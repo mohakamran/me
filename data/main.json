@@ -1,0 +1,102 @@
+{
+  "meta": {
+    "language": "en",
+    "direction": "ltr"
+  },
+  "header": {
+    "logo": "MK",
+    "nav": {
+      "home": "Home",
+      "skills": "Skills", 
+      "education": "Education",
+      "certifications": "Certifications",
+      "portfolio": "Portfolio",
+      "services": "Services",
+      "gallery": "Gallery",
+      "contact": "Contact"
+    },
+    "buttons": {
+      "cvEnglish": "CV English",
+      "cvJapanese": "CV 日本語"
+    }
+  },
+  "hero": {
+    "badge": "Available for freelance work",
+    "title": "Full Stack Developer",
+    "subtitle": "& AI Enthusiast",
+    "dynamicTexts": ["PHP", "Python", "Shopify", "WordPress", "React", "Laravel", "JavaScript", "Node.js"],
+    "description": "Crafting digital experiences with PHP Laravel, React, Python & AI solutions. Currently pursuing Masters in Japan, researching Traffic Psychology through data science.",
+    "buttons": {
+      "viewWork": "View My Work",
+      "getInTouch": "Get In Touch"
+    },
+    "stats": {
+      "projects": "50+",
+      "projectsLabel": "Projects",
+      "experience": "3+", 
+      "experienceLabel": "Years Exp",
+      "satisfaction": "100%",
+      "satisfactionLabel": "Satisfaction"
+    },
+    "status": "Open to opportunities"
+  },
+  "skills": {
+    "title": "My Skills",
+    "subtitle": "Technologies & Tools I Master",
+    "items": [
+      {
+        "name": "WordPress",
+        "level": 90,
+        "icon": "wordpress"
+      },
+      {
+        "name": "HTML5",
+        "level": 95,
+        "icon": "html5"
+      }
+      
+    ]
+  },
+  "education": {
+    "title": "Education & Experience",
+    "education": {
+      "title": "Education",
+      "items": [
+        {
+          "degree": "Masters in Applied Information Systems",
+          "institution": "University of Kitakyushu, Fukuoka, Japan",
+          "description": "Focused on traffic simulation systems and Psychology",
+          "period": "Oct 2024 - Sep 2026"
+        }
+      ]
+    },
+    "experience": {
+      "title": "Professional Experience", 
+      "items": [
+        {
+          "position": "Full Stack Engineer",
+          "company": "Reblate Solutions",
+          "description": "Worked as Full Stack Engineer with PHP, React, JavaScript, Laravel, WordPress, and Shopify.",
+          "period": "Jan 2022 - Aug 2024",
+          "skills": "PHP, JavaScript, CSS3, WordPress, React"
+        }
+      ]
+    }
+  },
+  "contact": {
+    "title": "Let's Connect",
+    "subtitle": "Follow me on social media or reach out directly",
+    "email": "mohammadkamran1515@gmail.com",
+    "social": {
+      "facebook": "https://www.facebook.com/being.m.kamran/",
+      "twitter": "https://x.com/being_m_kamran",
+      "instagram": "https://instagram.com/being_m_kamran",
+      "github": "https://github.com/mohakamran",
+      "linkedin": "https://www.linkedin.com/in/mokamran/",
+      "youtube": "https://www.youtube.com/@muhkamran1034"
+    }
+  },
+  "footer": {
+    "copyright": "&copy; 2025 Muhammad Kamran. All rights reserved."
+  }
+}

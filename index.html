@@ -1,0 +1,2897 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page-title">Muhammad Kamran - Full Stack Developer & AI Enthusiast</title>
+    <!-- <link rel="icon" href="assets/images/icons/favicon.svg" type="image/svg+xml"> -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Add these to your head section -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Add this with your other scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<style>
+    /* Custom Swiper Styles */
+    .gallery-slider {
+        padding: 10px 0 40px 0;
+        overflow: hidden;
+    }
+
+    .swiper-slide {
+        transition: transform 0.3s ease;
+        height: auto;
+    }
+
+    .swiper-slide:hover {
+        transform: translateY(-5px);
+    }
+
+    .image-container {
+        position: relative;
+        background: #1f2937;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+
+    .swiper-button-next:after,
+    .swiper-button-prev:after {
+        display: none;
+    }
+
+    .swiper-pagination-bullet {
+        background: rgba(255, 255, 255, 0.5);
+        opacity: 1;
+        width: 8px;
+        height: 8px;
+    }
+
+    .swiper-pagination-bullet-active {
+        background: linear-gradient(135deg, #2dd4bf, #22d3ee);
+        width: 20px;
+        border-radius: 4px;
+    }
+
+    /* Mobile Responsive Fixes */
+    @media (max-width: 640px) {
+        .gallery-slider {
+            padding: 5px 0 35px 0;
+            margin: 0 -8px;
+        }
+
+        .swiper-slide {
+            padding: 0 8px;
+        }
+
+        .image-container {
+            border-radius: 12px;
+        }
+    }
+
+    /* Lightbox Mobile Improvements */
+    @media (max-width: 640px) {
+        #lightbox {
+            padding: 10px;
+        }
+
+        .lightbox-content {
+            border-radius: 8px;
+        }
+
+        #lightbox-image {
+            max-height: 75vh;
+        }
+    }
+
+    /* Prevent horizontal scrollbar */
+    .swiper-container {
+        overflow: hidden;
+    }
+
+    /* Image quality improvements */
+    .gallery-item img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+    }
+</style>
+
+<body>
+    <!-- Animated Background -->
+    <div class="gradient-bg"></div>
+    <div class="particles" id="particles-container"></div>
+    <!-- Animated Progress Line -->
+    <!-- Animated Scroll Progress Line -->
+    <div class="fixed top-0 left-0 w-full h-1 z-50 bg-gray-800/30">
+        <div id="progress-line"
+            class="h-full bg-gradient-to-r from-teal-400 via-cyan-500 to-purple-500 transition-all duration-150 ease-out shadow-lg shadow-teal-500/30"
+            style="width: 0%"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="navbar fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex items-center justify-between">
+                <!-- Mobile Language Switcher -->
+                <div class="lg:hidden flex items-center space-x-1">
+                    <button id="lang-en-mobile"
+                        class="lang-btn glass text-gray-300 px-3 py-1 rounded text-sm font-medium hover:text-white flex items-center gap-1">
+                        <!-- <span class="fi fi-us fis"></span> -->
+                        <span data-i18n="lang-en">English</span>
+                    </button>
+                    <button id="lang-jp-mobile"
+                        class="lang-btn glass text-gray-300 px-3 py-1 rounded text-sm font-medium hover:text-white flex items-center gap-1">
+                        <!-- <span class="fi fi-jp fis"></span> -->
+                        <span data-i18n="lang-jp">日本語</span>
+                    </button>
+                </div>
+
+                <!-- Centered Navigation - Desktop -->
+                <nav class="hidden lg:flex items-center space-x-1 glass rounded-full px-4 py-2 shadow-lg">
+                    <a href="#home" class="nav-link text-white active flex items-center space-x-1 text-sm">
+                        <i class="fas fa-home text-xs"></i>
+                        <span data-i18n="nav-home">Home</span>
+                    </a>
+                    <a href="#skills"
+                        class="nav-link text-gray-300 hover:text-white flex items-center space-x-1 text-sm">
+                        <i class="fas fa-code text-xs"></i>
+                        <span data-i18n="nav-skills">Skills</span>
+                    </a>
+                    <a href="#education"
+                        class="nav-link text-gray-300 hover:text-white flex items-center space-x-1 text-sm">
+                        <i class="fas fa-graduation-cap text-xs"></i>
+                        <span data-i18n="nav-education">Education</span>
+                    </a>
+                    <a href="#certifications"
+                        class="nav-link text-gray-300 hover:text-white flex items-center space-x-1 text-sm">
+                        <i class="fas fa-award text-xs"></i>
+                        <span data-i18n="nav-certifications">Certifications</span>
+                    </a>
+                    <a href="#portfolio"
+                        class="nav-link text-gray-300 hover:text-white flex items-center space-x-1 text-sm">
+                        <i class="fas fa-briefcase text-xs"></i>
+                        <span data-i18n="nav-portfolio">Portfolio</span>
+                    </a>
+                    <a href="#services"
+                        class="nav-link text-gray-300 hover:text-white flex items-center space-x-1 text-sm">
+                        <i class="fas fa-cogs text-xs"></i>
+                        <span data-i18n="nav-services">Services</span>
+                    </a>
+                    <a href="#gallery"
+                        class="nav-link text-gray-300 hover:text-white flex items-center space-x-1 text-sm">
+                        <i class="fas fa-images text-xs"></i>
+                        <span data-i18n="nav-gallery">Gallary</span>
+                    </a>
+                    <a href="#contact"
+                        class="nav-link text-gray-300 hover:text-white flex items-center space-x-1 text-sm">
+                        <i class="fas fa-envelope text-xs"></i>
+                        <span data-i18n="nav-contact">Contact</span>
+                    </a>
+                </nav>
+
+                <!-- Right Side - Desktop Language & Mobile Menu -->
+                <div class="flex items-center space-x-2">
+                    <!-- Desktop Language Switcher -->
+                    <!-- Desktop Language Switcher -->
+                    <div class="hidden lg:flex items-center space-x-2">
+                        <button id="lang-en"
+                            class="lang-btn bg-gray-800 text-gray-300 px-4 py-2 rounded-lg font-medium border border-gray-600 hover:text-white hover:border-gray-500 flex items-center gap-2">
+                            <!-- <span class="fi fi-us fis"></span> -->
+                            <span data-i18n="lang-en">English</span>
+                        </button>
+                        <button id="lang-jp"
+                            class="lang-btn bg-gray-800 text-gray-300 px-4 py-2 rounded-lg font-medium border border-gray-600 hover:text-white hover:border-gray-500 flex items-center gap-2">
+                            <!-- <span class="fi fi-jp fis"></span> -->
+                            <span data-i18n="lang-jp">日本語</span>
+                        </button>
+                    </div>
+
+                    <!-- Mobile menu button -->
+                    <button id="menu-toggle" class="lg:hidden p-2 rounded glass hover:bg-gray-700/50">
+                        <i class="fas fa-bars text-white text-lg"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <!-- <div id="mobile-menu" class="hidden lg:hidden mt-3 glass rounded-xl p-4 border border-gray-700/50">
+            <div class="space-y-2">
+                <a href="#home" class="mobile-nav-item block text-white py-2 px-3 rounded text-sm flex items-center space-x-2 bg-teal-500/20">
+                    <i class="fas fa-home w-4"></i>
+                    <span data-i18n="nav-home">Home</span>
+                </a>
+                <a href="#skills" class="mobile-nav-item block text-gray-300 hover:text-white py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-gray-700/50">
+                    <i class="fas fa-code w-4"></i>
+                    <span data-i18n="nav-skills">Skills</span>
+                </a>
+                <a href="#education" class="mobile-nav-item block text-gray-300 hover:text-white py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-gray-700/50">
+                    <i class="fas fa-graduation-cap w-4"></i>
+                    <span data-i18n="nav-education">Education</span>
+                </a>
+                <a href="#certifications" class="mobile-nav-item block text-gray-300 hover:text-white py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-gray-700/50">
+                    <i class="fas fa-award w-4"></i>
+                    <span data-i18n="nav-certifications">Certifications</span>
+                </a>
+                <a href="#portfolio" class="mobile-nav-item block text-gray-300 hover:text-white py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-gray-700/50">
+                    <i class="fas fa-briefcase w-4"></i>
+                    <span data-i18n="nav-portfolio">Portfolio</span>
+                </a>
+                <a href="#services" class="mobile-nav-item block text-gray-300 hover:text-white py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-gray-700/50">
+                    <i class="fas fa-cogs w-4"></i>
+                    <span data-i18n="nav-services">Services</span>
+                </a>
+                <a href="#gallery" class="mobile-nav-item block text-gray-300 hover:text-white py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-gray-700/50">
+                    <i class="fas fa-images w-4"></i>
+                    <span data-i18n="nav-gallery">Gallery</span>
+                </a>
+                <a href="#contact" class="mobile-nav-item block text-gray-300 hover:text-white py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-gray-700/50">
+                    <i class="fas fa-envelope w-4"></i>
+                    <span data-i18n="nav-contact">Contact</span>
+                </a>
+            </div>
+        </div> -->
+            <!-- Mobile Menu -->
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden lg:hidden mt-3 glass rounded-xl p-4 border border-gray-700/50">
+                <div class="space-y-2">
+                    <a href="#home"
+                        class="mobile-nav-item block text-white py-2 px-3 rounded text-sm flex items-center space-x-2 bg-teal-500/20">
+                        <i class="fas fa-home w-4"></i>
+                        <span data-i18n="nav-home">Home</span>
+                    </a>
+                    <a href="#skills"
+                        class="mobile-nav-item block text-gray-300 hover:text-white py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-gray-700/50">
+                        <i class="fas fa-code w-4"></i>
+                        <span data-i18n="nav-skills">Skills</span>
+                    </a>
+                    <a href="#education"
+                        class="mobile-nav-item block text-gray-300 hover:text-white py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-gray-700/50">
+                        <i class="fas fa-graduation-cap w-4"></i>
+                        <span data-i18n="nav-education">Education</span>
+                    </a>
+                    <a href="#certifications"
+                        class="mobile-nav-item block text-gray-300 hover:text-white py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-gray-700/50">
+                        <i class="fas fa-award w-4"></i>
+                        <span data-i18n="nav-certifications">Certifications</span>
+                    </a>
+                    <a href="#portfolio"
+                        class="mobile-nav-item block text-gray-300 hover:text-white py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-gray-700/50">
+                        <i class="fas fa-briefcase w-4"></i>
+                        <span data-i18n="nav-portfolio">Portfolio</span>
+                    </a>
+                    <a href="#services"
+                        class="mobile-nav-item block text-gray-300 hover:text-white py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-gray-700/50">
+                        <i class="fas fa-cogs w-4"></i>
+                        <span data-i18n="nav-services">Services</span>
+                    </a>
+                    <a href="#gallery"
+                        class="mobile-nav-item block text-gray-300 hover:text-white py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-gray-700/50">
+                        <i class="fas fa-images w-4"></i>
+                        <span data-i18n="nav-gallery">Gallary</span>
+                    </a>
+                    <a href="#contact"
+                        class="mobile-nav-item block text-gray-300 hover:text-white py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-gray-700/50">
+                        <i class="fas fa-envelope w-4"></i>
+                        <span data-i18n="nav-contact">Contact</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-28 pb-20 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+                <!-- Left Content -->
+                <div class="text-center lg:text-left order-2 lg:order-1">
+                    <!-- Availability Badge -->
+                    <div class="hero-badge inline-flex items-center gap-2 mb-6">
+                        <div class="w-2 h-2 bg-teal-400 rounded-full animate-pulse"></div>
+                        <span class="text-sm text-teal-300 font-medium" data-i18n="hero-available">
+                            Available for freelance work
+                        </span>
+                    </div>
+
+                    <!-- Main Heading -->
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                        <span class="block" data-i18n="hero-title-1">Full Stack</span>
+                        <span class="gradient-text" data-i18n="hero-title-2">Developer</span>
+                        <span class="block text-xl sm:text-2xl text-gray-300 mt-4 font-normal">
+                            & <span class="text-teal-400" data-i18n="hero-title-3">AI Enthusiast</span>
+                        </span>
+                    </h1>
+
+                    <!-- Dynamic Typewriter -->
+                    <div class="mb-8">
+                        <div class="text-lg text-gray-300 mb-2" data-i18n="hero-builds">I build with</div>
+                        <div class="typewriter-container justify-center lg:justify-start">
+                            <span id="typewriter" class="border-r-2 border-teal-400 pr-1 animate-pulse">PHP</span>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <p class="text-gray-300 text-lg leading-relaxed mb-8 max-w-2xl mx-auto lg:mx-0"
+                        data-i18n="hero-description">
+                        Professional in PHP, JavaScript, Laravel, React, Python & AI solutions. MEXT scholar in
+                        University of Kitakyushu and my research theme is traffic psychology and behavior. I will
+                        graduate in September 2026.
+                    </p>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
+                        <a href="#portfolio"
+                            class="group bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-teal-500/25 flex items-center justify-center gap-3">
+                            <span data-i18n="hero-cta-work">View My Work</span>
+                            <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                        <a href="#contact"
+                            class="group glass hover:bg-gray-800/50 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3">
+                            <i class="fas fa-paper-plane"></i>
+                            <span data-i18n="hero-cta-contact">Get In Touch</span>
+                        </a>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="grid grid-cols-3 gap-4 max-w-md mx-auto lg:mx-0">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-white">50+</div>
+                            <div class="text-sm text-gray-400" data-i18n="hero-projects">Projects</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-white">3+</div>
+                            <div class="text-sm text-gray-400" data-i18n="hero-experience">Years Exp</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-white">100%</div>
+                            <div class="text-sm text-gray-400" data-i18n="hero-satisfaction">Satisfaction</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Visual -->
+                <div class="order-1 lg:order-2 flex justify-center lg:justify-end relative">
+                    <!-- Animated Background Element -->
+                    <div
+                        class="absolute -inset-6 bg-gradient-to-r from-teal-400/20 to-purple-500/20 rounded-3xl blur-3xl opacity-70 animate-pulse">
+                    </div>
+
+                    <!-- Main Visual Container -->
+                    <div class="relative group creative-card">
+                        <!-- Floating Elements -->
+                        <div
+                            class="floating-element absolute -top-6 -left-6 w-20 h-20 bg-gradient-to-r from-teal-400/10 to-cyan-400/10 rounded-2xl rotate-12 opacity-30 group-hover:opacity-50 transition-all duration-500">
+                        </div>
+                        <div
+                            class="floating-element absolute -bottom-6 -right-6 w-16 h-16 bg-gradient-to-r from-purple-400/10 to-pink-400/10 rounded-2xl -rotate-12 opacity-30 group-hover:opacity-50 transition-all duration-500">
+                        </div>
+
+                        <!-- Tech Icons Floating -->
+                        <div
+                            class="tech-icon tech-icon-1 absolute -top-8 -right-8 w-16 h-16 bg-gray-800/90 rounded-2xl flex items-center justify-center border border-cyan-500/30 shadow-2xl shadow-cyan-500/20">
+                            <i class="fab fa-react text-cyan-400 text-2xl"></i>
+                        </div>
+                        <div
+                            class="tech-icon tech-icon-2 absolute -bottom-8 -left-8 w-16 h-16 bg-gray-800/90 rounded-2xl flex items-center justify-center border border-red-500/30 shadow-2xl shadow-red-500/20">
+                            <i class="fab fa-laravel text-red-400 text-2xl"></i>
+                        </div>
+                        <div
+                            class="tech-icon tech-icon-3 absolute top-1/3 -left-10 w-14 h-14 bg-gray-800/90 rounded-xl flex items-center justify-center border border-yellow-500/30 shadow-2xl shadow-yellow-500/20">
+                            <i class="fab fa-python text-yellow-400 text-xl"></i>
+                        </div>
+                        <div
+                            class="tech-icon tech-icon-4 absolute top-1/4 -right-10 w-14 h-14 bg-gray-800/90 rounded-xl flex items-center justify-center border border-yellow-300/30 shadow-2xl shadow-yellow-300/20">
+                            <i class="fab fa-js-square text-yellow-300 text-xl"></i>
+                        </div>
+                        <div
+                            class="tech-icon tech-icon-5 absolute bottom-1/3 -right-12 w-12 h-12 bg-gray-800/90 rounded-xl flex items-center justify-center border border-green-500/30 shadow-2xl shadow-green-500/20">
+                            <i class="fab fa-node-js text-green-400 text-lg"></i>
+                        </div>
+                        <div
+                            class="tech-icon tech-icon-6 absolute bottom-1/4 -left-12 w-12 h-12 bg-gray-800/90 rounded-xl flex items-center justify-center border border-blue-500/30 shadow-2xl shadow-blue-500/20">
+                            <i class="fab fa-php text-blue-400 text-lg"></i>
+                        </div>
+
+                        <!-- Main Content Box -->
+                        <div
+                            class="glass rounded-3xl p-10 border border-gray-700/50 shadow-2xl transform group-hover:scale-105 transition-all duration-500 w-full max-w-xl">
+                            <div class="text-center">
+                                <!-- Profile Image -->
+                                <div
+                                    class="w-60 h-50 mx-auto mb-8 rounded-2xl bg-gradient-to-br from-teal-400 to-cyan-500 p-1 shadow-lg">
+                                    <div
+                                        class="w-full h-full rounded-2xl bg-gray-800 overflow-hidden flex items-center justify-center">
+                                        <img src="./gallary/face.jpg" alt="Muhammad Kamran"
+                                            class="object-cover transition-transform duration-500" />
+                                    </div>
+                                </div>
+
+                                <style>
+                                    /* Profile Image Styles */
+                                    .profile-image-container {
+                                        position: relative;
+                                        overflow: hidden;
+                                    }
+
+                                    .profile-image-container img {
+                                        transition: all 0.5s ease-in-out;
+                                        filter: grayscale(0.1) contrast(1.1);
+                                    }
+
+                                    /* .profile-image-container:hover img {
+                                        transform: scale(1.05);
+                                        filter: grayscale(0) contrast(1.2);
+                                    } */
+
+                                    /* Ensure image fits perfectly */
+                                    .object-cover {
+                                        object-fit: cover;
+                                    }
+
+                                    .object-center {
+                                        object-position: center center;
+                                    }
+                                </style>
+                                <h3 class="text-2xl font-bold text-white mb-3">Muhammad Kamran</h3>
+                                <p class="text-teal-400 font-semibold mb-6 text-lg" data-i18n="hero-title-2">Full Stack
+                                    Developer</p>
+
+                                <!-- Status -->
+                                <div
+                                    class="inline-flex items-center gap-2 bg-green-500/20 text-green-400 px-4 py-2 rounded-full text-sm border border-green-500/30">
+                                    <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                    <span data-i18n="hero-available">Open to opportunities</span>
+                                </div>
+
+                                <!-- Additional Info -->
+                                <div class="mt-6 grid grid-cols-2 gap-4 text-sm">
+                                    <div class="text-center">
+                                        <div class="text-teal-400 font-semibold" data-i18n="education-masters-short">
+                                            Masters</div>
+                                        <div class="text-gray-400" data-i18n="location-japan">Japan</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-teal-400 font-semibold" data-i18n="research-ai">Research
+                                        </div>
+                                        <div class="text-gray-400" data-i18n="research-traffic">Traffic Psychology</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+                <a href="#skills"
+                    class="flex flex-col items-center text-gray-400 hover:text-white transition-colors duration-300 group">
+                    <span class="text-sm mb-2 group-hover:text-teal-400" data-i18n="hero-scroll">Explore More</span>
+                    <div class="animate-bounce">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 section-hidden">
+        <div class="max-w-4xl mx-auto px-8 sm:px-12 lg:px-16">
+            <!-- Section Heading -->
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 gradient-text" data-i18n="skills-title">My Skills</h2>
+                <p class="text-xl text-gray-400" data-i18n="skills-subtitle">Technologies & Tools I Master</p>
+            </div>
+
+            <!-- Skills Grid -->
+            <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                <!-- HTML5 -->
+                <div class="skill-card group" data-skill="html">
+                    <div class="skill-icon bg-orange-500/20 border-orange-500/30">
+                        <i class="fab fa-html5 text-orange-500 text-xl"></i>
+                    </div>
+                    <h3 class="skill-name">HTML5</h3>
+                    <div class="skill-level">
+                        <div class="skill-progress bg-orange-500" data-level="95"></div>
+                    </div>
+                    <span class="skill-percent">95%</span>
+                </div>
+
+                <!-- CSS3 -->
+                <div class="skill-card group" data-skill="css">
+                    <div class="skill-icon bg-blue-500/20 border-blue-500/30">
+                        <i class="fab fa-css3-alt text-blue-400 text-xl"></i>
+                    </div>
+                    <h3 class="skill-name">CSS3</h3>
+                    <div class="skill-level">
+                        <div class="skill-progress bg-blue-400" data-level="90"></div>
+                    </div>
+                    <span class="skill-percent">90%</span>
+                </div>
+
+                <!-- JavaScript -->
+                <div class="skill-card group" data-skill="js">
+                    <div class="skill-icon bg-yellow-500/20 border-yellow-500/30">
+                        <i class="fab fa-js-square text-yellow-400 text-xl"></i>
+                    </div>
+                    <h3 class="skill-name">JavaScript</h3>
+                    <div class="skill-level">
+                        <div class="skill-progress bg-yellow-400" data-level="85"></div>
+                    </div>
+                    <span class="skill-percent">85%</span>
+                </div>
+
+                <!-- React -->
+                <div class="skill-card group" data-skill="react">
+                    <div class="skill-icon bg-cyan-500/20 border-cyan-500/30">
+                        <i class="fab fa-react text-cyan-400 text-xl"></i>
+                    </div>
+                    <h3 class="skill-name">React</h3>
+                    <div class="skill-level">
+                        <div class="skill-progress bg-cyan-400" data-level="80"></div>
+                    </div>
+                    <span class="skill-percent">80%</span>
+                </div>
+
+                <!-- Node.js -->
+                <div class="skill-card group" data-skill="node">
+                    <div class="skill-icon bg-green-500/20 border-green-500/30">
+                        <i class="fab fa-node-js text-green-400 text-xl"></i>
+                    </div>
+                    <h3 class="skill-name">Node.js</h3>
+                    <div class="skill-level">
+                        <div class="skill-progress bg-green-400" data-level="75"></div>
+                    </div>
+                    <span class="skill-percent">75%</span>
+                </div>
+
+                <!-- Python -->
+                <div class="skill-card group" data-skill="python">
+                    <div class="skill-icon bg-blue-400/20 border-blue-400/30">
+                        <i class="fab fa-python text-blue-300 text-xl"></i>
+                    </div>
+                    <h3 class="skill-name">Python</h3>
+                    <div class="skill-level">
+                        <div class="skill-progress bg-blue-300" data-level="88"></div>
+                    </div>
+                    <span class="skill-percent">88%</span>
+                </div>
+
+                <!-- PHP -->
+                <div class="skill-card group" data-skill="php">
+                    <div class="skill-icon bg-purple-500/20 border-purple-500/30">
+                        <i class="fab fa-php text-purple-400 text-xl"></i>
+                    </div>
+                    <h3 class="skill-name">PHP</h3>
+                    <div class="skill-level">
+                        <div class="skill-progress bg-purple-400" data-level="82"></div>
+                    </div>
+                    <span class="skill-percent">82%</span>
+                </div>
+
+                <!-- Laravel -->
+                <div class="skill-card group" data-skill="laravel">
+                    <div class="skill-icon bg-red-500/20 border-red-500/30">
+                        <i class="fab fa-laravel text-red-400 text-xl"></i>
+                    </div>
+                    <h3 class="skill-name">Laravel</h3>
+                    <div class="skill-level">
+                        <div class="skill-progress bg-red-400" data-level="78"></div>
+                    </div>
+                    <span class="skill-percent">78%</span>
+                </div>
+
+                <!-- WordPress -->
+                <div class="skill-card group" data-skill="wordpress">
+                    <div class="skill-icon bg-blue-600/20 border-blue-600/30">
+                        <i class="fab fa-wordpress text-blue-500 text-xl"></i>
+                    </div>
+                    <h3 class="skill-name">WordPress</h3>
+                    <div class="skill-level">
+                        <div class="skill-progress bg-blue-500" data-level="90"></div>
+                    </div>
+                    <span class="skill-percent">90%</span>
+                </div>
+
+                <!-- Shopify -->
+                <div class="skill-card group" data-skill="shopify">
+                    <div class="skill-icon bg-green-600/20 border-green-600/30">
+                        <i class="fas fa-shopping-cart text-green-500 text-xl"></i>
+                    </div>
+                    <h3 class="skill-name">Shopify</h3>
+                    <div class="skill-level">
+                        <div class="skill-progress bg-green-500" data-level="85"></div>
+                    </div>
+                    <span class="skill-percent">85%</span>
+                </div>
+
+                <!-- Git -->
+                <div class="skill-card group" data-skill="git">
+                    <div class="skill-icon bg-red-600/20 border-red-600/30">
+                        <i class="fab fa-git-alt text-red-500 text-xl"></i>
+                    </div>
+                    <h3 class="skill-name">Git</h3>
+                    <div class="skill-level">
+                        <div class="skill-progress bg-red-500" data-level="80"></div>
+                    </div>
+                    <span class="skill-percent">80%</span>
+                </div>
+
+                <!-- Docker -->
+                <div class="skill-card group" data-skill="docker">
+                    <div class="skill-icon bg-blue-500/20 border-blue-500/30">
+                        <i class="fab fa-docker text-blue-400 text-xl"></i>
+                    </div>
+                    <h3 class="skill-name">Docker</h3>
+                    <div class="skill-level">
+                        <div class="skill-progress bg-blue-400" data-level="70"></div>
+                    </div>
+                    <span class="skill-percent">70%</span>
+                </div>
+
+                <!-- Tailwind -->
+                <div class="skill-card group" data-skill="tailwind">
+                    <div class="skill-icon bg-cyan-500/20 border-cyan-500/30">
+                        <i class="fas fa-wind text-cyan-400 text-xl"></i>
+                    </div>
+                    <h3 class="skill-name">Tailwind</h3>
+                    <div class="skill-level">
+                        <div class="skill-progress bg-cyan-400" data-level="92"></div>
+                    </div>
+                    <span class="skill-percent">92%</span>
+                </div>
+
+                <!-- NumPy -->
+                <div class="skill-card group" data-skill="numpy">
+                    <div class="skill-icon bg-blue-700/20 border-blue-700/30">
+                        <i class="fas fa-calculator text-blue-600 text-xl"></i>
+                    </div>
+                    <h3 class="skill-name">NumPy</h3>
+                    <div class="skill-level">
+                        <div class="skill-progress bg-blue-600" data-level="75"></div>
+                    </div>
+                    <span class="skill-percent">75%</span>
+                </div>
+
+                <!-- Pandas -->
+                <div class="skill-card group" data-skill="pandas">
+                    <div class="skill-icon bg-red-700/20 border-red-700/30">
+                        <i class="fas fa-table text-red-600 text-xl"></i>
+                    </div>
+                    <h3 class="skill-name">Pandas</h3>
+                    <div class="skill-level">
+                        <div class="skill-progress bg-red-600" data-level="78"></div>
+                    </div>
+                    <span class="skill-percent">78%</span>
+                </div>
+
+                <!-- Matplotlib -->
+                <div class="skill-card group" data-skill="matplotlib">
+                    <div class="skill-icon bg-orange-600/20 border-orange-600/30">
+                        <i class="fas fa-chart-line text-orange-500 text-xl"></i>
+                    </div>
+                    <h3 class="skill-name">Matplotlib</h3>
+                    <div class="skill-level">
+                        <div class="skill-progress bg-orange-500" data-level="72"></div>
+                    </div>
+                    <span class="skill-percent">72%</span>
+                </div>
+
+                <!-- Scikit-learn -->
+                <div class="skill-card group" data-skill="sklearn">
+                    <div class="skill-icon bg-yellow-600/20 border-yellow-600/30">
+                        <i class="fas fa-brain text-yellow-500 text-xl"></i>
+                    </div>
+                    <h3 class="skill-name">Scikit-learn</h3>
+                    <div class="skill-level">
+                        <div class="skill-progress bg-yellow-500" data-level="68"></div>
+                    </div>
+                    <span class="skill-percent">68%</span>
+                </div>
+
+                <!-- Seaborn -->
+                <div class="skill-card group" data-skill="seaborn">
+                    <div class="skill-icon bg-pink-600/20 border-pink-600/30">
+                        <i class="fas fa-chart-bar text-pink-500 text-xl"></i>
+                    </div>
+                    <h3 class="skill-name">Seaborn</h3>
+                    <div class="skill-level">
+                        <div class="skill-progress bg-pink-500" data-level="70"></div>
+                    </div>
+                    <span class="skill-percent">70%</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-20 bg-gray-900/50 section-hidden">
+        <div class="max-w-4xl mx-auto px-8 sm:px-12 lg:px-16">
+            <!-- Section Heading -->
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 gradient-text" data-i18n="education-title">Education & Experience
+                </h2>
+                <p class="text-xl text-gray-400" data-i18n="education-subtitle">My academic journey and professional
+                    path</p>
+            </div>
+
+            <!-- Timeline Container -->
+            <div class="relative">
+                <!-- Timeline Line -->
+                <div
+                    class="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-teal-400 to-cyan-500 h-full hidden lg:block">
+                </div>
+
+                <!-- Timeline Items -->
+                <div class="space-y-12 lg:space-y-16">
+                    <!-- Education Item 1 -->
+                    <div class="timeline-item group">
+                        <div class="lg:flex lg:items-center lg:justify-between">
+                            <!-- Left Side - Education -->
+                            <div class="lg:w-5/12 lg:pr-8 mb-8 lg:mb-0">
+                                <div class="timeline-card timeline-card-left">
+                                    <div class="timeline-icon bg-teal-500/20 border-teal-500/30">
+                                        <i class="fas fa-graduation-cap text-teal-400"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <span class="timeline-date">2024 - 2026</span>
+                                        <h3 class="timeline-title" data-i18n="education-masters">Masters in Applied
+                                            Information Systems</h3>
+                                        <p class="timeline-subtitle">University of Kitakyushu, Fukuoka, Japan</p>
+                                        <p class="timeline-description" data-i18n="education-masters-desc">Focused on
+                                            traffic simulation systems and Psychology research using carla simulator.
+                                        </p>
+                                        <div class="timeline-tags">
+                                            <span class="timeline-tag" data-i18n="tag-data-science">Python</span>
+                                            <span class="timeline-tag" data-i18n="tag-ai-research">Unreal Engine</span>
+                                            <span class="timeline-tag" data-i18n="tag-traffic-psychology">Traffic
+                                                Psychology</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Center Dot -->
+                            <div
+                                class="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-teal-400 rounded-full border-4 border-gray-900 z-10">
+                            </div>
+
+                            <!-- Right Side - Empty for alignment -->
+                            <div class="lg:w-5/12"></div>
+                        </div>
+                    </div>
+
+                    <!-- Experience Item 1 -->
+                    <div class="timeline-item group">
+                        <div class="lg:flex lg:items-center lg:justify-between">
+                            <!-- Left Side - Empty for alignment -->
+                            <div class="lg:w-5/12 lg:pr-8"></div>
+
+                            <!-- Center Dot -->
+                            <div
+                                class="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-cyan-400 rounded-full border-4 border-gray-900 z-10">
+                            </div>
+
+                            <!-- Right Side - Experience -->
+                            <div class="lg:w-5/12 lg:pl-8">
+                                <div class="timeline-card timeline-card-right">
+                                    <div class="timeline-icon bg-cyan-500/20 border-cyan-500/30">
+                                        <i class="fas fa-briefcase text-cyan-400"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <span class="timeline-date">2021 - 2024</span>
+                                        <h3 class="timeline-title" data-i18n="experience-fullstack">Full Stack Engineer
+                                        </h3>
+                                        <p class="timeline-subtitle">Reblate Solutions</p>
+                                        <p class="timeline-description" data-i18n="experience-fullstack-desc">Developed
+                                            and maintained web applications using modern technologies. Worked on both
+                                            frontend and backend development.</p>
+                                        <div class="timeline-tags">
+                                            <span class="timeline-tag">PHP</span>
+                                            <span class="timeline-tag">React</span>
+                                            <span class="timeline-tag">Laravel</span>
+                                            <span class="timeline-tag">JavaScript</span>
+                                            <span class="timeline-tag">MySQL</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Education Item 2 -->
+                    <div class="timeline-item group">
+                        <div class="lg:flex lg:items-center lg:justify-between">
+                            <!-- Left Side - Education -->
+                            <div class="lg:w-5/12 lg:pr-8 mb-8 lg:mb-0">
+                                <div class="timeline-card timeline-card-left">
+                                    <div class="timeline-icon bg-teal-500/20 border-teal-500/30">
+                                        <i class="fas fa-graduation-cap text-teal-400"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <span class="timeline-date">2016 - 2020</span>
+                                        <h3 class="timeline-title" data-i18n="education-bachelors">Bachelor's in
+                                            Information Technology</h3>
+                                        <p class="timeline-subtitle">University of Gujrat (GPGC), Jhelum</p>
+                                        <p class="timeline-description" data-i18n="education-bachelors-desc">Focused on
+                                            Maths, Databases, Data Structures and Algorithms, Software Engineering and
+                                            Programming.
+                                        </p>
+                                        <div class="timeline-tags">
+                                            <span class="timeline-tag" data-i18n="tag-web-dev">DSA</span>
+                                            <span class="timeline-tag" data-i18n="tag-software-eng">Software
+                                                Engineering</span>
+                                            <span class="timeline-tag" data-i18n="tag-database">Database Design</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Center Dot -->
+                            <div
+                                class="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-teal-400 rounded-full border-4 border-gray-900 z-10">
+                            </div>
+
+                            <!-- Right Side - Empty for alignment -->
+                            <div class="lg:w-5/12"></div>
+                        </div>
+                    </div>
+
+                    <!-- Experience Item 2 -->
+                    <div class="timeline-item group">
+                        <div class="lg:flex lg:items-center lg:justify-between">
+                            <!-- Left Side - Empty for alignment -->
+                            <div class="lg:w-5/12 lg:pr-8"></div>
+
+                            <!-- Center Dot -->
+                            <div
+                                class="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-cyan-400 rounded-full border-4 border-gray-900 z-10">
+                            </div>
+
+                            <!-- Right Side - Experience -->
+                            <div class="lg:w-5/12 lg:pl-8">
+                                <div class="timeline-card timeline-card-right">
+                                    <div class="timeline-icon bg-cyan-500/20 border-cyan-500/30">
+                                        <i class="fas fa-briefcase text-cyan-400"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <span class="timeline-date">2020 - 2021</span>
+                                        <h3 class="timeline-title" data-i18n="experience-teacher">Computer Teacher</h3>
+                                        <p class="timeline-subtitle">Computer City</p>
+                                        <p class="timeline-description" data-i18n="experience-teacher-desc">Taught
+                                            various computer science subjects including web development, digital
+                                            marketing, and software tools.</p>
+                                        <div class="timeline-tags">
+                                            <span class="timeline-tag" data-i18n="tag-teaching">Teaching</span>
+                                            <span class="timeline-tag" data-i18n="tag-web-design">Web Design</span>
+                                            <span class="timeline-tag" data-i18n="tag-digital-marketing">Digital
+                                                Marketing</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="py-20 section-hidden">
+        <div class="max-w-4xl mx-auto px-8 sm:px-12 lg:px-16">
+            <!-- Section Heading -->
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 gradient-text" data-i18n="certifications-title">My Certifications
+                </h2>
+                <p class="text-xl text-gray-400" data-i18n="certifications-subtitle">Validating my expertise and
+                    continuous learning journey</p>
+            </div>
+
+            <!-- Certifications Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Scientific Computing with Python -->
+                <div class="certification-card group">
+                    <div class="certification-badge">
+                        <i class="fas fa-code text-yellow-400 text-2xl"></i>
+                    </div>
+                    <div class="certification-content">
+                        <h3 class="certification-title" data-i18n="cert-scientific">Scientific Computing With Python
+                        </h3>
+                        <p class="certification-issuer">FreeCodeCamp</p>
+                        <span class="certification-date" data-i18n="cert-issued-2023">Issued 2023</span>
+                        <p class="certification-description" data-i18n="cert-scientific-desc">Mastered Python
+                            programming, data structures, algorithms, and scientific computing concepts.</p>
+                        <div class="certification-skills">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag" data-i18n="tag-algorithms">Algorithms</span>
+                            <span class="skill-tag" data-i18n="tag-data-structures">Data Structures</span>
+                        </div>
+                        <a href="https://www.freecodecamp.org/certification/mohammad_kamran/scientific-computing-with-python-v7"
+                            target="_blank" class="certification-link group">
+                            <span data-i18n="cert-view-credentials">View Credentials</span>
+                            <i class="fas fa-external-link-alt group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Data Analysis with Python -->
+                <div class="certification-card group">
+                    <div class="certification-badge">
+                        <i class="fas fa-chart-bar text-green-400 text-2xl"></i>
+                    </div>
+                    <div class="certification-content">
+                        <h3 class="certification-title" data-i18n="cert-data-analysis">Data Analysis with Python</h3>
+                        <p class="certification-issuer">FreeCodeCamp</p>
+                        <span class="certification-date" data-i18n="cert-issued-2023">Issued 2023</span>
+                        <p class="certification-description" data-i18n="cert-data-analysis-desc">Learned data analysis,
+                            visualization, and manipulation using Python libraries like Pandas and NumPy.</p>
+                        <div class="certification-skills">
+                            <span class="skill-tag" data-i18n="tag-data-analysis">Data Analysis</span>
+                            <span class="skill-tag">Pandas</span>
+                            <span class="skill-tag">NumPy</span>
+                        </div>
+                        <a href="https://www.freecodecamp.org/certification/mohammad_kamran/data-analysis-with-python-v7"
+                            target="_blank" class="certification-link group">
+                            <span data-i18n="cert-view-credentials">View Credentials</span>
+                            <i class="fas fa-external-link-alt group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Google Digital Marketing -->
+                <div class="certification-card group">
+                    <div class="certification-badge">
+                        <i class="fas fa-bullhorn text-blue-400 text-2xl"></i>
+                    </div>
+                    <div class="certification-content">
+                        <h3 class="certification-title" data-i18n="cert-digital-marketing">Google Digital Marketing</h3>
+                        <p class="certification-issuer">Google</p>
+                        <span class="certification-date" data-i18n="cert-issued-2023">Issued 2023</span>
+                        <p class="certification-description" data-i18n="cert-digital-marketing-desc">Comprehensive
+                            digital marketing training covering SEO, SEM, social media, and analytics.</p>
+                        <div class="certification-skills">
+                            <span class="skill-tag">SEO</span>
+                            <span class="skill-tag">SEM</span>
+                            <span class="skill-tag" data-i18n="tag-analytics">Analytics</span>
+                        </div>
+                        <a href="https://mohakamran.github.io/portfolio/portfolio/google_digital_marketing.jpg"
+                            target="_blank" class="certification-link group">
+                            <span data-i18n="cert-view-credentials">View Credentials</span>
+                            <i class="fas fa-external-link-alt group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Web Development -->
+                <!-- <div class="certification-card group">
+                    <div class="certification-badge">
+                        <i class="fas fa-laptop-code text-purple-400 text-2xl"></i>
+                    </div>
+                    <div class="certification-content">
+                        <h3 class="certification-title" data-i18n="cert-web-dev">Full Stack Web Development</h3>
+                        <p class="certification-issuer" data-i18n="cert-issuer-various">Various Platforms</p>
+                        <span class="certification-date" data-i18n="cert-ongoing">Ongoing</span>
+                        <p class="certification-description" data-i18n="cert-web-dev-desc">Continuous learning in modern
+                            web technologies including React, Node.js, and cloud platforms.</p>
+                        <div class="certification-skills">
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">MongoDB</span>
+                        </div>
+                        <a href="#portfolio" class="certification-link group">
+                            <span data-i18n="cert-view-projects">View Projects</span>
+                            <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div> -->
+
+                <!-- AI & Machine Learning -->
+                <div class="certification-card group">
+                    <div class="certification-badge">
+                        <i class="fas fa-brain text-red-400 text-2xl"></i>
+                    </div>
+                    <div class="certification-content">
+                        <h3 class="certification-title" data-i18n="cert-ai">AI & Machine Learning</h3>
+                        <p class="certification-issuer">FreeCodeCamp</p>
+                        <span class="certification-date" data-i18n="cert-issued-2023">Issued 2025</span>
+                        <p class="certification-description" data-i18n="cert-ai-desc">Researching AI applications in
+                            traffic psychology and data science for Masters degree.</p>
+                        <div class="certification-skills">
+                            <span class="skill-tag" data-i18n="tag-machine-learning">Machine Learning</span>
+                            <span class="skill-tag" data-i18n="tag-ai-research">AI Research</span>
+                            <span class="skill-tag" data-i18n="tag-data-science">Data Science</span>
+                        </div>
+                        <a href="https://www.freecodecamp.org/certification/mkamran/machine-learning-with-python-v7"
+                            target="_blank" class="certification-link group">
+                            <span data-i18n="cert-view-credentials">View Credentials</span>
+                            <i class="fas fa-external-link-alt group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Shopify Development -->
+                <!-- <div class="certification-card group">
+                    <div class="certification-badge">
+                        <i class="fas fa-shopping-cart text-green-500 text-2xl"></i>
+                    </div>
+                    <div class="certification-content">
+                        <h3 class="certification-title" data-i18n="cert-ecommerce">E-commerce Development</h3>
+                        <p class="certification-issuer">Shopify & WooCommerce</p>
+                        <span class="certification-date" data-i18n="cert-professional-exp">Professional
+                            Experience</span>
+                        <p class="certification-description" data-i18n="cert-ecommerce-desc">Extensive experience
+                            building and optimizing e-commerce platforms and online stores.</p>
+                        <div class="certification-skills">
+                            <span class="skill-tag">Shopify</span>
+                            <span class="skill-tag">WooCommerce</span>
+                            <span class="skill-tag" data-i18n="tag-ecommerce">E-commerce</span>
+                        </div>
+                        <a href="#services" class="certification-link group">
+                            <span data-i18n="cert-view-services">View Services</span>
+                            <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div> -->
+            </div>
+
+            <!-- Call to Action -->
+            <div class="text-center mt-12">
+                <div class="glass rounded-2xl p-8 border border-gray-700/50">
+                    <h3 class="text-2xl font-bold text-white mb-4" data-i18n="cert-cta-title">Continuous Learning
+                        Journey</h3>
+                    <p class="text-gray-300 mb-6" data-i18n="cert-cta-desc">I believe in lifelong learning and
+                        constantly updating my skills with the latest technologies and methodologies.</p>
+                    <a href="#contact"
+                        class="inline-flex items-center gap-2 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105">
+                        <i class="fas fa-rocket"></i>
+                        <span data-i18n="cert-cta-button">Start a Project With Me</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 bg-gray-900/50 section-hidden">
+        <div class="max-w-6xl mx-auto px-8 sm:px-12 lg:px-16">
+            <!-- Section Heading -->
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 gradient-text" data-i18n="portfolio-title">My Portfolio</h2>
+                <p class="text-xl text-gray-400" data-i18n="portfolio-subtitle">Some of my projects in Web Development &
+                    Design</p>
+            </div>
+
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button
+                    class="filter-btn active px-5 py-2 rounded-full glass text-white font-medium transition-all duration-300 hover:scale-105"
+                    data-filter="all">
+                    <span data-i18n="filter-all">All Projects</span>
+                </button>
+                <button
+                    class="filter-btn px-5 py-2 rounded-full glass text-gray-300 font-medium transition-all duration-300 hover:scale-105 hover:text-white"
+                    data-filter="wordpress">
+                    <span data-i18n="filter-wordpress">WordPress</span>
+                </button>
+                <button
+                    class="filter-btn px-5 py-2 rounded-full glass text-gray-300 font-medium transition-all duration-300 hover:scale-105 hover:text-white"
+                    data-filter="ecommerce">
+                    <span data-i18n="filter-ecommerce">E-Commerce</span>
+                </button>
+                <button
+                    class="filter-btn px-5 py-2 rounded-full glass text-gray-300 font-medium transition-all duration-300 hover:scale-105 hover:text-white"
+                    data-filter="ai">
+                    <span data-i18n="filter-ai">AI & Data</span>
+                </button>
+                <button
+                    class="filter-btn px-5 py-2 rounded-full glass text-gray-300 font-medium transition-all duration-300 hover:scale-105 hover:text-white"
+                    data-filter="web-app">
+                    <span data-i18n="filter-web-app">Web Apps</span>
+                </button>
+                <button
+                    class="filter-btn px-5 py-2 rounded-full glass text-gray-300 font-medium transition-all duration-300 hover:scale-105 hover:text-white"
+                    data-filter="other">
+                    <span data-i18n="filter-other">Others</span>
+                </button>
+            </div>
+
+            <!-- Portfolio Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolio-grid">
+
+                <div class="portfolio-item group" data-category="other">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image-container">
+                            <div class="portfolio-image">
+                                <img src="./portfolio/digizone.png" alt="Digizone"
+                                    class="w-full h-48 object-cover">
+                            </div>
+
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://digizoneee.vercel.app/" class="portfolio-btn"
+                                        title="Visit Website">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <A href="https://github.com/mohakamran/digizoneee"
+                                        class="portfolio-btn view-details" data-project="neural-nexus"
+                                        title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3 class="portfolio-title" data-i18n="project-digizone">Digizone</h3>
+                            <p class="portfolio-description" data-i18n="project-digizone-desc">Ecommerce Services Startup Website
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">Framer Motion</span>
+                                <span class="portfolio-tag">Tailwind</span>
+                                <span class="portfolio-tag">NEXT JS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item group" data-category="other">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image-container">
+                            <div class="portfolio-image">
+                                <img src="./portfolio/ai-tools.png" alt="Neural Nexus"
+                                    class="w-full h-48 object-cover">
+                            </div>
+
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://ai-tools-dun.vercel.app/" class="portfolio-btn"
+                                        title="Visit Website">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <A href="https://github.com/mohakamran/ai-tools"
+                                        class="portfolio-btn view-details" data-project="neural-nexus"
+                                        title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3 class="portfolio-title" data-i18n="project-ai">AI tools SAAS website</h3>
+                            <p class="portfolio-description" data-i18n="project-ai-desc">A website for AI tools Marketing page
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">Framer Motion</span>
+                                <span class="portfolio-tag">Tailwind</span>
+                                <span class="portfolio-tag">NEXT JS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item group" data-category="other">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image-container">
+                            <div class="portfolio-image">
+                                <img src="./portfolio/travelx.png" alt="Neural Nexus"
+                                    class="w-full h-48 object-cover">
+                            </div>
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://mohakamran.github.io/travelx/" class="portfolio-btn"
+                                        title="Visit Website">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <A href="https://github.com/mohakamran/travelx" class="portfolio-btn view-details"
+                                        data-project="neural-nexus" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3 class="portfolio-title" data-i18n="project-travelx">Travelx Travel Website</h3>
+                            <p class="portfolio-description" data-i18n="project-travelx-desc">Travel Agency Website</p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">NEXT JS</span>
+                                <span class="portfolio-tag">Tailwind CSS</span>
+                                <span class="portfolio-tag">Three.js</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item group" data-category="other">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image-container">
+                            <div class="portfolio-image">
+                                <img src="./portfolio/bakery.png" alt="Neural Nexus"
+                                    class="w-full h-48 object-cover">
+                            </div>
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://mohakamran.github.io/bakery/" target="_blank"
+                                        class="portfolio-btn" title="Visit Website">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <A href="https://github.com/mohakamran/bakery"
+                                        class="portfolio-btn view-details" data-project="neural-nexus"
+                                        title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3 class="portfolio-title" data-i18n="project-bakery">Bakery Website</h3>
+                            <p class="portfolio-description" data-i18n="project-bakery-desc">A responsive bakery web design</p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">HTML</span>
+                                <span class="portfolio-tag">JavaScript</span>
+                                <span class="portfolio-tag">CSS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item group" data-category="ai">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image-container">
+                            <div class="portfolio-image">
+                                <img src="./portfolio/customer-churn.png" alt="Neural Nexus"
+                                    class="w-full h-48 object-cover">
+                            </div>
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://github.com/mohakamran/customer-churn-predictor"
+                                        class="portfolio-btn" title="Visit Website">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <A href="https://github.com/mohakamran/customer-churn-predictor"
+                                        class="portfolio-btn view-details" data-project="neural-nexus"
+                                        title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3 class="portfolio-title" data-i18n="project-customer-churn">Customer Churn Prediction
+                            </h3>
+                            <p class="portfolio-description" data-i18n="project-customer-churn-desc">machine learning
+                                solution to predict customer churn for telecommunications companies
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">AI</span>
+                                <span class="portfolio-tag">Machine Learning</span>
+                                <span class="portfolio-tag">Python</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Neural Nexus Page -->
+                <div class="portfolio-item group" data-category="other">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image-container">
+                            <div class="portfolio-image">
+                                <img src="./portfolio/solar-system.png" alt="Neural Nexus"
+                                    class="w-full h-48 object-cover">
+                            </div>
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://mohakamran.github.io/solar-system/" target="_blank"
+                                        class="portfolio-btn" title="Visit Website">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <A href="https://github.com/mohakamran/solar-system"
+                                        class="portfolio-btn view-details" data-project="neural-nexus"
+                                        title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3 class="portfolio-title" data-i18n="project-solar">Solar System 3D Visualization</h3>
+                            <p class="portfolio-description" data-i18n="project-solar-desc">nteractive 3D visualization
+                                of our Solar System</p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">HTML</span>
+                                <span class="portfolio-tag">JavaScript</span>
+                                <span class="portfolio-tag">Simulation</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Neural Nexus Page -->
+                <div class="portfolio-item group" data-category="web-app">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image-container">
+                            <div class="portfolio-image">
+                                <img src="./portfolio/neural-nexus.png" alt="Neural Nexus"
+                                    class="w-full h-48 object-cover">
+                            </div>
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://mohakamran.github.io/neural-nexus/" target="_blank"
+                                        class="portfolio-btn" title="Visit Website">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <button class="portfolio-btn view-details" data-project="neural-nexus"
+                                        title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3 class="portfolio-title" data-i18n="project-neural">Neural Nexus Page</h3>
+                            <p class="portfolio-description" data-i18n="project-neural-desc">A simulator for Model
+                                training</p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">AI</span>
+                                <span class="portfolio-tag">JavaScript</span>
+                                <span class="portfolio-tag">Simulation</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Hive Landing Page -->
+                <div class="portfolio-item group" data-category="web-app">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image-container">
+                            <div class="portfolio-image">
+                                <img src="./portfolio/data-hive.png" alt="Data Hive" class="w-full h-48 object-cover">
+                            </div>
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://mohakamran.github.io/data-hive/" target="_blank"
+                                        class="portfolio-btn" title="Visit Website">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <button class="portfolio-btn view-details" data-project="data-hive"
+                                        title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3 class="portfolio-title" data-i18n="project-datahive">Data Hive Landing Page</h3>
+                            <p class="portfolio-description" data-i18n="project-datahive-desc">Data Hive</p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">React</span>
+                                <span class="portfolio-tag">UI/UX</span>
+                                <span class="portfolio-tag">Data</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Invoice Generator -->
+                <div class="portfolio-item group" data-category="web-app">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image-container">
+                            <div class="portfolio-image">
+                                <img src="./portfolio/envoice-generator.png" alt="Invoice Generator"
+                                    class="w-full h-48 object-cover">
+                            </div>
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://mohakamran.github.io/invoice-creator/" target="_blank"
+                                        class="portfolio-btn" title="Visit Website">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <button class="portfolio-btn view-details" data-project="invoice-generator"
+                                        title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3 class="portfolio-title" data-i18n="project-invoice">Invoice Generator</h3>
+                            <p class="portfolio-description" data-i18n="project-invoice-desc">Invoice Generator</p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">JavaScript</span>
+                                <span class="portfolio-tag">Tools</span>
+                                <span class="portfolio-tag">Business</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sentiment Analyzer -->
+                <div class="portfolio-item group" data-category="web-app">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image-container">
+                            <div class="portfolio-image">
+                                <img src="./portfolio/sentiment.png" alt="Sentiment Analyzer"
+                                    class="w-full h-48 object-cover">
+                            </div>
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://mohakamran.github.io/sentiment-analyzer/" target="_blank"
+                                        class="portfolio-btn" title="Visit Website">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <button class="portfolio-btn view-details" data-project="sentiment-analyzer"
+                                        title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3 class="portfolio-title" data-i18n="project-sentiment">Sentiment Analyzer</h3>
+                            <p class="portfolio-description" data-i18n="project-sentiment-desc">AI Tool</p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">AI</span>
+                                <span class="portfolio-tag">JavaScript</span>
+                                <span class="portfolio-tag">Analysis</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Estores Experts -->
+                <div class="portfolio-item group" data-category="wordpress">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image-container">
+                            <div class="portfolio-image">
+                                <img src="./portfolio/estores-experts.png" alt="Estores Experts"
+                                    class="w-full h-48 object-cover">
+                            </div>
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://www.estoresexperts.com" target="_blank" class="portfolio-btn"
+                                        title="Visit Website">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <button class="portfolio-btn view-details" data-project="estores"
+                                        title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3 class="portfolio-title" data-i18n="project-estores">Estores Experts</h3>
+                            <p class="portfolio-description" data-i18n="project-estores-desc">Business Website</p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">WordPress</span>
+                                <span class="portfolio-tag">Business</span>
+                                <span class="portfolio-tag">E-commerce</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7 Digits Hub -->
+                <div class="portfolio-item group" data-category="wordpress">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image-container">
+                            <div class="portfolio-image">
+                                <img src="./portfolio/7-digits-hub.png" alt="7 Digits Hub"
+                                    class="w-full h-48 object-cover">
+                            </div>
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://7digitshub.com/" target="_blank" class="portfolio-btn"
+                                        title="Visit Website">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <button class="portfolio-btn view-details" data-project="digits-hub"
+                                        title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3 class="portfolio-title" data-i18n="project-digits">7 Digits Hub</h3>
+                            <p class="portfolio-description" data-i18n="project-digits-desc">Business Website</p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">WordPress</span>
+                                <span class="portfolio-tag">Business</span>
+                                <span class="portfolio-tag">Consulting</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Expert Estores -->
+                <div class="portfolio-item group" data-category="wordpress">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image-container">
+                            <div class="portfolio-image">
+                                <img src="./portfolio/expert-estores.png" alt="Expert Estores"
+                                    class="w-full h-48 object-cover">
+                            </div>
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://www.expertestores.com" target="_blank" class="portfolio-btn"
+                                        title="Visit Website">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <button class="portfolio-btn view-details" data-project="expert-estores"
+                                        title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3 class="portfolio-title" data-i18n="project-expert">Expert Estores</h3>
+                            <p class="portfolio-description" data-i18n="project-expert-desc">Business Website</p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">WordPress</span>
+                                <span class="portfolio-tag">Business</span>
+                                <span class="portfolio-tag">E-commerce</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Unique Links -->
+                <div class="portfolio-item group" data-category="web-app">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image-container">
+                            <div class="portfolio-image">
+                                <img src="./portfolio/unique-links.png" alt="Unique Links"
+                                    class="w-full h-48 object-cover">
+                            </div>
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://www.unique-links.com.pk/" target="_blank" class="portfolio-btn"
+                                        title="Visit Website">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <button class="portfolio-btn view-details" data-project="unique-links"
+                                        title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3 class="portfolio-title" data-i18n="project-unique">Unique Links</h3>
+                            <p class="portfolio-description" data-i18n="project-unique-desc">Web Hosting Company Website
+                            </p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">WordPress</span>
+                                <span class="portfolio-tag">Hosting</span>
+                                <span class="portfolio-tag">Business</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Zoo Bounty -->
+                <div class="portfolio-item group" data-category="ecommerce">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image-container">
+                            <div class="portfolio-image">
+                                <img src="./portfolio/zoo-bounty.png" alt="Zoo Bounty" class="w-full h-48 object-cover">
+                            </div>
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://zoo-bounty.com/" target="_blank" class="portfolio-btn"
+                                        title="Visit Website">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <button class="portfolio-btn view-details" data-project="zoo-bounty"
+                                        title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3 class="portfolio-title" data-i18n="project-zoobounty">Zoo Bounty</h3>
+                            <p class="portfolio-description" data-i18n="project-zoobounty-desc">Online Shopping Website
+                            </p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">Shopify</span>
+                                <span class="portfolio-tag">E-commerce</span>
+                                <span class="portfolio-tag">Pets</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Global Travel Wide -->
+                <div class="portfolio-item group" data-category="wordpress">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image-container">
+                            <div class="portfolio-image">
+                                <img src="./portfolio/global-travel-wide.png" alt="Global Travel Wide"
+                                    class="w-full h-48 object-cover">
+                            </div>
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://globaltravelwide.co.uk/" target="_blank" class="portfolio-btn"
+                                        title="Visit Website">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <button class="portfolio-btn view-details" data-project="travel-wide"
+                                        title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3 class="portfolio-title" data-i18n="project-travel">Global Travel Wide</h3>
+                            <p class="portfolio-description" data-i18n="project-travel-desc">Travel Agency Website</p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">WordPress</span>
+                                <span class="portfolio-tag">Travel</span>
+                                <span class="portfolio-tag">Business</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Swif Sol -->
+                <div class="portfolio-item group" data-category="wordpress">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image-container">
+                            <div class="portfolio-image">
+                                <img src="./portfolio/swif-sol.png" alt="Swif Sol" class="w-full h-48 object-cover">
+                            </div>
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://swifsol.com/" target="_blank" class="portfolio-btn"
+                                        title="Visit Website">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <button class="portfolio-btn view-details" data-project="swif-sol"
+                                        title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3 class="portfolio-title" data-i18n="project-swif">Swif Sol</h3>
+                            <p class="portfolio-description" data-i18n="project-swif-desc">Digital Marketing Agency</p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">WordPress</span>
+                                <span class="portfolio-tag">Marketing</span>
+                                <span class="portfolio-tag">Agency</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reblate Solutions -->
+                <div class="portfolio-item group" data-category="web-app">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image-container">
+                            <div class="portfolio-image">
+                                <img src="./portfolio/reblate-sols.png" alt="Reblate Solutions"
+                                    class="w-full h-48 object-cover">
+                            </div>
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://reblatesols.com/" target="_blank" class="portfolio-btn"
+                                        title="Visit Website">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <button class="portfolio-btn view-details" data-project="reblate-sols"
+                                        title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3 class="portfolio-title" data-i18n="project-reblate">Reblate Solutions</h3>
+                            <p class="portfolio-description" data-i18n="project-reblate-desc">Agency Website</p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">ReactJS</span>
+                                <span class="portfolio-tag">Agency</span>
+                                <span class="portfolio-tag">Business</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CRM Reblate -->
+                <div class="portfolio-item group" data-category="web-app">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image-container">
+                            <div class="portfolio-image">
+                                <img src="./portfolio/crm-reblate.png" alt="CRM Reblate"
+                                    class="w-full h-48 object-cover">
+                            </div>
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://crm.reblatesols.com/login" target="_blank" class="portfolio-btn"
+                                        title="Visit Website">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <button class="portfolio-btn view-details" data-project="crm-reblate"
+                                        title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3 class="portfolio-title" data-i18n="project-crm">Company CRM Project</h3>
+                            <p class="portfolio-description" data-i18n="project-crm-desc">JavaScript + Laravel Web App
+                            </p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">Laravel</span>
+                                <span class="portfolio-tag">JavaScript</span>
+                                <span class="portfolio-tag">CRM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Firex Project -->
+                <div class="portfolio-item group" data-category="other">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image-container">
+                            <div class="portfolio-image">
+                                <img src="./portfolio/firex.png" alt="Firex Unity Project"
+                                    class="w-full h-48 object-cover">
+                            </div>
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    <a href="https://www.linkedin.com/posts/mokamran_finalyearproject-indiegame-gamedevlife-activity-7143562652156420096-nOJh"
+                                        target="_blank" class="portfolio-btn" title="View Project">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <button class="portfolio-btn view-details" data-project="firex"
+                                        title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3 class="portfolio-title" data-i18n="project-firex">Firex Unity Project</h3>
+                            <p class="portfolio-description" data-i18n="project-firex-desc">Unity and C# Final Year
+                                Project</p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">Unity</span>
+                                <span class="portfolio-tag">C#</span>
+                                <span class="portfolio-tag">Game Dev</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- View More Button -->
+            <div class="text-center mt-12">
+                <a href="https://github.com/mohakamran" blank="_blank"
+                    class="inline-flex items-center gap-3 glass hover:bg-gray-800/50 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105">
+                    <i class="fas fa-arrow-right"></i>
+                    <span data-i18n="portfolio-cta">Want to See More? Let's Talk</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <!-- Services Section -->
+    <section id="services" class="py-20 section-hidden">
+        <div class="max-w-4xl mx-auto px-8 sm:px-12 lg:px-16">
+            <!-- Section Heading -->
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 gradient-text" data-i18n="services-title">My Services</h2>
+                <p class="text-xl text-gray-400" data-i18n="services-subtitle">Helping you build, optimize, and scale
+                    your online presence</p>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+                <!-- Web Design & UI/UX -->
+                <div class="service-card group">
+                    <div class="service-icon">
+                        <div class="icon-container bg-blue-500/20 border-blue-500/30">
+                            <i class="fas fa-laptop-code text-blue-400 text-2xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="service-title" data-i18n="service-design">Web Design & UI/UX</h3>
+                    <p class="service-description" data-i18n="service-design-desc">Crafting modern, responsive, and
+                        visually appealing websites optimized for user experience and conversion rates.</p>
+                    <div class="service-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span data-i18n="service-feature-1">Responsive Design</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span data-i18n="service-feature-2">User Experience</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span data-i18n="service-feature-3">Modern UI</span>
+                        </div>
+                    </div>
+                    <div class="service-tech">
+                        <span class="tech-tag">Figma</span>
+                        <span class="tech-tag">Adobe XD</span>
+                        <span class="tech-tag">Tailwind</span>
+                    </div>
+                    <!-- <button class="service-cta">
+                        <span data-i18n="service-cta">Get Started</span>
+                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button> -->
+                </div>
+
+                <!-- Web Development -->
+                <div class="service-card group">
+                    <div class="service-icon">
+                        <div class="icon-container bg-green-500/20 border-green-500/30">
+                            <i class="fas fa-code text-green-400 text-2xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="service-title" data-i18n="service-dev">Web Development</h3>
+                    <p class="service-description" data-i18n="service-dev-desc">Building scalable and high-performance
+                        websites using modern technologies and best practices.</p>
+                    <div class="service-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span data-i18n="service-feature-4">Full Stack</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span data-i18n="service-feature-5">API Integration</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span data-i18n="service-feature-6">Performance</span>
+                        </div>
+                    </div>
+                    <div class="service-tech">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">Laravel</span>
+                    </div>
+                    <!-- <button class="service-cta">
+                        <span data-i18n="service-cta">Get Started</span>
+                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button> -->
+                </div>
+
+                <!-- E-Commerce Development -->
+                <div class="service-card group">
+                    <div class="service-icon">
+                        <div class="icon-container bg-purple-500/20 border-purple-500/30">
+                            <i class="fas fa-shopping-cart text-purple-400 text-2xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="service-title" data-i18n="service-ecommerce">E-Commerce Development</h3>
+                    <p class="service-description" data-i18n="service-ecommerce-desc">Creating custom online stores with
+                        Shopify, WooCommerce tailored for your business growth.</p>
+                    <div class="service-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span data-i18n="service-feature-7">Shopify Stores</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span data-i18n="service-feature-8">Payment Integration</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span data-i18n="service-feature-9">Inventory Management</span>
+                        </div>
+                    </div>
+                    <div class="service-tech">
+                        <span class="tech-tag">Shopify</span>
+                        <span class="tech-tag">WooCommerce</span>
+                        <span class="tech-tag">Stripe</span>
+                    </div>
+                    <!-- <button class="service-cta">
+                        <span data-i18n="service-cta">Get Started</span>
+                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button> -->
+                </div>
+
+                <!-- WordPress Development -->
+                <div class="service-card group">
+                    <div class="service-icon">
+                        <div class="icon-container bg-blue-600/20 border-blue-600/30">
+                            <i class="fab fa-wordpress text-blue-500 text-2xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="service-title" data-i18n="service-wordpress">WordPress Development</h3>
+                    <p class="service-description" data-i18n="service-wordpress-desc">Custom WordPress themes, plugins,
+                        and full website development with SEO optimization.</p>
+                    <div class="service-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span data-i18n="service-feature-10">Custom Themes</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span data-i18n="service-feature-11">Plugin Development</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span data-i18n="service-feature-12">SEO Ready</span>
+                        </div>
+                    </div>
+                    <div class="service-tech">
+                        <span class="tech-tag">WordPress</span>
+                        <span class="tech-tag">PHP</span>
+                        <span class="tech-tag">MySQL</span>
+                    </div>
+                    <!-- <button class="service-cta">
+                        <span data-i18n="service-cta">Get Started</span>
+                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button> -->
+                </div>
+
+                <!-- AI & Data Solutions -->
+                <div class="service-card group">
+                    <div class="service-icon">
+                        <div class="icon-container bg-red-500/20 border-red-500/30">
+                            <i class="fas fa-brain text-red-400 text-2xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="service-title" data-i18n="service-ai">AI & Data Solutions</h3>
+                    <p class="service-description" data-i18n="service-ai-desc">Implementing AI solutions, data analysis,
+                        and machine learning for your business intelligence.</p>
+                    <div class="service-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span data-i18n="service-feature-13">Data Analysis</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span data-i18n="service-feature-14">Machine Learning</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span data-i18n="service-feature-15">AI Integration</span>
+                        </div>
+                    </div>
+                    <div class="service-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">TensorFlow</span>
+                        <span class="tech-tag">Pandas</span>
+                    </div>
+                    <!-- <button class="service-cta">
+                        <span data-i18n="service-cta">Get Started</span>
+                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button> -->
+                </div>
+
+                <!-- Maintenance & Support -->
+                <div class="service-card group">
+                    <div class="service-icon">
+                        <div class="icon-container bg-orange-500/20 border-orange-500/30">
+                            <i class="fas fa-tools text-orange-400 text-2xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="service-title" data-i18n="service-maintenance">Maintenance & Support</h3>
+                    <p class="service-description" data-i18n="service-maintenance-desc">Ongoing website maintenance,
+                        updates, security, and technical support services.</p>
+                    <div class="service-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span data-i18n="service-feature-16">Regular Updates</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span data-i18n="service-feature-17">Security Monitoring</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span data-i18n="service-feature-18">Technical Support</span>
+                        </div>
+                    </div>
+                    <div class="service-tech">
+                        <span class="tech-tag" data-i18n="tag-security">Security</span>
+                        <span class="tech-tag" data-i18n="tag-updates">Updates</span>
+                        <span class="tech-tag" data-i18n="tag-support">Support</span>
+                    </div>
+                    <!-- <button class="service-cta">
+                        <span data-i18n="service-cta">Get Started</span>
+                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button> -->
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="text-center">
+                <div class="glass rounded-2xl p-8 border border-gray-700/50">
+                    <h3 class="text-2xl font-bold text-white mb-4" data-i18n="services-main-cta-title">Ready to Start
+                        Your Project?</h3>
+                    <p class="text-gray-300 mb-6" data-i18n="services-main-cta-desc">Let's discuss your ideas and create
+                        something amazing together. I'm here to help bring your vision to life.</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="#contact"
+                            class="bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3">
+                            <i class="fas fa-paper-plane"></i>
+                            <span data-i18n="services-cta-contact">Get In Touch</span>
+                        </a>
+                        <a href="#portfolio"
+                            class="glass hover:bg-gray-800/50 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3">
+                            <i class="fas fa-eye"></i>
+                            <span data-i18n="services-cta-portfolio">View My Work</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 bg-gray-900/30 section-hidden">
+        <div class="max-w-6xl mx-auto px-8 sm:px-12 lg:px-16">
+            <!-- Section Heading -->
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 gradient-text" data-i18n="pricing-title">Pricing Plans</h2>
+                <p class="text-xl text-gray-400" data-i18n="pricing-subtitle">Affordable packages tailored for your
+                    needs with guaranteed support</p>
+            </div>
+
+            <!-- Pricing Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Web Design -->
+                <div
+                    class="pricing-card bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 shadow-2xl hover:shadow-teal-500/20 hover:scale-105 transition-all duration-300 relative overflow-hidden border border-gray-700/50 group">
+                    <div class="absolute -top-3 -right-3 bg-gradient-to-r from-teal-400 to-cyan-500 text-white px-4 py-2 rounded-full text-sm font-bold transform rotate-12 shadow-lg z-10"
+                        data-i18n="pricing-badge-best">
+                        Best Deal
+                    </div>
+                    <div class="pricing-header text-center mb-8">
+                        <h3 class="text-2xl font-bold text-teal-400 mb-4" data-i18n="pricing-web-design">Web Design</h3>
+                        <div class="flex items-center justify-center gap-1 mb-2">
+                            <span class="text-teal-400 text-2xl font-bold">$</span>
+                            <span class="text-5xl font-extrabold text-white">600</span>
+                        </div>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center space-x-3 text-gray-300">
+                            <i class="fas fa-check text-green-400 text-lg"></i>
+                            <span data-i18n="pricing-feature-modern">Modern & Responsive UI</span>
+                        </li>
+                        <li class="flex items-center space-x-3 text-gray-300">
+                            <i class="fas fa-check text-green-400 text-lg"></i>
+                            <span data-i18n="pricing-feature-pages">Up to 5 Pages</span>
+                        </li>
+                        <li class="flex items-center space-x-3 text-gray-300">
+                            <i class="fas fa-check text-green-400 text-lg"></i>
+                            <span data-i18n="pricing-feature-support">30 Days Free Support</span>
+                        </li>
+                        <li class="flex items-center space-x-3 text-gray-300">
+                            <i class="fas fa-check text-green-400 text-lg"></i>
+                            <span data-i18n="pricing-feature-satisfaction">100% Satisfaction Guarantee</span>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <!-- Web Development -->
+                <div
+                    class="pricing-card bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 shadow-2xl hover:shadow-blue-500/20 hover:scale-105 transition-all duration-300 relative overflow-hidden border border-gray-700/50 group">
+                    <div class="pricing-header text-center mb-8">
+                        <h3 class="text-2xl font-bold text-blue-400 mb-4" data-i18n="pricing-web-dev">Web Development
+                        </h3>
+                        <div class="flex items-center justify-center gap-1 mb-2">
+                            <span class="text-blue-400 text-2xl font-bold">$</span>
+                            <span class="text-5xl font-extrabold text-white">1200</span>
+                        </div>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center space-x-3 text-gray-300">
+                            <i class="fas fa-check text-green-400 text-lg"></i>
+                            <span data-i18n="pricing-feature-fullstack">Full Stack Development</span>
+                        </li>
+                        <li class="flex items-center space-x-3 text-gray-300">
+                            <i class="fas fa-check text-green-400 text-lg"></i>
+                            <span data-i18n="pricing-feature-custom">Custom Web Applications</span>
+                        </li>
+                        <li class="flex items-center space-x-3 text-gray-300">
+                            <i class="fas fa-check text-green-400 text-lg"></i>
+                            <span data-i18n="pricing-feature-support">30 Days Free Support</span>
+                        </li>
+                        <li class="flex items-center space-x-3 text-gray-300">
+                            <i class="fas fa-check text-green-400 text-lg"></i>
+                            <span data-i18n="pricing-feature-satisfaction">100% Satisfaction Guarantee</span>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <!-- E-commerce Development -->
+                <div
+                    class="pricing-card bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 shadow-2xl hover:shadow-purple-500/20 hover:scale-105 transition-all duration-300 relative overflow-hidden border border-gray-700/50 group">
+                    <div class="pricing-header text-center mb-8">
+                        <h3 class="text-2xl font-bold text-purple-400 mb-4" data-i18n="pricing-ecommerce">E-commerce
+                            Development</h3>
+                        <div class="flex items-center justify-center gap-1 mb-2">
+                            <span class="text-purple-400 text-2xl font-bold">$</span>
+                            <span class="text-5xl font-extrabold text-white">1000</span>
+                        </div>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center space-x-3 text-gray-300">
+                            <i class="fas fa-check text-green-400 text-lg"></i>
+                            <span data-i18n="pricing-feature-platforms">Shopify, WooCommerce & WordPress Stores</span>
+                        </li>
+                        <li class="flex items-center space-x-3 text-gray-300">
+                            <i class="fas fa-check text-green-400 text-lg"></i>
+                            <span data-i18n="pricing-feature-responsive">Responsive Product Pages</span>
+                        </li>
+                        <li class="flex items-center space-x-3 text-gray-300">
+                            <i class="fas fa-check text-green-400 text-lg"></i>
+                            <span data-i18n="pricing-feature-payment">Payment Gateway Integration</span>
+                        </li>
+                        <li class="flex items-center space-x-3 text-gray-300">
+                            <i class="fas fa-check text-green-400 text-lg"></i>
+                            <span data-i18n="pricing-feature-support-guarantee">30 Days Free Support & Guarantee</span>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <!-- Data Analysis & Other Services -->
+                <div
+                    class="pricing-card bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 shadow-2xl hover:shadow-orange-500/20 hover:scale-105 transition-all duration-300 relative overflow-hidden border border-gray-700/50 group">
+                    <div class="pricing-header text-center mb-8">
+                        <h3 class="text-2xl font-bold text-orange-400 mb-4" data-i18n="pricing-data-analysis">Data
+                            Analysis & Others</h3>
+                        <div class="flex items-center justify-center gap-1 mb-2">
+                            <span class="text-orange-400 text-2xl font-bold">$</span>
+                            <span class="text-5xl font-extrabold text-white">500</span>
+                        </div>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center space-x-3 text-gray-300">
+                            <i class="fas fa-check text-green-400 text-lg"></i>
+                            <span data-i18n="pricing-feature-visualization">Data Visualization & Insights</span>
+                        </li>
+                        <li class="flex items-center space-x-3 text-gray-300">
+                            <i class="fas fa-check text-green-400 text-lg"></i>
+                            <span data-i18n="pricing-feature-python">Python, Pandas, Matplotlib, Seaborn</span>
+                        </li>
+                        <li class="flex items-center space-x-3 text-gray-300">
+                            <i class="fas fa-check text-green-400 text-lg"></i>
+                            <span data-i18n="pricing-feature-api">API Development</span>
+                        </li>
+                        <li class="flex items-center space-x-3 text-gray-300">
+                            <i class="fas fa-check text-green-400 text-lg"></i>
+                            <span data-i18n="pricing-feature-support">30 Days Free Support</span>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+            <!-- Additional Info -->
+            <div class="text-center mt-16">
+                <div
+                    class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 border border-gray-700/50 shadow-2xl">
+                    <h3 class="text-2xl font-bold text-white mb-4" data-i18n="pricing-custom-title">Need a Custom
+                        Solution?</h3>
+                    <p class="text-gray-300 mb-6 text-lg" data-i18n="pricing-custom-desc">Let's discuss your specific
+                        requirements and create a tailored package just for you.</p>
+                    <a href="#contact"
+                        class="inline-flex items-center gap-3 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-teal-500/25 text-lg">
+                        <i class="fas fa-comments"></i>
+                        <span data-i18n="pricing-custom-cta">Discuss Your Project</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* Pricing Section Styles */
+        .pricing-card {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gradient-color-1), var(--gradient-color-2));
+            border-radius: 8px 8px 0 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .pricing-card:hover::before {
+            opacity: 1;
+        }
+
+        .pricing-card:nth-child(1)::before {
+            --gradient-color-1: #2dd4bf;
+            --gradient-color-2: #22d3ee;
+        }
+
+        .pricing-card:nth-child(2)::before {
+            --gradient-color-1: #3b82f6;
+            --gradient-color-2: #06b6d4;
+        }
+
+        .pricing-card:nth-child(3)::before {
+            --gradient-color-1: #8b5cf6;
+            --gradient-color-2: #ec4899;
+        }
+
+        .pricing-card:nth-child(4)::before {
+            --gradient-color-1: #f59e0b;
+            --gradient-color-2: #ef4444;
+        }
+
+        /* Glow effect on hover */
+        .pricing-card:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(45, 212, 191, 0.1);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .pricing-card {
+                padding: 1.5rem;
+            }
+
+            .text-5xl {
+                font-size: 2.5rem;
+            }
+
+            .pricing-header {
+                margin-bottom: 1.5rem;
+            }
+        }
+
+        /* Animation for cards */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .pricing-card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .pricing-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .pricing-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .pricing-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .pricing-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+    </style>
+
+    <!-- Gallery Section -->
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-gray-900/50 section-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Heading -->
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 gradient-text">My Travel Gallery</h2>
+                <!-- <p class="text-xl text-gray-400">Moments captured from my travels and adventures in Japan</p> -->
+            </div>
+
+            <!-- Swiper Slider Container -->
+            <div class="swiper-container gallery-slider relative">
+                <div class="swiper-wrapper">
+                    <!-- Slides for images 1-26 -->
+                    <div class="swiper-slide">
+                        <div class="gallery-item group cursor-pointer" data-image-index="0">
+                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-gray-800">
+                                <img src="./gallary/1.jpg" alt="Travel image 1"
+                                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="gallery-item group cursor-pointer" data-image-index="1">
+                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-gray-800">
+                                <img src="./gallary/2.jpg" alt="Travel image 2"
+                                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="swiper-slide">
+                        <div class="gallery-item group cursor-pointer" data-image-index="2">
+                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-gray-800">
+                                <img src="./gallary/3.jpg" alt="Travel image 3"
+                                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <div class="swiper-slide">
+                        <div class="gallery-item group cursor-pointer" data-image-index="3">
+                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-gray-800">
+                                <img src="./gallary/4.jpg" alt="Travel image 4"
+                                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="gallery-item group cursor-pointer" data-image-index="4">
+                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-gray-800">
+                                <img src="./gallary/5.jpg" alt="Travel image 5"
+                                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="gallery-item group cursor-pointer" data-image-index="5">
+                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-gray-800">
+                                <img src="./gallary/6.jpg" alt="Travel image 6"
+                                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Continue for images 7-26 with the same structure -->
+                    <div class="swiper-slide">
+                        <div class="gallery-item group cursor-pointer" data-image-index="6">
+                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-gray-800">
+                                <img src="./gallary/7.jpg" alt="Travel image 7"
+                                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="gallery-item group cursor-pointer" data-image-index="7">
+                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-gray-800">
+                                <img src="./gallary/8.jpg" alt="Travel image 8"
+                                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="gallery-item group cursor-pointer" data-image-index="8">
+                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-gray-800">
+                                <img src="./gallary/9.jpg" alt="Travel image 9"
+                                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="gallery-item group cursor-pointer" data-image-index="9">
+                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-gray-800">
+                                <img src="./gallary/10.jpg" alt="Travel image 10"
+                                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add remaining slides for images 11-26 following the same pattern -->
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="swiper-button-next !hidden sm:!flex">
+                    <i class="fas fa-chevron-right text-white text-lg"></i>
+                </div>
+                <div class="swiper-button-prev !hidden sm:!flex">
+                    <i class="fas fa-chevron-left text-white text-lg"></i>
+                </div>
+
+                <!-- Pagination Dots -->
+                <div class="swiper-pagination !bottom-0 mt-6"></div>
+            </div>
+
+            <!-- Lightbox Modal -->
+            <div id="lightbox" class="fixed inset-0 bg-black/95 z-50 hidden items-center justify-center p-4">
+                <div class="relative w-full max-w-4xl max-h-full">
+                    <button id="close-lightbox"
+                        class="absolute -top-12 right-0 text-white text-2xl hover:text-teal-400 transition-colors z-10 bg-black/50 rounded-full w-10 h-10 flex items-center justify-center">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <button id="prev-lightbox"
+                        class="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 text-white text-2xl hover:text-teal-400 transition-colors z-10 bg-black/50 rounded-full w-10 h-10 flex items-center justify-center">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button id="next-lightbox"
+                        class="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 text-white text-2xl hover:text-teal-400 transition-colors z-10 bg-black/50 rounded-full w-10 h-10 flex items-center justify-center">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="lightbox-content bg-gray-900 rounded-lg overflow-hidden">
+                        <img id="lightbox-image" src="" alt="" class="w-full h-auto max-h-[85vh] object-contain">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <!-- <div class="text-center mt-12">
+                <div class="glass rounded-2xl p-6 sm:p-8 border border-gray-700/50">
+                    <h3 class="text-xl sm:text-2xl font-bold text-white mb-4">More Adventures Coming Soon!</h3>
+                    <p class="text-gray-300 mb-6 text-sm sm:text-base">I'm constantly exploring new places and capturing
+                        memories. Follow my journey for more updates!</p>
+                    <a href="#contact"
+                        class="inline-flex items-center gap-3 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base">
+                        <i class="fas fa-camera"></i>
+                        <span>Share Your Travel Stories</span>
+                    </a>
+                </div>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 section-hidden">
+        <div class="max-w-4xl mx-auto px-8 sm:px-12 lg:px-16">
+            <!-- Section Heading -->
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 gradient-text" data-i18n="contact-title">Let's Connect</h2>
+                <p class="text-xl text-gray-400" data-i18n="contact-subtitle">Get in touch and let's create something
+                    amazing together</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Information -->
+                <div class="space-y-8">
+                    <!-- Contact Card -->
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope text-teal-400 text-2xl"></i>
+                        </div>
+                        <div class="contact-content">
+                            <h3 class="contact-title" data-i18n="contact-email">Email Me</h3>
+                            <p class="contact-info">mohammadkamran1515@gmail.com</p>
+                            <a href="mailto:mohammadkamran1515@gmail.com" class="contact-link">
+                                <span data-i18n="contact-send-email">Send Email</span> <i
+                                    class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Location Card -->
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt text-red-400 text-2xl"></i>
+                        </div>
+                        <div class="contact-content">
+                            <h3 class="contact-title" data-i18n="contact-location">Location</h3>
+                            <p class="contact-info">Kitakyushu, Fukuoka, Japan</p>
+                            <span class="contact-subinfo" data-i18n="contact-based-in">Currently based in Japan for
+                                Masters studies</span>
+                        </div>
+                    </div>
+
+                    <!-- Availability Card -->
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock text-yellow-400 text-2xl"></i>
+                        </div>
+                        <div class="contact-content">
+                            <h3 class="contact-title" data-i18n="contact-availability">Availability</h3>
+                            <p class="contact-info" data-i18n="contact-open-projects">Open for freelance projects</p>
+                            <span class="contact-subinfo" data-i18n="contact-quick-response">Quick response within 24
+                                hours</span>
+                        </div>
+                    </div>
+
+                    <!-- Social Media -->
+                    <!-- Social Media -->
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-share-alt text-purple-400 text-2xl"></i>
+                        </div>
+                        <div class="contact-content">
+                            <h3 class="contact-title" data-i18n="contact-follow">Follow Me</h3>
+                            <div class="social-links">
+                                <a href="https://github.com/mohakamran" target="_blank" class="social-link">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/in/mokamran/" target="_blank" class="social-link">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="https://x.com/being_m_kamran" target="_blank" class="social-link">
+                                    <i class="fab fa-x-twitter"></i>
+                                </a>
+                                <a href="https://www.tiktok.com/@mohammad_kamran_" target="_blank" class="social-link">
+                                    <i class="fab fa-tiktok"></i>
+                                </a>
+                                <a href="https://www.instagram.com/being_m_kamran" target="_blank" class="social-link">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="https://www.facebook.com/being.m.kamran" target="_blank" class="social-link">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <!-- Contact Form -->
+                <div class="contact-form-container">
+                    <form class="contact-form" id="contact-form">
+                        <div class="form-group">
+                            <label for="name" class="form-label" data-i18n="form-name">Full Name</label>
+                            <input type="text" id="name" name="from_name" class="form-input"
+                                placeholder="Enter your full name" data-i18n-placeholder="form-name-placeholder"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label" data-i18n="form-email">Email Address</label>
+                            <input type="email" id="email" name="from_email" class="form-input"
+                                placeholder="Enter your email address" data-i18n-placeholder="form-email-placeholder"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject" class="form-label" data-i18n="form-subject">Subject</label>
+                            <input type="text" id="subject" name="subject" class="form-input"
+                                placeholder="What is this regarding?" data-i18n-placeholder="form-subject-placeholder"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" class="form-label" data-i18n="form-message">Message</label>
+                            <textarea id="message" name="message" class="form-textarea" rows="5"
+                                placeholder="Tell me about your project..."
+                                data-i18n-placeholder="form-message-placeholder" required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <span class="submit-text" data-i18n="form-submit">Send Message</span>
+                            <i class="fas fa-paper-plane submit-icon"></i>
+                            <div class="submit-loader hidden">
+                                <i class="fas fa-spinner fa-spin"></i>
+                            </div>
+                        </button>
+
+                        <!-- Success Message -->
+                        <div id="form-success"
+                            class="hidden mt-4 p-4 bg-green-500/20 border border-green-500/30 rounded-lg text-green-400 text-center">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            <span data-i18n="form-sent">Message sent successfully! I'll get back to you within 24
+                                hours.</span>
+                        </div>
+
+                        <!-- Error Message -->
+                        <div id="form-error"
+                            class="hidden mt-4 p-4 bg-red-500/20 border border-red-500/30 rounded-lg text-red-400 text-center">
+                            <i class="fas fa-exclamation-circle mr-2"></i>
+                            <span>There was an error sending your message. Please try again or email me directly.</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900/80 border-t border-gray-700/50 py-12">
+        <div class="max-w-4xl mx-auto px-8 sm:px-12 lg:px-16">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Brand -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div
+                            class="w-8 h-8 bg-gradient-to-r from-teal-400 to-cyan-500 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-code text-white text-sm"></i>
+                        </div>
+                        <span class="text-white font-bold text-lg">Muhammad Kamran</span>
+                    </div>
+                    <p class="text-gray-400 mb-4 leading-relaxed" data-i18n="footer-brand-desc">
+                        Full Stack Developer & AI Enthusiast crafting digital experiences with modern technologies.
+                        Based in Japan, creating innovative solutions worldwide.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="cv-kamran-english.pdf" download class="footer-btn">
+                            <i class="fas fa-download mr-2"></i>
+                            <span data-i18n="footer-cv-en">CV English</span>
+                        </a>
+                        <a href="cv-kamran-japanese.pdf" download class="footer-btn">
+                            <i class="fas fa-download mr-2"></i>
+                            <span data-i18n="footer-cv-jp">CV 日本語</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-white font-semibold mb-4" data-i18n="footer-quick-links">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="footer-link" data-i18n="nav-home">Home</a></li>
+                        <li><a href="#skills" class="footer-link" data-i18n="nav-skills">Skills</a></li>
+                        <li><a href="#portfolio" class="footer-link" data-i18n="nav-portfolio">Portfolio</a></li>
+                        <li><a href="#services" class="footer-link" data-i18n="nav-services">Services</a></li>
+                        <li><a href="#contact" class="footer-link" data-i18n="nav-contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h3 class="text-white font-semibold mb-4" data-i18n="footer-services">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#services" class="footer-link" data-i18n="service-dev">Web Development</a></li>
+                        <li><a href="#services" class="footer-link" data-i18n="service-design">UI/UX Design</a></li>
+                        <li><a href="#services" class="footer-link" data-i18n="service-ecommerce">E-commerce</a></li>
+                        <li><a href="#services" class="footer-link" data-i18n="service-wordpress">WordPress</a></li>
+                        <li><a href="#services" class="footer-link" data-i18n="service-ai">AI Solutions</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-700/50 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0" data-i18n="footer-copyright">
+                    Muhammad Kamran </p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors text-sm"
+                        data-i18n="footer-privacy">
+                        Privacy Policy
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors text-sm"
+                        data-i18n="footer-terms">
+                        Terms of Service
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Swiper Slider
+        function initGallerySlider() {
+            const gallerySwiper = new Swiper('.gallery-slider', {
+                slidesPerView: 1,
+                spaceBetween: 16,
+                loop: true,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                },
+                speed: 600,
+                effect: 'slide',
+                direction: 'horizontal',
+                centeredSlides: false,
+                grabCursor: true,
+
+                // Responsive breakpoints
+                breakpoints: {
+                    400: {
+                        slidesPerView: 1.2,
+                        spaceBetween: 16
+                    },
+                    500: {
+                        slidesPerView: 1.5,
+                        spaceBetween: 16
+                    },
+                    640: {
+                        slidesPerView: 2,
+                        spaceBetween: 16
+                    },
+                    768: {
+                        slidesPerView: 2.5,
+                        spaceBetween: 20
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 24
+                    },
+                    1280: {
+                        slidesPerView: 4,
+                        spaceBetween: 24
+                    }
+                },
+
+                // Navigation arrows
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+
+                // Pagination dots
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                    dynamicBullets: true,
+                    dynamicMainBullets: 3
+                }
+            });
+
+            // Lightbox functionality
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const closeLightbox = document.getElementById('close-lightbox');
+            const prevLightbox = document.getElementById('prev-lightbox');
+            const nextLightbox = document.getElementById('next-lightbox');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+
+            let currentImageIndex = 0;
+            const imagePaths = [
+                './gallary/1.jpg', './gallary/2.jpg', './gallary/3.jpg', './gallary/4.jpg',
+                './gallary/5.jpg', './gallary/6.jpg', './gallary/7.jpg', './gallary/8.jpg',
+                './gallary/9.jpg', './gallary/10.jpg', './gallary/11.jpg', './gallary/12.jpg',
+                './gallary/13.jpg', './gallary/14.jpg', './gallary/15.jpg', './gallary/16.jpg',
+                './gallary/17.jpg', './gallary/18.jpg', './gallary/19.jpg', './gallary/20.jpg',
+                './gallary/21.jpg', './gallary/22.jpg', './gallary/23.jpg', './gallary/24.jpg',
+                './gallary/25.jpg', './gallary/26.jpg'
+            ];
+
+            // Open lightbox when image is clicked
+            galleryItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    currentImageIndex = parseInt(this.getAttribute('data-image-index'));
+                    updateLightboxImage();
+                    lightbox.classList.remove('hidden');
+                    lightbox.classList.add('flex');
+                    document.body.style.overflow = 'hidden';
+                    document.documentElement.style.overflow = 'hidden';
+                });
+            });
+
+            // Close lightbox
+            closeLightbox.addEventListener('click', closeLightboxFunc);
+            lightbox.addEventListener('click', function (e) {
+                if (e.target === lightbox) {
+                    closeLightboxFunc();
+                }
+            });
+
+            // Navigation in lightbox
+            prevLightbox.addEventListener('click', showPrevImage);
+            nextLightbox.addEventListener('click', showNextImage);
+
+            // Keyboard navigation
+            document.addEventListener('keydown', function (e) {
+                if (!lightbox.classList.contains('hidden')) {
+                    if (e.key === 'Escape') closeLightboxFunc();
+                    if (e.key === 'ArrowLeft') showPrevImage();
+                    if (e.key === 'ArrowRight') showNextImage();
+                }
+            });
+
+            // Touch swipe for mobile lightbox
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            lightbox.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+
+            lightbox.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = touchStartX - touchEndX;
+
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0) {
+                        showNextImage(); // Swipe left
+                    } else {
+                        showPrevImage(); // Swipe right
+                    }
+                }
+            }
+
+            function updateLightboxImage() {
+                lightboxImage.src = imagePaths[currentImageIndex];
+                lightboxImage.alt = `Travel image ${currentImageIndex + 1}`;
+
+                // Preload next and previous images for smoother navigation
+                const nextIndex = (currentImageIndex + 1) % imagePaths.length;
+                const prevIndex = (currentImageIndex - 1 + imagePaths.length) % imagePaths.length;
+
+                const nextImage = new Image();
+                nextImage.src = imagePaths[nextIndex];
+
+                const prevImage = new Image();
+                prevImage.src = imagePaths[prevIndex];
+            }
+
+            function showPrevImage() {
+                currentImageIndex = (currentImageIndex - 1 + imagePaths.length) % imagePaths.length;
+                updateLightboxImage();
+            }
+
+            function showNextImage() {
+                currentImageIndex = (currentImageIndex + 1) % imagePaths.length;
+                updateLightboxImage();
+            }
+
+            function closeLightboxFunc() {
+                lightbox.classList.add('hidden');
+                lightbox.classList.remove('flex');
+                document.body.style.overflow = 'auto';
+                document.documentElement.style.overflow = 'auto';
+            }
+
+            console.log('Gallery slider initialized with', imagePaths.length, 'images');
+        }
+
+        // Initialize when section is in view
+        function initGallerySection() {
+            const gallerySection = document.getElementById('gallery');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        initGallerySlider();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            if (gallerySection) {
+                observer.observe(gallerySection);
+            }
+        }
+
+        // Add to your main initialization
+        document.addEventListener('DOMContentLoaded', function () {
+            initGallerySection();
+        });
+    </script>
+
+    <!-- External JavaScript -->
+    <script src="js/index.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

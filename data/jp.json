@@ -1,0 +1,102 @@
+{
+  "meta": {
+    "language": "jp", 
+    "direction": "ltr"
+  },
+  "header": {
+    "logo": "MK",
+    "nav": {
+      "home": "ホーム",
+      "skills": "スキル",
+      "education": "学歴",
+      "certifications": "資格",
+      "portfolio": "ポートフォリオ", 
+      "services": "サービス",
+      "gallery": "ギャラリー",
+      "contact": "お問い合わせ"
+    },
+    "buttons": {
+      "cvEnglish": "英語履歴書",
+      "cvJapanese": "日本語履歴書"
+    }
+  },
+  "hero": {
+    "badge": "フリーランス可能",
+    "title": "フルスタック開発者",
+    "subtitle": "AIエンスージアスト",
+    "dynamicTexts": ["PHP", "Python", "Shopify", "WordPress", "React", "Laravel", "JavaScript", "Node.js"],
+    "description": "PHP Laravel、React、Python、AIソリューションを使用したデジタル体験を創り出しています。現在日本で修士号を取得中で、データサイエンスを通じて交通心理学を研究しています。",
+    "buttons": {
+      "viewWork": "作品を見る",
+      "getInTouch": "お問い合わせ"
+    },
+    "stats": {
+      "projects": "50+",
+      "projectsLabel": "プロジェクト",
+      "experience": "3+",
+      "experienceLabel": "年の経験", 
+      "satisfaction": "100%",
+      "satisfactionLabel": "満足度"
+    },
+    "status": "求職中"
+  },
+  "skills": {
+    "title": "私のスキル",
+    "subtitle": "習得した技術とツール",
+    "items": [
+      {
+        "name": "WordPress",
+        "level": 90,
+        "icon": "wordpress"
+      },
+      {
+        "name": "HTML5", 
+        "level": 95,
+        "icon": "html5"
+      }
+      
+    ]
+  },
+  "education": {
+    "title": "学歴と職務経験",
+    "education": {
+      "title": "学歴",
+      "items": [
+        {
+          "degree": "応用情報システム修士",
+          "institution": "北九州市立大学、福岡、日本",
+          "description": "交通シミュレーションシステムと心理学に焦点",
+          "period": "2024年10月 - 2026年9月"
+        }
+      ]
+    },
+    "experience": {
+      "title": "職務経験",
+      "items": [
+        {
+          "position": "フルスタックエンジニア",
+          "company": "Reblate Solutions",
+          "description": "PHP、React、JavaScript、Laravel、WordPress、Shopifyを使用したフルスタックエンジニアとして勤務",
+          "period": "2022年1月 - 2024年8月", 
+          "skills": "PHP, JavaScript, CSS3, WordPress, React"
+        }
+      ]
+    }
+  },
+  "contact": {
+    "title": "お問い合わせ",
+    "subtitle": "SNSでフォローまたは直接ご連絡ください",
+    "email": "mohammadkamran1515@gmail.com",
+    "social": {
+      "facebook": "https://www.facebook.com/being.m.kamran/",
+      "twitter": "https://x.com/being_m_kamran", 
+      "instagram": "https://instagram.com/being_m_kamran",
+      "github": "https://github.com/mohakamran",
+      "linkedin": "https://www.linkedin.com/in/mokamran/",
+      "youtube": "https://www.youtube.com/@muhkamran1034"
+    }
+  },
+  "footer": {
+    "copyright": "&copy; 2025 Muhammad Kamran. All rights reserved."
+  }
+}
