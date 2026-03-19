@@ -84,57 +84,16 @@ document.addEventListener('DOMContentLoaded', function () {
         navbar.style.opacity = '1';
     }
 
-    // ===== THEME TOGGLE FUNCTIONALITY =====
+    // ===== THEME INITIALIZATION (FORCED DARK) =====
+    document.documentElement.setAttribute('data-theme', 'dark');
+    
+    // (Optional) Remove unused theme toggle event listeners since UI is removed
+    /*
     const themeToggleDesktop = document.getElementById('theme-toggle-desktop');
     const themeToggleMobile = document.getElementById('theme-toggle-mobile');
-    
-    // Check for saved theme preference or prefer-color-scheme
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    // Set initial theme
-    if (savedTheme === 'light' || (!savedTheme && !prefersDark)) {
-        document.documentElement.setAttribute('data-theme', 'light');
-        updateThemeIcons('light');
-    } else {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        updateThemeIcons('dark');
-    }
-
-    function updateThemeIcons(theme) {
-        const iconClass = theme === 'light' ? 'fa-sun' : 'fa-moon';
-        const oldClass = theme === 'light' ? 'fa-moon' : 'fa-sun';
-        
-        if (themeToggleDesktop) {
-            const icon = themeToggleDesktop.querySelector('i');
-            if (icon) {
-                icon.classList.remove(oldClass);
-                icon.classList.add(iconClass);
-                // In light mode, icon is a sun, but maybe we want a moon to indicate "switch to dark"?
-                // Let's use Sun to indicate we are in light mode, or moon to indicate dark mode.
-            }
-        }
-        
-        if (themeToggleMobile) {
-            const icon = themeToggleMobile.querySelector('i');
-            if (icon) {
-                icon.classList.remove(oldClass);
-                icon.classList.add(iconClass);
-            }
-        }
-    }
-
-    function toggleTheme() {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateThemeIcons(newTheme);
-    }
-
     if (themeToggleDesktop) themeToggleDesktop.addEventListener('click', toggleTheme);
     if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
+    */
 });
 
 // Additional safety check for navbar
@@ -152,19 +111,26 @@ window.addEventListener('load', function () {
 // Create floating particles
 function createParticles() {
     const container = document.getElementById('particles-container');
-    const particleCount = 20;
+    const particleCount = 12;
+    const colors = ['#0ea5e9', '#14b8a6', '#a855f7', '#ec4899'];
 
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.classList.add('particle');
 
-        const size = Math.random() * 60 + 10;
+        const size = Math.random() * 40 + 5;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        
         particle.style.width = `${size}px`;
         particle.style.height = `${size}px`;
+        particle.style.background = color;
+        particle.style.opacity = Math.random() * 0.3 + 0.1;
+        particle.style.boxShadow = `0 0 20px ${color}`;
+        
         particle.style.left = `${Math.random() * 100}vw`;
         particle.style.top = `${Math.random() * 100 + 100}vh`;
         particle.style.animationDelay = `${Math.random() * 20}s`;
-        particle.style.animationDuration = `${Math.random() * 20 + 10}s`;
+        particle.style.animationDuration = `${Math.random() * 15 + 10}s`;
 
         container.appendChild(particle);
     }

@@ -12,7 +12,7 @@
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -151,10 +151,10 @@
                         <!-- <span class="fi fi-jp fis"></span> -->
                         <span data-i18n="lang-jp">日本語</span>
                     </button>
-                    <button id="theme-toggle-mobile"
+                    <!-- <button id="theme-toggle-mobile"
                         class="lang-btn glass text-[var(--text-muted)] px-3 py-1 rounded text-sm font-medium hover:text-[var(--text-main)] flex items-center justify-center">
                         <i class="fas fa-moon"></i>
-                    </button>
+                    </button> -->
                 </div>
 
                 <!-- Centered Navigation - Desktop -->
@@ -206,18 +206,14 @@
                     <!-- Desktop Language Switcher -->
                     <div class="hidden lg:flex items-center space-x-2">
                         <button id="lang-en"
-                            class="lang-btn bg-[var(--bg-card)] border-[var(--border-color)] text-[var(--text-muted)] px-4 py-2 rounded-lg font-medium border border-gray-600 hover:text-[var(--text-main)] hover:border-gray-500 flex items-center gap-2">
+                            class="lang-btn bg-[var(--bg-card)] border-[var(--border-color)] text-[var(--text-muted)] px-4 py-2 rounded-lg font-medium border border-[var(--border-color)] hover:text-[var(--text-main)] hover:border-gray-500 flex items-center gap-2">
                             <!-- <span class="fi fi-us fis"></span> -->
                             <span data-i18n="lang-en">English</span>
                         </button>
                         <button id="lang-jp"
-                            class="lang-btn bg-[var(--bg-card)] border-[var(--border-color)] text-[var(--text-muted)] px-4 py-2 rounded-lg font-medium border border-gray-600 hover:text-[var(--text-main)] hover:border-gray-500 flex items-center gap-2">
+                            class="lang-btn bg-[var(--bg-card)] border-[var(--border-color)] text-[var(--text-muted)] px-4 py-2 rounded-lg font-medium border border-[var(--border-color)] hover:text-[var(--text-main)] hover:border-gray-500 flex items-center gap-2">
                             <!-- <span class="fi fi-jp fis"></span> -->
                             <span data-i18n="lang-jp">日本語</span>
-                        </button>
-                        <button id="theme-toggle-desktop"
-                            class="lang-btn bg-[var(--bg-card)] border-[var(--border-color)] text-[var(--text-muted)] px-3 py-2 rounded-lg font-medium border border-gray-600 hover:text-[var(--text-main)] hover:border-gray-500 flex items-center justify-center">
-                            <i class="fas fa-moon"></i>
                         </button>
                     </div>
 
@@ -229,7 +225,7 @@
             </div>
 
             <!-- Mobile Menu -->
-            <!-- <div id="mobile-menu" class="hidden lg:hidden mt-3 glass rounded-xl p-4 border border-gray-700/50">
+            <!-- <div id="mobile-menu" class="hidden lg:hidden mt-3 glass rounded-xl p-4 border border-[var(--border-color)]">
             <div class="space-y-2">
                 <a href="#home" class="mobile-nav-item block text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 bg-teal-500/20">
                     <i class="fas fa-home w-4"></i>
@@ -267,7 +263,8 @@
         </div> -->
             <!-- Mobile Menu -->
             <!-- Mobile Menu -->
-            <div id="mobile-menu" class="hidden lg:hidden mt-3 glass rounded-xl p-4 border border-gray-700/50">
+            <div id="mobile-menu"
+                class="hidden lg:hidden mt-3 glass rounded-xl p-4 border border-[var(--border-color)]">
                 <div class="space-y-2">
                     <a href="#home"
                         class="mobile-nav-item block text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 bg-teal-500/20">
@@ -331,11 +328,12 @@
                     </div>
 
                     <!-- Main Heading -->
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                    <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold mb-6 leading-tight glow-text">
                         <span class="block" data-i18n="hero-title-1">Full Stack</span>
                         <span class="gradient-text" data-i18n="hero-title-2">Developer</span>
                         <span class="block text-xl sm:text-2xl text-[var(--text-muted)] mt-4 font-normal">
-                            & <span class="text-teal-400" data-i18n="hero-title-3">AI Enthusiast</span>
+                            <span class="text-teal-400 glow-text-secondary" data-i18n="hero-title-3">AI
+                                Enthusiast</span>
                         </span>
                     </h1>
 
@@ -358,14 +356,17 @@
                     <!-- CTA Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
                         <a href="#portfolio"
-                            class="group relative overflow-hidden bg-gradient-to-r from-cyan-500 to-teal-500 text-[var(--text-main)] font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-[0_0_20px_rgba(20,184,166,0.4)] hover:shadow-[0_0_30px_rgba(6,182,212,0.6)] flex items-center justify-center gap-3 z-10">
-                            <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-[-1]"></div>
+                            class="group relative overflow-hidden bg-gradient-to-r from-cyan-500 to-teal-500 !text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-[0_0_20px_rgba(20,184,166,0.4)] hover:shadow-[0_0_30px_rgba(6,182,212,0.6)] flex items-center justify-center gap-3 z-10">
+                            <div
+                                class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-[-1]">
+                            </div>
                             <span data-i18n="hero-cta-work">View My Work</span>
                             <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
                         </a>
                         <a href="#contact"
                             class="group glass text-[var(--text-main)] font-semibold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 hover:bg-[var(--bg-glass-hover)] border border-[var(--border-color)] flex items-center justify-center gap-3">
-                            <i class="fas fa-paper-plane text-cyan-500 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform"></i>
+                            <i
+                                class="fas fa-paper-plane text-cyan-500 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform"></i>
                             <span data-i18n="hero-cta-contact">Get In Touch</span>
                         </a>
                     </div>
@@ -374,15 +375,16 @@
                     <div class="grid grid-cols-3 gap-4 max-w-md mx-auto lg:mx-0">
                         <div class="text-center">
                             <div class="text-2xl font-bold text-[var(--text-main)]">50+</div>
-                            <div class="text-sm text-gray-400" data-i18n="hero-projects">Projects</div>
+                            <div class="text-sm text-[var(--text-muted)]" data-i18n="hero-projects">Projects</div>
                         </div>
                         <div class="text-center">
                             <div class="text-2xl font-bold text-[var(--text-main)]">3+</div>
-                            <div class="text-sm text-gray-400" data-i18n="hero-experience">Years Exp</div>
+                            <div class="text-sm text-[var(--text-muted)]" data-i18n="hero-experience">Years Exp</div>
                         </div>
                         <div class="text-center">
                             <div class="text-2xl font-bold text-[var(--text-main)]">100%</div>
-                            <div class="text-sm text-gray-400" data-i18n="hero-satisfaction">Satisfaction</div>
+                            <div class="text-sm text-[var(--text-muted)]" data-i18n="hero-satisfaction">Satisfaction
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -396,50 +398,47 @@
 
                     <!-- Main Visual Container -->
                     <div class="relative group creative-card">
-                        <!-- Floating Elements -->
+                        <!-- Floating Tech Icons -->
                         <div
-                            class="floating-element absolute -top-6 -left-6 w-20 h-20 bg-gradient-to-r from-teal-400/10 to-cyan-400/10 rounded-2xl rotate-12 opacity-30 group-hover:opacity-50 transition-all duration-500">
+                            class="tech-icon tech-icon-1 absolute hidden sm:flex -top-6 -right-6 w-16 h-16 glass rounded-2xl flex items-center justify-center text-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.3)] z-20">
+                            <i class="fab fa-php text-2xl"></i>
                         </div>
                         <div
-                            class="floating-element absolute -bottom-6 -right-6 w-16 h-16 bg-gradient-to-r from-purple-400/10 to-pink-400/10 rounded-2xl -rotate-12 opacity-30 group-hover:opacity-50 transition-all duration-500">
-                        </div>
-
-                        <!-- Tech Icons Floating -->
-                        <div
-                            class="tech-icon tech-icon-1 absolute -top-8 -right-8 w-16 h-16 glass bg-[var(--bg-card)] rounded-2xl flex items-center justify-center border border-cyan-500/30 shadow-2xl shadow-cyan-500/20">
-                            <i class="fab fa-react text-cyan-400 text-2xl"></i>
+                            class="tech-icon tech-icon-2 absolute hidden sm:flex top-1/4 -right-10 w-14 h-14 glass rounded-2xl flex items-center justify-center text-yellow-400 shadow-[0_0_20px_rgba(250,204,21,0.3)] z-20">
+                            <i class="fab fa-js text-2xl"></i>
                         </div>
                         <div
-                            class="tech-icon tech-icon-2 absolute -bottom-8 -left-8 w-16 h-16 glass bg-[var(--bg-card)] rounded-2xl flex items-center justify-center border border-red-500/30 shadow-2xl shadow-red-500/20">
-                            <i class="fab fa-laravel text-red-400 text-2xl"></i>
+                            class="tech-icon tech-icon-3 absolute hidden sm:flex bottom-1/4 -left-10 w-14 h-14 glass rounded-2xl flex items-center justify-center text-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.3)] z-20">
+                            <i class="fab fa-react text-2xl"></i>
                         </div>
                         <div
-                            class="tech-icon tech-icon-3 absolute top-1/3 -left-10 w-14 h-14 glass bg-[var(--bg-card)] rounded-xl flex items-center justify-center border border-yellow-500/30 shadow-2xl shadow-yellow-500/20">
-                            <i class="fab fa-python text-yellow-400 text-xl"></i>
+                            class="tech-icon tech-icon-4 absolute hidden sm:flex -bottom-6 right-6 w-16 h-16 glass rounded-2xl flex items-center justify-center text-red-500 shadow-[0_0_20px_rgba(239,44,44,0.3)] z-20">
+                            <i class="fab fa-laravel text-2xl"></i>
                         </div>
                         <div
-                            class="tech-icon tech-icon-4 absolute top-1/4 -right-10 w-14 h-14 glass bg-[var(--bg-card)] rounded-xl flex items-center justify-center border border-yellow-300/30 shadow-2xl shadow-yellow-300/20">
-                            <i class="fab fa-js-square text-yellow-300 text-xl"></i>
+                            class="tech-icon tech-icon-5 absolute hidden sm:flex -top-6 left-1/4 w-12 h-12 glass rounded-2xl flex items-center justify-center text-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.3)] z-20">
+                            <i class="fab fa-python text-xl"></i>
                         </div>
                         <div
-                            class="tech-icon tech-icon-5 absolute bottom-1/3 -right-12 w-12 h-12 glass bg-[var(--bg-card)] rounded-xl flex items-center justify-center border border-green-500/30 shadow-2xl shadow-green-500/20">
-                            <i class="fab fa-node-js text-green-400 text-lg"></i>
-                        </div>
-                        <div
-                            class="tech-icon tech-icon-6 absolute bottom-1/4 -left-12 w-12 h-12 glass bg-[var(--bg-card)] rounded-xl flex items-center justify-center border border-blue-500/30 shadow-2xl shadow-blue-500/20">
-                            <i class="fab fa-php text-blue-400 text-lg"></i>
+                            class="tech-icon tech-icon-6 absolute hidden sm:flex -bottom-6 left-1/4 w-12 h-12 glass rounded-2xl flex items-center justify-center text-green-500 shadow-[0_0_20px_rgba(34,197,94,0.3)] z-20">
+                            <i class="fab fa-node-js text-xl"></i>
                         </div>
 
                         <!-- Main Content Box -->
                         <div
-                            class="glass rounded-3xl p-10 border border-gray-700/50 shadow-2xl transform group-hover:scale-105 transition-all duration-500 w-full max-w-xl">
+                            class="glass rounded-3xl p-6 sm:p-10 border border-[var(--border-color)] shadow-2xl transform group-hover:scale-105 transition-all duration-500 w-full max-w-xl">
                             <div class="text-center">
                                 <!-- Profile Image -->
-                                <div class="relative w-56 h-56 mx-auto mb-8 p-1 rounded-full group-hover:shadow-[0_0_40px_rgba(45,212,191,0.5)] transition-shadow duration-500">
-                                    <div class="absolute inset-0 bg-gradient-to-r from-teal-400 via-cyan-500 to-purple-500 animate-[spin_4s_linear_infinite] rounded-full opacity-80 blur-sm"></div>
+                                <div
+                                    class="relative w-40 h-40 sm:w-56 sm:h-56 mx-auto mb-8 p-1 rounded-full group-hover:shadow-[0_0_40px_rgba(45,212,191,0.5)] transition-shadow duration-500">
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-r from-teal-400 via-cyan-500 to-purple-500 animate-[spin_4s_linear_infinite] rounded-full opacity-80 blur-sm">
+                                    </div>
                                     <div class="absolute inset-1 bg-[var(--bg-card)] rounded-full z-0"></div>
-                                    <div class="relative w-full h-full rounded-full overflow-hidden border-[3px] border-[var(--bg-card)] z-10">
-                                        <img src="./gallary/1.jpg" alt="Muhammad Kamran" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" />
+                                    <div
+                                        class="relative w-full h-full rounded-full overflow-hidden border-[3px] border-[var(--bg-card)] z-10">
+                                        <img src="./gallary/1.jpg" alt="Muhammad Kamran"
+                                            class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" />
                                     </div>
                                 </div>
 
@@ -485,12 +484,13 @@
                                     <div class="text-center">
                                         <div class="text-teal-400 font-semibold" data-i18n="education-masters-short">
                                             Masters</div>
-                                        <div class="text-gray-400" data-i18n="location-japan">Japan</div>
+                                        <div class="text-[var(--text-muted)]" data-i18n="location-japan">Japan</div>
                                     </div>
                                     <div class="text-center">
                                         <div class="text-teal-400 font-semibold" data-i18n="research-ai">Research
                                         </div>
-                                        <div class="text-gray-400" data-i18n="research-traffic">Traffic Psychology</div>
+                                        <div class="text-[var(--text-muted)]" data-i18n="research-traffic">Traffic
+                                            Psychology</div>
                                     </div>
                                 </div>
                             </div>
@@ -502,7 +502,7 @@
             <!-- Scroll Indicator -->
             <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
                 <a href="#skills"
-                    class="flex flex-col items-center text-gray-400 hover:text-[var(--text-main)] transition-colors duration-300 group">
+                    class="flex flex-col items-center text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors duration-300 group">
                     <span class="text-sm mb-2 group-hover:text-teal-400" data-i18n="hero-scroll">Explore More</span>
                     <div class="animate-bounce">
                         <i class="fas fa-chevron-down"></i>
@@ -516,9 +516,12 @@
     <section id="skills" class="py-20 section-hidden">
         <div class="max-w-4xl mx-auto px-8 sm:px-12 lg:px-16">
             <!-- Section Heading -->
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4 gradient-text" data-i18n="skills-title">My Skills</h2>
-                <p class="text-xl text-gray-400" data-i18n="skills-subtitle">Technologies & Tools I Master</p>
+            <div class="text-center mb-16 section-hidden">
+                <h2 class="text-4xl font-bold mb-4 glow-text" data-i18n="skills-title">Technical Expertise</h2>
+                <p class="text-[var(--text-muted)] max-w-2xl mx-auto" data-i18n="skills-subtitle">
+                    A comprehensive overview of my technical skills and proficiency levels in various technologies.
+                </p>
+                <div class="w-24 h-1 bg-gradient-to-r from-teal-500 to-cyan-500 mx-auto mt-6 rounded-full"></div>
             </div>
 
             <!-- Skills Grid -->
@@ -743,13 +746,14 @@
     </section>
 
     <!-- Education Section -->
-    <section id="education" class="py-20 bg-gray-900/50 section-hidden">
+    <section id="education" class="py-20 bg-[var(--bg-card)] section-hidden">
         <div class="max-w-4xl mx-auto px-8 sm:px-12 lg:px-16">
             <!-- Section Heading -->
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold mb-4 gradient-text" data-i18n="education-title">Education & Experience
                 </h2>
-                <p class="text-xl text-gray-400" data-i18n="education-subtitle">My academic journey and professional
+                <p class="text-xl text-[var(--text-muted)]" data-i18n="education-subtitle">My academic journey and
+                    professional
                     path</p>
             </div>
 
@@ -922,7 +926,8 @@
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold mb-4 gradient-text" data-i18n="certifications-title">My Certifications
                 </h2>
-                <p class="text-xl text-gray-400" data-i18n="certifications-subtitle">Validating my expertise and
+                <p class="text-xl text-[var(--text-muted)]" data-i18n="certifications-subtitle">Validating my expertise
+                    and
                     continuous learning journey</p>
             </div>
 
@@ -1075,13 +1080,15 @@
 
             <!-- Call to Action -->
             <div class="text-center mt-12">
-                <div class="glass rounded-2xl p-8 border border-gray-700/50">
-                    <h3 class="text-2xl font-bold text-[var(--text-main)] mb-4" data-i18n="cert-cta-title">Continuous Learning
+                <div class="glass rounded-2xl p-8 border border-[var(--border-color)]">
+                    <h3 class="text-2xl font-bold text-[var(--text-main)] mb-4" data-i18n="cert-cta-title">Continuous
+                        Learning
                         Journey</h3>
-                    <p class="text-[var(--text-muted)] mb-6" data-i18n="cert-cta-desc">I believe in lifelong learning and
+                    <p class="text-[var(--text-muted)] mb-6" data-i18n="cert-cta-desc">I believe in lifelong learning
+                        and
                         constantly updating my skills with the latest technologies and methodologies.</p>
                     <a href="#contact"
-                        class="inline-flex items-center gap-2 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-[var(--text-main)] font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105">
+                        class="inline-flex items-center gap-2 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-[var(--text-main)] !text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105">
                         <i class="fas fa-rocket"></i>
                         <span data-i18n="cert-cta-button">Start a Project With Me</span>
                     </a>
@@ -1092,12 +1099,13 @@
 
     <!-- Portfolio Section -->
     <!-- Portfolio Section -->
-    <section id="portfolio" class="py-20 bg-gray-900/50 section-hidden">
+    <section id="portfolio" class="py-20 bg-[var(--bg-card)] section-hidden">
         <div class="max-w-6xl mx-auto px-8 sm:px-12 lg:px-16">
             <!-- Section Heading -->
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold mb-4 gradient-text" data-i18n="portfolio-title">My Portfolio</h2>
-                <p class="text-xl text-gray-400" data-i18n="portfolio-subtitle">Some of my projects in Web Development &
+                <p class="text-xl text-[var(--text-muted)]" data-i18n="portfolio-subtitle">Some of my projects in Web
+                    Development &
                     Design</p>
             </div>
 
@@ -1143,8 +1151,7 @@
                     <div class="portfolio-card">
                         <div class="portfolio-image-container">
                             <div class="portfolio-image">
-                                <img src="./portfolio/digizone.png" alt="Digizone"
-                                    class="w-full h-48 object-cover">
+                                <img src="./portfolio/digizone.png" alt="Digizone" class="w-full h-48 object-cover">
                             </div>
 
                             <div class="portfolio-overlay">
@@ -1163,7 +1170,8 @@
                         </div>
                         <div class="portfolio-content">
                             <h3 class="portfolio-title" data-i18n="project-digizone">Digizone</h3>
-                            <p class="portfolio-description" data-i18n="project-digizone-desc">Ecommerce Services Startup Website
+                            <p class="portfolio-description" data-i18n="project-digizone-desc">Ecommerce Services
+                                Startup Website
                             <div class="portfolio-tags">
                                 <span class="portfolio-tag">Framer Motion</span>
                                 <span class="portfolio-tag">Tailwind</span>
@@ -1177,8 +1185,7 @@
                     <div class="portfolio-card">
                         <div class="portfolio-image-container">
                             <div class="portfolio-image">
-                                <img src="./portfolio/ai-tools.png" alt="Neural Nexus"
-                                    class="w-full h-48 object-cover">
+                                <img src="./portfolio/ai-tools.png" alt="Neural Nexus" class="w-full h-48 object-cover">
                             </div>
 
                             <div class="portfolio-overlay">
@@ -1187,9 +1194,8 @@
                                         title="Visit Website">
                                         <i class="fas fa-external-link-alt"></i>
                                     </a>
-                                    <A href="https://github.com/mohakamran/ai-tools"
-                                        class="portfolio-btn view-details" data-project="neural-nexus"
-                                        title="View Details">
+                                    <A href="https://github.com/mohakamran/ai-tools" class="portfolio-btn view-details"
+                                        data-project="neural-nexus" title="View Details">
                                         <i class="fas fa-eye"></i>
                                     </a>
                                 </div>
@@ -1197,7 +1203,8 @@
                         </div>
                         <div class="portfolio-content">
                             <h3 class="portfolio-title" data-i18n="project-ai">AI tools SAAS website</h3>
-                            <p class="portfolio-description" data-i18n="project-ai-desc">A website for AI tools Marketing page
+                            <p class="portfolio-description" data-i18n="project-ai-desc">A website for AI tools
+                                Marketing page
                             <div class="portfolio-tags">
                                 <span class="portfolio-tag">Framer Motion</span>
                                 <span class="portfolio-tag">Tailwind</span>
@@ -1210,8 +1217,7 @@
                     <div class="portfolio-card">
                         <div class="portfolio-image-container">
                             <div class="portfolio-image">
-                                <img src="./portfolio/travelx.png" alt="Neural Nexus"
-                                    class="w-full h-48 object-cover">
+                                <img src="./portfolio/travelx.png" alt="Neural Nexus" class="w-full h-48 object-cover">
                             </div>
                             <div class="portfolio-overlay">
                                 <div class="portfolio-actions">
@@ -1242,18 +1248,16 @@
                     <div class="portfolio-card">
                         <div class="portfolio-image-container">
                             <div class="portfolio-image">
-                                <img src="./portfolio/bakery.png" alt="Neural Nexus"
-                                    class="w-full h-48 object-cover">
+                                <img src="./portfolio/bakery.png" alt="Neural Nexus" class="w-full h-48 object-cover">
                             </div>
                             <div class="portfolio-overlay">
                                 <div class="portfolio-actions">
-                                    <a href="https://mohakamran.github.io/bakery/" target="_blank"
-                                        class="portfolio-btn" title="Visit Website">
+                                    <a href="https://mohakamran.github.io/bakery/" target="_blank" class="portfolio-btn"
+                                        title="Visit Website">
                                         <i class="fas fa-external-link-alt"></i>
                                     </a>
-                                    <A href="https://github.com/mohakamran/bakery"
-                                        class="portfolio-btn view-details" data-project="neural-nexus"
-                                        title="View Details">
+                                    <A href="https://github.com/mohakamran/bakery" class="portfolio-btn view-details"
+                                        data-project="neural-nexus" title="View Details">
                                         <i class="fas fa-eye"></i>
                                     </a>
                                 </div>
@@ -1261,7 +1265,8 @@
                         </div>
                         <div class="portfolio-content">
                             <h3 class="portfolio-title" data-i18n="project-bakery">Bakery Website</h3>
-                            <p class="portfolio-description" data-i18n="project-bakery-desc">A responsive bakery web design</p>
+                            <p class="portfolio-description" data-i18n="project-bakery-desc">A responsive bakery web
+                                design</p>
                             <div class="portfolio-tags">
                                 <span class="portfolio-tag">HTML</span>
                                 <span class="portfolio-tag">JavaScript</span>
@@ -1824,7 +1829,8 @@
             <!-- Section Heading -->
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold mb-4 gradient-text" data-i18n="services-title">My Services</h2>
-                <p class="text-xl text-gray-400" data-i18n="services-subtitle">Helping you build, optimize, and scale
+                <p class="text-xl text-[var(--text-muted)]" data-i18n="services-subtitle">Helping you build, optimize,
+                    and scale
                     your online presence</p>
             </div>
 
@@ -2043,14 +2049,16 @@
 
             <!-- Call to Action -->
             <div class="text-center">
-                <div class="glass rounded-2xl p-8 border border-gray-700/50">
-                    <h3 class="text-2xl font-bold text-[var(--text-main)] mb-4" data-i18n="services-main-cta-title">Ready to Start
+                <div class="glass rounded-2xl p-8 border border-[var(--border-color)]">
+                    <h3 class="text-2xl font-bold text-[var(--text-main)] mb-4" data-i18n="services-main-cta-title">
+                        Ready to Start
                         Your Project?</h3>
-                    <p class="text-[var(--text-muted)] mb-6" data-i18n="services-main-cta-desc">Let's discuss your ideas and create
+                    <p class="text-[var(--text-muted)] mb-6" data-i18n="services-main-cta-desc">Let's discuss your ideas
+                        and create
                         something amazing together. I'm here to help bring your vision to life.</p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
                         <a href="#contact"
-                            class="bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-[var(--text-main)] font-semibold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3">
+                            class="bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-[var(--text-main)] !text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3">
                             <i class="fas fa-paper-plane"></i>
                             <span data-i18n="services-cta-contact">Get In Touch</span>
                         </a>
@@ -2067,12 +2075,13 @@
 
     <!-- Pricing Section -->
     <!-- Pricing Section -->
-    <section id="pricing" class="py-20 bg-gray-900/30 section-hidden">
+    <section id="pricing" class="py-20 bg-[var(--bg-card)] section-hidden">
         <div class="max-w-6xl mx-auto px-8 sm:px-12 lg:px-16">
             <!-- Section Heading -->
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold mb-4 gradient-text" data-i18n="pricing-title">Pricing Plans</h2>
-                <p class="text-xl text-gray-400" data-i18n="pricing-subtitle">Affordable packages tailored for your
+                <p class="text-xl text-[var(--text-muted)]" data-i18n="pricing-subtitle">Affordable packages tailored
+                    for your
                     needs with guaranteed support</p>
             </div>
 
@@ -2080,7 +2089,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Web Design -->
                 <div
-                    class="pricing-card bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 shadow-2xl hover:shadow-teal-500/20 hover:scale-105 transition-all duration-300 relative overflow-hidden border border-gray-700/50 group">
+                    class="pricing-card bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 shadow-2xl hover:shadow-teal-500/20 hover:scale-105 transition-all duration-300 relative overflow-hidden border border-[var(--border-color)] group">
                     <div class="absolute -top-3 -right-3 bg-gradient-to-r from-teal-400 to-cyan-500 text-[var(--text-main)] px-4 py-2 rounded-full text-sm font-bold transform rotate-12 shadow-lg z-10"
                         data-i18n="pricing-badge-best">
                         Best Deal
@@ -2115,7 +2124,7 @@
 
                 <!-- Web Development -->
                 <div
-                    class="pricing-card bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 shadow-2xl hover:shadow-blue-500/20 hover:scale-105 transition-all duration-300 relative overflow-hidden border border-gray-700/50 group">
+                    class="pricing-card bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 shadow-2xl hover:shadow-blue-500/20 hover:scale-105 transition-all duration-300 relative overflow-hidden border border-[var(--border-color)] group">
                     <div class="pricing-header text-center mb-8">
                         <h3 class="text-2xl font-bold text-blue-400 mb-4" data-i18n="pricing-web-dev">Web Development
                         </h3>
@@ -2147,7 +2156,7 @@
 
                 <!-- E-commerce Development -->
                 <div
-                    class="pricing-card bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 shadow-2xl hover:shadow-purple-500/20 hover:scale-105 transition-all duration-300 relative overflow-hidden border border-gray-700/50 group">
+                    class="pricing-card bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 shadow-2xl hover:shadow-purple-500/20 hover:scale-105 transition-all duration-300 relative overflow-hidden border border-[var(--border-color)] group">
                     <div class="pricing-header text-center mb-8">
                         <h3 class="text-2xl font-bold text-purple-400 mb-4" data-i18n="pricing-ecommerce">E-commerce
                             Development</h3>
@@ -2179,7 +2188,7 @@
 
                 <!-- Data Analysis & Other Services -->
                 <div
-                    class="pricing-card bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 shadow-2xl hover:shadow-orange-500/20 hover:scale-105 transition-all duration-300 relative overflow-hidden border border-gray-700/50 group">
+                    class="pricing-card bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 shadow-2xl hover:shadow-orange-500/20 hover:scale-105 transition-all duration-300 relative overflow-hidden border border-[var(--border-color)] group">
                     <div class="pricing-header text-center mb-8">
                         <h3 class="text-2xl font-bold text-orange-400 mb-4" data-i18n="pricing-data-analysis">Data
                             Analysis & Others</h3>
@@ -2213,13 +2222,15 @@
             <!-- Additional Info -->
             <div class="text-center mt-16">
                 <div
-                    class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 border border-gray-700/50 shadow-2xl">
-                    <h3 class="text-2xl font-bold text-[var(--text-main)] mb-4" data-i18n="pricing-custom-title">Need a Custom
+                    class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 border border-[var(--border-color)] shadow-2xl">
+                    <h3 class="text-2xl font-bold text-[var(--text-main)] mb-4" data-i18n="pricing-custom-title">Need a
+                        Custom
                         Solution?</h3>
-                    <p class="text-[var(--text-muted)] mb-6 text-lg" data-i18n="pricing-custom-desc">Let's discuss your specific
+                    <p class="text-[var(--text-muted)] mb-6 text-lg" data-i18n="pricing-custom-desc">Let's discuss your
+                        specific
                         requirements and create a tailored package just for you.</p>
                     <a href="#contact"
-                        class="inline-flex items-center gap-3 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-[var(--text-main)] font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-teal-500/25 text-lg">
+                        class="inline-flex items-center gap-3 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-[var(--text-main)] !text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-teal-500/25 text-lg">
                         <i class="fas fa-comments"></i>
                         <span data-i18n="pricing-custom-cta">Discuss Your Project</span>
                     </a>
@@ -2328,12 +2339,12 @@
 
     <!-- Gallery Section -->
     <!-- Gallery Section -->
-    <section id="gallery" class="py-20 bg-gray-900/50 section-hidden">
+    <section id="gallery" class="py-20 bg-[var(--bg-card)] section-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Section Heading -->
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold mb-4 gradient-text">My Travel Gallery</h2>
-                <!-- <p class="text-xl text-gray-400">Moments captured from my travels and adventures in Japan</p> -->
+                <!-- <p class="text-xl text-[var(--text-muted)]">Moments captured from my travels and adventures in Japan</p> -->
             </div>
 
             <!-- Swiper Slider Container -->
@@ -2342,7 +2353,8 @@
                     <!-- Slides for images 1-26 -->
                     <div class="swiper-slide">
                         <div class="gallery-item group cursor-pointer" data-image-index="0">
-                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-[var(--bg-card)] border-[var(--border-color)]">
+                            <div
+                                class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-[var(--bg-card)] border-[var(--border-color)]">
                                 <img src="./gallary/1.jpg" alt="Travel image 1"
                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                             </div>
@@ -2351,7 +2363,8 @@
 
                     <div class="swiper-slide">
                         <div class="gallery-item group cursor-pointer" data-image-index="1">
-                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-[var(--bg-card)] border-[var(--border-color)]">
+                            <div
+                                class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-[var(--bg-card)] border-[var(--border-color)]">
                                 <img src="./gallary/2.jpg" alt="Travel image 2"
                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                             </div>
@@ -2369,7 +2382,8 @@
 
                     <div class="swiper-slide">
                         <div class="gallery-item group cursor-pointer" data-image-index="3">
-                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-[var(--bg-card)] border-[var(--border-color)]">
+                            <div
+                                class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-[var(--bg-card)] border-[var(--border-color)]">
                                 <img src="./gallary/4.jpg" alt="Travel image 4"
                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                             </div>
@@ -2378,7 +2392,8 @@
 
                     <div class="swiper-slide">
                         <div class="gallery-item group cursor-pointer" data-image-index="4">
-                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-[var(--bg-card)] border-[var(--border-color)]">
+                            <div
+                                class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-[var(--bg-card)] border-[var(--border-color)]">
                                 <img src="./gallary/5.jpg" alt="Travel image 5"
                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                             </div>
@@ -2387,7 +2402,8 @@
 
                     <div class="swiper-slide">
                         <div class="gallery-item group cursor-pointer" data-image-index="5">
-                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-[var(--bg-card)] border-[var(--border-color)]">
+                            <div
+                                class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-[var(--bg-card)] border-[var(--border-color)]">
                                 <img src="./gallary/6.jpg" alt="Travel image 6"
                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                             </div>
@@ -2397,7 +2413,8 @@
                     <!-- Continue for images 7-26 with the same structure -->
                     <div class="swiper-slide">
                         <div class="gallery-item group cursor-pointer" data-image-index="6">
-                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-[var(--bg-card)] border-[var(--border-color)]">
+                            <div
+                                class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-[var(--bg-card)] border-[var(--border-color)]">
                                 <img src="./gallary/7.jpg" alt="Travel image 7"
                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                             </div>
@@ -2406,7 +2423,8 @@
 
                     <div class="swiper-slide">
                         <div class="gallery-item group cursor-pointer" data-image-index="7">
-                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-[var(--bg-card)] border-[var(--border-color)]">
+                            <div
+                                class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-[var(--bg-card)] border-[var(--border-color)]">
                                 <img src="./gallary/8.jpg" alt="Travel image 8"
                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                             </div>
@@ -2415,7 +2433,8 @@
 
                     <div class="swiper-slide">
                         <div class="gallery-item group cursor-pointer" data-image-index="8">
-                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-[var(--bg-card)] border-[var(--border-color)]">
+                            <div
+                                class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-[var(--bg-card)] border-[var(--border-color)]">
                                 <img src="./gallary/9.jpg" alt="Travel image 9"
                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                             </div>
@@ -2424,7 +2443,8 @@
 
                     <div class="swiper-slide">
                         <div class="gallery-item group cursor-pointer" data-image-index="9">
-                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-[var(--bg-card)] border-[var(--border-color)]">
+                            <div
+                                class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-[var(--bg-card)] border-[var(--border-color)]">
                                 <img src="./gallary/10.jpg" alt="Travel image 10"
                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                             </div>
@@ -2461,7 +2481,7 @@
                         class="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 text-[var(--text-main)] text-2xl hover:text-teal-400 transition-colors z-10 bg-black/50 rounded-full w-10 h-10 flex items-center justify-center">
                         <i class="fas fa-chevron-right"></i>
                     </button>
-                    <div class="lightbox-content bg-gray-900 rounded-lg overflow-hidden">
+                    <div class="lightbox-content bg-[var(--bg-card)] rounded-lg overflow-hidden">
                         <img id="lightbox-image" src="" alt="" class="w-full h-auto max-h-[85vh] object-contain">
                     </div>
                 </div>
@@ -2469,12 +2489,12 @@
 
             <!-- Call to Action -->
             <!-- <div class="text-center mt-12">
-                <div class="glass rounded-2xl p-6 sm:p-8 border border-gray-700/50">
+                <div class="glass rounded-2xl p-6 sm:p-8 border border-[var(--border-color)]">
                     <h3 class="text-xl sm:text-2xl font-bold text-[var(--text-main)] mb-4">More Adventures Coming Soon!</h3>
                     <p class="text-[var(--text-muted)] mb-6 text-sm sm:text-base">I'm constantly exploring new places and capturing
                         memories. Follow my journey for more updates!</p>
                     <a href="#contact"
-                        class="inline-flex items-center gap-3 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-[var(--text-main)] font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base">
+                        class="inline-flex items-center gap-3 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-[var(--text-main)] !text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base">
                         <i class="fas fa-camera"></i>
                         <span>Share Your Travel Stories</span>
                     </a>
@@ -2489,7 +2509,8 @@
             <!-- Section Heading -->
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold mb-4 gradient-text" data-i18n="contact-title">Let's Connect</h2>
-                <p class="text-xl text-gray-400" data-i18n="contact-subtitle">Get in touch and let's create something
+                <p class="text-xl text-[var(--text-muted)]" data-i18n="contact-subtitle">Get in touch and let's create
+                    something
                     amazing together</p>
             </div>
 
@@ -2630,7 +2651,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900/80 border-t border-gray-700/50 py-12">
+    <footer class="bg-[var(--bg-card)] border-t border-[var(--border-color)] py-12">
         <div class="max-w-4xl mx-auto px-8 sm:px-12 lg:px-16">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <!-- Brand -->
@@ -2642,7 +2663,7 @@
                         </div>
                         <span class="text-[var(--text-main)] font-bold text-lg">Muhammad Kamran</span>
                     </div>
-                    <p class="text-gray-400 mb-4 leading-relaxed" data-i18n="footer-brand-desc">
+                    <p class="text-[var(--text-muted)] mb-4 leading-relaxed" data-i18n="footer-brand-desc">
                         Full Stack Developer & AI Enthusiast crafting digital experiences with modern technologies.
                         Based in Japan, creating innovative solutions worldwide.
                     </p>
@@ -2664,7 +2685,8 @@
 
                 <!-- Quick Links -->
                 <div>
-                    <h3 class="text-[var(--text-main)] font-semibold mb-4" data-i18n="footer-quick-links">Quick Links</h3>
+                    <h3 class="text-[var(--text-main)] font-semibold mb-4" data-i18n="footer-quick-links">Quick Links
+                    </h3>
                     <ul class="space-y-2">
                         <li><a href="#home" class="footer-link" data-i18n="nav-home">Home</a></li>
                         <li><a href="#skills" class="footer-link" data-i18n="nav-skills">Skills</a></li>
@@ -2688,15 +2710,16 @@
             </div>
 
             <!-- Bottom Bar -->
-            <div class="border-t border-gray-700/50 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400 text-sm mb-4 md:mb-0" data-i18n="footer-copyright">
-                    Muhammad Kamran </p>
+            <div
+                class="border-t border-[var(--border-color)] mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-[var(--text-muted)] text-sm mb-4 md:mb-0" data-i18n="footer-copyright">
+                    2026 Muhammad Kamran. All rights reserved. </p>
                 <div class="flex space-x-4">
-                    <a href="#" class="text-gray-400 hover:text-[var(--text-main)] transition-colors text-sm"
+                    <a href="#" class="text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors text-sm"
                         data-i18n="footer-privacy">
                         Privacy Policy
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-[var(--text-main)] transition-colors text-sm"
+                    <a href="#" class="text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors text-sm"
                         data-i18n="footer-terms">
                         Terms of Service
                     </a>
