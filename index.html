@@ -129,7 +129,7 @@
     <div class="particles" id="particles-container"></div>
     <!-- Animated Progress Line -->
     <!-- Animated Scroll Progress Line -->
-    <div class="fixed top-0 left-0 w-full h-1 z-50 bg-gray-800/30">
+    <div class="fixed top-0 left-0 w-full h-1 z-50 bg-[var(--bg-card)] border-[var(--border-color)]/30">
         <div id="progress-line"
             class="h-full bg-gradient-to-r from-teal-400 via-cyan-500 to-purple-500 transition-all duration-150 ease-out shadow-lg shadow-teal-500/30"
             style="width: 0%"></div>
@@ -142,55 +142,59 @@
                 <!-- Mobile Language Switcher -->
                 <div class="lg:hidden flex items-center space-x-1">
                     <button id="lang-en-mobile"
-                        class="lang-btn glass text-gray-300 px-3 py-1 rounded text-sm font-medium hover:text-white flex items-center gap-1">
+                        class="lang-btn glass text-[var(--text-muted)] px-3 py-1 rounded text-sm font-medium hover:text-[var(--text-main)] flex items-center gap-1">
                         <!-- <span class="fi fi-us fis"></span> -->
                         <span data-i18n="lang-en">English</span>
                     </button>
                     <button id="lang-jp-mobile"
-                        class="lang-btn glass text-gray-300 px-3 py-1 rounded text-sm font-medium hover:text-white flex items-center gap-1">
+                        class="lang-btn glass text-[var(--text-muted)] px-3 py-1 rounded text-sm font-medium hover:text-[var(--text-main)] flex items-center gap-1">
                         <!-- <span class="fi fi-jp fis"></span> -->
                         <span data-i18n="lang-jp">日本語</span>
+                    </button>
+                    <button id="theme-toggle-mobile"
+                        class="lang-btn glass text-[var(--text-muted)] px-3 py-1 rounded text-sm font-medium hover:text-[var(--text-main)] flex items-center justify-center">
+                        <i class="fas fa-moon"></i>
                     </button>
                 </div>
 
                 <!-- Centered Navigation - Desktop -->
                 <nav class="hidden lg:flex items-center space-x-1 glass rounded-full px-4 py-2 shadow-lg">
-                    <a href="#home" class="nav-link text-white active flex items-center space-x-1 text-sm">
+                    <a href="#home" class="nav-link text-[var(--text-main)] active flex items-center space-x-1 text-sm">
                         <i class="fas fa-home text-xs"></i>
                         <span data-i18n="nav-home">Home</span>
                     </a>
                     <a href="#skills"
-                        class="nav-link text-gray-300 hover:text-white flex items-center space-x-1 text-sm">
+                        class="nav-link text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center space-x-1 text-sm">
                         <i class="fas fa-code text-xs"></i>
                         <span data-i18n="nav-skills">Skills</span>
                     </a>
                     <a href="#education"
-                        class="nav-link text-gray-300 hover:text-white flex items-center space-x-1 text-sm">
+                        class="nav-link text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center space-x-1 text-sm">
                         <i class="fas fa-graduation-cap text-xs"></i>
                         <span data-i18n="nav-education">Education</span>
                     </a>
                     <a href="#certifications"
-                        class="nav-link text-gray-300 hover:text-white flex items-center space-x-1 text-sm">
+                        class="nav-link text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center space-x-1 text-sm">
                         <i class="fas fa-award text-xs"></i>
                         <span data-i18n="nav-certifications">Certifications</span>
                     </a>
                     <a href="#portfolio"
-                        class="nav-link text-gray-300 hover:text-white flex items-center space-x-1 text-sm">
+                        class="nav-link text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center space-x-1 text-sm">
                         <i class="fas fa-briefcase text-xs"></i>
                         <span data-i18n="nav-portfolio">Portfolio</span>
                     </a>
                     <a href="#services"
-                        class="nav-link text-gray-300 hover:text-white flex items-center space-x-1 text-sm">
+                        class="nav-link text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center space-x-1 text-sm">
                         <i class="fas fa-cogs text-xs"></i>
                         <span data-i18n="nav-services">Services</span>
                     </a>
                     <a href="#gallery"
-                        class="nav-link text-gray-300 hover:text-white flex items-center space-x-1 text-sm">
+                        class="nav-link text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center space-x-1 text-sm">
                         <i class="fas fa-images text-xs"></i>
                         <span data-i18n="nav-gallery">Gallary</span>
                     </a>
                     <a href="#contact"
-                        class="nav-link text-gray-300 hover:text-white flex items-center space-x-1 text-sm">
+                        class="nav-link text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center space-x-1 text-sm">
                         <i class="fas fa-envelope text-xs"></i>
                         <span data-i18n="nav-contact">Contact</span>
                     </a>
@@ -202,20 +206,24 @@
                     <!-- Desktop Language Switcher -->
                     <div class="hidden lg:flex items-center space-x-2">
                         <button id="lang-en"
-                            class="lang-btn bg-gray-800 text-gray-300 px-4 py-2 rounded-lg font-medium border border-gray-600 hover:text-white hover:border-gray-500 flex items-center gap-2">
+                            class="lang-btn bg-[var(--bg-card)] border-[var(--border-color)] text-[var(--text-muted)] px-4 py-2 rounded-lg font-medium border border-gray-600 hover:text-[var(--text-main)] hover:border-gray-500 flex items-center gap-2">
                             <!-- <span class="fi fi-us fis"></span> -->
                             <span data-i18n="lang-en">English</span>
                         </button>
                         <button id="lang-jp"
-                            class="lang-btn bg-gray-800 text-gray-300 px-4 py-2 rounded-lg font-medium border border-gray-600 hover:text-white hover:border-gray-500 flex items-center gap-2">
+                            class="lang-btn bg-[var(--bg-card)] border-[var(--border-color)] text-[var(--text-muted)] px-4 py-2 rounded-lg font-medium border border-gray-600 hover:text-[var(--text-main)] hover:border-gray-500 flex items-center gap-2">
                             <!-- <span class="fi fi-jp fis"></span> -->
                             <span data-i18n="lang-jp">日本語</span>
+                        </button>
+                        <button id="theme-toggle-desktop"
+                            class="lang-btn bg-[var(--bg-card)] border-[var(--border-color)] text-[var(--text-muted)] px-3 py-2 rounded-lg font-medium border border-gray-600 hover:text-[var(--text-main)] hover:border-gray-500 flex items-center justify-center">
+                            <i class="fas fa-moon"></i>
                         </button>
                     </div>
 
                     <!-- Mobile menu button -->
-                    <button id="menu-toggle" class="lg:hidden p-2 rounded glass hover:bg-gray-700/50">
-                        <i class="fas fa-bars text-white text-lg"></i>
+                    <button id="menu-toggle" class="lg:hidden p-2 rounded glass hover:bg-[var(--bg-glass-hover)]">
+                        <i class="fas fa-bars text-[var(--text-main)] text-lg"></i>
                     </button>
                 </div>
             </div>
@@ -223,35 +231,35 @@
             <!-- Mobile Menu -->
             <!-- <div id="mobile-menu" class="hidden lg:hidden mt-3 glass rounded-xl p-4 border border-gray-700/50">
             <div class="space-y-2">
-                <a href="#home" class="mobile-nav-item block text-white py-2 px-3 rounded text-sm flex items-center space-x-2 bg-teal-500/20">
+                <a href="#home" class="mobile-nav-item block text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 bg-teal-500/20">
                     <i class="fas fa-home w-4"></i>
                     <span data-i18n="nav-home">Home</span>
                 </a>
-                <a href="#skills" class="mobile-nav-item block text-gray-300 hover:text-white py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-gray-700/50">
+                <a href="#skills" class="mobile-nav-item block text-[var(--text-muted)] hover:text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-[var(--bg-glass-hover)]">
                     <i class="fas fa-code w-4"></i>
                     <span data-i18n="nav-skills">Skills</span>
                 </a>
-                <a href="#education" class="mobile-nav-item block text-gray-300 hover:text-white py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-gray-700/50">
+                <a href="#education" class="mobile-nav-item block text-[var(--text-muted)] hover:text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-[var(--bg-glass-hover)]">
                     <i class="fas fa-graduation-cap w-4"></i>
                     <span data-i18n="nav-education">Education</span>
                 </a>
-                <a href="#certifications" class="mobile-nav-item block text-gray-300 hover:text-white py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-gray-700/50">
+                <a href="#certifications" class="mobile-nav-item block text-[var(--text-muted)] hover:text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-[var(--bg-glass-hover)]">
                     <i class="fas fa-award w-4"></i>
                     <span data-i18n="nav-certifications">Certifications</span>
                 </a>
-                <a href="#portfolio" class="mobile-nav-item block text-gray-300 hover:text-white py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-gray-700/50">
+                <a href="#portfolio" class="mobile-nav-item block text-[var(--text-muted)] hover:text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-[var(--bg-glass-hover)]">
                     <i class="fas fa-briefcase w-4"></i>
                     <span data-i18n="nav-portfolio">Portfolio</span>
                 </a>
-                <a href="#services" class="mobile-nav-item block text-gray-300 hover:text-white py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-gray-700/50">
+                <a href="#services" class="mobile-nav-item block text-[var(--text-muted)] hover:text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-[var(--bg-glass-hover)]">
                     <i class="fas fa-cogs w-4"></i>
                     <span data-i18n="nav-services">Services</span>
                 </a>
-                <a href="#gallery" class="mobile-nav-item block text-gray-300 hover:text-white py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-gray-700/50">
+                <a href="#gallery" class="mobile-nav-item block text-[var(--text-muted)] hover:text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-[var(--bg-glass-hover)]">
                     <i class="fas fa-images w-4"></i>
                     <span data-i18n="nav-gallery">Gallery</span>
                 </a>
-                <a href="#contact" class="mobile-nav-item block text-gray-300 hover:text-white py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-gray-700/50">
+                <a href="#contact" class="mobile-nav-item block text-[var(--text-muted)] hover:text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-[var(--bg-glass-hover)]">
                     <i class="fas fa-envelope w-4"></i>
                     <span data-i18n="nav-contact">Contact</span>
                 </a>
@@ -262,42 +270,42 @@
             <div id="mobile-menu" class="hidden lg:hidden mt-3 glass rounded-xl p-4 border border-gray-700/50">
                 <div class="space-y-2">
                     <a href="#home"
-                        class="mobile-nav-item block text-white py-2 px-3 rounded text-sm flex items-center space-x-2 bg-teal-500/20">
+                        class="mobile-nav-item block text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 bg-teal-500/20">
                         <i class="fas fa-home w-4"></i>
                         <span data-i18n="nav-home">Home</span>
                     </a>
                     <a href="#skills"
-                        class="mobile-nav-item block text-gray-300 hover:text-white py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-gray-700/50">
+                        class="mobile-nav-item block text-[var(--text-muted)] hover:text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-[var(--bg-glass-hover)]">
                         <i class="fas fa-code w-4"></i>
                         <span data-i18n="nav-skills">Skills</span>
                     </a>
                     <a href="#education"
-                        class="mobile-nav-item block text-gray-300 hover:text-white py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-gray-700/50">
+                        class="mobile-nav-item block text-[var(--text-muted)] hover:text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-[var(--bg-glass-hover)]">
                         <i class="fas fa-graduation-cap w-4"></i>
                         <span data-i18n="nav-education">Education</span>
                     </a>
                     <a href="#certifications"
-                        class="mobile-nav-item block text-gray-300 hover:text-white py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-gray-700/50">
+                        class="mobile-nav-item block text-[var(--text-muted)] hover:text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-[var(--bg-glass-hover)]">
                         <i class="fas fa-award w-4"></i>
                         <span data-i18n="nav-certifications">Certifications</span>
                     </a>
                     <a href="#portfolio"
-                        class="mobile-nav-item block text-gray-300 hover:text-white py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-gray-700/50">
+                        class="mobile-nav-item block text-[var(--text-muted)] hover:text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-[var(--bg-glass-hover)]">
                         <i class="fas fa-briefcase w-4"></i>
                         <span data-i18n="nav-portfolio">Portfolio</span>
                     </a>
                     <a href="#services"
-                        class="mobile-nav-item block text-gray-300 hover:text-white py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-gray-700/50">
+                        class="mobile-nav-item block text-[var(--text-muted)] hover:text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-[var(--bg-glass-hover)]">
                         <i class="fas fa-cogs w-4"></i>
                         <span data-i18n="nav-services">Services</span>
                     </a>
                     <a href="#gallery"
-                        class="mobile-nav-item block text-gray-300 hover:text-white py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-gray-700/50">
+                        class="mobile-nav-item block text-[var(--text-muted)] hover:text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-[var(--bg-glass-hover)]">
                         <i class="fas fa-images w-4"></i>
                         <span data-i18n="nav-gallery">Gallary</span>
                     </a>
                     <a href="#contact"
-                        class="mobile-nav-item block text-gray-300 hover:text-white py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-gray-700/50">
+                        class="mobile-nav-item block text-[var(--text-muted)] hover:text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-[var(--bg-glass-hover)]">
                         <i class="fas fa-envelope w-4"></i>
                         <span data-i18n="nav-contact">Contact</span>
                     </a>
@@ -326,21 +334,21 @@
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                         <span class="block" data-i18n="hero-title-1">Full Stack</span>
                         <span class="gradient-text" data-i18n="hero-title-2">Developer</span>
-                        <span class="block text-xl sm:text-2xl text-gray-300 mt-4 font-normal">
+                        <span class="block text-xl sm:text-2xl text-[var(--text-muted)] mt-4 font-normal">
                             & <span class="text-teal-400" data-i18n="hero-title-3">AI Enthusiast</span>
                         </span>
                     </h1>
 
                     <!-- Dynamic Typewriter -->
                     <div class="mb-8">
-                        <div class="text-lg text-gray-300 mb-2" data-i18n="hero-builds">I build with</div>
+                        <div class="text-lg text-[var(--text-muted)] mb-2" data-i18n="hero-builds">I build with</div>
                         <div class="typewriter-container justify-center lg:justify-start">
                             <span id="typewriter" class="border-r-2 border-teal-400 pr-1 animate-pulse">PHP</span>
                         </div>
                     </div>
 
                     <!-- Description -->
-                    <p class="text-gray-300 text-lg leading-relaxed mb-8 max-w-2xl mx-auto lg:mx-0"
+                    <p class="text-[var(--text-muted)] text-lg leading-relaxed mb-8 max-w-2xl mx-auto lg:mx-0"
                         data-i18n="hero-description">
                         Professional in PHP, JavaScript, Laravel, React, Python & AI solutions. MEXT scholar in
                         University of Kitakyushu and my research theme is traffic psychology and behavior. I will
@@ -350,13 +358,14 @@
                     <!-- CTA Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
                         <a href="#portfolio"
-                            class="group bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-teal-500/25 flex items-center justify-center gap-3">
+                            class="group relative overflow-hidden bg-gradient-to-r from-cyan-500 to-teal-500 text-[var(--text-main)] font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-[0_0_20px_rgba(20,184,166,0.4)] hover:shadow-[0_0_30px_rgba(6,182,212,0.6)] flex items-center justify-center gap-3 z-10">
+                            <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-[-1]"></div>
                             <span data-i18n="hero-cta-work">View My Work</span>
                             <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
                         </a>
                         <a href="#contact"
-                            class="group glass hover:bg-gray-800/50 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3">
-                            <i class="fas fa-paper-plane"></i>
+                            class="group glass text-[var(--text-main)] font-semibold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 hover:bg-[var(--bg-glass-hover)] border border-[var(--border-color)] flex items-center justify-center gap-3">
+                            <i class="fas fa-paper-plane text-cyan-500 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform"></i>
                             <span data-i18n="hero-cta-contact">Get In Touch</span>
                         </a>
                     </div>
@@ -364,15 +373,15 @@
                     <!-- Stats -->
                     <div class="grid grid-cols-3 gap-4 max-w-md mx-auto lg:mx-0">
                         <div class="text-center">
-                            <div class="text-2xl font-bold text-white">50+</div>
+                            <div class="text-2xl font-bold text-[var(--text-main)]">50+</div>
                             <div class="text-sm text-gray-400" data-i18n="hero-projects">Projects</div>
                         </div>
                         <div class="text-center">
-                            <div class="text-2xl font-bold text-white">3+</div>
+                            <div class="text-2xl font-bold text-[var(--text-main)]">3+</div>
                             <div class="text-sm text-gray-400" data-i18n="hero-experience">Years Exp</div>
                         </div>
                         <div class="text-center">
-                            <div class="text-2xl font-bold text-white">100%</div>
+                            <div class="text-2xl font-bold text-[var(--text-main)]">100%</div>
                             <div class="text-sm text-gray-400" data-i18n="hero-satisfaction">Satisfaction</div>
                         </div>
                     </div>
@@ -397,27 +406,27 @@
 
                         <!-- Tech Icons Floating -->
                         <div
-                            class="tech-icon tech-icon-1 absolute -top-8 -right-8 w-16 h-16 bg-gray-800/90 rounded-2xl flex items-center justify-center border border-cyan-500/30 shadow-2xl shadow-cyan-500/20">
+                            class="tech-icon tech-icon-1 absolute -top-8 -right-8 w-16 h-16 glass bg-[var(--bg-card)] rounded-2xl flex items-center justify-center border border-cyan-500/30 shadow-2xl shadow-cyan-500/20">
                             <i class="fab fa-react text-cyan-400 text-2xl"></i>
                         </div>
                         <div
-                            class="tech-icon tech-icon-2 absolute -bottom-8 -left-8 w-16 h-16 bg-gray-800/90 rounded-2xl flex items-center justify-center border border-red-500/30 shadow-2xl shadow-red-500/20">
+                            class="tech-icon tech-icon-2 absolute -bottom-8 -left-8 w-16 h-16 glass bg-[var(--bg-card)] rounded-2xl flex items-center justify-center border border-red-500/30 shadow-2xl shadow-red-500/20">
                             <i class="fab fa-laravel text-red-400 text-2xl"></i>
                         </div>
                         <div
-                            class="tech-icon tech-icon-3 absolute top-1/3 -left-10 w-14 h-14 bg-gray-800/90 rounded-xl flex items-center justify-center border border-yellow-500/30 shadow-2xl shadow-yellow-500/20">
+                            class="tech-icon tech-icon-3 absolute top-1/3 -left-10 w-14 h-14 glass bg-[var(--bg-card)] rounded-xl flex items-center justify-center border border-yellow-500/30 shadow-2xl shadow-yellow-500/20">
                             <i class="fab fa-python text-yellow-400 text-xl"></i>
                         </div>
                         <div
-                            class="tech-icon tech-icon-4 absolute top-1/4 -right-10 w-14 h-14 bg-gray-800/90 rounded-xl flex items-center justify-center border border-yellow-300/30 shadow-2xl shadow-yellow-300/20">
+                            class="tech-icon tech-icon-4 absolute top-1/4 -right-10 w-14 h-14 glass bg-[var(--bg-card)] rounded-xl flex items-center justify-center border border-yellow-300/30 shadow-2xl shadow-yellow-300/20">
                             <i class="fab fa-js-square text-yellow-300 text-xl"></i>
                         </div>
                         <div
-                            class="tech-icon tech-icon-5 absolute bottom-1/3 -right-12 w-12 h-12 bg-gray-800/90 rounded-xl flex items-center justify-center border border-green-500/30 shadow-2xl shadow-green-500/20">
+                            class="tech-icon tech-icon-5 absolute bottom-1/3 -right-12 w-12 h-12 glass bg-[var(--bg-card)] rounded-xl flex items-center justify-center border border-green-500/30 shadow-2xl shadow-green-500/20">
                             <i class="fab fa-node-js text-green-400 text-lg"></i>
                         </div>
                         <div
-                            class="tech-icon tech-icon-6 absolute bottom-1/4 -left-12 w-12 h-12 bg-gray-800/90 rounded-xl flex items-center justify-center border border-blue-500/30 shadow-2xl shadow-blue-500/20">
+                            class="tech-icon tech-icon-6 absolute bottom-1/4 -left-12 w-12 h-12 glass bg-[var(--bg-card)] rounded-xl flex items-center justify-center border border-blue-500/30 shadow-2xl shadow-blue-500/20">
                             <i class="fab fa-php text-blue-400 text-lg"></i>
                         </div>
 
@@ -426,12 +435,11 @@
                             class="glass rounded-3xl p-10 border border-gray-700/50 shadow-2xl transform group-hover:scale-105 transition-all duration-500 w-full max-w-xl">
                             <div class="text-center">
                                 <!-- Profile Image -->
-                                <div
-                                    class="w-60 h-50 mx-auto mb-8 rounded-2xl bg-gradient-to-br from-teal-400 to-cyan-500 p-1 shadow-lg">
-                                    <div
-                                        class="w-full h-full rounded-2xl bg-gray-800 overflow-hidden flex items-center justify-center">
-                                        <img src="./gallary/1.jpg" alt="Muhammad Kamran"
-                                            class="object-cover transition-transform duration-500" />
+                                <div class="relative w-56 h-56 mx-auto mb-8 p-1 rounded-full group-hover:shadow-[0_0_40px_rgba(45,212,191,0.5)] transition-shadow duration-500">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-teal-400 via-cyan-500 to-purple-500 animate-[spin_4s_linear_infinite] rounded-full opacity-80 blur-sm"></div>
+                                    <div class="absolute inset-1 bg-[var(--bg-card)] rounded-full z-0"></div>
+                                    <div class="relative w-full h-full rounded-full overflow-hidden border-[3px] border-[var(--bg-card)] z-10">
+                                        <img src="./gallary/1.jpg" alt="Muhammad Kamran" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" />
                                     </div>
                                 </div>
 
@@ -461,7 +469,7 @@
                                         object-position: center center;
                                     }
                                 </style>
-                                <h3 class="text-2xl font-bold text-white mb-3">Muhammad Kamran</h3>
+                                <h3 class="text-2xl font-bold text-[var(--text-main)] mb-3">Muhammad Kamran</h3>
                                 <p class="text-teal-400 font-semibold mb-6 text-lg" data-i18n="hero-title-2">Full Stack
                                     Developer</p>
 
@@ -494,7 +502,7 @@
             <!-- Scroll Indicator -->
             <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
                 <a href="#skills"
-                    class="flex flex-col items-center text-gray-400 hover:text-white transition-colors duration-300 group">
+                    class="flex flex-col items-center text-gray-400 hover:text-[var(--text-main)] transition-colors duration-300 group">
                     <span class="text-sm mb-2 group-hover:text-teal-400" data-i18n="hero-scroll">Explore More</span>
                     <div class="animate-bounce">
                         <i class="fas fa-chevron-down"></i>
@@ -1068,12 +1076,12 @@
             <!-- Call to Action -->
             <div class="text-center mt-12">
                 <div class="glass rounded-2xl p-8 border border-gray-700/50">
-                    <h3 class="text-2xl font-bold text-white mb-4" data-i18n="cert-cta-title">Continuous Learning
+                    <h3 class="text-2xl font-bold text-[var(--text-main)] mb-4" data-i18n="cert-cta-title">Continuous Learning
                         Journey</h3>
-                    <p class="text-gray-300 mb-6" data-i18n="cert-cta-desc">I believe in lifelong learning and
+                    <p class="text-[var(--text-muted)] mb-6" data-i18n="cert-cta-desc">I believe in lifelong learning and
                         constantly updating my skills with the latest technologies and methodologies.</p>
                     <a href="#contact"
-                        class="inline-flex items-center gap-2 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105">
+                        class="inline-flex items-center gap-2 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-[var(--text-main)] font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105">
                         <i class="fas fa-rocket"></i>
                         <span data-i18n="cert-cta-button">Start a Project With Me</span>
                     </a>
@@ -1097,32 +1105,32 @@
             <!-- Filter Buttons -->
             <div class="flex flex-wrap justify-center gap-3 mb-12">
                 <button
-                    class="filter-btn active px-5 py-2 rounded-full glass text-white font-medium transition-all duration-300 hover:scale-105"
+                    class="filter-btn active px-5 py-2 rounded-full glass text-[var(--text-main)] font-medium transition-all duration-300 hover:scale-105"
                     data-filter="all">
                     <span data-i18n="filter-all">All Projects</span>
                 </button>
                 <button
-                    class="filter-btn px-5 py-2 rounded-full glass text-gray-300 font-medium transition-all duration-300 hover:scale-105 hover:text-white"
+                    class="filter-btn px-5 py-2 rounded-full glass text-[var(--text-muted)] font-medium transition-all duration-300 hover:scale-105 hover:text-[var(--text-main)]"
                     data-filter="wordpress">
                     <span data-i18n="filter-wordpress">WordPress</span>
                 </button>
                 <button
-                    class="filter-btn px-5 py-2 rounded-full glass text-gray-300 font-medium transition-all duration-300 hover:scale-105 hover:text-white"
+                    class="filter-btn px-5 py-2 rounded-full glass text-[var(--text-muted)] font-medium transition-all duration-300 hover:scale-105 hover:text-[var(--text-main)]"
                     data-filter="ecommerce">
                     <span data-i18n="filter-ecommerce">E-Commerce</span>
                 </button>
                 <button
-                    class="filter-btn px-5 py-2 rounded-full glass text-gray-300 font-medium transition-all duration-300 hover:scale-105 hover:text-white"
+                    class="filter-btn px-5 py-2 rounded-full glass text-[var(--text-muted)] font-medium transition-all duration-300 hover:scale-105 hover:text-[var(--text-main)]"
                     data-filter="ai">
                     <span data-i18n="filter-ai">AI & Data</span>
                 </button>
                 <button
-                    class="filter-btn px-5 py-2 rounded-full glass text-gray-300 font-medium transition-all duration-300 hover:scale-105 hover:text-white"
+                    class="filter-btn px-5 py-2 rounded-full glass text-[var(--text-muted)] font-medium transition-all duration-300 hover:scale-105 hover:text-[var(--text-main)]"
                     data-filter="web-app">
                     <span data-i18n="filter-web-app">Web Apps</span>
                 </button>
                 <button
-                    class="filter-btn px-5 py-2 rounded-full glass text-gray-300 font-medium transition-all duration-300 hover:scale-105 hover:text-white"
+                    class="filter-btn px-5 py-2 rounded-full glass text-[var(--text-muted)] font-medium transition-all duration-300 hover:scale-105 hover:text-[var(--text-main)]"
                     data-filter="other">
                     <span data-i18n="filter-other">Others</span>
                 </button>
@@ -1801,7 +1809,7 @@
             <!-- View More Button -->
             <div class="text-center mt-12">
                 <a href="https://github.com/mohakamran" blank="_blank"
-                    class="inline-flex items-center gap-3 glass hover:bg-gray-800/50 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105">
+                    class="inline-flex items-center gap-3 glass hover:bg-[var(--bg-card)] border-[var(--border-color)]/50 text-[var(--text-main)] font-semibold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105">
                     <i class="fas fa-arrow-right"></i>
                     <span data-i18n="portfolio-cta">Want to See More? Let's Talk</span>
                 </a>
@@ -2036,18 +2044,18 @@
             <!-- Call to Action -->
             <div class="text-center">
                 <div class="glass rounded-2xl p-8 border border-gray-700/50">
-                    <h3 class="text-2xl font-bold text-white mb-4" data-i18n="services-main-cta-title">Ready to Start
+                    <h3 class="text-2xl font-bold text-[var(--text-main)] mb-4" data-i18n="services-main-cta-title">Ready to Start
                         Your Project?</h3>
-                    <p class="text-gray-300 mb-6" data-i18n="services-main-cta-desc">Let's discuss your ideas and create
+                    <p class="text-[var(--text-muted)] mb-6" data-i18n="services-main-cta-desc">Let's discuss your ideas and create
                         something amazing together. I'm here to help bring your vision to life.</p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
                         <a href="#contact"
-                            class="bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3">
+                            class="bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-[var(--text-main)] font-semibold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3">
                             <i class="fas fa-paper-plane"></i>
                             <span data-i18n="services-cta-contact">Get In Touch</span>
                         </a>
                         <a href="#portfolio"
-                            class="glass hover:bg-gray-800/50 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3">
+                            class="glass hover:bg-[var(--bg-card)] border-[var(--border-color)]/50 text-[var(--text-main)] font-semibold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3">
                             <i class="fas fa-eye"></i>
                             <span data-i18n="services-cta-portfolio">View My Work</span>
                         </a>
@@ -2073,7 +2081,7 @@
                 <!-- Web Design -->
                 <div
                     class="pricing-card bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 shadow-2xl hover:shadow-teal-500/20 hover:scale-105 transition-all duration-300 relative overflow-hidden border border-gray-700/50 group">
-                    <div class="absolute -top-3 -right-3 bg-gradient-to-r from-teal-400 to-cyan-500 text-white px-4 py-2 rounded-full text-sm font-bold transform rotate-12 shadow-lg z-10"
+                    <div class="absolute -top-3 -right-3 bg-gradient-to-r from-teal-400 to-cyan-500 text-[var(--text-main)] px-4 py-2 rounded-full text-sm font-bold transform rotate-12 shadow-lg z-10"
                         data-i18n="pricing-badge-best">
                         Best Deal
                     </div>
@@ -2081,23 +2089,23 @@
                         <h3 class="text-2xl font-bold text-teal-400 mb-4" data-i18n="pricing-web-design">Web Design</h3>
                         <div class="flex items-center justify-center gap-1 mb-2">
                             <span class="text-teal-400 text-2xl font-bold">$</span>
-                            <span class="text-5xl font-extrabold text-white">600</span>
+                            <span class="text-5xl font-extrabold text-[var(--text-main)]">600</span>
                         </div>
                     </div>
                     <ul class="space-y-4 mb-8">
-                        <li class="flex items-center space-x-3 text-gray-300">
+                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
                             <i class="fas fa-check text-green-400 text-lg"></i>
                             <span data-i18n="pricing-feature-modern">Modern & Responsive UI</span>
                         </li>
-                        <li class="flex items-center space-x-3 text-gray-300">
+                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
                             <i class="fas fa-check text-green-400 text-lg"></i>
                             <span data-i18n="pricing-feature-pages">Up to 5 Pages</span>
                         </li>
-                        <li class="flex items-center space-x-3 text-gray-300">
+                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
                             <i class="fas fa-check text-green-400 text-lg"></i>
                             <span data-i18n="pricing-feature-support">30 Days Free Support</span>
                         </li>
-                        <li class="flex items-center space-x-3 text-gray-300">
+                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
                             <i class="fas fa-check text-green-400 text-lg"></i>
                             <span data-i18n="pricing-feature-satisfaction">100% Satisfaction Guarantee</span>
                         </li>
@@ -2113,23 +2121,23 @@
                         </h3>
                         <div class="flex items-center justify-center gap-1 mb-2">
                             <span class="text-blue-400 text-2xl font-bold">$</span>
-                            <span class="text-5xl font-extrabold text-white">1200</span>
+                            <span class="text-5xl font-extrabold text-[var(--text-main)]">1200</span>
                         </div>
                     </div>
                     <ul class="space-y-4 mb-8">
-                        <li class="flex items-center space-x-3 text-gray-300">
+                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
                             <i class="fas fa-check text-green-400 text-lg"></i>
                             <span data-i18n="pricing-feature-fullstack">Full Stack Development</span>
                         </li>
-                        <li class="flex items-center space-x-3 text-gray-300">
+                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
                             <i class="fas fa-check text-green-400 text-lg"></i>
                             <span data-i18n="pricing-feature-custom">Custom Web Applications</span>
                         </li>
-                        <li class="flex items-center space-x-3 text-gray-300">
+                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
                             <i class="fas fa-check text-green-400 text-lg"></i>
                             <span data-i18n="pricing-feature-support">30 Days Free Support</span>
                         </li>
-                        <li class="flex items-center space-x-3 text-gray-300">
+                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
                             <i class="fas fa-check text-green-400 text-lg"></i>
                             <span data-i18n="pricing-feature-satisfaction">100% Satisfaction Guarantee</span>
                         </li>
@@ -2145,23 +2153,23 @@
                             Development</h3>
                         <div class="flex items-center justify-center gap-1 mb-2">
                             <span class="text-purple-400 text-2xl font-bold">$</span>
-                            <span class="text-5xl font-extrabold text-white">1000</span>
+                            <span class="text-5xl font-extrabold text-[var(--text-main)]">1000</span>
                         </div>
                     </div>
                     <ul class="space-y-4 mb-8">
-                        <li class="flex items-center space-x-3 text-gray-300">
+                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
                             <i class="fas fa-check text-green-400 text-lg"></i>
                             <span data-i18n="pricing-feature-platforms">Shopify, WooCommerce & WordPress Stores</span>
                         </li>
-                        <li class="flex items-center space-x-3 text-gray-300">
+                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
                             <i class="fas fa-check text-green-400 text-lg"></i>
                             <span data-i18n="pricing-feature-responsive">Responsive Product Pages</span>
                         </li>
-                        <li class="flex items-center space-x-3 text-gray-300">
+                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
                             <i class="fas fa-check text-green-400 text-lg"></i>
                             <span data-i18n="pricing-feature-payment">Payment Gateway Integration</span>
                         </li>
-                        <li class="flex items-center space-x-3 text-gray-300">
+                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
                             <i class="fas fa-check text-green-400 text-lg"></i>
                             <span data-i18n="pricing-feature-support-guarantee">30 Days Free Support & Guarantee</span>
                         </li>
@@ -2177,23 +2185,23 @@
                             Analysis & Others</h3>
                         <div class="flex items-center justify-center gap-1 mb-2">
                             <span class="text-orange-400 text-2xl font-bold">$</span>
-                            <span class="text-5xl font-extrabold text-white">500</span>
+                            <span class="text-5xl font-extrabold text-[var(--text-main)]">500</span>
                         </div>
                     </div>
                     <ul class="space-y-4 mb-8">
-                        <li class="flex items-center space-x-3 text-gray-300">
+                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
                             <i class="fas fa-check text-green-400 text-lg"></i>
                             <span data-i18n="pricing-feature-visualization">Data Visualization & Insights</span>
                         </li>
-                        <li class="flex items-center space-x-3 text-gray-300">
+                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
                             <i class="fas fa-check text-green-400 text-lg"></i>
                             <span data-i18n="pricing-feature-python">Python, Pandas, Matplotlib, Seaborn</span>
                         </li>
-                        <li class="flex items-center space-x-3 text-gray-300">
+                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
                             <i class="fas fa-check text-green-400 text-lg"></i>
                             <span data-i18n="pricing-feature-api">API Development</span>
                         </li>
-                        <li class="flex items-center space-x-3 text-gray-300">
+                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
                             <i class="fas fa-check text-green-400 text-lg"></i>
                             <span data-i18n="pricing-feature-support">30 Days Free Support</span>
                         </li>
@@ -2206,12 +2214,12 @@
             <div class="text-center mt-16">
                 <div
                     class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 border border-gray-700/50 shadow-2xl">
-                    <h3 class="text-2xl font-bold text-white mb-4" data-i18n="pricing-custom-title">Need a Custom
+                    <h3 class="text-2xl font-bold text-[var(--text-main)] mb-4" data-i18n="pricing-custom-title">Need a Custom
                         Solution?</h3>
-                    <p class="text-gray-300 mb-6 text-lg" data-i18n="pricing-custom-desc">Let's discuss your specific
+                    <p class="text-[var(--text-muted)] mb-6 text-lg" data-i18n="pricing-custom-desc">Let's discuss your specific
                         requirements and create a tailored package just for you.</p>
                     <a href="#contact"
-                        class="inline-flex items-center gap-3 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-teal-500/25 text-lg">
+                        class="inline-flex items-center gap-3 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-[var(--text-main)] font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-teal-500/25 text-lg">
                         <i class="fas fa-comments"></i>
                         <span data-i18n="pricing-custom-cta">Discuss Your Project</span>
                     </a>
@@ -2334,7 +2342,7 @@
                     <!-- Slides for images 1-26 -->
                     <div class="swiper-slide">
                         <div class="gallery-item group cursor-pointer" data-image-index="0">
-                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-gray-800">
+                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-[var(--bg-card)] border-[var(--border-color)]">
                                 <img src="./gallary/1.jpg" alt="Travel image 1"
                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                             </div>
@@ -2343,7 +2351,7 @@
 
                     <div class="swiper-slide">
                         <div class="gallery-item group cursor-pointer" data-image-index="1">
-                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-gray-800">
+                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-[var(--bg-card)] border-[var(--border-color)]">
                                 <img src="./gallary/2.jpg" alt="Travel image 2"
                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                             </div>
@@ -2352,7 +2360,7 @@
 
                     <!-- <div class="swiper-slide">
                         <div class="gallery-item group cursor-pointer" data-image-index="2">
-                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-gray-800">
+                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-[var(--bg-card)] border-[var(--border-color)]">
                                 <img src="./gallary/3.jpg" alt="Travel image 3"
                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                             </div>
@@ -2361,7 +2369,7 @@
 
                     <div class="swiper-slide">
                         <div class="gallery-item group cursor-pointer" data-image-index="3">
-                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-gray-800">
+                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-[var(--bg-card)] border-[var(--border-color)]">
                                 <img src="./gallary/4.jpg" alt="Travel image 4"
                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                             </div>
@@ -2370,7 +2378,7 @@
 
                     <div class="swiper-slide">
                         <div class="gallery-item group cursor-pointer" data-image-index="4">
-                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-gray-800">
+                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-[var(--bg-card)] border-[var(--border-color)]">
                                 <img src="./gallary/5.jpg" alt="Travel image 5"
                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                             </div>
@@ -2379,7 +2387,7 @@
 
                     <div class="swiper-slide">
                         <div class="gallery-item group cursor-pointer" data-image-index="5">
-                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-gray-800">
+                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-[var(--bg-card)] border-[var(--border-color)]">
                                 <img src="./gallary/6.jpg" alt="Travel image 6"
                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                             </div>
@@ -2389,7 +2397,7 @@
                     <!-- Continue for images 7-26 with the same structure -->
                     <div class="swiper-slide">
                         <div class="gallery-item group cursor-pointer" data-image-index="6">
-                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-gray-800">
+                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-[var(--bg-card)] border-[var(--border-color)]">
                                 <img src="./gallary/7.jpg" alt="Travel image 7"
                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                             </div>
@@ -2398,7 +2406,7 @@
 
                     <div class="swiper-slide">
                         <div class="gallery-item group cursor-pointer" data-image-index="7">
-                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-gray-800">
+                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-[var(--bg-card)] border-[var(--border-color)]">
                                 <img src="./gallary/8.jpg" alt="Travel image 8"
                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                             </div>
@@ -2407,7 +2415,7 @@
 
                     <div class="swiper-slide">
                         <div class="gallery-item group cursor-pointer" data-image-index="8">
-                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-gray-800">
+                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-[var(--bg-card)] border-[var(--border-color)]">
                                 <img src="./gallary/9.jpg" alt="Travel image 9"
                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                             </div>
@@ -2416,7 +2424,7 @@
 
                     <div class="swiper-slide">
                         <div class="gallery-item group cursor-pointer" data-image-index="9">
-                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-gray-800">
+                            <div class="image-container aspect-[4/3] overflow-hidden rounded-xl bg-[var(--bg-card)] border-[var(--border-color)]">
                                 <img src="./gallary/10.jpg" alt="Travel image 10"
                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                             </div>
@@ -2428,10 +2436,10 @@
 
                 <!-- Navigation Buttons -->
                 <div class="swiper-button-next !hidden sm:!flex">
-                    <i class="fas fa-chevron-right text-white text-lg"></i>
+                    <i class="fas fa-chevron-right text-[var(--text-main)] text-lg"></i>
                 </div>
                 <div class="swiper-button-prev !hidden sm:!flex">
-                    <i class="fas fa-chevron-left text-white text-lg"></i>
+                    <i class="fas fa-chevron-left text-[var(--text-main)] text-lg"></i>
                 </div>
 
                 <!-- Pagination Dots -->
@@ -2442,15 +2450,15 @@
             <div id="lightbox" class="fixed inset-0 bg-black/95 z-50 hidden items-center justify-center p-4">
                 <div class="relative w-full max-w-4xl max-h-full">
                     <button id="close-lightbox"
-                        class="absolute -top-12 right-0 text-white text-2xl hover:text-teal-400 transition-colors z-10 bg-black/50 rounded-full w-10 h-10 flex items-center justify-center">
+                        class="absolute -top-12 right-0 text-[var(--text-main)] text-2xl hover:text-teal-400 transition-colors z-10 bg-black/50 rounded-full w-10 h-10 flex items-center justify-center">
                         <i class="fas fa-times"></i>
                     </button>
                     <button id="prev-lightbox"
-                        class="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 text-white text-2xl hover:text-teal-400 transition-colors z-10 bg-black/50 rounded-full w-10 h-10 flex items-center justify-center">
+                        class="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 text-[var(--text-main)] text-2xl hover:text-teal-400 transition-colors z-10 bg-black/50 rounded-full w-10 h-10 flex items-center justify-center">
                         <i class="fas fa-chevron-left"></i>
                     </button>
                     <button id="next-lightbox"
-                        class="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 text-white text-2xl hover:text-teal-400 transition-colors z-10 bg-black/50 rounded-full w-10 h-10 flex items-center justify-center">
+                        class="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 text-[var(--text-main)] text-2xl hover:text-teal-400 transition-colors z-10 bg-black/50 rounded-full w-10 h-10 flex items-center justify-center">
                         <i class="fas fa-chevron-right"></i>
                     </button>
                     <div class="lightbox-content bg-gray-900 rounded-lg overflow-hidden">
@@ -2462,11 +2470,11 @@
             <!-- Call to Action -->
             <!-- <div class="text-center mt-12">
                 <div class="glass rounded-2xl p-6 sm:p-8 border border-gray-700/50">
-                    <h3 class="text-xl sm:text-2xl font-bold text-white mb-4">More Adventures Coming Soon!</h3>
-                    <p class="text-gray-300 mb-6 text-sm sm:text-base">I'm constantly exploring new places and capturing
+                    <h3 class="text-xl sm:text-2xl font-bold text-[var(--text-main)] mb-4">More Adventures Coming Soon!</h3>
+                    <p class="text-[var(--text-muted)] mb-6 text-sm sm:text-base">I'm constantly exploring new places and capturing
                         memories. Follow my journey for more updates!</p>
                     <a href="#contact"
-                        class="inline-flex items-center gap-3 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base">
+                        class="inline-flex items-center gap-3 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-[var(--text-main)] font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base">
                         <i class="fas fa-camera"></i>
                         <span>Share Your Travel Stories</span>
                     </a>
@@ -2630,9 +2638,9 @@
                     <div class="flex items-center space-x-3 mb-4">
                         <div
                             class="w-8 h-8 bg-gradient-to-r from-teal-400 to-cyan-500 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-code text-white text-sm"></i>
+                            <i class="fas fa-code text-[var(--text-main)] text-sm"></i>
                         </div>
-                        <span class="text-white font-bold text-lg">Muhammad Kamran</span>
+                        <span class="text-[var(--text-main)] font-bold text-lg">Muhammad Kamran</span>
                     </div>
                     <p class="text-gray-400 mb-4 leading-relaxed" data-i18n="footer-brand-desc">
                         Full Stack Developer & AI Enthusiast crafting digital experiences with modern technologies.
@@ -2656,7 +2664,7 @@
 
                 <!-- Quick Links -->
                 <div>
-                    <h3 class="text-white font-semibold mb-4" data-i18n="footer-quick-links">Quick Links</h3>
+                    <h3 class="text-[var(--text-main)] font-semibold mb-4" data-i18n="footer-quick-links">Quick Links</h3>
                     <ul class="space-y-2">
                         <li><a href="#home" class="footer-link" data-i18n="nav-home">Home</a></li>
                         <li><a href="#skills" class="footer-link" data-i18n="nav-skills">Skills</a></li>
@@ -2668,7 +2676,7 @@
 
                 <!-- Services -->
                 <div>
-                    <h3 class="text-white font-semibold mb-4" data-i18n="footer-services">Services</h3>
+                    <h3 class="text-[var(--text-main)] font-semibold mb-4" data-i18n="footer-services">Services</h3>
                     <ul class="space-y-2">
                         <li><a href="#services" class="footer-link" data-i18n="service-dev">Web Development</a></li>
                         <li><a href="#services" class="footer-link" data-i18n="service-design">UI/UX Design</a></li>
@@ -2684,11 +2692,11 @@
                 <p class="text-gray-400 text-sm mb-4 md:mb-0" data-i18n="footer-copyright">
                     Muhammad Kamran </p>
                 <div class="flex space-x-4">
-                    <a href="#" class="text-gray-400 hover:text-white transition-colors text-sm"
+                    <a href="#" class="text-gray-400 hover:text-[var(--text-main)] transition-colors text-sm"
                         data-i18n="footer-privacy">
                         Privacy Policy
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition-colors text-sm"
+                    <a href="#" class="text-gray-400 hover:text-[var(--text-main)] transition-colors text-sm"
                         data-i18n="footer-terms">
                         Terms of Service
                     </a>

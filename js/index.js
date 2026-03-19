@@ -83,6 +83,58 @@ document.addEventListener('DOMContentLoaded', function () {
         navbar.style.visibility = 'visible';
         navbar.style.opacity = '1';
     }
+
+    // ===== THEME TOGGLE FUNCTIONALITY =====
+    const themeToggleDesktop = document.getElementById('theme-toggle-desktop');
+    const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+    
+    // Check for saved theme preference or prefer-color-scheme
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // Set initial theme
+    if (savedTheme === 'light' || (!savedTheme && !prefersDark)) {
+        document.documentElement.setAttribute('data-theme', 'light');
+        updateThemeIcons('light');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        updateThemeIcons('dark');
+    }
+
+    function updateThemeIcons(theme) {
+        const iconClass = theme === 'light' ? 'fa-sun' : 'fa-moon';
+        const oldClass = theme === 'light' ? 'fa-moon' : 'fa-sun';
+        
+        if (themeToggleDesktop) {
+            const icon = themeToggleDesktop.querySelector('i');
+            if (icon) {
+                icon.classList.remove(oldClass);
+                icon.classList.add(iconClass);
+                // In light mode, icon is a sun, but maybe we want a moon to indicate "switch to dark"?
+                // Let's use Sun to indicate we are in light mode, or moon to indicate dark mode.
+            }
+        }
+        
+        if (themeToggleMobile) {
+            const icon = themeToggleMobile.querySelector('i');
+            if (icon) {
+                icon.classList.remove(oldClass);
+                icon.classList.add(iconClass);
+            }
+        }
+    }
+
+    function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcons(newTheme);
+    }
+
+    if (themeToggleDesktop) themeToggleDesktop.addEventListener('click', toggleTheme);
+    if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
 });
 
 // Additional safety check for navbar
