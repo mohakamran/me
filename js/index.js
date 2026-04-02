@@ -1111,6 +1111,7 @@ class LanguageManager {
                 'project-atoms': 'Interactive 3D Atom Simulator',
                 'project-def': 'Galactic Defender',
                 'project-digizone': 'Digizone',
+                'project-longs-cafe': 'Longs Cafe Website',
 
                 // Project Descriptions
                 'project-windows-11-desc': 'Browser-based simulation of the Windows 11 desktop environment',
@@ -1120,6 +1121,7 @@ class LanguageManager {
                 'project-atoms-desc': 'The Bohr atomic model in interactive 3D using HTML, Tailwind CSS, and Three.js.',
                 'project-def-desc': 'Classic-style 2D vertical space shooter built using pure HTML, CSS, and JavaScript.',
                 'project-digizone-desc': 'Ecommerce Services Startup Website',
+                'project-longs-cafe-desc': 'A university lab website for selling matcha',
 
                 // Portfolio CTA
                 'portfolio-cta': 'Want to See More? Let\'s Talk',
@@ -1299,6 +1301,7 @@ class LanguageManager {
                 'project-def': 'ギャラクティックディフェンダー',
                 'project-digizone': 'Digizone',
                 'project-digizone-desc': 'Eコマースサービス スタートアップウェブサイト',
+                'project-longs-cafe': 'Longs Cafe ウェブサイト',
 
                 // Project Descriptions
                 'project-windows-11-desc': 'ブラウザで体験できるWindows 11デスクトップ環境のシミュレーション',
@@ -1307,6 +1310,7 @@ class LanguageManager {
                 'project-ai-desc': 'AIツールのマーケティングページ用ウェブサイト',
                 'project-atoms-desc': 'HTML、Tailwind CSS、Three.jsでボーアの原子モデルをインタラクティブに体験できます。',
                 'project-def-desc': 'HTML、CSS、JavaScriptで構築したクラシックな2D縦スクロールシューティングゲーム.',
+                'project-longs-cafe-desc': '抹茶を販売する大学の研究室ウェブサイト',
                 'project-unique-desc': 'ウェブホスティング会社のウェブサイト',
                 'project-zoobounty-desc': 'オンラインショッピングサイト',
                 'project-travel-desc': '旅行代理店のウェブサイト',
