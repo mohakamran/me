@@ -84,16 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
         navbar.style.opacity = '1';
     }
 
-    // ===== THEME INITIALIZATION (FORCED DARK) =====
-    document.documentElement.setAttribute('data-theme', 'dark');
-    
-    // (Optional) Remove unused theme toggle event listeners since UI is removed
-    /*
-    const themeToggleDesktop = document.getElementById('theme-toggle-desktop');
-    const themeToggleMobile = document.getElementById('theme-toggle-mobile');
-    if (themeToggleDesktop) themeToggleDesktop.addEventListener('click', toggleTheme);
-    if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
-    */
+    // Theme initialization is handled later in the main DOMContentLoaded initializer.
 });
 
 // Additional safety check for navbar
@@ -1066,10 +1057,13 @@ class LanguageManager {
                 'education-title': 'Education & Experience',
                 'education-subtitle': 'My academic journey and professional path',
                 'education-masters': 'Masters in Applied Information Systems',
+                'education-masters-date': 'October 2024 – September 2026',
                 'education-masters-desc': 'Focused on Maths, Databases, Data Structures and Algorithms, Software Engineering and Programming.',
-                'education-bachelors': 'Bachelor\'s in Information Technology',
+                'education-bachelors': 'Bs Information Technology',
+                'education-bachelors-date': 'September 2016 – September 2020',
                 'education-bachelors-desc': 'Focused on Full Stack Development, Software Architecture, and modern web technologies.',
                 'experience-fullstack': 'Full Stack Engineer',
+                'experience-fullstack-date': 'January 2021 - August 2024',
                 'experience-fullstack-desc': 'Developed and maintained web applications using modern technologies. Worked on both frontend and backend development.',
                 'experience-teacher': 'Computer Teacher',
                 'experience-teacher-desc': 'Taught various computer science subjects including web development, digital marketing, and software tools.',
@@ -1275,10 +1269,13 @@ class LanguageManager {
                 'education-title': '学歴と職歴',
                 'education-subtitle': '私の学業とキャリアの歩み',
                 'education-masters': '応用情報システム学修士',
+                'education-masters-date': '2024年10月 – 2026年9月',
                 'education-masters-desc': 'データサイエンスとAI技術を用いた交通シミュレーションシステムと心理学研究に焦点を当てています。',
                 'education-bachelors': '情報技術学士',
+                'education-bachelors-date': '2016年9月 – 2020年9月',
                 'education-bachelors-desc': '数学、データベース、データ構造とアルゴリズム、ソフトウェア工学とプログラミングに焦点を当てています。',
                 'experience-fullstack': 'フルスタックエンジニア',
+                'experience-fullstack-date': '2021年1月 - 2024年8月',
                 'experience-fullstack-desc': '最新技術を使用したWebアプリケーションの開発と保守。フロントエンドとバックエンドの両方の開発に携わりました。',
                 'experience-teacher': 'コンピューター講師',
                 'experience-teacher-desc': 'Web開発、デジタルマーケティング、ソフトウェアツールを含む様々なコンピューターサイエンス科目を教えました。',

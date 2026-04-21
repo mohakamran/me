@@ -185,6 +185,7 @@ body {
     z-index: 9999 !important;
     transform: translateZ(0) !important;
     will-change: transform;
+    transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
 }
 
 .nav-link {
@@ -1438,7 +1439,7 @@ body {
 }
 
 .footer-link:hover {
-    color: var(--teal-400);
+    color: var(--text-main);
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
