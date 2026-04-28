@@ -128,7 +128,7 @@ function createParticles() {
 }
 
 // ===== TYPEWRITER EFFECT =====
-const roles = ["PHP", "Python", "Shopify", "WordPress", "React", "Laravel", "JavaScript", "Node.js"];
+const roles = ["PHP", "Python", "React", "Laravel", "JavaScript", "Node.js", "MongoDB", "Express", "Git", "Docker", "TypeScript", "AI Driven Development", "Shopify", "WordPress"];
 let roleIndex = 0, charIndex = 0, isDeleting = false;
 const typewriter = document.getElementById("typewriter");
 
