@@ -162,6 +162,38 @@ function createParticles() {
     }
 }
 
+function updateThemeIcons(theme) {
+    const buttons = [document.getElementById('theme-toggle'), document.getElementById('theme-toggle-mobile')];
+    buttons.forEach(btn => {
+        if (!btn) return;
+        const icon = btn.querySelector('i');
+        if (!icon) return;
+        icon.className = theme === 'dark' ? 'fas fa-sun text-sm' : 'fas fa-moon text-sm';
+    });
+}
+
+function applyTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem('theme', theme);
+    updateThemeIcons(theme);
+}
+
+function initThemeToggle() {
+    const storedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = storedTheme || (prefersDark ? 'dark' : 'light');
+    applyTheme(theme);
+
+    const toggleButtons = [document.getElementById('theme-toggle'), document.getElementById('theme-toggle-mobile')];
+    toggleButtons.forEach(button => {
+        if (!button) return;
+        button.addEventListener('click', () => {
+            const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+            applyTheme(nextTheme);
+        });
+    });
+}
+
 // ===== TYPEWRITER EFFECT =====
 const roles = ["PHP", "Python", "React", "Laravel", "JavaScript", "Node.js", "MongoDB", "Express", "Git", "Docker", "TypeScript", "AI Driven Development", "Shopify", "WordPress"];
 let roleIndex = 0, charIndex = 0, isDeleting = false;
@@ -980,7 +1012,8 @@ function initPricingAnimation() {
 document.addEventListener('DOMContentLoaded', function () {
     const languageManager = new LanguageManager();
 
-    // Initialize core functionality
+    // Initialize theme and core functionality
+    initThemeToggle();
     typeEffect();
     checkScroll();
     initSmoothScrolling();
@@ -1071,11 +1104,11 @@ class LanguageManager {
 
                 // Hero Section
                 'hero-available': 'Available for freelance work',
-                'hero-title-1': 'Full Stack',
-                'hero-title-2': 'Developer',
-                'hero-title-3': '& AI Enthusiast',
+                'hero-title-1': 'Full-stack',
+                'hero-title-2': 'Web Engineer',
+                'hero-title-3': 'MEXT Scholar',
                 'hero-builds': 'I build with',
-                'hero-description': 'Professional in PHP, JavaScript, Laravel, React, Python & AI solutions. MEXT scholar in University of Kitakyushu and my research theme is traffic psychology and behavior. I will graduate in September 2026.',
+                'hero-description': 'Full-stack Web Engineer | MEXT Scholar | M.Sc. Candidate with 3+ years of industry experience specializing in the MERN stack, TypeScript, and PHP (Laravel). I build scalable, production-ready systems and leverage AI-driven development workflows with Claude Code and Cursor to improve team efficiency. Currently pursuing an M.Sc. in Applied Information Systems in Japan, I hold a valid student visa through December 27, 2026, and possess conversational Japanese proficiency (JLPT N4, N3 candidate for Dec 2026).',
                 'hero-cta-work': 'View My Work',
                 'hero-cta-contact': 'Get In Touch',
                 'hero-cta-resume': 'Download CV',
@@ -1286,10 +1319,10 @@ class LanguageManager {
                 // Hero Section
                 'hero-available': 'フリーランス対応可能',
                 'hero-title-1': 'フルスタック',
-                'hero-title-2': '開発者',
-                'hero-title-3': '＆ AI 愛好家',
+                'hero-title-2': 'Webエンジニア',
+                'hero-title-3': '文部科学省奨学生',
                 'hero-builds': '使用技術',
-                'hero-description': 'PHP、JavaScript、Laravel、React、Python、AIソリューションの専門家。北九州市立大学文部科学省奨学生。研究テーマは交通心理学と行動。2026年9月卒業予定。',
+                'hero-description': 'MERNスタック、TypeScript、PHP（Laravel）を専門とするフルスタックWebエンジニアで、3年以上の業界経験があります。スケーラブルで本番運用対応のシステム構築に強みがあり、Claude Code や Cursor を活用した AI 駆動の開発ワークフローでチームの効率化を図ります。現在、日本で応用情報システムの修士課程を履修中で、2026年12月27日まで有効な学生ビザを保有し、日本語は会話レベル（JLPT N4、2026年12月にN3受験予定）です。',
                 'hero-cta-work': '作品を見る',
                 'hero-cta-contact': 'お問い合わせ',
                 'hero-cta-resume': '履歴書をダウンロード',

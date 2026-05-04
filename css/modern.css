@@ -6,6 +6,10 @@
     background: rgba(255,255,255,0.95) !important;
 }
 
+html[data-theme="dark"] #modern-header.header-scrolled > div:first-child {
+    background: rgba(15, 23, 42, 0.96) !important;
+}
+
 /* Particles canvas */
 #particles-js {
     position: fixed;
@@ -278,8 +282,12 @@ html {
 
 /* Footer background override */
 footer {
-    background: linear-gradient(180deg, var(--bg-main), #f5f5f4) !important;
+    background: linear-gradient(180deg, var(--bg-card), var(--gradient-2)) !important;
     border-top: 1px solid var(--border-color);
+}
+
+html[data-theme="dark"] footer {
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.98)) !important;
 }
 
 /* Text selection color */

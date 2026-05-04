@@ -99,21 +99,21 @@ function initParticlesJs() {
     if (typeof particlesJS === 'undefined') return;
     particlesJS('particles-js', {
         particles: {
-            number: { value: 70, density: { enable: true, value_area: 900 } },
-            color: { value: ['#1e40af', '#0d9488', '#f97316', '#3b82f6'] },
+            number: { value: 90, density: { enable: true, value_area: 900 } },
+            color: { value: ['#ffffff', '#60a5fa', '#0d9488', '#fb7185', '#a78bfa'] },
             shape: { type: 'circle', stroke: { width: 0, color: '#000000' } },
-            opacity: { value: 0.3, random: true, anim: { enable: true, speed: 0.6, opacity_min: 0.08, sync: false } },
-            size: { value: 3.5, random: true, anim: { enable: true, speed: 1.5, size_min: 0.4, sync: false } },
-            line_linked: { enable: true, distance: 160, color: '#1e40af', opacity: 0.08, width: 1 },
-            move: { enable: true, speed: 0.8, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false }
+            opacity: { value: 0.32, random: true, anim: { enable: true, speed: 0.8, opacity_min: 0.08, sync: false } },
+            size: { value: 4, random: true, anim: { enable: true, speed: 1.5, size_min: 0.3, sync: false } },
+            line_linked: { enable: true, distance: 170, color: '#ffffff', opacity: 0.35, width: 1.25 },
+            move: { enable: true, speed: 1.1, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false }
         },
         interactivity: {
             detect_on: 'canvas',
             events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' }, resize: true },
             modes: {
-                grab: { distance: 180, line_linked: { opacity: 0.25 } },
-                push: { particles_nb: 4 },
-                repulse: { distance: 120, duration: 0.4 }
+                grab: { distance: 200, line_linked: { opacity: 0.45 } },
+                push: { particles_nb: 6 },
+                repulse: { distance: 140, duration: 0.45 }
             }
         },
         retina_detect: true
