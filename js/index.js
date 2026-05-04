@@ -1166,6 +1166,8 @@ class LanguageManager {
                 'filter-other': 'Others',
 
                 // Project Titles
+                'project-expense-iq': 'Expense IQ — Income & Expense Tracker',
+                'project-modern-pos': 'Modern POS Application',
                 'project-windows-11': 'Windows 11 Web Clone',
                 'project-bakery': 'Bakery Website',
                 'project-travelx': 'Travelx Travel Website',
@@ -1179,6 +1181,8 @@ class LanguageManager {
                 'project-saas-dashboard': 'SaaS Analytics Dashboard',
 
                 // Project Descriptions
+                'project-expense-iq-desc': 'A production-ready, fully responsive MERN stack web application for tracking income and expenses with real-time updates and dynamic charts.',
+                'project-modern-pos-desc': 'A professional, modern, and fully responsive Point of Sale frontend web application built with React, Vite, and Tailwind CSS v4. It simulates a real-world cashier system with a polished UI and smooth UX.',
                 'project-windows-11-desc': 'Browser-based Windows 11 interface clone with responsive desktop UI and interactive app windows.',
                 'project-bakery-desc': 'Responsive bakery website with product showcase, menu highlights, and customer-friendly ordering flow.',
                 'project-travelx-desc': 'Modern travel agency website featuring destination highlights, service booking, and immersive trip planning design.',
@@ -1380,6 +1384,8 @@ class LanguageManager {
                 'filter-other': 'その他',
 
                 // Project Titles
+                'project-expense-iq': 'Expense IQ — 収支管理トラッカー',
+                'project-modern-pos': 'モダンPOSアプリケーション',
                 'project-windows-11': 'Windows 11 Webクローン',
                 'project-bakery': 'ベーカリーウェブサイト',
                 'project-travelx': 'トラベルエックス旅行ウェブサイト',
@@ -1393,6 +1399,8 @@ class LanguageManager {
                 'project-saas-dashboard': 'SaaS Analytics Dashboard',
 
                 // Project Descriptions
+                'project-expense-iq-desc': '収益と支出を追跡する本番対応のMERNスタックウェブアプリで、リアルタイム更新と動的チャートを備えています。',
+                'project-modern-pos-desc': 'プロフェッショナルでモダン、完全レスポンシブなPOSフロントエンドアプリで、React、Vite、Tailwind CSS v4を使用し、実際のレジシステムを洗練されたUIとスムーズなUXで再現します。',
                 'project-windows-11-desc': 'ブラウザで使えるWindows 11インターフェイスのクローン。レスポンシブなデスクトップUIとインタラクティブなウィンドウが特徴です。',
                 'project-bakery-desc': '商品紹介、メニュー、顧客に優しい注文フローを備えたレスポンシブなベーカリーサイトです。',
                 'project-travelx-desc': '目的地の魅力を伝え、予約を促すトラベルサイトです。',
