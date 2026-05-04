@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="page-title">Muhammad Kamran - Full Stack Developer & AI Enthusiast</title>
-    <!-- <link rel="icon" href="assets/images/icons/favicon.svg" type="image/svg+xml"> -->
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
+    <title data-i18n="page-title">MK | Muhammad Kamran</title>
+    <!-- Sleek Geometric Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2228%22 fill=%22%231e40af%22/><text x=%2250%22 y=%2268%22 text-anchor=%22middle%22 font-family=%22system-ui, sans-serif%22 font-size=%2250%22 font-weight=%22700%22 fill=%22%23ffffff%22>MK</text></svg>">
 
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Dancing+Script:wght@600;700&display=swap"
         rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -28,6 +28,7 @@
 
     <!-- External CSS -->
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/modern.css">
 </head>
 <style>
     /* Custom Swiper Styles */
@@ -47,17 +48,18 @@
 
     .image-container {
         position: relative;
-        background: #1f2937;
+        background: #f5f5f4;
     }
 
     .swiper-button-next,
     .swiper-button-prev {
-        background: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.9);
         backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        border: 1px solid rgba(0, 0, 0, 0.06);
         width: 40px;
         height: 40px;
         border-radius: 50%;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.06);
     }
 
     .swiper-button-next:after,
@@ -66,14 +68,15 @@
     }
 
     .swiper-pagination-bullet {
-        background: rgba(255, 255, 255, 0.5);
-        opacity: 1;
+        background: #a8a29e;
+        opacity: 0.5;
         width: 8px;
         height: 8px;
     }
 
     .swiper-pagination-bullet-active {
-        background: linear-gradient(135deg, #2dd4bf, #22d3ee);
+        background: linear-gradient(135deg, #1e40af, #f97316);
+        opacity: 1;
         width: 20px;
         border-radius: 4px;
     }
@@ -125,393 +128,151 @@
 
 <body>
     <!-- Animated Background -->
+    <div id="particles-js" class="fixed inset-0 z-0 pointer-events-none"></div>
     <div class="gradient-bg"></div>
-    <div class="particles" id="particles-container"></div>
     <!-- Animated Progress Line -->
     <!-- Animated Scroll Progress Line -->
     <div class="fixed top-0 left-0 w-full h-1 z-50 bg-[var(--bg-card)] border-[var(--border-color)]/30">
         <div id="progress-line"
-            class="h-full bg-gradient-to-r from-teal-400 via-cyan-500 to-purple-500 transition-all duration-150 ease-out shadow-lg shadow-teal-500/30"
+            class="h-full bg-gradient-to-r from-[var(--primary)] via-[var(--secondary)] to-[var(--accent)] transition-all duration-150 ease-out shadow-lg shadow-[var(--primary)]/20"
             style="width: 0%"></div>
     </div>
 
     <!-- Header -->
-    <header class="navbar fixed w-full top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-            <div class="flex items-center justify-between">
-                <!-- Mobile Language Switcher -->
-                <div class="lg:hidden flex items-center space-x-1">
-                    <button id="lang-en-mobile"
-                        class="lang-btn glass text-[var(--text-muted)] px-3 py-1 rounded text-sm font-medium hover:text-[var(--text-main)] flex items-center gap-1">
-                        <!-- <span class="fi fi-us fis"></span> -->
-                        <span data-i18n="lang-en">English</span>
-                    </button>
-                    <button id="lang-jp-mobile"
-                        class="lang-btn glass text-[var(--text-muted)] px-3 py-1 rounded text-sm font-medium hover:text-[var(--text-main)] flex items-center gap-1">
-                        <!-- <span class="fi fi-jp fis"></span> -->
-                        <span data-i18n="lang-jp">日本語</span>
-                    </button>
-                    <!-- <button id="theme-toggle-mobile"
-                        class="lang-btn glass text-[var(--text-muted)] px-3 py-1 rounded text-sm font-medium hover:text-[var(--text-main)] flex items-center justify-center">
-                        <i class="fas fa-moon"></i>
-                    </button> -->
-                </div>
+    <header class="fixed w-full top-0 z-[60] transition-all duration-300" id="modern-header">
+        <div class="mx-auto px-4 sm:px-6 lg:px-8 pt-3 pb-3">
+            <div class="flex items-center justify-between px-5 sm:px-7 py-3 rounded-2xl w-full max-w-6xl mx-auto shadow-[0_8px_32px_rgba(0,0,0,0.06)] border border-[var(--border-color)] bg-white backdrop-blur-2xl transition-all duration-300">
+                <!-- Brand/Logo -->
+                <a href="#home" class="text-2xl font-extrabold tracking-tighter gradient-text shrink-0 flex items-center gap-2">
+                    <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-[var(--primary)] to-[var(--accent)] flex items-center justify-center text-white text-sm shadow-lg">MK</span>
+                    <span class="hidden sm:inline">.</span>
+                </a>
 
-                <!-- Centered Navigation - Desktop -->
-                <nav class="hidden lg:flex items-center space-x-1 glass rounded-full px-4 py-2 shadow-lg">
-                    <a href="#home" class="nav-link text-[var(--text-main)] active flex items-center space-x-1 text-sm">
-                        <i class="fas fa-home text-xs"></i>
-                        <span data-i18n="nav-home">Home</span>
-                    </a>
-                    <a href="#skills"
-                        class="nav-link text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center space-x-1 text-sm">
-                        <i class="fas fa-code text-xs"></i>
-                        <span data-i18n="nav-skills">Skills</span>
-                    </a>
-                    <a href="#education"
-                        class="nav-link text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center space-x-1 text-sm">
-                        <i class="fas fa-graduation-cap text-xs"></i>
-                        <span data-i18n="nav-education">Education</span>
-                    </a>
-                    <a href="#certifications"
-                        class="nav-link text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center space-x-1 text-sm">
-                        <i class="fas fa-award text-xs"></i>
-                        <span data-i18n="nav-certifications">Certifications</span>
-                    </a>
-                    <a href="#portfolio"
-                        class="nav-link text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center space-x-1 text-sm">
-                        <i class="fas fa-briefcase text-xs"></i>
-                        <span data-i18n="nav-portfolio">Portfolio</span>
-                    </a>
-                    <a href="#services"
-                        class="nav-link text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center space-x-1 text-sm">
-                        <i class="fas fa-cogs text-xs"></i>
-                        <span data-i18n="nav-services">Services</span>
-                    </a>
-                    <a href="#gallery"
-                        class="nav-link text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center space-x-1 text-sm">
-                        <i class="fas fa-images text-xs"></i>
-                        <span data-i18n="nav-gallery">Gallary</span>
-                    </a>
-                    <a href="#contact"
-                        class="nav-link text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center space-x-1 text-sm">
-                        <i class="fas fa-envelope text-xs"></i>
-                        <span data-i18n="nav-contact">Contact</span>
-                    </a>
+                <!-- Desktop Nav -->
+                <nav class="hidden lg:flex items-center space-x-1 text-sm font-semibold bg-[var(--bg-glass-hover)] rounded-full p-1 border border-[var(--border-color)]">
+                    <a href="#home" class="nav-link px-4 py-2 rounded-full text-[var(--text-main)] hover:bg-[var(--bg-card)] hover:shadow-sm transition-all" data-i18n="nav-home">Home</a>
+                    <a href="#skills" class="nav-link px-4 py-2 rounded-full text-[var(--text-main)] hover:bg-[var(--bg-card)] hover:shadow-sm transition-all" data-i18n="nav-skills">Skills</a>
+                    <a href="#education" class="nav-link px-4 py-2 rounded-full text-[var(--text-main)] hover:bg-[var(--bg-card)] hover:shadow-sm transition-all" data-i18n="nav-education">Education</a>
+                    <a href="#portfolio" class="nav-link px-4 py-2 rounded-full text-[var(--text-main)] hover:bg-[var(--bg-card)] hover:shadow-sm transition-all" data-i18n="nav-portfolio">Work</a>
+                    <a href="#services" class="nav-link px-4 py-2 rounded-full text-[var(--text-main)] hover:bg-[var(--bg-card)] hover:shadow-sm transition-all" data-i18n="nav-services">Services</a>
+                    <a href="#contact" class="nav-link px-4 py-2 rounded-full text-[var(--text-main)] hover:bg-[var(--bg-card)] hover:shadow-sm transition-all" data-i18n="nav-contact">Contact</a>
                 </nav>
 
-                <!-- Right Side - Desktop Language & Mobile Menu -->
-                <div class="flex items-center space-x-2">
-                    <!-- Desktop Language Switcher -->
-                    <!-- Desktop Language Switcher -->
-                    <div class="hidden lg:flex items-center space-x-2">
-                        <button id="lang-en"
-                            class="lang-btn bg-[var(--bg-card)] border-[var(--border-color)] text-[var(--text-muted)] px-4 py-2 rounded-lg font-medium border border-[var(--border-color)] hover:text-[var(--text-main)] hover:border-gray-500 flex items-center gap-2">
-                            <!-- <span class="fi fi-us fis"></span> -->
-                            <span data-i18n="lang-en">English</span>
-                        </button>
-                        <button id="lang-jp"
-                            class="lang-btn bg-[var(--bg-card)] border-[var(--border-color)] text-[var(--text-muted)] px-4 py-2 rounded-lg font-medium border border-[var(--border-color)] hover:text-[var(--text-main)] hover:border-gray-500 flex items-center gap-2">
-                            <!-- <span class="fi fi-jp fis"></span> -->
-                            <span data-i18n="lang-jp">日本語</span>
-                        </button>
+                <!-- Actions & Mobile Toggle -->
+                <div class="flex items-center space-x-2 sm:space-x-3 shrink-0">
+                    <!-- Desktop Language Toggles -->
+                    <div class="hidden lg:flex items-center space-x-1 bg-[var(--bg-glass-hover)] rounded-full p-1 border border-[var(--border-color)]">
+                        <button id="lang-en" class="flex items-center justify-center w-7 h-7 rounded-full bg-[var(--bg-card)] shadow-sm text-[10px] font-bold text-[var(--text-main)] transition-all hover:scale-105" title="English">EN</button>
+                        <button id="lang-jp" class="flex items-center justify-center w-7 h-7 rounded-full text-[10px] font-bold text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all hover:scale-105" title="日本語">JP</button>
                     </div>
-
-                    <!-- Mobile menu button -->
-                    <button id="menu-toggle" class="lg:hidden p-2 rounded glass hover:bg-[var(--bg-glass-hover)]">
-                        <i class="fas fa-bars text-[var(--text-main)] text-lg"></i>
+                    <!-- Mobile Menu Toggle -->
+                    <button id="menu-toggle" class="lg:hidden flex items-center justify-center w-9 h-9 rounded-full bg-[var(--bg-glass-hover)] hover:bg-[var(--border-color)] transition-all border border-[var(--border-color)] text-[var(--text-main)] shadow-sm">
+                        <i class="fas fa-bars text-sm"></i>
                     </button>
                 </div>
             </div>
+        </div>
 
-            <!-- Mobile Menu -->
-            <!-- <div id="mobile-menu" class="hidden lg:hidden mt-3 glass rounded-xl p-4 border border-[var(--border-color)]">
-            <div class="space-y-2">
-                <a href="#home" class="mobile-nav-item block text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 bg-teal-500/20">
-                    <i class="fas fa-home w-4"></i>
-                    <span data-i18n="nav-home">Home</span>
-                </a>
-                <a href="#skills" class="mobile-nav-item block text-[var(--text-muted)] hover:text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-[var(--bg-glass-hover)]">
-                    <i class="fas fa-code w-4"></i>
-                    <span data-i18n="nav-skills">Skills</span>
-                </a>
-                <a href="#education" class="mobile-nav-item block text-[var(--text-muted)] hover:text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-[var(--bg-glass-hover)]">
-                    <i class="fas fa-graduation-cap w-4"></i>
-                    <span data-i18n="nav-education">Education</span>
-                </a>
-                <a href="#certifications" class="mobile-nav-item block text-[var(--text-muted)] hover:text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-[var(--bg-glass-hover)]">
-                    <i class="fas fa-award w-4"></i>
-                    <span data-i18n="nav-certifications">Certifications</span>
-                </a>
-                <a href="#portfolio" class="mobile-nav-item block text-[var(--text-muted)] hover:text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-[var(--bg-glass-hover)]">
-                    <i class="fas fa-briefcase w-4"></i>
-                    <span data-i18n="nav-portfolio">Portfolio</span>
-                </a>
-                <a href="#services" class="mobile-nav-item block text-[var(--text-muted)] hover:text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-[var(--bg-glass-hover)]">
-                    <i class="fas fa-cogs w-4"></i>
-                    <span data-i18n="nav-services">Services</span>
-                </a>
-                <a href="#gallery" class="mobile-nav-item block text-[var(--text-muted)] hover:text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-[var(--bg-glass-hover)]">
-                    <i class="fas fa-images w-4"></i>
-                    <span data-i18n="nav-gallery">Gallery</span>
-                </a>
-                <a href="#contact" class="mobile-nav-item block text-[var(--text-muted)] hover:text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-[var(--bg-glass-hover)]">
-                    <i class="fas fa-envelope w-4"></i>
-                    <span data-i18n="nav-contact">Contact</span>
-                </a>
-            </div>
-        </div> -->
-            <!-- Mobile Menu -->
-            <!-- Mobile Menu -->
-            <div id="mobile-menu"
-                class="hidden lg:hidden mt-3 glass rounded-xl p-4 border border-[var(--border-color)]">
-                <div class="space-y-2">
-                    <a href="#home"
-                        class="mobile-nav-item block text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 bg-teal-500/20">
-                        <i class="fas fa-home w-4"></i>
-                        <span data-i18n="nav-home">Home</span>
-                    </a>
-                    <a href="#skills"
-                        class="mobile-nav-item block text-[var(--text-muted)] hover:text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-[var(--bg-glass-hover)]">
-                        <i class="fas fa-code w-4"></i>
-                        <span data-i18n="nav-skills">Skills</span>
-                    </a>
-                    <a href="#education"
-                        class="mobile-nav-item block text-[var(--text-muted)] hover:text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-[var(--bg-glass-hover)]">
-                        <i class="fas fa-graduation-cap w-4"></i>
-                        <span data-i18n="nav-education">Education</span>
-                    </a>
-                    <a href="#certifications"
-                        class="mobile-nav-item block text-[var(--text-muted)] hover:text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-[var(--bg-glass-hover)]">
-                        <i class="fas fa-award w-4"></i>
-                        <span data-i18n="nav-certifications">Certifications</span>
-                    </a>
-                    <a href="#portfolio"
-                        class="mobile-nav-item block text-[var(--text-muted)] hover:text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-[var(--bg-glass-hover)]">
-                        <i class="fas fa-briefcase w-4"></i>
-                        <span data-i18n="nav-portfolio">Portfolio</span>
-                    </a>
-                    <a href="#services"
-                        class="mobile-nav-item block text-[var(--text-muted)] hover:text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-[var(--bg-glass-hover)]">
-                        <i class="fas fa-cogs w-4"></i>
-                        <span data-i18n="nav-services">Services</span>
-                    </a>
-                    <a href="#gallery"
-                        class="mobile-nav-item block text-[var(--text-muted)] hover:text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-[var(--bg-glass-hover)]">
-                        <i class="fas fa-images w-4"></i>
-                        <span data-i18n="nav-gallery">Gallary</span>
-                    </a>
-                    <a href="#contact"
-                        class="mobile-nav-item block text-[var(--text-muted)] hover:text-[var(--text-main)] py-2 px-3 rounded text-sm flex items-center space-x-2 hover:bg-[var(--bg-glass-hover)]">
-                        <i class="fas fa-envelope w-4"></i>
-                        <span data-i18n="nav-contact">Contact</span>
-                    </a>
-                </div>
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed inset-x-4 top-[88px] z-50 bg-[var(--bg-card)]/95 border border-[var(--border-color)] rounded-3xl shadow-2xl backdrop-blur-2xl flex flex-col p-6 hidden opacity-0 transition-all duration-300 origin-top">
+            <a href="#home" class="mobile-nav-item text-lg font-semibold text-[var(--text-main)] py-3 px-4 rounded-xl hover:bg-[var(--bg-glass-hover)] transition-colors flex items-center gap-3" data-i18n="nav-home"><i class="fas fa-home text-[var(--primary)] w-5"></i>Home</a>
+            <a href="#skills" class="mobile-nav-item text-lg font-semibold text-[var(--text-main)] py-3 px-4 rounded-xl hover:bg-[var(--bg-glass-hover)] transition-colors flex items-center gap-3" data-i18n="nav-skills"><i class="fas fa-code text-[var(--primary)] w-5"></i>Skills</a>
+            <a href="#education" class="mobile-nav-item text-lg font-semibold text-[var(--text-main)] py-3 px-4 rounded-xl hover:bg-[var(--bg-glass-hover)] transition-colors flex items-center gap-3" data-i18n="nav-education"><i class="fas fa-graduation-cap text-[var(--primary)] w-5"></i>Education</a>
+            <a href="#portfolio" class="mobile-nav-item text-lg font-semibold text-[var(--text-main)] py-3 px-4 rounded-xl hover:bg-[var(--bg-glass-hover)] transition-colors flex items-center gap-3" data-i18n="nav-portfolio"><i class="fas fa-briefcase text-[var(--primary)] w-5"></i>Portfolio</a>
+            <a href="#services" class="mobile-nav-item text-lg font-semibold text-[var(--text-main)] py-3 px-4 rounded-xl hover:bg-[var(--bg-glass-hover)] transition-colors flex items-center gap-3" data-i18n="nav-services"><i class="fas fa-cogs text-[var(--primary)] w-5"></i>Services</a>
+            <a href="#contact" class="mobile-nav-item text-lg font-semibold text-[var(--text-main)] py-3 px-4 rounded-xl hover:bg-[var(--bg-glass-hover)] transition-colors flex items-center gap-3" data-i18n="nav-contact"><i class="fas fa-envelope text-[var(--primary)] w-5"></i>Contact</a>
+
+            <div class="flex items-center space-x-3 pt-4 mt-2 border-t border-[var(--border-color)] justify-center">
+                <button id="lang-en-mobile" class="px-5 py-2 rounded-full bg-[var(--bg-glass-hover)] border border-[var(--border-color)] text-sm font-bold text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-colors">EN</button>
+                <button id="lang-jp-mobile" class="px-5 py-2 rounded-full bg-[var(--bg-glass-hover)] border border-[var(--border-color)] text-sm font-bold text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-colors">JP</button>
             </div>
         </div>
     </header>
 
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center pt-28 pb-20 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+    <section id="home" class="min-h-[100vh] flex items-center justify-center pt-48 sm:pt-56 pb-20 relative overflow-hidden">
+        <!-- Dramatic Background Elements -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-tr from-[var(--primary)] via-[var(--secondary)] to-[var(--accent)] rounded-full blur-[150px] opacity-[0.08] pointer-events-none"></div>
+        <div class="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-[var(--accent)] rounded-full blur-[120px] opacity-[0.05] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-[var(--primary)] rounded-full blur-[100px] opacity-[0.06] pointer-events-none"></div>
 
-                <!-- Left Content -->
-                <div class="text-center lg:text-left order-2 lg:order-1">
-                    <!-- Availability Badge -->
-                    <div class="hero-badge inline-flex items-center gap-2 mb-6">
-                        <div class="w-2 h-2 bg-teal-400 rounded-full animate-pulse"></div>
-                        <span class="text-sm text-teal-300 font-medium" data-i18n="hero-available">
-                            Available for freelance work
-                        </span>
-                    </div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 text-center">
 
-                    <!-- Main Heading -->
-                    <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold mb-6 leading-tight glow-text">
-                        <span class="block" data-i18n="hero-title-1">Full Stack</span>
-                        <span class="gradient-text" data-i18n="hero-title-2">Developer</span>
-                        <span class="block text-xl sm:text-2xl text-[var(--text-muted)] mt-4 font-normal">
-                            <span class="text-teal-400 glow-text-secondary" data-i18n="hero-title-3">AI
-                                Enthusiast</span>
-                        </span>
-                    </h1>
-
-                    <!-- Dynamic Typewriter -->
-                    <div class="mb-8">
-                        <div class="text-lg text-[var(--text-muted)] mb-2" data-i18n="hero-builds">I build with</div>
-                        <div class="typewriter-container justify-center lg:justify-start">
-                            <span id="typewriter" class="border-r-2 border-teal-400 pr-1 animate-pulse">PHP</span>
-                        </div>
-                    </div>
-
-                    <!-- Description -->
-                    <p class="text-[var(--text-muted)] text-lg leading-relaxed mb-4 max-w-2xl mx-auto lg:mx-0">
-                        Professional in MongoDB, React, Express, Node.js, Git, Docker, PHP, TypeScript, Laravel, Python, and AI-driven development. MEXT scholar at the University of Kitakyushu with a research theme in traffic psychology and behavior. I will graduate in September 2026 and hold a student visa valid until 27 December 2026. Currently at JLPT N4 level in Japanese and aiming for N3 by July 2027.
-                    </p>
-                    <p class="text-[var(--text-muted)] text-lg leading-relaxed mb-8 max-w-2xl mx-auto lg:mx-0">
-                        MongoDB、React、Express、Node.js、Git、Docker、PHP、TypeScript、Laravel、Python、AI駆動型開発を専門としています。北九州市立大学のMEXT奨学生で、研究テーマは交通心理学と行動です。2026年9月に卒業予定で、学生ビザは2026年12月27日まで有効です。現在日本語はJLPT N4レベルで、2027年7月までにN3を目指しています。
-                    </p>
-
-                    <!-- CTA Buttons -->
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
-                        <a href="#portfolio"
-                            class="group relative overflow-hidden bg-gradient-to-r from-cyan-500 to-teal-500 !text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-[0_0_20px_rgba(20,184,166,0.4)] hover:shadow-[0_0_30px_rgba(6,182,212,0.6)] flex items-center justify-center gap-3 min-w-[12rem] z-10">
-                            <div
-                                class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-[-1]">
-                            </div>
-                            <span class="whitespace-nowrap" data-i18n="hero-cta-work">View My Work</span>
-                            <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
-                        </a>
-                        <a href="#contact"
-                            class="group glass text-[var(--text-main)] font-semibold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 hover:bg-[var(--bg-glass-hover)] border border-[var(--border-color)] flex items-center justify-center gap-3 min-w-[12rem]">
-                            <i
-                                class="fas fa-paper-plane text-cyan-500 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform"></i>
-                            <span class="whitespace-nowrap" data-i18n="hero-cta-contact">Get In Touch</span>
-                        </a>
-                        <a href="japan-kamran-cv.pdf" download
-                            class="group glass text-[var(--text-main)] font-semibold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 hover:bg-[var(--bg-glass-hover)] border border-[var(--border-color)] flex items-center justify-center gap-3 min-w-[12rem]">
-                            <i class="fas fa-download text-cyan-500"></i>
-                            <span class="whitespace-nowrap" data-i18n="hero-cta-resume">Download CV</span>
-                        </a>
-                    </div>
-
-                    <!-- Stats -->
-                    <div class="grid grid-cols-3 gap-4 max-w-md mx-auto lg:mx-0">
-                        <div class="text-center">
-                            <div class="text-2xl font-bold text-[var(--text-main)]">50+</div>
-                            <div class="text-sm text-[var(--text-muted)]" data-i18n="hero-projects">Projects</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-2xl font-bold text-[var(--text-main)]">3+</div>
-                            <div class="text-sm text-[var(--text-muted)]" data-i18n="hero-experience">Years Exp</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-2xl font-bold text-[var(--text-main)]">100%</div>
-                            <div class="text-sm text-[var(--text-muted)]" data-i18n="hero-satisfaction">Satisfaction
-                            </div>
-                        </div>
-                    </div>
+            <!-- Profile Photo Card -->
+            <div class="inline-block mb-10">
+                <div class="glass-strong p-2 sm:p-3 rounded-[1.5rem] shadow-2xl border border-white/40 inline-block">
+                    <img src="gallary/1.jpg" alt="Muhammad Kamran" class="w-36 h-36 sm:w-44 sm:h-44 md:w-48 md:h-48 rounded-[1.2rem] object-cover border-[2px] border-white/60 shadow-lg block" loading="eager">
                 </div>
+                <div class="relative -mt-5 mx-auto w-fit">
+                    <span class="inline-flex items-center gap-1.5 bg-[var(--bg-card)] border border-[var(--border-color)] px-3 py-1 rounded-full shadow-md text-xs font-bold text-[var(--primary)]">
+                        <i class="fas fa-check-circle text-[var(--secondary)]"></i> Available
+                    </span>
+                </div>
+            </div>
 
-                <!-- Right Visual -->
-                <div class="order-1 lg:order-2 flex justify-center lg:justify-end relative">
-                    <!-- Animated Background Element -->
-                    <div
-                        class="absolute -inset-6 bg-gradient-to-r from-teal-400/20 to-purple-500/20 rounded-3xl blur-3xl opacity-70 animate-pulse">
-                    </div>
+            <!-- Availability Badge - Top -->
+            <div class="inline-flex items-center gap-3 mb-8 bg-white/60 border border-white/50 px-5 py-2 rounded-full backdrop-blur-xl hover:border-[var(--primary)]/30 transition-all shadow-lg hover:scale-105 cursor-default">
+                <div class="relative flex h-3 w-3">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent)] opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-3 w-3 bg-[var(--accent)]"></span>
+                </div>
+                <span class="text-lg sm:text-xl font-bold text-[var(--text-main)]" style="font-family:'Dancing Script',cursive;letter-spacing:0.02em;" data-i18n="hero-available">Available for freelance work</span>
+            </div>
 
-                    <!-- Main Visual Container -->
-                    <div class="relative group creative-card">
-                        <!-- Floating Tech Icons -->
-                        <div
-                            class="tech-icon tech-icon-1 absolute hidden sm:flex -top-6 -right-6 w-16 h-16 glass rounded-2xl flex items-center justify-center text-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.3)] z-20">
-                            <i class="fab fa-php text-2xl"></i>
-                        </div>
-                        <div
-                            class="tech-icon tech-icon-2 absolute hidden sm:flex top-1/4 -right-10 w-14 h-14 glass rounded-2xl flex items-center justify-center text-yellow-400 shadow-[0_0_20px_rgba(250,204,21,0.3)] z-20">
-                            <i class="fab fa-js text-2xl"></i>
-                        </div>
-                        <div
-                            class="tech-icon tech-icon-3 absolute hidden sm:flex bottom-1/4 -left-10 w-14 h-14 glass rounded-2xl flex items-center justify-center text-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.3)] z-20">
-                            <i class="fab fa-react text-2xl"></i>
-                        </div>
-                        <div
-                            class="tech-icon tech-icon-4 absolute hidden sm:flex -bottom-6 right-6 w-16 h-16 glass rounded-2xl flex items-center justify-center text-red-500 shadow-[0_0_20px_rgba(239,44,44,0.3)] z-20">
-                            <i class="fab fa-laravel text-2xl"></i>
-                        </div>
-                        <div
-                            class="tech-icon tech-icon-5 absolute hidden sm:flex -top-6 left-1/4 w-12 h-12 glass rounded-2xl flex items-center justify-center text-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.3)] z-20">
-                            <i class="fab fa-python text-xl"></i>
-                        </div>
-                        <div
-                            class="tech-icon tech-icon-6 absolute hidden sm:flex -bottom-6 left-1/4 w-12 h-12 glass rounded-2xl flex items-center justify-center text-green-500 shadow-[0_0_20px_rgba(34,197,94,0.3)] z-20">
-                            <i class="fab fa-node-js text-xl"></i>
-                        </div>
+            <!-- Typewriter -->
+            <div class="text-2xl sm:text-3xl text-[var(--text-main)] font-semibold mb-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <span class="text-[var(--text-main)]" data-i18n="hero-builds">I build with</span>
+                <div class="glass-strong inline-block text-[var(--primary)] px-5 py-2 rounded-2xl border border-white/40 shadow-lg">
+                    <span id="typewriter" class="border-r-2 border-[var(--primary)] pr-1 animate-pulse">PHP</span>
+                </div>
+            </div>
 
-                        <!-- Main Content Box -->
-                        <div
-                            class="glass rounded-3xl p-6 sm:p-10 border border-[var(--border-color)] shadow-2xl transform group-hover:scale-105 transition-all duration-500 w-full max-w-xl">
-                            <div class="text-center">
-                                <!-- Profile Image -->
-                                <div
-                                    class="relative w-40 h-40 sm:w-56 sm:h-56 mx-auto mb-8 p-1 rounded-full group-hover:shadow-[0_0_40px_rgba(45,212,191,0.5)] transition-shadow duration-500">
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-r from-teal-400 via-cyan-500 to-purple-500 animate-[spin_4s_linear_infinite] rounded-full opacity-80 blur-sm">
-                                    </div>
-                                    <div class="absolute inset-1 bg-[var(--bg-card)] rounded-full z-0"></div>
-                                    <div
-                                        class="relative w-full h-full rounded-full overflow-hidden border-[3px] border-[var(--bg-card)] z-10">
-                                        <img src="./gallary/1.jpg" alt="Muhammad Kamran"
-                                            class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" />
-                                    </div>
-                                </div>
+            <!-- Description - Glass Card -->
+            <div class="max-w-3xl mx-auto p-8 sm:p-10 rounded-[2rem] mb-12 border border-white/40 glass-strong shadow-2xl relative overflow-hidden group">
+                <div class="absolute inset-0 bg-gradient-to-br from-[var(--primary)]/5 to-[var(--accent)]/5 group-hover:from-[var(--primary)]/10 group-hover:to-[var(--accent)]/10 transition-all"></div>
+                <div class="absolute -top-20 -right-20 w-40 h-40 bg-[var(--primary)]/10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-20 -left-20 w-40 h-40 bg-[var(--accent)]/10 rounded-full blur-3xl"></div>
+                <p class="text-[var(--text-main)] text-base sm:text-lg leading-relaxed font-medium relative z-10 text-center" data-i18n="hero-description">
+                    Professional in MongoDB, React, Express, Node.js, Git, Docker, PHP, TypeScript, Laravel, Python, and AI-driven development. MEXT scholar at the University of Kitakyushu with a research theme in traffic psychology and behavior. I will graduate in September 2026 and hold a student visa valid until 27 December 2026. Currently at JLPT N4 level in Japanese and aiming for N3 by July 2027.
+                </p>
+            </div>
 
-                                <style>
-                                    /* Profile Image Styles */
-                                    .profile-image-container {
-                                        position: relative;
-                                        overflow: hidden;
-                                    }
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-5 justify-center items-center mb-16">
+                <a href="#portfolio" class="group relative overflow-hidden bg-[var(--text-main)] text-white font-bold text-lg py-4 px-10 rounded-full transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl flex items-center justify-center gap-3 w-full sm:w-auto glow-pulse">
+                    <span class="whitespace-nowrap relative z-10" data-i18n="hero-cta-work">View My Work</span>
+                    <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform relative z-10"></i>
+                </a>
+                <a href="#contact" class="group glass-strong text-[var(--text-main)] font-bold text-lg py-4 px-10 rounded-full transition-all duration-300 transform hover:scale-105 border border-white/40 flex items-center justify-center gap-3 w-full sm:w-auto shadow-xl hover:shadow-2xl">
+                    <i class="fas fa-paper-plane text-[var(--primary)] group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform"></i>
+                    <span class="whitespace-nowrap" data-i18n="hero-cta-contact">Get In Touch</span>
+                </a>
+            </div>
 
-                                    .profile-image-container img {
-                                        transition: all 0.5s ease-in-out;
-                                        filter: grayscale(0.1) contrast(1.1);
-                                    }
-
-                                    /* .profile-image-container:hover img {
-                                        transform: scale(1.05);
-                                        filter: grayscale(0) contrast(1.2);
-                                    } */
-
-                                    /* Ensure image fits perfectly */
-                                    .object-cover {
-                                        object-fit: cover;
-                                    }
-
-                                    .object-center {
-                                        object-position: center center;
-                                    }
-                                </style>
-                                <h3 class="text-2xl font-bold text-[var(--text-main)] mb-3">Muhammad Kamran</h3>
-                                <p class="text-teal-400 font-semibold mb-6 text-lg" data-i18n="hero-title-2">Full Stack
-                                    Developer</p>
-
-                                <!-- Status -->
-                                <div
-                                    class="inline-flex items-center gap-2 bg-green-500/20 text-green-400 px-4 py-2 rounded-full text-sm border border-green-500/30">
-                                    <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                                    <span data-i18n="hero-available">Open to opportunities</span>
-                                </div>
-
-                                <!-- Additional Info -->
-                                <div class="mt-6 grid grid-cols-2 gap-4 text-sm">
-                                    <div class="text-center">
-                                        <div class="text-teal-400 font-semibold" data-i18n="education-masters-short">
-                                            Masters</div>
-                                        <div class="text-[var(--text-muted)]" data-i18n="location-japan">Japan</div>
-                                    </div>
-                                    <div class="text-center">
-                                        <div class="text-teal-400 font-semibold" data-i18n="research-ai">Research
-                                        </div>
-                                        <div class="text-[var(--text-muted)]" data-i18n="research-traffic">Traffic
-                                            Psychology</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Stats (Glass Bento Style) -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-3xl mx-auto">
+                <div class="p-7 rounded-3xl border border-white/40 glass-strong hover:border-[var(--primary)]/40 transition-all hover:-translate-y-2 shadow-xl group relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-[var(--primary)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="text-4xl sm:text-5xl font-black text-[var(--text-main)] mb-2 relative z-10">50+</div>
+                    <div class="text-sm font-bold tracking-widest text-[var(--text-main)] uppercase relative z-10" data-i18n="hero-projects">Projects</div>
+                </div>
+                <div class="p-7 rounded-3xl border border-white/40 glass-strong hover:border-[var(--accent)]/40 transition-all hover:-translate-y-2 shadow-xl group relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-[var(--accent)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="text-4xl sm:text-5xl font-black text-[var(--text-main)] mb-2 relative z-10">3+</div>
+                    <div class="text-sm font-bold tracking-widest text-[var(--text-main)] uppercase relative z-10" data-i18n="hero-experience">Years Exp</div>
+                </div>
+                <div class="p-7 rounded-3xl border border-white/40 glass-strong hover:border-[var(--secondary)]/40 transition-all hover:-translate-y-2 shadow-xl group relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-[var(--secondary)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="text-4xl sm:text-5xl font-black text-[var(--text-main)] mb-2 relative z-10">100%</div>
+                    <div class="text-sm font-bold tracking-widest text-[var(--text-main)] uppercase relative z-10" data-i18n="hero-satisfaction">Satisfaction</div>
                 </div>
             </div>
 
             <!-- Scroll Indicator -->
-            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-                <a href="#skills"
-                    class="flex flex-col items-center text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors duration-300 group">
-                    <span class="text-sm mb-2 group-hover:text-teal-400" data-i18n="hero-scroll">Explore More</span>
-                    <div class="animate-bounce">
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
+            <div class="absolute bottom-10 left-1/2" style="animation: scrollBounce 2s ease-in-out infinite;">
+                <a href="#skills" class="flex items-center justify-center w-12 h-12 rounded-full glass-strong border border-white/40 text-[var(--text-main)] hover:text-[var(--primary)] hover:border-[var(--primary)]/40 transition-all shadow-xl">
+                    <i class="fas fa-chevron-down text-sm"></i>
                 </a>
             </div>
         </div>
@@ -523,14 +284,14 @@
             <!-- Section Heading -->
             <div class="text-center mb-16 section-hidden">
                 <h2 class="text-4xl font-bold mb-4 glow-text" data-i18n="skills-title">Technical Expertise</h2>
-                <p class="text-[var(--text-muted)] max-w-2xl mx-auto" data-i18n="skills-subtitle">
+                <p class="text-[var(--text-main)] max-w-2xl mx-auto" data-i18n="skills-subtitle">
                     A comprehensive overview of my technical skills and proficiency levels in various technologies.
                 </p>
-                <div class="w-24 h-1 bg-gradient-to-r from-teal-500 to-cyan-500 mx-auto mt-6 rounded-full"></div>
+                <div class="w-24 h-1 bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] mx-auto mt-6 rounded-full"></div>
             </div>
 
             <!-- Skills Grid -->
-            <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
                 <!-- Python -->
                 <div class="skill-card group" data-skill="python">
                     <div class="skill-icon bg-blue-400/20 border-blue-400/30">
@@ -605,8 +366,8 @@
 
                 <!-- Express.js -->
                 <div class="skill-card group" data-skill="express">
-                    <div class="skill-icon bg-gray-600/20 border-gray-600/30">
-                        <i class="fas fa-server text-gray-500 text-xl"></i>
+                    <div class="skill-icon bg-gray-200/50 border-gray-300/50">
+                        <i class="fas fa-server text-[var(--text-main)] text-xl"></i>
                     </div>
                     <h3 class="skill-name">Express.js</h3>
                     <div class="skill-level">
@@ -617,8 +378,8 @@
 
                 <!-- Next.js -->
                 <div class="skill-card group" data-skill="nextjs">
-                    <div class="skill-icon bg-black/20 border-black/30">
-                        <i class="fas fa-code text-gray-300 text-xl"></i>
+                    <div class="skill-icon bg-gray-200/50 border-gray-300/50">
+                        <i class="fas fa-code text-[var(--text-main)] text-xl"></i>
                     </div>
                     <h3 class="skill-name">Next.js</h3>
                     <div class="skill-level">
@@ -737,8 +498,8 @@
 
                 <!-- GitHub -->
                 <div class="skill-card group" data-skill="github">
-                    <div class="skill-icon bg-gray-800/20 border-gray-800/30">
-                        <i class="fab fa-github text-gray-300 text-xl"></i>
+                    <div class="skill-icon bg-gray-200/50 border-gray-300/50">
+                        <i class="fab fa-github text-[var(--text-main)] text-xl"></i>
                     </div>
                     <h3 class="skill-name">GitHub</h3>
                     <div class="skill-level">
@@ -845,8 +606,8 @@
 
                 <!-- Antigravity -->
                 <div class="skill-card group" data-skill="antigravity">
-                    <div class="skill-icon bg-gray-500/20 border-gray-500/30">
-                        <i class="fas fa-magic text-gray-400 text-xl"></i>
+                    <div class="skill-icon bg-gray-200/50 border-gray-300/50">
+                        <i class="fas fa-magic text-[var(--text-main)] text-xl"></i>
                     </div>
                     <h3 class="skill-name">Antigravity</h3>
                     <div class="skill-level">
@@ -865,7 +626,7 @@
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold mb-4 gradient-text" data-i18n="education-title">Education & Experience
                 </h2>
-                <p class="text-xl text-[var(--text-muted)]" data-i18n="education-subtitle">My academic journey and
+                <p class="text-xl text-[var(--text-main)]" data-i18n="education-subtitle">My academic journey and
                     professional
                     path</p>
             </div>
@@ -874,7 +635,7 @@
             <div class="relative">
                 <!-- Timeline Line -->
                 <div
-                    class="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-teal-400 to-cyan-500 h-full hidden lg:block">
+                    class="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-[var(--primary)] to-[var(--secondary)] h-full hidden lg:block">
                 </div>
 
                 <!-- Timeline Items -->
@@ -1004,7 +765,7 @@
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold mb-4 gradient-text" data-i18n="certifications-title">My Certifications
                 </h2>
-                <p class="text-xl text-[var(--text-muted)]" data-i18n="certifications-subtitle">Validating my expertise
+                <p class="text-xl text-[var(--text-main)]" data-i18n="certifications-subtitle">Validating my expertise
                     and
                     continuous learning journey</p>
             </div>
@@ -1076,7 +837,7 @@
                             <span class="skill-tag">SEM</span>
                             <span class="skill-tag" data-i18n="tag-analytics">Analytics</span>
                         </div>
-                        <a href="https://mohakamran.github.io/portfolio/portfolio/google_digital_marketing.jpg"
+                        <a href="portfolio/google_digital_marketing.jpg"
                             target="_blank" class="certification-link group">
                             <span data-i18n="cert-view-credentials">View Credentials</span>
                             <i class="fas fa-external-link-alt group-hover:translate-x-1 transition-transform"></i>
@@ -1162,11 +923,11 @@
                     <h3 class="text-2xl font-bold text-[var(--text-main)] mb-4" data-i18n="cert-cta-title">Continuous
                         Learning
                         Journey</h3>
-                    <p class="text-[var(--text-muted)] mb-6" data-i18n="cert-cta-desc">I believe in lifelong learning
+                    <p class="text-[var(--text-main)] mb-6" data-i18n="cert-cta-desc">I believe in lifelong learning
                         and
                         constantly updating my skills with the latest technologies and methodologies.</p>
                     <a href="#contact"
-                        class="inline-flex items-center gap-2 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-[var(--text-main)] !text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105">
+                        class="inline-flex items-center gap-2 bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] hover:from-[#1e3a8a] hover:to-[#0f766e] text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105">
                         <i class="fas fa-rocket"></i>
                         <span data-i18n="cert-cta-button">Start a Project With Me</span>
                     </a>
@@ -1182,7 +943,7 @@
             <!-- Section Heading -->
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold mb-4 gradient-text" data-i18n="portfolio-title">My Portfolio</h2>
-                <p class="text-xl text-[var(--text-muted)]" data-i18n="portfolio-subtitle">Some of my projects in Web
+                <p class="text-xl text-[var(--text-main)]" data-i18n="portfolio-subtitle">Some of my projects in Web
                     Development &
                     Design</p>
             </div>
@@ -1196,27 +957,27 @@
                     <span data-i18n="filter-all">All Projects</span>
                 </button>
                 <button
-                    class="filter-btn px-5 py-2 rounded-full glass text-[var(--text-muted)] font-medium transition-all duration-300 hover:scale-105 hover:text-[var(--text-main)]"
+                    class="filter-btn px-5 py-2 rounded-full glass text-[var(--text-main)] font-medium transition-all duration-300 hover:scale-105 hover:text-[var(--text-main)]"
                     data-filter="wordpress">
                     <span data-i18n="filter-wordpress">WordPress</span>
                 </button>
                 <button
-                    class="filter-btn px-5 py-2 rounded-full glass text-[var(--text-muted)] font-medium transition-all duration-300 hover:scale-105 hover:text-[var(--text-main)]"
+                    class="filter-btn px-5 py-2 rounded-full glass text-[var(--text-main)] font-medium transition-all duration-300 hover:scale-105 hover:text-[var(--text-main)]"
                     data-filter="ecommerce">
                     <span data-i18n="filter-ecommerce">E-Commerce</span>
                 </button>
                 <button
-                    class="filter-btn px-5 py-2 rounded-full glass text-[var(--text-muted)] font-medium transition-all duration-300 hover:scale-105 hover:text-[var(--text-main)]"
+                    class="filter-btn px-5 py-2 rounded-full glass text-[var(--text-main)] font-medium transition-all duration-300 hover:scale-105 hover:text-[var(--text-main)]"
                     data-filter="ai">
                     <span data-i18n="filter-ai">AI & Data</span>
                 </button>
                 <button
-                    class="filter-btn px-5 py-2 rounded-full glass text-[var(--text-muted)] font-medium transition-all duration-300 hover:scale-105 hover:text-[var(--text-main)]"
+                    class="filter-btn px-5 py-2 rounded-full glass text-[var(--text-main)] font-medium transition-all duration-300 hover:scale-105 hover:text-[var(--text-main)]"
                     data-filter="web-app">
                     <span data-i18n="filter-web-app">Web Apps</span>
                 </button>
                 <button
-                    class="filter-btn px-5 py-2 rounded-full glass text-[var(--text-muted)] font-medium transition-all duration-300 hover:scale-105 hover:text-[var(--text-main)]"
+                    class="filter-btn px-5 py-2 rounded-full glass text-[var(--text-main)] font-medium transition-all duration-300 hover:scale-105 hover:text-[var(--text-main)]"
                     data-filter="other">
                     <span data-i18n="filter-other">Others</span>
                 </button>
@@ -2034,7 +1795,7 @@
             <!-- Section Heading -->
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold mb-4 gradient-text" data-i18n="services-title">My Services</h2>
-                <p class="text-xl text-[var(--text-muted)]" data-i18n="services-subtitle">Helping you build, optimize,
+                <p class="text-xl text-[var(--text-main)]" data-i18n="services-subtitle">Helping you build, optimize,
                     and scale
                     your online presence</p>
             </div>
@@ -2258,12 +2019,12 @@
                     <h3 class="text-2xl font-bold text-[var(--text-main)] mb-4" data-i18n="services-main-cta-title">
                         Ready to Start
                         Your Project?</h3>
-                    <p class="text-[var(--text-muted)] mb-6" data-i18n="services-main-cta-desc">Let's discuss your ideas
+                    <p class="text-[var(--text-main)] mb-6" data-i18n="services-main-cta-desc">Let's discuss your ideas
                         and create
                         something amazing together. I'm here to help bring your vision to life.</p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
                         <a href="#contact"
-                            class="bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-[var(--text-main)] !text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3">
+                            class="bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] hover:from-[#1e3a8a] hover:to-[#0f766e] text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3">
                             <i class="fas fa-paper-plane"></i>
                             <span data-i18n="services-cta-contact">Get In Touch</span>
                         </a>
@@ -2285,42 +2046,42 @@
             <!-- Section Heading -->
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold mb-4 gradient-text" data-i18n="pricing-title">Pricing Plans</h2>
-                <p class="text-xl text-[var(--text-muted)]" data-i18n="pricing-subtitle">Affordable packages tailored
+                <p class="text-xl text-[var(--text-main)]" data-i18n="pricing-subtitle">Affordable packages tailored
                     for your
                     needs with guaranteed support</p>
             </div>
 
             <!-- Pricing Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
                 <!-- Web Design -->
                 <div
-                    class="pricing-card bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 shadow-2xl hover:shadow-teal-500/20 hover:scale-105 transition-all duration-300 relative overflow-hidden border border-[var(--border-color)] group">
-                    <div class="absolute -top-3 -right-3 bg-gradient-to-r from-teal-400 to-cyan-500 text-[var(--text-main)] px-4 py-2 rounded-full text-sm font-bold transform rotate-12 shadow-lg z-10"
+                    class="pricing-card bg-[var(--bg-card)] rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:shadow-[var(--primary)]/10 hover:scale-[1.02] transition-all duration-300 relative overflow-hidden border border-[var(--border-color)] group">
+                    <div class="pricing-badge absolute -top-3 -right-3"
                         data-i18n="pricing-badge-best">
                         Best Deal
                     </div>
                     <div class="pricing-header text-center mb-8">
-                        <h3 class="text-2xl font-bold text-teal-400 mb-4" data-i18n="pricing-web-design">Web Design</h3>
-                        <div class="flex items-center justify-center gap-1 mb-2">
-                            <span class="text-teal-400 text-2xl font-bold">$</span>
-                            <span class="text-5xl font-extrabold text-[var(--text-main)]">600</span>
+                        <h3 class="pricing-title text-[var(--primary)] mb-4" data-i18n="pricing-web-design">Web Design</h3>
+                        <div class="pricing-price flex items-center justify-center gap-1 mb-2">
+                            <span class="text-[var(--primary)] text-2xl font-bold">$</span>
+                            <span>600</span><span>/project</span>
                         </div>
                     </div>
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
-                            <i class="fas fa-check text-green-400 text-lg"></i>
+                    <ul class="pricing-features space-y-4 mb-8">
+                        <li class="pricing-feature flex items-center space-x-3 text-[var(--text-main)]">
+                            <i class="fas fa-check text-[var(--secondary)] text-lg"></i>
                             <span data-i18n="pricing-feature-modern">Modern & Responsive UI</span>
                         </li>
-                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
-                            <i class="fas fa-check text-green-400 text-lg"></i>
+                        <li class="pricing-feature flex items-center space-x-3 text-[var(--text-main)]">
+                            <i class="fas fa-check text-[var(--secondary)] text-lg"></i>
                             <span data-i18n="pricing-feature-pages">Up to 5 Pages</span>
                         </li>
-                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
-                            <i class="fas fa-check text-green-400 text-lg"></i>
+                        <li class="pricing-feature flex items-center space-x-3 text-[var(--text-main)]">
+                            <i class="fas fa-check text-[var(--secondary)] text-lg"></i>
                             <span data-i18n="pricing-feature-support">30 Days Free Support</span>
                         </li>
-                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
-                            <i class="fas fa-check text-green-400 text-lg"></i>
+                        <li class="pricing-feature flex items-center space-x-3 text-[var(--text-main)]">
+                            <i class="fas fa-check text-[var(--secondary)] text-lg"></i>
                             <span data-i18n="pricing-feature-satisfaction">100% Satisfaction Guarantee</span>
                         </li>
                     </ul>
@@ -2329,30 +2090,29 @@
 
                 <!-- Web Development -->
                 <div
-                    class="pricing-card bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 shadow-2xl hover:shadow-blue-500/20 hover:scale-105 transition-all duration-300 relative overflow-hidden border border-[var(--border-color)] group">
+                    class="pricing-card bg-[var(--bg-card)] rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:shadow-[var(--primary)]/10 hover:scale-[1.02] transition-all duration-300 relative overflow-hidden border border-[var(--border-color)] group">
                     <div class="pricing-header text-center mb-8">
-                        <h3 class="text-2xl font-bold text-blue-400 mb-4" data-i18n="pricing-web-dev">Web Development
-                        </h3>
-                        <div class="flex items-center justify-center gap-1 mb-2">
-                            <span class="text-blue-400 text-2xl font-bold">$</span>
-                            <span class="text-5xl font-extrabold text-[var(--text-main)]">1200</span>
+                        <h3 class="pricing-title text-[var(--primary)] mb-4" data-i18n="pricing-web-dev">Web Development</h3>
+                        <div class="pricing-price flex items-center justify-center gap-1 mb-2">
+                            <span class="text-[var(--primary)] text-2xl font-bold">$</span>
+                            <span>1200</span><span>/project</span>
                         </div>
                     </div>
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
-                            <i class="fas fa-check text-green-400 text-lg"></i>
+                    <ul class="pricing-features space-y-4 mb-8">
+                        <li class="pricing-feature flex items-center space-x-3 text-[var(--text-main)]">
+                            <i class="fas fa-check text-[var(--secondary)] text-lg"></i>
                             <span data-i18n="pricing-feature-fullstack">Full Stack Development</span>
                         </li>
-                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
-                            <i class="fas fa-check text-green-400 text-lg"></i>
+                        <li class="pricing-feature flex items-center space-x-3 text-[var(--text-main)]">
+                            <i class="fas fa-check text-[var(--secondary)] text-lg"></i>
                             <span data-i18n="pricing-feature-custom">Custom Web Applications</span>
                         </li>
-                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
-                            <i class="fas fa-check text-green-400 text-lg"></i>
+                        <li class="pricing-feature flex items-center space-x-3 text-[var(--text-main)]">
+                            <i class="fas fa-check text-[var(--secondary)] text-lg"></i>
                             <span data-i18n="pricing-feature-support">30 Days Free Support</span>
                         </li>
-                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
-                            <i class="fas fa-check text-green-400 text-lg"></i>
+                        <li class="pricing-feature flex items-center space-x-3 text-[var(--text-main)]">
+                            <i class="fas fa-check text-[var(--secondary)] text-lg"></i>
                             <span data-i18n="pricing-feature-satisfaction">100% Satisfaction Guarantee</span>
                         </li>
                     </ul>
@@ -2361,30 +2121,29 @@
 
                 <!-- E-commerce Development -->
                 <div
-                    class="pricing-card bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 shadow-2xl hover:shadow-purple-500/20 hover:scale-105 transition-all duration-300 relative overflow-hidden border border-[var(--border-color)] group">
+                    class="pricing-card bg-[var(--bg-card)] rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:shadow-[var(--primary)]/10 hover:scale-[1.02] transition-all duration-300 relative overflow-hidden border border-[var(--border-color)] group">
                     <div class="pricing-header text-center mb-8">
-                        <h3 class="text-2xl font-bold text-purple-400 mb-4" data-i18n="pricing-ecommerce">E-commerce
-                            Development</h3>
-                        <div class="flex items-center justify-center gap-1 mb-2">
-                            <span class="text-purple-400 text-2xl font-bold">$</span>
-                            <span class="text-5xl font-extrabold text-[var(--text-main)]">1000</span>
+                        <h3 class="pricing-title text-[var(--primary)] mb-4" data-i18n="pricing-ecommerce">E-commerce Development</h3>
+                        <div class="pricing-price flex items-center justify-center gap-1 mb-2">
+                            <span class="text-[var(--primary)] text-2xl font-bold">$</span>
+                            <span>1000</span><span>/project</span>
                         </div>
                     </div>
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
-                            <i class="fas fa-check text-green-400 text-lg"></i>
+                    <ul class="pricing-features space-y-4 mb-8">
+                        <li class="pricing-feature flex items-center space-x-3 text-[var(--text-main)]">
+                            <i class="fas fa-check text-[var(--secondary)] text-lg"></i>
                             <span data-i18n="pricing-feature-platforms">Shopify, WooCommerce & WordPress Stores</span>
                         </li>
-                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
-                            <i class="fas fa-check text-green-400 text-lg"></i>
+                        <li class="pricing-feature flex items-center space-x-3 text-[var(--text-main)]">
+                            <i class="fas fa-check text-[var(--secondary)] text-lg"></i>
                             <span data-i18n="pricing-feature-responsive">Responsive Product Pages</span>
                         </li>
-                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
-                            <i class="fas fa-check text-green-400 text-lg"></i>
+                        <li class="pricing-feature flex items-center space-x-3 text-[var(--text-main)]">
+                            <i class="fas fa-check text-[var(--secondary)] text-lg"></i>
                             <span data-i18n="pricing-feature-payment">Payment Gateway Integration</span>
                         </li>
-                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
-                            <i class="fas fa-check text-green-400 text-lg"></i>
+                        <li class="pricing-feature flex items-center space-x-3 text-[var(--text-main)]">
+                            <i class="fas fa-check text-[var(--secondary)] text-lg"></i>
                             <span data-i18n="pricing-feature-support-guarantee">30 Days Free Support & Guarantee</span>
                         </li>
                     </ul>
@@ -2393,30 +2152,29 @@
 
                 <!-- Data Analysis & Other Services -->
                 <div
-                    class="pricing-card bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 shadow-2xl hover:shadow-orange-500/20 hover:scale-105 transition-all duration-300 relative overflow-hidden border border-[var(--border-color)] group">
+                    class="pricing-card bg-[var(--bg-card)] rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:shadow-[var(--primary)]/10 hover:scale-[1.02] transition-all duration-300 relative overflow-hidden border border-[var(--border-color)] group">
                     <div class="pricing-header text-center mb-8">
-                        <h3 class="text-2xl font-bold text-orange-400 mb-4" data-i18n="pricing-data-analysis">Data
-                            Analysis & Others</h3>
-                        <div class="flex items-center justify-center gap-1 mb-2">
-                            <span class="text-orange-400 text-2xl font-bold">$</span>
-                            <span class="text-5xl font-extrabold text-[var(--text-main)]">500</span>
+                        <h3 class="pricing-title text-[var(--primary)] mb-4" data-i18n="pricing-data-analysis">Data Analysis & Others</h3>
+                        <div class="pricing-price flex items-center justify-center gap-1 mb-2">
+                            <span class="text-[var(--primary)] text-2xl font-bold">$</span>
+                            <span>500</span><span>/project</span>
                         </div>
                     </div>
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
-                            <i class="fas fa-check text-green-400 text-lg"></i>
+                    <ul class="pricing-features space-y-4 mb-8">
+                        <li class="pricing-feature flex items-center space-x-3 text-[var(--text-main)]">
+                            <i class="fas fa-check text-[var(--secondary)] text-lg"></i>
                             <span data-i18n="pricing-feature-visualization">Data Visualization & Insights</span>
                         </li>
-                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
-                            <i class="fas fa-check text-green-400 text-lg"></i>
+                        <li class="pricing-feature flex items-center space-x-3 text-[var(--text-main)]">
+                            <i class="fas fa-check text-[var(--secondary)] text-lg"></i>
                             <span data-i18n="pricing-feature-python">Python, Pandas, Matplotlib, Seaborn</span>
                         </li>
-                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
-                            <i class="fas fa-check text-green-400 text-lg"></i>
+                        <li class="pricing-feature flex items-center space-x-3 text-[var(--text-main)]">
+                            <i class="fas fa-check text-[var(--secondary)] text-lg"></i>
                             <span data-i18n="pricing-feature-api">API Development</span>
                         </li>
-                        <li class="flex items-center space-x-3 text-[var(--text-muted)]">
-                            <i class="fas fa-check text-green-400 text-lg"></i>
+                        <li class="pricing-feature flex items-center space-x-3 text-[var(--text-main)]">
+                            <i class="fas fa-check text-[var(--secondary)] text-lg"></i>
                             <span data-i18n="pricing-feature-support">30 Days Free Support</span>
                         </li>
                     </ul>
@@ -2427,15 +2185,11 @@
             <!-- Additional Info -->
             <div class="text-center mt-16">
                 <div
-                    class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 border border-[var(--border-color)] shadow-2xl">
-                    <h3 class="text-2xl font-bold text-[var(--text-main)] mb-4" data-i18n="pricing-custom-title">Need a
-                        Custom
-                        Solution?</h3>
-                    <p class="text-[var(--text-muted)] mb-6 text-lg" data-i18n="pricing-custom-desc">Let's discuss your
-                        specific
-                        requirements and create a tailored package just for you.</p>
+                    class="bg-[var(--bg-card)] rounded-2xl p-8 border border-[var(--border-color)] shadow-xl">
+                    <h3 class="text-2xl font-bold text-[var(--text-main)] mb-4" data-i18n="pricing-custom-title">Need a Custom Solution?</h3>
+                    <p class="text-[var(--text-main)] mb-6 text-lg" data-i18n="pricing-custom-desc">Let's discuss your specific requirements and create a tailored package just for you.</p>
                     <a href="#contact"
-                        class="inline-flex items-center gap-3 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-[var(--text-main)] !text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-teal-500/25 text-lg">
+                        class="pricing-cta inline-flex items-center gap-3 font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 text-lg">
                         <i class="fas fa-comments"></i>
                         <span data-i18n="pricing-custom-cta">Discuss Your Project</span>
                     </a>
@@ -2469,28 +2223,28 @@
         }
 
         .pricing-card:nth-child(1)::before {
-            --gradient-color-1: #2dd4bf;
-            --gradient-color-2: #22d3ee;
+            --gradient-color-1: #1e40af;
+            --gradient-color-2: #3b82f6;
         }
 
         .pricing-card:nth-child(2)::before {
-            --gradient-color-1: #3b82f6;
-            --gradient-color-2: #06b6d4;
+            --gradient-color-1: #0d9488;
+            --gradient-color-2: #14b8a6;
         }
 
         .pricing-card:nth-child(3)::before {
-            --gradient-color-1: #8b5cf6;
-            --gradient-color-2: #ec4899;
+            --gradient-color-1: #7c3aed;
+            --gradient-color-2: #a855f7;
         }
 
         .pricing-card:nth-child(4)::before {
-            --gradient-color-1: #f59e0b;
-            --gradient-color-2: #ef4444;
+            --gradient-color-1: #f97316;
+            --gradient-color-2: #fb923c;
         }
 
         /* Glow effect on hover */
         .pricing-card:hover {
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(45, 212, 191, 0.1);
+            box-shadow: 0 20px 40px rgba(30, 64, 175, 0.08), 0 0 0 1px rgba(30, 64, 175, 0.06);
         }
 
         /* Mobile Responsive */
@@ -2549,7 +2303,7 @@
             <!-- Section Heading -->
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold mb-4 gradient-text">My Travel Gallery</h2>
-                <!-- <p class="text-xl text-[var(--text-muted)]">Moments captured from my travels and adventures in Japan</p> -->
+                <!-- <p class="text-xl text-[var(--text-main)]">Moments captured from my travels and adventures in Japan</p> -->
             </div>
 
             <!-- Swiper Slider Container -->
@@ -2672,18 +2426,18 @@
             </div>
 
             <!-- Lightbox Modal -->
-            <div id="lightbox" class="fixed inset-0 bg-black/95 z-50 hidden items-center justify-center p-4">
+            <div id="lightbox" class="fixed inset-0 bg-black/40 backdrop-blur-md z-50 hidden items-center justify-center p-4">
                 <div class="relative w-full max-w-4xl max-h-full">
                     <button id="close-lightbox"
-                        class="absolute -top-12 right-0 text-[var(--text-main)] text-2xl hover:text-teal-400 transition-colors z-10 bg-black/50 rounded-full w-10 h-10 flex items-center justify-center">
+                        class="absolute -top-12 right-0 text-[var(--text-main)] text-2xl transition-colors z-10 bg-white/90 backdrop-blur rounded-full w-10 h-10 flex items-center justify-center border border-[var(--border-color)] shadow-lg">
                         <i class="fas fa-times"></i>
                     </button>
                     <button id="prev-lightbox"
-                        class="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 text-[var(--text-main)] text-2xl hover:text-teal-400 transition-colors z-10 bg-black/50 rounded-full w-10 h-10 flex items-center justify-center">
+                        class="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 text-[var(--text-main)] text-2xl transition-colors z-10 bg-white/90 backdrop-blur rounded-full w-10 h-10 flex items-center justify-center border border-[var(--border-color)] shadow-lg">
                         <i class="fas fa-chevron-left"></i>
                     </button>
                     <button id="next-lightbox"
-                        class="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 text-[var(--text-main)] text-2xl hover:text-teal-400 transition-colors z-10 bg-black/50 rounded-full w-10 h-10 flex items-center justify-center">
+                        class="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 text-[var(--text-main)] text-2xl transition-colors z-10 bg-white/90 backdrop-blur rounded-full w-10 h-10 flex items-center justify-center border border-[var(--border-color)] shadow-lg">
                         <i class="fas fa-chevron-right"></i>
                     </button>
                     <div class="lightbox-content bg-[var(--bg-card)] rounded-lg overflow-hidden">
@@ -2696,10 +2450,10 @@
             <!-- <div class="text-center mt-12">
                 <div class="glass rounded-2xl p-6 sm:p-8 border border-[var(--border-color)]">
                     <h3 class="text-xl sm:text-2xl font-bold text-[var(--text-main)] mb-4">More Adventures Coming Soon!</h3>
-                    <p class="text-[var(--text-muted)] mb-6 text-sm sm:text-base">I'm constantly exploring new places and capturing
+                    <p class="text-[var(--text-main)] mb-6 text-sm sm:text-base">I'm constantly exploring new places and capturing
                         memories. Follow my journey for more updates!</p>
                     <a href="#contact"
-                        class="inline-flex items-center gap-3 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-[var(--text-main)] !text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base">
+                        class="inline-flex items-center gap-3 bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] hover:from-[#1e3a8a] hover:to-[#0f766e] text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base">
                         <i class="fas fa-camera"></i>
                         <span>Share Your Travel Stories</span>
                     </a>
@@ -2714,7 +2468,7 @@
             <!-- Section Heading -->
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold mb-4 gradient-text" data-i18n="contact-title">Let's Connect</h2>
-                <p class="text-xl text-[var(--text-muted)]" data-i18n="contact-subtitle">Get in touch and let's create
+                <p class="text-xl text-[var(--text-main)]" data-i18n="contact-subtitle">Get in touch and let's create
                     something
                     amazing together</p>
             </div>
@@ -2729,9 +2483,9 @@
                         </div>
                         <div class="contact-content">
                             <h3 class="contact-title" data-i18n="contact-email">Email Me</h3>
-                            <p class="contact-info">mohammadkamran1515@gmail.com</p>
-                            <a href="mailto:mohammadkamran1515@gmail.com" class="contact-link">
-                                <span data-i18n="contact-send-email">Send Email</span> <i
+                            <p class="contact-info" data-i18n="contact-email-desc">Ready to start a project? Let's talk!</p>
+                            <a href="#contact-form" class="contact-link">
+                                <span data-i18n="contact-send-email">Send a Message</span> <i
                                     class="fas fa-arrow-right"></i>
                             </a>
                         </div>
@@ -2856,64 +2610,81 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-[var(--bg-card)] border-t border-[var(--border-color)] py-12">
-        <div class="max-w-4xl mx-auto px-8 sm:px-12 lg:px-16">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <!-- Brand -->
-                <div class="md:col-span-2">
-                    <div class="flex items-center space-x-3 mb-4">
-                        <div
-                            class="w-8 h-8 bg-gradient-to-r from-teal-400 to-cyan-500 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-code text-[var(--text-main)] text-sm"></i>
-                        </div>
-                        <span class="text-[var(--text-main)] font-bold text-lg">Muhammad Kamran</span>
-                    </div>
-                    <p class="text-[var(--text-muted)] mb-4 leading-relaxed" data-i18n="footer-brand-desc">
-                        Full Stack Developer & AI Enthusiast crafting digital experiences with modern technologies.
-                        Based in Japan, creating innovative solutions worldwide.
+    <!-- Footer -->
+    <footer class="relative overflow-hidden pt-20 pb-10 mt-20 border-t border-[var(--border-color)] bg-gradient-to-b from-[var(--bg-card)] to-[#f5f5f4]">
+        <!-- Top gradient line -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[2px] bg-gradient-to-r from-transparent via-[var(--primary)] via-[var(--secondary)] via-[var(--accent)] to-transparent opacity-60"></div>
+
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+            <!-- Main Footer Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-14">
+                <!-- Brand Column -->
+                <div class="sm:col-span-2 lg:col-span-1">
+                    <a href="#home" class="text-3xl font-extrabold tracking-tighter gradient-text mb-4 inline-block">MK.</a>
+                    <p class="text-[var(--text-main)] text-sm leading-relaxed mb-6 max-w-xs" data-i18n="footer-brand-desc">
+                        Full Stack Developer & AI Enthusiast crafting digital experiences with modern technologies. Based in Japan, creating worldwide.
                     </p>
-                    <div class="flex space-x-4">
-                        <!-- <a href="cv-kamran-english.pdf" download class="footer-btn">
-                            <i class="fas fa-download mr-2"></i>
-                            <span data-i18n="footer-cv-en">CV English</span>
+                    <div class="flex gap-3">
+                        <a href="japan-kamran-cv.pdf" download class="group flex items-center justify-center w-10 h-10 rounded-xl bg-[var(--bg-glass-hover)] border border-[var(--border-color)] hover:border-[var(--primary)] hover:bg-[var(--primary)] transition-all hover:scale-110 shadow-sm">
+                            <i class="fas fa-file-download text-[var(--text-main)] group-hover:text-white text-sm transition-colors"></i>
                         </a>
-                        <a href="cv-kamran-japanese.pdf" download class="footer-btn">
-                            <i class="fas fa-download mr-2"></i>
-                            <span data-i18n="footer-cv-jp">CV 日本語</span>
-                        </a> -->
-                        <a href="japan-kamran-cv.pdf" download class="footer-btn">
-                            <i class="fas fa-download mr-2"></i>
-                            <span data-i18n="footer-cv-download">Download CV</span>
+                        <a href="https://github.com/mohakamran" target="_blank" class="group flex items-center justify-center w-10 h-10 rounded-xl bg-[var(--bg-glass-hover)] border border-[var(--border-color)] hover:border-[var(--primary)] hover:bg-[var(--primary)] transition-all hover:scale-110 shadow-sm">
+                            <i class="fab fa-github text-[var(--text-main)] group-hover:text-white text-sm transition-colors"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/mohkamran" target="_blank" class="group flex items-center justify-center w-10 h-10 rounded-xl bg-[var(--bg-glass-hover)] border border-[var(--border-color)] hover:border-[var(--primary)] hover:bg-[var(--primary)] transition-all hover:scale-110 shadow-sm">
+                            <i class="fab fa-linkedin-in text-[var(--text-main)] group-hover:text-white text-sm transition-colors"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- Quick Links -->
                 <div>
-                    <h3 class="text-[var(--text-main)] font-semibold mb-4" data-i18n="footer-quick-links">Quick Links
-                    </h3>
-                    <ul class="space-y-2">
-                        <li><a href="#home" class="footer-link" data-i18n="nav-home">Home</a></li>
-                        <li><a href="#skills" class="footer-link" data-i18n="nav-skills">Skills</a></li>
-                        <li><a href="#portfolio" class="footer-link" data-i18n="nav-portfolio">Portfolio</a></li>
-                        <li><a href="#services" class="footer-link" data-i18n="nav-services">Services</a></li>
-                        <li><a href="#contact" class="footer-link" data-i18n="nav-contact">Contact</a></li>
+                    <h4 class="text-sm font-bold uppercase tracking-widest text-[var(--text-main)] mb-5">Navigate</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-[var(--text-main)] hover:text-[var(--primary)] transition-colors text-sm font-medium" data-i18n="nav-home">Home</a></li>
+                        <li><a href="#skills" class="text-[var(--text-main)] hover:text-[var(--primary)] transition-colors text-sm font-medium" data-i18n="nav-skills">Skills</a></li>
+                        <li><a href="#portfolio" class="text-[var(--text-main)] hover:text-[var(--primary)] transition-colors text-sm font-medium" data-i18n="nav-portfolio">Portfolio</a></li>
+                        <li><a href="#services" class="text-[var(--text-main)] hover:text-[var(--primary)] transition-colors text-sm font-medium" data-i18n="nav-services">Services</a></li>
+                        <li><a href="#contact" class="text-[var(--text-main)] hover:text-[var(--primary)] transition-colors text-sm font-medium" data-i18n="nav-contact">Contact</a></li>
                     </ul>
                 </div>
 
                 <!-- Services -->
                 <div>
-                    <h3 class="text-[var(--text-main)] font-semibold mb-4" data-i18n="footer-services">Services</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#services" class="footer-link" data-i18n="service-dev">Web Development</a></li>
-                        <li><a href="#services" class="footer-link" data-i18n="service-design">UI/UX Design</a></li>
-                        <li><a href="#services" class="footer-link" data-i18n="service-ecommerce">E-commerce</a></li>
-                        <li><a href="#services" class="footer-link" data-i18n="service-wordpress">WordPress</a></li>
-                        <li><a href="#services" class="footer-link" data-i18n="service-ai">AI Solutions</a></li>
+                    <h4 class="text-sm font-bold uppercase tracking-widest text-[var(--text-main)] mb-5">Services</h4>
+                    <ul class="space-y-3">
+                        <li><span class="text-[var(--text-main)] text-sm font-medium">Web Development</span></li>
+                        <li><span class="text-[var(--text-main)] text-sm font-medium">UI/UX Design</span></li>
+                        <li><span class="text-[var(--text-main)] text-sm font-medium">AI Solutions</span></li>
+                        <li><span class="text-[var(--text-main)] text-sm font-medium">E-Commerce</span></li>
+                        <li><span class="text-[var(--text-main)] text-sm font-medium">Data Analysis</span></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="text-sm font-bold uppercase tracking-widest text-[var(--text-main)] mb-5">Contact</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-2 text-[var(--text-main)] text-sm font-medium">
+                            <i class="fas fa-envelope text-[var(--primary)] text-xs"></i>
+                            <span data-i18n="footer-email">Available via contact form</span>
+                        </li>
+                        <li class="flex items-center gap-2 text-[var(--text-main)] text-sm font-medium">
+                            <i class="fas fa-map-marker-alt text-[var(--primary)] text-xs"></i>
+                            <span>Kitakyushu, Japan</span>
+                        </li>
+                        <li class="flex items-center gap-2 text-[var(--text-main)] text-sm font-medium">
+                            <i class="fas fa-university text-[var(--primary)] text-xs"></i>
+                            <span>University of Kitakyushu</span>
+                        </li>
                     </ul>
                 </div>
             </div>
 
+            <!-- Bottom Bar -->
+            <div class="border-t border-[var(--border-color)] pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p class="text-xs text-[var(--text-main)] font-medium">&copy; 2026 Muhammad Kamran. All rights reserved.</p>
+                <p class="text-xs text-[var(--text-main)] font-medium">Built with passion, code & coffee.</p>
             </div>
         </div>
     </footer>
@@ -3117,6 +2888,7 @@
     <!-- External JavaScript -->
     <script src="js/index.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/modern.js"></script>
 </body>
 
 </html>

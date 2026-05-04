@@ -1,0 +1,84 @@
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Subtle Glow Cursor Logic
+    const glowCursor = document.createElement('div');
+    glowCursor.classList.add('glow-cursor');
+    document.body.appendChild(glowCursor);
+
+    document.addEventListener('mousemove', (e) => {
+        requestAnimationFrame(() => {
+            glowCursor.style.left = `${e.clientX}px`;
+            glowCursor.style.top = `${e.clientY}px`;
+        });
+    });
+
+    const interactives = document.querySelectorAll('a, button, .portfolio-card, .skill-card, .timeline-card, .certification-card');
+    interactives.forEach(el => {
+        el.addEventListener('mouseenter', () => glowCursor.style.opacity = '0.15');
+        el.addEventListener('mouseleave', () => glowCursor.style.opacity = '');
+    });
+
+    // 2. 3D Tilt & Glow Follow Effect for Cards
+    const cards = document.querySelectorAll('.portfolio-card, .skill-card, .timeline-card, .certification-card');
+    
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        });
+        // Removed heavy JS transform tilt to rely on CSS transform for smoother light mode performance
+    });
+
+    // 3. Eye Catchy Scroll Reveal Animations
+    // Add reveal class to all major sections and cards automatically
+    const animateElements = document.querySelectorAll('section > div > h2, section > div > p, .skill-card, .portfolio-item, .timeline-item, .creative-card, .glass-card');
+    animateElements.forEach((el, index) => {
+        el.classList.add('reveal-up');
+        // Add staggered delays for grid items
+        if (el.classList.contains('skill-card') || el.classList.contains('portfolio-item')) {
+            const delay = (index % 4) * 100;
+            if (delay > 0) el.classList.add(`delay-${delay}`);
+        }
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                revealObserver.unobserve(entry.target); // Only animate once
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    document.querySelectorAll('.reveal-up').forEach(el => {
+        revealObserver.observe(el);
+    });
+
+    // 4. Modern Mobile Menu Toggle
+    const menuBtn = document.getElementById('menu-toggle');
+    const mobMenu = document.getElementById('mobile-menu');
+    if (menuBtn && mobMenu) {
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (mobMenu.classList.contains('opacity-0')) {
+                mobMenu.classList.remove('hidden');
+                setTimeout(() => {
+                    mobMenu.classList.remove('opacity-0');
+                    mobMenu.classList.add('opacity-100');
+                }, 10);
+            } else {
+                mobMenu.classList.remove('opacity-100');
+                mobMenu.classList.add('opacity-0');
+                setTimeout(() => {
+                    mobMenu.classList.add('hidden');
+                }, 300);
+            }
+        });
+    }
+});

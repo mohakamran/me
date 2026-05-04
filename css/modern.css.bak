@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
+
+html {
+  scroll-behavior: smooth !important;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+  background-color: var(--bg-main) !important;
+  color: var(--text-main) !important;
+}
+
+/* Hide old Bubbles completely */
+.particles {
+  display: none !important;
+}
+
+/* New Sleek Light Mode Mesh Background */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  pointer-events: none;
+  background: 
+    radial-gradient(circle at 15% 50%, rgba(79, 70, 229, 0.04), transparent 30%),
+    radial-gradient(circle at 85% 30%, rgba(244, 63, 94, 0.04), transparent 30%);
+}
+
+/* Sleek Glowing Dot Cursor - Light Mode Adjusted */
+.glow-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, var(--primary) 0%, transparent 60%);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  opacity: 0.08;
+  transition: opacity 0.3s;
+  mix-blend-mode: multiply;
+}
+
+/* Clean Bento Box / Glassmorphism on Light Mode */
+.portfolio-card, .skill-card, .timeline-card, .certification-card {
+  background: var(--bg-card) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 20px !important;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02) !important;
+}
+
+.portfolio-card:hover, .skill-card:hover, .timeline-card:hover, .certification-card:hover {
+  border-color: var(--border-hover) !important;
+  box-shadow: 0 20px 40px -10px rgba(79, 70, 229, 0.1) !important;
+  transform: translateY(-4px) scale(1.01) !important;
+}
+
+/* Add Glow Follow Effect container */
+.portfolio-card::after, .skill-card::after, .timeline-card::after, .certification-card::after {
+  content: '';
+  position: absolute;
+  top: var(--mouse-y, 50%);
+  left: var(--mouse-x, 50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(0,0,0,0.03) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.portfolio-card:hover::after, .skill-card:hover::after, .timeline-card:hover::after, .certification-card:hover::after {
+  opacity: 1;
+}
+
+/* Ensure content is above glow */
+.portfolio-card *, .skill-card *, .timeline-card *, .certification-card * {
+  z-index: 2;
+  position: relative;
+}
+
+/* Portfolio Grid - Bento Box Layout tweaks */
+#portfolio-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+  gap: 1.5rem !important;
+}
+
+@media (min-width: 1024px) {
+  .portfolio-item:nth-child(1),
+  .portfolio-item:nth-child(4),
+  .portfolio-item:nth-child(7) {
+    grid-column: span 2 !important;
+  }
+}
+
+/* Vertical Timeline */
+.timeline-card {
+  border-left: 3px solid var(--primary) !important;
+}
+
+/* Eye Catchy Reveal Animations */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.reveal-up.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays for multiple items */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }

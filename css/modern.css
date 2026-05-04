@@ -1,0 +1,321 @@
+/* ===== MODERN ENHANCEMENTS ===== */
+
+/* Header scrolled state */
+#modern-header.header-scrolled > div:first-child {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    background: rgba(255,255,255,0.95) !important;
+}
+
+/* Particles canvas */
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+#particles-js canvas {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Floating animation for hero elements */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+.float-animation {
+    animation: float 4s ease-in-out infinite;
+}
+.float-animation-delay {
+    animation: float 4s ease-in-out infinite;
+    animation-delay: -1.5s;
+}
+
+/* Glow pulse for interactive elements */
+@keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(30, 64, 175, 0.1); }
+    50% { box-shadow: 0 0 30px rgba(30, 64, 175, 0.2); }
+}
+.glow-pulse {
+    animation: glowPulse 3s ease-in-out infinite;
+}
+
+/* Shimmer sweep effect for cards */
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+.card-shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    background-size: 200% 100%;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    border-radius: inherit;
+}
+.card-shimmer:hover::after {
+    opacity: 1;
+    animation: shimmer 1.5s ease-in-out;
+}
+
+/* Scroll indicator glow */
+@keyframes scrollBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* Image hover zoom in cards */
+.portfolio-image img,
+.gallery-image img {
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Card entrance stagger helper */
+[data-stagger] > * {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+}
+
+[data-stagger].visible > *:nth-child(1) { transition-delay: 0.05s; }
+[data-stagger].visible > *:nth-child(2) { transition-delay: 0.1s; }
+[data-stagger].visible > *:nth-child(3) { transition-delay: 0.15s; }
+[data-stagger].visible > *:nth-child(4) { transition-delay: 0.2s; }
+[data-stagger].visible > *:nth-child(5) { transition-delay: 0.25s; }
+[data-stagger].visible > *:nth-child(6) { transition-delay: 0.3s; }
+[data-stagger].visible > *:nth-child(7) { transition-delay: 0.35s; }
+[data-stagger].visible > *:nth-child(8) { transition-delay: 0.4s; }
+[data-stagger].visible > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hero section enhanced */
+#home h1 {
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+}
+
+#home h1 span {
+    position: relative;
+    display: inline-block;
+}
+
+/* Smooth stat cards */
+.stat-card {
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+}
+
+/* Service CTA button */
+.service-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: #fff;
+    font-weight: 600;
+    padding: 0.875rem 1.5rem;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: auto;
+    text-decoration: none;
+    font-family: 'Space Grotesk', sans-serif;
+    box-shadow: 0 4px 16px rgba(30, 64, 175, 0.2);
+}
+
+.service-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(30, 64, 175, 0.3);
+}
+
+/* Section headings accent line */
+.section-heading {
+    position: relative;
+    display: inline-block;
+}
+
+.section-heading::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 48px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    border-radius: 3px;
+}
+
+/* Swiper custom styles */
+.swiper-pagination-bullet {
+    background: var(--text-light) !important;
+    opacity: 0.5 !important;
+    transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+    background: var(--primary) !important;
+    opacity: 1 !important;
+    width: 24px !important;
+    border-radius: 4px !important;
+}
+
+/* Portfolio hover overlay text */
+.portfolio-overlay-text {
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.875rem;
+    letter-spacing: 0.02em;
+}
+
+/* Lightbox navigation */
+.lightbox-nav {
+    transition: all 0.3s ease;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    color: var(--text-main);
+}
+
+.lightbox-nav:hover {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+    transform: scale(1.05);
+}
+
+/* Close lightbox */
+#close-lightbox {
+    transition: all 0.3s ease;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+}
+
+#close-lightbox:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    transform: rotate(90deg);
+}
+
+/* Form success/error messages */
+#form-success {
+    background: rgba(13, 148, 136, 0.08);
+    border: 1px solid rgba(13, 148, 136, 0.2);
+    color: #0d9488;
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+#form-error {
+    background: rgba(249, 115, 22, 0.08);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    color: #ea580c;
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+/* Pricing dark card override for light theme */
+.pricing-card .bg-gradient-to-r {
+    background: none !important;
+}
+
+/* Swiper slide cards */
+.swiper-slide .gallery-card {
+    margin: 0 8px;
+}
+
+/* Swiper navigation */
+.swiper-button-next,
+.swiper-button-prev {
+    color: var(--primary) !important;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(8px);
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    background: var(--primary);
+    color: #fff !important;
+    border-color: var(--primary);
+    transform: scale(1.08);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 1rem !important;
+    font-weight: 700;
+}
+
+/* Footer background override */
+footer {
+    background: linear-gradient(180deg, var(--bg-main), #f5f5f4) !important;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Text selection color */
+::selection {
+    background: rgba(30, 64, 175, 0.15);
+    color: var(--primary);
+}
+
+/* Focus visible for accessibility */
+:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Mobile menu open animation */
+#mobile-menu:not(.hidden) {
+    animation: menuSlideDown 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes menuSlideDown {
+    from { opacity: 0; transform: translateY(-10px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Extra small screen fixes */
+@media (max-width: 380px) {
+    #home h1 { font-size: 2.25rem !important; }
+    .skill-icon { width: 2rem; height: 2rem; }
+    .skill-name { font-size: 0.7rem; }
+}

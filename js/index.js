@@ -7,26 +7,61 @@ document.addEventListener('DOMContentLoaded', function () {
     const mobileMenu = document.getElementById('mobile-menu');
 
     if (menuToggle && mobileMenu) {
-        menuToggle.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            const icon = menuToggle.querySelector('i');
-            if (icon.classList.contains('fa-bars')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
+        function toggleMobileMenu(show) {
+            if (show) {
+                mobileMenu.classList.remove('hidden');
+                requestAnimationFrame(() => {
+                    mobileMenu.classList.remove('opacity-0');
+                    mobileMenu.classList.add('opacity-100');
+                });
             } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+                mobileMenu.classList.remove('opacity-100');
+                mobileMenu.classList.add('opacity-0');
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        menuToggle.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            toggleMobileMenu(isHidden);
+            const icon = menuToggle.querySelector('i');
+            if (icon) {
+                if (isHidden) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
             }
         });
 
         // Close mobile menu when clicking on links
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
+        document.querySelectorAll('#mobile-menu a, #mobile-menu button').forEach(el => {
+            el.addEventListener('click', () => {
+                toggleMobileMenu(false);
                 const icon = menuToggle.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
             });
+        });
+
+        // Close on outside click
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.classList.contains('hidden') &&
+                !mobileMenu.contains(e.target) &&
+                !menuToggle.contains(e.target)) {
+                toggleMobileMenu(false);
+                const icon = menuToggle.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            }
         });
     }
 
@@ -50,23 +85,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Update desktop nav links
         navLinks.forEach(link => {
-            link.classList.remove('active', 'text-white');
-            link.classList.add('text-gray-300');
+            link.classList.remove('active', 'text-[#1e40af]');
+            link.classList.add('text-gray-500');
 
             if (link.getAttribute('href') === `#${current}`) {
-                link.classList.add('active', 'text-white');
-                link.classList.remove('text-gray-300');
+                link.classList.add('active', 'text-[#1e40af]');
+                link.classList.remove('text-gray-500');
             }
         });
 
         // Update mobile nav links
         mobileNavLinks.forEach(link => {
-            link.classList.remove('active', 'text-white', 'bg-teal-500/20');
-            link.classList.add('text-gray-300');
+            link.classList.remove('active', 'text-[#1e40af]', 'bg-blue-50');
+            link.classList.add('text-gray-500');
 
             if (link.getAttribute('href') === `#${current}`) {
-                link.classList.add('active', 'text-white', 'bg-teal-500/20');
-                link.classList.remove('text-gray-300');
+                link.classList.add('active', 'text-[#1e40af]', 'bg-blue-50');
+                link.classList.remove('text-gray-500');
             }
         });
     }
@@ -103,7 +138,7 @@ window.addEventListener('load', function () {
 function createParticles() {
     const container = document.getElementById('particles-container');
     const particleCount = 12;
-    const colors = ['#0ea5e9', '#14b8a6', '#a855f7', '#ec4899'];
+    const colors = ['#1e40af', '#0d9488', '#7c3aed', '#f97316'];
 
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
@@ -291,11 +326,11 @@ function initPortfolioFilter() {
         btn.addEventListener('click', () => {
             // Remove active class from all buttons
             filterButtons.forEach(b => b.classList.remove('active', 'text-white'));
-            filterButtons.forEach(b => b.classList.add('text-gray-300'));
+            filterButtons.forEach(b => b.classList.add('text-gray-500'));
 
             // Add active class to clicked button
             btn.classList.add('active', 'text-white');
-            btn.classList.remove('text-gray-300');
+            btn.classList.remove('text-gray-500');
 
             const filter = btn.getAttribute('data-filter');
 
@@ -352,12 +387,12 @@ function initPortfolioFilter() {
             // Remove active class from all buttons
             filterButtons.forEach(b => {
                 b.classList.remove('active', 'text-white');
-                b.classList.add('text-gray-300');
+                b.classList.add('text-gray-500');
             });
 
             // Add active class to clicked button
             btn.classList.add('active', 'text-white');
-            btn.classList.remove('text-gray-300');
+            btn.classList.remove('text-gray-500');
 
             const filter = btn.getAttribute('data-filter');
 
@@ -521,11 +556,11 @@ function initProgressLine() {
 
         // Add direction-based effects
         if (isScrollingDown) {
-            progressLine.style.background = 'linear-gradient(90deg, #2dd4bf 0%, #22d3ee 50%, #8b5cf6 100%)';
-            progressLine.style.boxShadow = '0 0 15px rgba(45, 212, 191, 0.5)';
+            progressLine.style.background = 'linear-gradient(90deg, #1e40af 0%, #0d9488 50%, #f97316 100%)';
+            progressLine.style.boxShadow = '0 0 15px rgba(30, 64, 175, 0.25)';
         } else {
-            progressLine.style.background = 'linear-gradient(90deg, #8b5cf6 0%, #22d3ee 50%, #2dd4bf 100%)';
-            progressLine.style.boxShadow = '0 0 15px rgba(139, 92, 246, 0.5)';
+            progressLine.style.background = 'linear-gradient(90deg, #f97316 0%, #0d9488 50%, #1e40af 100%)';
+            progressLine.style.boxShadow = '0 0 15px rgba(249, 115, 22, 0.25)';
         }
 
         // Add glow effect when actively scrolling
@@ -649,11 +684,11 @@ function initGalleryFilter() {
         btn.addEventListener('click', () => {
             // Remove active class from all buttons
             filterButtons.forEach(b => b.classList.remove('active', 'text-white'));
-            filterButtons.forEach(b => b.classList.add('text-gray-300'));
+            filterButtons.forEach(b => b.classList.add('text-gray-500'));
 
             // Add active class to clicked button
             btn.classList.add('active', 'text-white');
-            btn.classList.remove('text-gray-300');
+            btn.classList.remove('text-gray-500');
 
             const filter = btn.getAttribute('data-filter');
 
@@ -946,7 +981,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const languageManager = new LanguageManager();
 
     // Initialize core functionality
-    createParticles();
     typeEffect();
     checkScroll();
     initSmoothScrolling();
@@ -1568,19 +1602,19 @@ class LanguageManager {
             if (btn) {
                 // Remove all possible active styles
                 btn.classList.remove(
-                    'bg-gradient-to-r', 'from-teal-500', 'to-cyan-500',
-                    'text-white', 'border-teal-500/30',
-                    'bg-teal-500', 'bg-cyan-500', 'bg-gray-800', 'text-gray-300', 'border-gray-600',
+                    'bg-gradient-to-r', 'from-[#1e40af]', 'to-[#3b82f6]',
+                    'text-white', 'border-blue-500/30',
+                    'bg-blue-600', 'bg-blue-500', 'bg-white', 'text-gray-500', 'border-gray-200',
                     'glass'
                 );
 
                 // Add base styles
                 if (btn === enBtnMobile || btn === jpBtnMobile) {
                     // Mobile buttons - default to glass style
-                    btn.classList.add('glass', 'text-gray-300');
+                    btn.classList.add('glass', 'text-gray-500');
                 } else {
-                    // Desktop buttons - default to dark style
-                    btn.classList.add('bg-gray-800', 'text-gray-300', 'border-gray-600');
+                    // Desktop buttons - default to light style
+                    btn.classList.add('bg-white', 'text-gray-500', 'border-gray-200');
                 }
             }
         });
@@ -1589,22 +1623,22 @@ class LanguageManager {
         if (lang === 'en') {
             // Activate English buttons
             if (enBtn) {
-                enBtn.classList.remove('bg-gray-800', 'text-gray-300', 'border-gray-600');
-                enBtn.classList.add('bg-gradient-to-r', 'from-teal-500', 'to-cyan-500', 'text-white', 'border-teal-500/30');
+                enBtn.classList.remove('bg-white', 'text-gray-500', 'border-gray-200');
+                enBtn.classList.add('bg-gradient-to-r', 'from-[#1e40af]', 'to-[#3b82f6]', 'text-white', 'border-blue-500/30');
             }
             if (enBtnMobile) {
-                enBtnMobile.classList.remove('glass', 'text-gray-300');
-                enBtnMobile.classList.add('bg-gradient-to-r', 'from-teal-500', 'to-cyan-500', 'text-white');
+                enBtnMobile.classList.remove('glass', 'text-gray-500');
+                enBtnMobile.classList.add('bg-gradient-to-r', 'from-[#1e40af]', 'to-[#3b82f6]', 'text-white');
             }
         } else {
             // Activate Japanese buttons  
             if (jpBtn) {
-                jpBtn.classList.remove('bg-gray-800', 'text-gray-300', 'border-gray-600');
-                jpBtn.classList.add('bg-gradient-to-r', 'from-teal-500', 'to-cyan-500', 'text-white', 'border-teal-500/30');
+                jpBtn.classList.remove('bg-white', 'text-gray-500', 'border-gray-200');
+                jpBtn.classList.add('bg-gradient-to-r', 'from-[#1e40af]', 'to-[#3b82f6]', 'text-white', 'border-blue-500/30');
             }
             if (jpBtnMobile) {
-                jpBtnMobile.classList.remove('glass', 'text-gray-300');
-                jpBtnMobile.classList.add('bg-gradient-to-r', 'from-teal-500', 'to-cyan-500', 'text-white');
+                jpBtnMobile.classList.remove('glass', 'text-gray-500');
+                jpBtnMobile.classList.add('bg-gradient-to-r', 'from-[#1e40af]', 'to-[#3b82f6]', 'text-white');
             }
         }
 
