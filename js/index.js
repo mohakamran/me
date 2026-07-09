@@ -85,22 +85,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Update desktop nav links
         navLinks.forEach(link => {
-            link.classList.remove('active', 'text-[#1e40af]');
+            link.classList.remove('active', 'text-orange-500');
             link.classList.add('text-gray-500');
 
             if (link.getAttribute('href') === `#${current}`) {
-                link.classList.add('active', 'text-[#1e40af]');
+                link.classList.add('active', 'text-orange-500');
                 link.classList.remove('text-gray-500');
             }
         });
 
         // Update mobile nav links
         mobileNavLinks.forEach(link => {
-            link.classList.remove('active', 'text-[#1e40af]', 'bg-blue-50');
+            link.classList.remove('active', 'text-orange-500', 'bg-orange-50');
             link.classList.add('text-gray-500');
 
             if (link.getAttribute('href') === `#${current}`) {
-                link.classList.add('active', 'text-[#1e40af]', 'bg-blue-50');
+                link.classList.add('active', 'text-orange-500');
                 link.classList.remove('text-gray-500');
             }
         });
@@ -176,6 +176,51 @@ function applyTheme(theme) {
     document.documentElement.dataset.theme = theme;
     localStorage.setItem('theme', theme);
     updateThemeIcons(theme);
+    applyCardTheme(theme);
+    document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme } }));
+}
+
+function applyCardTheme(theme) {
+    const isLight = theme !== 'dark';
+    // All section card panels that carry hardcoded dark Tailwind bg classes
+    const cardSelectors = [
+        '#about .rounded-3xl', '#about .rounded-2xl',
+        '#journey .rounded-3xl',
+        '#skills .shimmer-panel',
+        '#experience .timeline-card', '#experience .rounded-3xl', '#experience .rounded-2xl',
+        '#services .rounded-3xl', '#services .rounded-2xl',
+        '#featured-projects .rounded-3xl', '#featured-projects .rounded-2xl',
+        '#certifications .rounded-3xl', '#certifications .rounded-2xl',
+        '#contact .rounded-3xl', '#contact .rounded-2xl',
+        '#gallery .rounded-3xl', '#gallery .rounded-2xl',
+        '#portfolio .rounded-3xl',
+        '#ai-research .rounded-3xl',
+        '#mobile-menu',
+        '.float-badge-1 > div', '.float-badge-2 > div', '.float-badge-3 > div'
+    ];
+    cardSelectors.forEach(sel => {
+        document.querySelectorAll(sel).forEach(el => {
+            if (isLight) {
+                el.style.setProperty('background-color', 'var(--bg-surface)', 'important');
+                el.style.setProperty('border-color', 'var(--border-color)', 'important');
+            } else {
+                el.style.removeProperty('background-color');
+                el.style.removeProperty('border-color');
+            }
+        });
+    });
+    // Text colors inside cards
+    const textSelectors = ['section .text-white', 'footer .text-white'];
+    textSelectors.forEach(sel => {
+        document.querySelectorAll(sel).forEach(el => {
+            if (el.closest('.gradient-text') || el.classList.contains('gradient-text')) return;
+            if (isLight) {
+                el.style.setProperty('color', 'var(--text-main)', 'important');
+            } else {
+                el.style.removeProperty('color');
+            }
+        });
+    });
 }
 
 function initThemeToggle() {
@@ -588,11 +633,11 @@ function initProgressLine() {
 
         // Add direction-based effects
         if (isScrollingDown) {
-            progressLine.style.background = 'linear-gradient(90deg, #1e40af 0%, #0d9488 50%, #f97316 100%)';
-            progressLine.style.boxShadow = '0 0 15px rgba(30, 64, 175, 0.25)';
+            progressLine.style.background = 'linear-gradient(90deg, #f97316 0%, #d97706 50%, #fbbf24 100%)';
+            progressLine.style.boxShadow = '0 0 15px rgba(249, 115, 22, 0.35)';
         } else {
-            progressLine.style.background = 'linear-gradient(90deg, #f97316 0%, #0d9488 50%, #1e40af 100%)';
-            progressLine.style.boxShadow = '0 0 15px rgba(249, 115, 22, 0.25)';
+            progressLine.style.background = 'linear-gradient(90deg, #fbbf24 0%, #f59e0b 50%, #f97316 100%)';
+            progressLine.style.boxShadow = '0 0 15px rgba(249, 115, 22, 0.35)';
         }
 
         // Add glow effect when actively scrolling
@@ -1010,10 +1055,12 @@ function initPricingAnimation() {
 // ===== INITIALIZE ALL FUNCTIONALITY =====
 // ===== INITIALIZE ALL FUNCTIONALITY =====
 document.addEventListener('DOMContentLoaded', function () {
-    const languageManager = new LanguageManager();
+    // LanguageManager is initialized in the block below — do not re-create it here
 
     // Initialize theme and core functionality
     initThemeToggle();
+    // Apply card theming after layout settles so all cards are in DOM
+    requestAnimationFrame(() => applyCardTheme(document.documentElement.dataset.theme || 'dark'));
     typeEffect();
     checkScroll();
     initSmoothScrolling();
@@ -1094,7 +1141,9 @@ class LanguageManager {
                 'pricing-custom-cta': 'Discuss Your Project',
                 // Navigation
                 'nav-home': 'Home',
+                'nav-about': 'About',
                 'nav-skills': 'Skills',
+                'nav-journey': 'Journey',
                 'nav-education': 'Education',
                 'nav-certifications': 'Certifications',
                 'nav-portfolio': 'Portfolio',
@@ -1102,34 +1151,135 @@ class LanguageManager {
                 'nav-gallery': 'Gallery',
                 'nav-contact': 'Contact',
 
+                // Section headings with gradient spans (uses innerHTML)
+                'about-title': 'About <span class="gradient-text">Me</span>',
+                'journey-title': 'My Academic & <span class="gradient-text">Career Journey</span>',
+                'experience-title': 'Work <span class="gradient-text">Experience</span>',
+                'featured-title': 'Featured <span class="gradient-text">Solutions</span>',
+
+                // Experience — Freelance role
+                'experience-freelance': 'Freelance Full Stack Architect',
+                'experience-freelance-company': 'Independent Consulting',
+                'experience-freelance-date': 'August 2024 – Present',
+                'experience-freelance-desc': 'Formulating tailored, robust web architectures and cloud microservices for modern international startups and research labs.',
+                'experience-freelance-li1': 'Design elegant Next.js, React, and Tailwind structures linked to cloud database engines.',
+                'experience-freelance-li2': 'Automate data pipelines, customer dashboards, and AI integrations (Cursor, OpenAI, Claude).',
+                'experience-freelance-li3': 'Develop SEO blueprints to optimize storefront index ratings across major search frameworks.',
+
+                // Services — AI Powered Apps (new)
+                'service-ai-apps': 'AI Powered Apps',
+                'service-ai-apps-desc': 'Build intelligent applications using LangChain, FastAPI, Hugging Face models, Vector DBs, and RAG pipelines.',
+                'service-ai-apps-f1': 'LangChain & RAG Pipelines',
+                'service-ai-apps-f2': 'FastAPI & Vector DBs',
+
                 // Hero Section
-                'hero-available': 'Available for freelance work',
+                'hero-available': 'Open to International Opportunities',
+                'hero-senior-level': 'Senior Level',
+                'hero-tag-scholar': 'MEXT Scholar',
+                'hero-tag-projects': '50+ Projects Shipped',
+                'hero-tag-ai': 'AI-Driven Dev',
+                'hero-tag-location': 'Fukuoka, Japan',
                 'hero-title-1': 'Full-stack',
                 'hero-title-2': 'Web Engineer',
                 'hero-title-3': 'MEXT Scholar',
                 'hero-builds': 'I build with',
-                'hero-description': 'Full-stack Web Engineer | MEXT Scholar | M.Sc. Candidate with 3+ years of industry experience specializing in the MERN stack, TypeScript, and PHP (Laravel). I build scalable, production-ready systems and leverage AI-driven development workflows with Claude Code and Cursor to improve team efficiency. Currently pursuing an M.Sc. in Applied Information Systems in Japan, I hold a valid student visa through December 27, 2026, and possess conversational Japanese proficiency (JLPT N4, N3 candidate for Dec 2026).',
-                'hero-cta-work': 'View My Work',
+                'hero-description': 'Senior Full-Stack Engineer & MEXT Scholar with 3+ years delivering production-grade systems used globally. Expert in MERN, TypeScript, PHP (Laravel) and AI-driven development. M.Sc. Candidate in Applied Information Systems, University of Kitakyushu, Japan.',
+                'hero-cta-work': 'View Projects',
                 'hero-cta-contact': 'Get In Touch',
                 'hero-cta-resume': 'Download CV',
-                'hero-projects': 'Projects',
-                'hero-experience': 'Years Exp',
+                'hero-projects': 'Projects Done',
+                'hero-experience': 'Years Exp.',
                 'hero-satisfaction': 'Satisfaction',
                 'hero-scroll': 'Explore More',
 
+                // About Section
+                'about-personal-story': 'Personal Story',
+                'about-personal-story-text': 'My passion is combining engineering and technology to solve complex digital challenges. Over the past 3+ years, I have built production-ready applications using Laravel, React, and Python, helping global teams increase product velocities. Currently, as a MEXT Scholar in Kitakyushu, Japan, I am researching Traffic Psychology and Autonomous Vehicle Simulations inside the CARLA Simulator framework to analyze human-vehicle interaction and enhance roadway safety systems.',
+                'about-mission-title': 'My Mission',
+                'about-mission-text': 'Build robust and performant software systems that solve real-world human behavior challenges using AI and data.',
+                'about-research-title': 'Research Focus',
+                'about-research-text': 'Applying machine learning and simulated environments (CARLA) to study traffic safety, behavior, and automation.',
+                'about-projects-desc': 'Full-stack, WordPress & Shopify products deployed worldwide.',
+                'about-experience-desc': 'Professional engineering and team collaboration experience.',
+                'about-global-title': 'Global Scope',
+                'about-global-desc': 'Available for Remote, JP, AUS & worldwide.',
+                'about-bilingual-title': 'Bilingual Engine',
+                'about-bilingual-desc': 'Conversational Japanese (JLPT N4/N3 Candidate)',
+                'about-satisfaction-title': '100% Satisfaction',
+
+                // AI Research Section
+                'ai-research-badge': 'Autonomous Simulation',
+                'ai-research-title': 'AI Research &<br><span class="gradient-text">Traffic Psychology</span>',
+                'ai-research-desc': 'Combining information systems with behavioral data science. I hold professional experience researching driver interactions and roadway metrics within the CARLA Simulator platform (built on Unreal Engine 5). I analyze high-dimensional safety scenarios, studying psychology factors and automated vehicle reactions to improve future traffic architectures.',
+                'ai-research-li1': 'CARLA Autonomous Simulations & Unreal Engine Integration',
+                'ai-research-li2': 'Interactive node analyses & behavioral datasets',
+                'ai-research-li3': 'Traffic safety modeling & simulation algorithms',
+
                 // Skills Section
-                'skills-title': 'My Skills',
-                'skills-subtitle': 'Technologies & Tools I Master',
+                'skills-title': 'Technical <span class="gradient-text">Ecosystem</span>',
+                'skills-subtitle': 'Full-stack, AI Engineering & Research tools I ship with',
+
+                // Skills Categories
+                'skill-cat-frontend': 'Frontend & UI',
+                'skill-cat-backend': 'Backend & Frameworks',
+                'skill-cat-ai': 'AI Engineering',
+                'skill-cat-research': 'Research & Simulation',
+                'skill-cat-devops': 'DevOps & Deployment',
+                'skill-cat-cms': 'CMS & E-Commerce',
+
+                // Skill Names & Descriptions
+                'skill-react': 'React & Next.js',
+                'skill-react-desc': 'Single Page Apps & Server Rendered',
+                'skill-js': 'JavaScript & TypeScript',
+                'skill-js-desc': 'Typed and dynamic programming',
+                'skill-html': 'HTML5, CSS3 & Tailwind',
+                'skill-html-desc': 'Responsive layouts and animations',
+                'skill-php': 'PHP & Laravel',
+                'skill-php-desc': 'Enterprise APIs & MVC Structures',
+                'skill-node': 'Node.js & Express',
+                'skill-node-desc': 'REST APIs & real-time scripting',
+                'skill-db': 'MySQL, MongoDB & Redis',
+                'skill-db-desc': 'Relational, document & cache stores',
+                'skill-python': 'Python & FastAPI',
+                'skill-python-desc': 'AI backends, async APIs, ML pipelines',
+                'skill-langchain': 'LangChain & RAG',
+                'skill-langchain-desc': 'Hugging Face, Vector DBs, LLM chains',
+                'skill-claude': 'Claude Code & Cursor AI',
+                'skill-claude-desc': 'Agentic AI-driven engineering',
+                'skill-carla': 'CARLA Simulator',
+                'skill-carla-desc': 'Autonomous driving research & datasets',
+                'skill-ue5': 'Unreal Engine 5',
+                'skill-ue5-desc': '3D simulation environments',
+                'skill-pandas': 'Data Analysis & Pandas',
+                'skill-pandas-desc': 'Traffic datasets, behavioral metrics',
+                'skill-docker': 'Docker & Containers',
+                'skill-docker-desc': 'Containerized deployments & CI/CD',
+                'skill-git': 'Git & GitHub Actions',
+                'skill-git-desc': 'Version control & automated pipelines',
+                'skill-vercel': 'Vercel, Netlify & VPS',
+                'skill-vercel-desc': 'Cloud deploys, nginx, SSH, domains',
+                'skill-wordpress': 'WordPress & WooCommerce',
+                'skill-wordpress-desc': 'Custom themes & plugin development',
+                'skill-shopify': 'Shopify & Liquid',
+                'skill-shopify-desc': 'Custom storefronts & e-commerce flows',
+                'skill-seo': 'SEO & Digital Marketing',
+                'skill-seo-desc': 'Google Ads, Analytics, conversion CRO',
 
                 // Education Section
                 'education-title': 'Education & Experience',
                 'education-subtitle': 'My academic journey and professional path',
-                'education-masters': 'Masters in Applied Information Systems',
+                'education-masters': 'MEXT Scholarship Scholar',
                 'education-masters-date': 'October 2024 – September 2026',
-                'education-masters-desc': 'Focused on Maths, Databases, Data Structures and Algorithms, Software Engineering and Programming.',
-                'education-bachelors': 'Bs Information Technology',
+                'education-masters-desc': 'Researching driver psychology, simulation metrics, and machine learning utilizing autonomous systems simulators (CARLA) to optimize roadway designs.',
+                'education-bachelors': 'BS Information Technology',
                 'education-bachelors-date': 'September 2016 – September 2020',
-                'education-bachelors-desc': 'Focused on Full Stack Development, Software Architecture, and modern web technologies.',
+                'education-bachelors-desc': "Completed Bachelor's in IT with deep focus on algorithms, data structures, database designs, and foundational software engineering methodologies.",
+                'journey-date-1': 'Sep 2016 – 2020',
+                'journey-date-2': 'Jan 2021 – Aug 2024',
+                'journey-date-3': 'Oct 2024 – Present',
+                'journey-mext-desc': "Awarded the prestigious Japanese Government MEXT Scholarship to pursue a Master's degree in Applied Information Systems at the University of Kitakyushu.",
+                'journey-current-label': 'Current Theme',
+                'journey-research-title': 'Traffic Psychology Research',
                 'experience-fullstack': 'Full Stack Engineer',
                 'experience-fullstack-date': 'January 2021 - August 2024',
                 'experience-fullstack-desc': 'Developed and maintained web applications using modern technologies. Worked on both frontend and backend development.',
@@ -1312,7 +1462,9 @@ class LanguageManager {
             jp: {
                 // Navigation
                 'nav-home': 'ホーム',
+                'nav-about': '自己紹介',
                 'nav-skills': 'スキル',
+                'nav-journey': '歩み',
                 'nav-education': '学歴',
                 'nav-certifications': '資格',
                 'nav-portfolio': 'ポートフォリオ',
@@ -1320,34 +1472,135 @@ class LanguageManager {
                 'nav-gallery': 'ギャラリー',
                 'nav-contact': 'お問い合わせ',
 
+                // Section headings with gradient spans (uses innerHTML)
+                'about-title': '自己<span class="gradient-text">紹介</span>',
+                'journey-title': '学歴・<span class="gradient-text">キャリアの歩み</span>',
+                'experience-title': '職務<span class="gradient-text">経験</span>',
+                'featured-title': '注目の<span class="gradient-text">プロジェクト</span>',
+
+                // Experience — Freelance role
+                'experience-freelance': 'フリーランス フルスタックアーキテクト',
+                'experience-freelance-company': '独立コンサルティング',
+                'experience-freelance-date': '2024年8月 – 現在',
+                'experience-freelance-desc': '国際的なスタートアップや研究所向けに、カスタマイズされた堅牢なウェブアーキテクチャとクラウドマイクロサービスを構築。',
+                'experience-freelance-li1': 'クラウドデータベースエンジンと連携したNext.js、React、Tailwindの構築。',
+                'experience-freelance-li2': 'データパイプライン、顧客ダッシュボード、AI統合（Cursor、OpenAI、Claude）の自動化。',
+                'experience-freelance-li3': '主要な検索エンジンでのストアフロントのSEO最適化。',
+
+                // Services — AI Powered Apps (new)
+                'service-ai-apps': 'AIパワードアプリ',
+                'service-ai-apps-desc': 'LangChain、FastAPI、Hugging Face、Vector DB、RAGパイプラインを使用したインテリジェントアプリの構築。',
+                'service-ai-apps-f1': 'LangChain & RAGパイプライン',
+                'service-ai-apps-f2': 'FastAPI & ベクターDB',
+
                 // Hero Section
-                'hero-available': 'フリーランス対応可能',
+                'hero-available': '国際的な機会を求めて',
+                'hero-senior-level': 'シニアレベル',
+                'hero-tag-scholar': '文部科学省奨学生',
+                'hero-tag-projects': '50以上のプロジェクト完了',
+                'hero-tag-ai': 'AI駆動開発',
+                'hero-tag-location': '福岡、日本',
                 'hero-title-1': 'フルスタック',
                 'hero-title-2': 'Webエンジニア',
                 'hero-title-3': '文部科学省奨学生',
                 'hero-builds': '使用技術',
-                'hero-description': 'MERNスタック、TypeScript、PHP（Laravel）を専門とするフルスタックWebエンジニアで、3年以上の業界経験があります。スケーラブルで本番運用対応のシステム構築に強みがあり、Claude Code や Cursor を活用した AI 駆動の開発ワークフローでチームの効率化を図ります。現在、日本で応用情報システムの修士課程を履修中で、2026年12月27日まで有効な学生ビザを保有し、日本語は会話レベル（JLPT N4、2026年12月にN3受験予定）です。',
-                'hero-cta-work': '作品を見る',
+                'hero-description': '3年以上の実績を持つシニアフルスタックエンジニア & 文部科学省奨学生。MERNスタック、TypeScript、PHP（Laravel）を専門とし、世界規模で使用される本番システムを構築。AI駆動開発（Claude Code、Cursor）を活用し、チーム効率を向上。北九州市立大学応用情報システム研究科修士課程在学中。',
+                'hero-cta-work': 'プロジェクトを見る',
                 'hero-cta-contact': 'お問い合わせ',
                 'hero-cta-resume': '履歴書をダウンロード',
-                'hero-projects': 'プロジェクト',
+                'hero-projects': 'プロジェクト完了',
                 'hero-experience': '年の経験',
                 'hero-satisfaction': '満足度',
                 'hero-scroll': 'もっと見る',
 
+                // About Section
+                'about-personal-story': 'パーソナルストーリー',
+                'about-personal-story-text': '私の情熱は、エンジニアリングとテクノロジーを組み合わせて複雑なデジタル課題を解決することです。過去3年以上、Laravel、React、Pythonを使用して本番対応のアプリケーションを構築し、グローバルチームの開発速度向上に貢献してきました。現在は、北九州市立大学のMEXT奨学生として、CARLAシミュレーターフレームワーク内で交通心理学と自律走行シミュレーションを研究し、人間と車両の相互作用を分析して道路安全システムの改善に取り組んでいます。',
+                'about-mission-title': 'ミッション',
+                'about-mission-text': 'AIとデータを活用して、現実世界の人間行動の課題を解決する堅牢で高性能なソフトウェアシステムを構築する。',
+                'about-research-title': '研究テーマ',
+                'about-research-text': '機械学習とシミュレーション環境（CARLA）を活用し、交通安全、行動、自動化の研究を行う。',
+                'about-projects-desc': '世界中に展開されたフルスタック・WordPress・Shopify製品。',
+                'about-experience-desc': 'プロフェッショナルなエンジニアリングとチームコラボレーションの経験。',
+                'about-global-title': 'グローバル対応',
+                'about-global-desc': 'リモート・日本・オーストラリア・世界中で対応可能。',
+                'about-bilingual-title': 'バイリンガル対応',
+                'about-bilingual-desc': '日常会話レベルの日本語（JLPT N4/N3 受験予定）',
+                'about-satisfaction-title': '100%満足保証',
+
+                // AI Research Section
+                'ai-research-badge': '自律シミュレーション',
+                'ai-research-title': 'AI研究と<br><span class="gradient-text">交通心理学</span>',
+                'ai-research-desc': '情報システムと行動データサイエンスを組み合わせた研究を行っています。Unreal Engine 5上に構築されたCARLAシミュレータープラットフォームでドライバーの行動と道路指標を研究した実務経験を持ち、高次元の安全シナリオを分析して将来の交通アーキテクチャの改善に取り組んでいます。',
+                'ai-research-li1': 'CARLAによる自律走行シミュレーションとUnreal Engine統合',
+                'ai-research-li2': 'インタラクティブなノード分析と行動データセット',
+                'ai-research-li3': '交通安全モデリングとシミュレーションアルゴリズム',
+
                 // Skills Section
-                'skills-title': '私のスキル',
-                'skills-subtitle': '習得した技術とツール',
+                'skills-title': '技術<span class="gradient-text">エコシステム</span>',
+                'skills-subtitle': 'フルスタック・AI・リサーチで使用する技術スタック',
+
+                // Skills Categories
+                'skill-cat-frontend': 'フロントエンド & UI',
+                'skill-cat-backend': 'バックエンド & フレームワーク',
+                'skill-cat-ai': 'AIエンジニアリング',
+                'skill-cat-research': 'リサーチ & シミュレーション',
+                'skill-cat-devops': 'DevOps & デプロイ',
+                'skill-cat-cms': 'CMS & Eコマース',
+
+                // Skill Names & Descriptions
+                'skill-react': 'React & Next.js',
+                'skill-react-desc': 'SPA & サーバーサイドレンダリング',
+                'skill-js': 'JavaScript & TypeScript',
+                'skill-js-desc': '型付き & 動的プログラミング',
+                'skill-html': 'HTML5, CSS3 & Tailwind',
+                'skill-html-desc': 'レスポンシブレイアウト & アニメーション',
+                'skill-php': 'PHP & Laravel',
+                'skill-php-desc': 'エンタープライズAPI & MVC構造',
+                'skill-node': 'Node.js & Express',
+                'skill-node-desc': 'REST API & リアルタイム処理',
+                'skill-db': 'MySQL, MongoDB & Redis',
+                'skill-db-desc': 'リレーショナル・ドキュメント・キャッシュDB',
+                'skill-python': 'Python & FastAPI',
+                'skill-python-desc': 'AIバックエンド・非同期API・MLパイプライン',
+                'skill-langchain': 'LangChain & RAG',
+                'skill-langchain-desc': 'Hugging Face・ベクターDB・LLMチェーン',
+                'skill-claude': 'Claude Code & Cursor AI',
+                'skill-claude-desc': 'エージェント型AI駆動エンジニアリング',
+                'skill-carla': 'CARLAシミュレーター',
+                'skill-carla-desc': '自動運転研究 & データセット収集',
+                'skill-ue5': 'Unreal Engine 5',
+                'skill-ue5-desc': '3Dシミュレーション環境',
+                'skill-pandas': 'データ分析 & Pandas',
+                'skill-pandas-desc': '交通データセット・行動指標分析',
+                'skill-docker': 'Docker & コンテナ',
+                'skill-docker-desc': 'コンテナデプロイ & CI/CD',
+                'skill-git': 'Git & GitHub Actions',
+                'skill-git-desc': 'バージョン管理 & 自動パイプライン',
+                'skill-vercel': 'Vercel, Netlify & VPS',
+                'skill-vercel-desc': 'クラウドデプロイ・nginx・SSH・ドメイン',
+                'skill-wordpress': 'WordPress & WooCommerce',
+                'skill-wordpress-desc': 'カスタムテーマ & プラグイン開発',
+                'skill-shopify': 'Shopify & Liquid',
+                'skill-shopify-desc': 'カスタムストアフロント & ECフロー',
+                'skill-seo': 'SEO & デジタルマーケティング',
+                'skill-seo-desc': 'Google広告・アナリティクス・CRO最適化',
 
                 // Education Section
                 'education-title': '学歴と職歴',
                 'education-subtitle': '私の学業とキャリアの歩み',
-                'education-masters': '応用情報システム学修士',
+                'education-masters': 'MEXT奨学金留学生',
                 'education-masters-date': '2024年10月 – 2026年9月',
-                'education-masters-desc': 'データサイエンスとAI技術を用いた交通シミュレーションシステムと心理学研究に焦点を当てています。',
+                'education-masters-desc': 'ドライバー心理学、シミュレーション指標、自律システムシミュレーター（CARLA）を活用した機械学習を研究し、道路設計の最適化を目指しています。',
                 'education-bachelors': '情報技術学士',
                 'education-bachelors-date': '2016年9月 – 2020年9月',
-                'education-bachelors-desc': '数学、データベース、データ構造とアルゴリズム、ソフトウェア工学とプログラミングに焦点を当てています。',
+                'education-bachelors-desc': 'アルゴリズム、データ構造、データベース設計、ソフトウェア工学の基礎に深く取り組み、IT学士号を取得しました。',
+                'journey-date-1': '2016年9月 – 2020年',
+                'journey-date-2': '2021年1月 – 2024年8月',
+                'journey-date-3': '2024年10月 – 現在',
+                'journey-mext-desc': '日本政府文部科学省（MEXT）奨学金を授与され、北九州市立大学で応用情報システム学修士号を取得するために来日しました。',
+                'journey-current-label': '現在のテーマ',
+                'journey-research-title': '交通心理学研究',
                 'experience-fullstack': 'フルスタックエンジニア',
                 'experience-fullstack-date': '2021年1月 - 2024年8月',
                 'experience-fullstack-desc': '最新技術を使用したWebアプリケーションの開発と保守。フロントエンドとバックエンドの両方の開発に携わりました。',
@@ -1574,26 +1827,32 @@ class LanguageManager {
     }
 
     setupEventListeners() {
-        // Desktop language switchers
-        const enBtn = document.getElementById('lang-en');
-        const jpBtn = document.getElementById('lang-jp');
+        // Language dropdown toggle
+        const dropdownBtn = document.getElementById('lang-dropdown-btn');
+        const dropdownMenu = document.getElementById('lang-dropdown-menu');
 
-        // Mobile language switchers  
-        const enBtnMobile = document.getElementById('lang-en-mobile');
-        const jpBtnMobile = document.getElementById('lang-jp-mobile');
+        if (dropdownBtn && dropdownMenu) {
+            dropdownBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isOpen = dropdownMenu.classList.contains('open');
+                dropdownMenu.classList.toggle('open', !isOpen);
+                dropdownBtn.classList.toggle('open', !isOpen);
+            });
+            document.addEventListener('click', () => {
+                dropdownMenu.classList.remove('open');
+                dropdownBtn.classList.remove('open');
+            });
+        }
 
-        console.log('Language buttons found:', {
-            enBtn: !!enBtn,
-            jpBtn: !!jpBtn,
-            enBtnMobile: !!enBtnMobile,
-            jpBtnMobile: !!jpBtnMobile
+        // Language option buttons (dropdown items)
+        document.querySelectorAll('.lang-option[data-lang]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.getAttribute('data-lang');
+                this.switchLanguage(lang);
+                if (dropdownMenu) dropdownMenu.classList.remove('open');
+                if (dropdownBtn) dropdownBtn.classList.remove('open');
+            });
         });
-
-        // Add event listeners if elements exist
-        if (enBtn) enBtn.addEventListener('click', () => this.switchLanguage('en'));
-        if (jpBtn) jpBtn.addEventListener('click', () => this.switchLanguage('jp'));
-        if (enBtnMobile) enBtnMobile.addEventListener('click', () => this.switchLanguage('en'));
-        if (jpBtnMobile) jpBtnMobile.addEventListener('click', () => this.switchLanguage('jp'));
     }
 
     loadSavedLanguage() {
@@ -1628,62 +1887,16 @@ class LanguageManager {
     }
 
     updateButtonStates(lang) {
-        console.log('Updating button states for language:', lang);
+        // Update dropdown display
+        const flagEl = document.getElementById('lang-flag');
+        const codeEl = document.getElementById('lang-code');
+        if (flagEl) flagEl.innerHTML = lang === 'en' ? '&#x1F1FA;&#x1F1F8;' : '&#x1F1EF;&#x1F1F5;';
+        if (codeEl) codeEl.textContent = lang === 'en' ? 'EN' : 'JP';
 
-        // Desktop buttons
-        const enBtn = document.getElementById('lang-en');
-        const jpBtn = document.getElementById('lang-jp');
-
-        // Mobile buttons
-        const enBtnMobile = document.getElementById('lang-en-mobile');
-        const jpBtnMobile = document.getElementById('lang-jp-mobile');
-
-        // Remove active styles from ALL buttons first
-        [enBtn, jpBtn, enBtnMobile, jpBtnMobile].forEach(btn => {
-            if (btn) {
-                // Remove all possible active styles
-                btn.classList.remove(
-                    'bg-gradient-to-r', 'from-[#1e40af]', 'to-[#3b82f6]',
-                    'text-white', 'border-blue-500/30',
-                    'bg-blue-600', 'bg-blue-500', 'bg-white', 'text-gray-500', 'border-gray-200',
-                    'glass'
-                );
-
-                // Add base styles
-                if (btn === enBtnMobile || btn === jpBtnMobile) {
-                    // Mobile buttons - default to glass style
-                    btn.classList.add('glass', 'text-gray-500');
-                } else {
-                    // Desktop buttons - default to light style
-                    btn.classList.add('bg-white', 'text-gray-500', 'border-gray-200');
-                }
-            }
+        // Mark active lang option
+        document.querySelectorAll('.lang-option[data-lang]').forEach(btn => {
+            btn.classList.toggle('active-lang', btn.getAttribute('data-lang') === lang);
         });
-
-        // Apply active styles to the correct button based on language
-        if (lang === 'en') {
-            // Activate English buttons
-            if (enBtn) {
-                enBtn.classList.remove('bg-white', 'text-gray-500', 'border-gray-200');
-                enBtn.classList.add('bg-gradient-to-r', 'from-[#1e40af]', 'to-[#3b82f6]', 'text-white', 'border-blue-500/30');
-            }
-            if (enBtnMobile) {
-                enBtnMobile.classList.remove('glass', 'text-gray-500');
-                enBtnMobile.classList.add('bg-gradient-to-r', 'from-[#1e40af]', 'to-[#3b82f6]', 'text-white');
-            }
-        } else {
-            // Activate Japanese buttons  
-            if (jpBtn) {
-                jpBtn.classList.remove('bg-white', 'text-gray-500', 'border-gray-200');
-                jpBtn.classList.add('bg-gradient-to-r', 'from-[#1e40af]', 'to-[#3b82f6]', 'text-white', 'border-blue-500/30');
-            }
-            if (jpBtnMobile) {
-                jpBtnMobile.classList.remove('glass', 'text-gray-500');
-                jpBtnMobile.classList.add('bg-gradient-to-r', 'from-[#1e40af]', 'to-[#3b82f6]', 'text-white');
-            }
-        }
-
-        console.log('Button states updated. Active language:', lang);
     }
 
     updateContent(lang) {
@@ -1700,19 +1913,22 @@ class LanguageManager {
         console.log(`Found ${elements.length} elements to translate`);
         
         elements.forEach(element => {
-            const key = element.getAttribute('data-i18n');
+            const rawKey = element.getAttribute('data-i18n');
+            // Strip any curly/smart quotes that may have been introduced by text editors
+            const key = rawKey.replace(/[“”‘’]/g, '');
             if (translations[key] !== undefined) {
                 try {
                     if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
                         element.placeholder = translations[key];
+                    } else if (element.children.length > 0) {
+                        // Preserve child element structure (e.g. gradient-text spans)
+                        element.innerHTML = translations[key];
                     } else {
                         element.textContent = translations[key];
                     }
                 } catch (error) {
                     console.error(`Error updating element with key '${key}':`, error);
                 }
-            } else {
-                console.warn(`No translation found for key: ${key}`);
             }
         });
 
