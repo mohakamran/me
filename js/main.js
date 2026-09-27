@@ -1,1 +1,0 @@
-// main.js - functionality moved to index.js and modern.js for compatibility
