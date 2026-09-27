@@ -36,7 +36,14 @@
         var radius = 160, rotX = 0.35, rotY = 0, velX = 0.0012, velY = 0.0042;
         var visible = false, running = false, dragging = false, lastX = 0, lastY = 0;
 
-        function measure() { radius = Math.min(globe.clientWidth, globe.clientHeight) * 0.42; }
+        // Radius leaves room for the widest tag (front tags scale up to 1.15×),
+        // so no tag ever pokes outside the globe — this caused horizontal scroll on phones.
+        function measure() {
+            var size = Math.min(globe.clientWidth, globe.clientHeight);
+            var widest = 0;
+            nodes.forEach(function (n) { widest = Math.max(widest, n.el.offsetWidth); });
+            radius = Math.max(size * 0.28, size / 2 - (widest * 1.15) / 2 - 6);
+        }
 
         function draw() {
             var cx = Math.cos(rotX), sx = Math.sin(rotX), cy = Math.cos(rotY), sy = Math.sin(rotY);
@@ -88,6 +95,7 @@
         measure();
         draw();
         window.addEventListener('resize', function () { measure(); draw(); }, { passive: true });
+        window.addEventListener('load', function () { measure(); draw(); }); // tag widths change once web fonts load
         document.addEventListener('visibilitychange', kick);
         if ('IntersectionObserver' in window) {
             new IntersectionObserver(function (entries) { visible = entries[0].isIntersecting; kick(); }).observe(globe);

@@ -161,10 +161,16 @@
                 timeline.style.setProperty('--progress', Math.max(0, Math.min(1, p)).toFixed(3));
             }
 
-            // Hero content drifts up and fades as you scroll away
-            if (heroInner && !reduceMotion && y < vh * 1.2) {
-                heroInner.style.translate = '0 ' + (y * 0.28).toFixed(1) + 'px';
-                heroInner.style.opacity = Math.max(0, 1 - y / (vh * 0.85)).toFixed(3);
+            // Hero content drifts up and fades as you scroll away — desktop only.
+            // On phones/tablets the portrait sits below the text, so fading would hide it.
+            if (heroInner && !reduceMotion) {
+                if (window.innerWidth >= 1024 && y < vh * 1.2) {
+                    heroInner.style.translate = '0 ' + (y * 0.28).toFixed(1) + 'px';
+                    heroInner.style.opacity = Math.max(0, 1 - y / (vh * 0.85)).toFixed(3);
+                } else if (window.innerWidth < 1024 && heroInner.style.opacity) {
+                    heroInner.style.translate = '';
+                    heroInner.style.opacity = '';
+                }
             }
         }
 

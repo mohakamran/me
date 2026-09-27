@@ -216,7 +216,7 @@
             anchor.position.x = (cx - heroW / 2) * unitsPerPx;
             anchor.position.y = -(cy - heroH / 2) * unitsPerPx;
             // Blob a bit larger than the portrait so it glows out around the edges
-            anchor.userData.radius = (pr.width * 0.66) * unitsPerPx;
+            anchor.userData.radius = (pr.width * (heroW < 640 ? 0.6 : 0.66)) * unitsPerPx;
         }
         var intro = 0; // 0 → 1 grow-in progress
         resize();

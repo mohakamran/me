@@ -94,6 +94,8 @@ html {
     scroll-padding-top: calc(var(--header-h) + 16px);
     -webkit-text-size-adjust: 100%;
     background: var(--bg);
+    overflow-x: hidden;
+    overflow-x: clip; /* mobile browsers ignore overflow on <body> alone */
 }
 /* Lenis smooth scrolling */
 html.lenis, html.lenis body { height: auto; }
@@ -110,6 +112,7 @@ body {
     color: var(--text);
     background: var(--bg);
     overflow-x: hidden;
+    overflow-x: clip; /* clip (not hidden) keeps position: sticky working */
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
 }
@@ -554,7 +557,7 @@ main { position: relative; z-index: 1; }
 .site-header {
     position: fixed;
     inset: 0 0 auto;
-    z-index: 90;
+    z-index: 96; /* above the mobile drawer (95) so the ✕ button stays reachable */
     padding: 12px var(--gutter) 0;
     transition: padding 0.3s var(--ease);
 }
@@ -1172,7 +1175,7 @@ main { position: relative; z-index: 1; }
 .js .skills-grid.is-visible .skill-tiles li:nth-child(7) { transition-delay: calc(var(--i, 0) * 80ms + 550ms); }
 .js .skills-grid.is-visible .skill-tiles li:hover { transition-delay: 0s; }
 
-.globe-wrap { display: grid; justify-items: center; gap: 8px; }
+.globe-wrap { display: grid; justify-items: center; gap: 8px; max-width: 100%; overflow: hidden; padding: 4px 0; }
 .skill-globe {
     position: relative;
     width: min(100%, 420px);
@@ -1492,7 +1495,7 @@ a.cert-badge:hover, .cert-badge-main:hover { border-color: var(--accent); transf
 .contact-list li > div { display: grid; min-width: 0; }
 .contact-list strong { font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-subtle); font-weight: 700; }
 :lang(ja) .contact-list strong { letter-spacing: 0.04em; }
-.contact-list span, .contact-list a { font-size: 0.97rem; font-weight: 600; color: var(--text); overflow-wrap: anywhere; }
+.contact-list span, .contact-list a { font-size: 0.97rem; font-weight: 600; color: var(--text); overflow-wrap: break-word; }
 .contact-list a:hover { color: var(--accent); }
 .contact-icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; background: var(--grad-soft); color: var(--accent); flex: none; }
 .contact-list li:first-child .contact-icon { color: var(--success); background: color-mix(in srgb, var(--success) 12%, transparent); }
@@ -1687,6 +1690,27 @@ a.cert-badge:hover, .cert-badge-main:hover { border-color: var(--accent); transf
     .skill-globe { width: min(100%, 340px); }
 }
 
+/* Phones & tablets: the header is always a visible floating pill with breathing room */
+@media (max-width: 1023px) {
+    .site-header { padding: calc(10px + env(safe-area-inset-top, 0px)) 12px 0; }
+    .site-header.scrolled { padding-top: calc(8px + env(safe-area-inset-top, 0px)); }
+    .nav-shell {
+        height: 58px;
+        padding: 0 8px 0 12px;
+        background: var(--surface-strong);
+        border-color: var(--border);
+        box-shadow: var(--shadow);
+        -webkit-backdrop-filter: blur(18px) saturate(170%);
+        backdrop-filter: blur(18px) saturate(170%);
+    }
+    .hero { padding-top: calc(var(--header-h) + 40px + env(safe-area-inset-top, 0px)); padding-bottom: 72px; }
+    .hero-visual { width: min(100%, 360px); padding: 30px 26px; }
+    .fc-1 { left: 0; }
+    .fc-2 { right: 0; }
+    .scroll-cue { display: none; }
+    .drawer { padding-top: calc(var(--header-h) + 28px + env(safe-area-inset-top, 0px)); }
+}
+
 /* Small phones: keep header uncluttered — language & theme live in the drawer */
 @media (max-width: 479px) {
     .nav-actions > .lang-switch,
@@ -1700,6 +1724,14 @@ a.cert-badge:hover, .cert-badge-main:hover { border-color: var(--accent); transf
     .career-track .seg { font-size: 0.7rem; padding: 0 8px; }
     .cf-btn { width: 44px; height: 44px; }
     .cf-caption { font-size: 0.86rem; }
+}
+
+/* Phones: smaller globe tags so the sphere reads clearly; roomier case-study layout */
+@media (max-width: 639px) {
+    .globe-tag { font-size: 0.7rem; padding: 4px 9px; }
+    .case-step { grid-template-columns: 32px 1fr; gap: 12px; padding: 14px; }
+    .case-num { width: 32px; height: 32px; border-radius: 10px; }
+    .modal-inner { width: calc(100vw - 16px); max-height: calc(100dvh - 16px); }
 }
 
 @media (max-width: 359px) {
