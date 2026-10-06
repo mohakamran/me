@@ -39,12 +39,15 @@
     function renderFeatured() {
         var grid = document.getElementById('featured-grid');
         if (!grid) return;
+        var wideCount = 0;
         grid.innerHTML = data.featured.map(function (p, i) {
+            // Alternate the image side on consecutive full-width cards
+            var wideClass = p.wide ? ' fp-wide' + (wideCount++ % 2 ? ' fp-reverse' : '') : '';
             var metric = p.metric
                 ? '<div class="fp-metric"><strong>' + esc(p.metric.value) + '</strong><span>' + esc(pick(p.metric.label)) + '</span></div>'
                 : '';
             return '' +
-                '<article class="fp-card glass tilt' + (p.wide ? ' fp-wide' : '') + '" data-tilt-max="6" style="--i:' + i + '">' +
+                '<article class="fp-card glass tilt' + wideClass + '" data-tilt-max="6" style="--i:' + i + '">' +
                     '<div class="fp-media">' +
                         '<img src="' + p.image + '" alt="' + esc(pick(p.title)) + '" width="960" height="600" loading="lazy" decoding="async">' +
                         '<span class="chip chip-solid">' + esc(pick(p.label)) + '</span>' +
@@ -94,6 +97,7 @@
                         p.stack.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') + '</ul></div></section>' +
                     '<section class="case-step case-result"><span class="case-num">4</span><div><h3>' + esc(t('work.result')) + '</h3><p>' + esc(pick(p.result)) + '</p></div></section>' +
                 '</div>' +
+                (p.image2 ? '<figure class="case-shot"><img src="' + p.image2 + '" alt="' + esc(pick(p.title)) + '" width="1280" height="800" loading="lazy" decoding="async"></figure>' : '') +
                 note +
                 '<div class="fp-actions">' + linkButtons(p.links) + '</div>' +
             '</div>';
