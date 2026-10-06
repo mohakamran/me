@@ -119,7 +119,7 @@
 
         // Active link highlighting (the hero clears it; "All projects" counts as Projects)
         var links = document.querySelectorAll('.nav-links a, .drawer-links a');
-        var watch = ['home', 'about', 'experience', 'skills', 'work', 'projects', 'services', 'gallery', 'contact'];
+        var watch = ['home', 'about', 'experience', 'publications', 'skills', 'work', 'projects', 'services', 'gallery', 'contact'];
         var alias = { projects: 'work' };
         if ('IntersectionObserver' in window) {
             var io = new IntersectionObserver(function (entries) {

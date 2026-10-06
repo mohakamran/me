@@ -91,6 +91,7 @@
             <nav class="nav-links" aria-label="Primary">
                 <a href="#about" data-i18n="nav.about">About</a>
                 <a href="#experience" data-i18n="nav.experience">Experience</a>
+                <a href="#publications" data-i18n="nav.publications">Publications</a>
                 <a href="#skills" data-i18n="nav.skills">Skills</a>
                 <a href="#work" data-i18n="nav.work">Projects</a>
                 <a href="#services" data-i18n="nav.services">Services</a>
@@ -120,6 +121,7 @@
         <nav class="drawer-links" aria-label="Mobile">
             <a href="#about"><i class="fa-solid fa-user" aria-hidden="true"></i><span data-i18n="nav.about">About</span></a>
             <a href="#experience"><i class="fa-solid fa-route" aria-hidden="true"></i><span data-i18n="nav.experience">Experience</span></a>
+            <a href="#publications"><i class="fa-solid fa-book-open-reader" aria-hidden="true"></i><span data-i18n="nav.publications">Publications</span></a>
             <a href="#skills"><i class="fa-solid fa-code" aria-hidden="true"></i><span data-i18n="nav.skills">Skills</span></a>
             <a href="#work"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span data-i18n="nav.work">Projects</span></a>
             <a href="#services"><i class="fa-solid fa-layer-group" aria-hidden="true"></i><span data-i18n="nav.services">Services</span></a>
@@ -345,9 +347,30 @@
                             </header>
                             <h3 data-i18n="exp.ed.role">M.Sc. Applied Information Systems</h3>
                             <p class="tl-org"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i><span data-i18n="exp.ed.org">University of Kitakyushu, Japan · MEXT Scholarship</span></p>
-                            <p class="tl-summary" data-i18n="exp.ed.summary">Completed alongside freelance work. Research on traffic psychology and driver behavior using Python and the CARLA simulator (Unreal Engine) — data collection, analysis and simulation design.</p>
+                            <p class="tl-summary" data-i18n="exp.ed.summary">Completed alongside freelance work. Research on traffic psychology, driver behavior and speech articulation using Python and the CARLA simulator (Unreal Engine), resulting in three first-author conference papers, including one in IEEE Xplore.</p>
                         </article>
                     </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- ============ 3b. PUBLICATIONS ============ -->
+        <section id="publications" class="section" aria-labelledby="pubs-title">
+            <div class="container">
+                <header class="section-head reveal">
+                    <span class="eyebrow" data-i18n="pubs.eyebrow">Research</span>
+                    <h2 id="pubs-title" data-i18n-html="pubs.title">Publications &amp; <span class="grad-text">conference papers</span></h2>
+                    <p class="section-sub" data-i18n="pubs.sub">First-author research from my M.Sc. at the University of Kitakyushu — driving simulation, speech acoustics and data visualization.</p>
+                </header>
+
+                <ul class="pub-stats reveal-stagger">
+                    <li class="glass"><strong>3</strong><span data-i18n="pubs.statPapers">first-author papers</span></li>
+                    <li class="glass"><strong>3</strong><span data-i18n="pubs.statConf">international &amp; national conferences</span></li>
+                    <li class="glass"><strong>IEEE</strong><span data-i18n="pubs.statIndexed">Xplore · Springer proceedings (forthcoming)</span></li>
+                </ul>
+
+                <ol class="pub-list reveal-stagger" id="pub-list">
+                    <!-- Rendered by js/publications.js from js/data.js -->
                 </ol>
             </div>
         </section>
@@ -660,6 +683,7 @@
                 <h2 class="footer-heading" data-i18n="footer.links">Quick links</h2>
                 <a href="#about" data-i18n="nav.about">About</a>
                 <a href="#experience" data-i18n="nav.experience">Experience</a>
+                <a href="#publications" data-i18n="nav.publications">Publications</a>
                 <a href="#skills" data-i18n="nav.skills">Skills</a>
                 <a href="#work" data-i18n="nav.work">Projects</a>
                 <a href="#contact" data-i18n="nav.contact">Contact Me</a>
@@ -705,6 +729,7 @@
     <script src="js/theme.js" defer></script>
     <script src="js/animations.js" defer></script>
     <script src="js/projects.js" defer></script>
+    <script src="js/publications.js" defer></script>
     <script src="js/gallery.js" defer></script>
     <script src="js/skills-globe.js" defer></script>
     <script src="js/contact.js" defer></script>

@@ -259,6 +259,47 @@ window.SITE_DATA = {
         { image: 'img/projects/reblate-sols.webp', category: 'javascript', title: { en: 'Reblate Solutions', ja: 'Reblate Solutions' }, desc: { en: 'React-based website for a business development agency offering design, web development, SEO and digital marketing.', ja: 'デザイン、Web開発、SEO、デジタルマーケティングを提供する会社の、Reactで構築したWebサイト。' }, tags: ['React', 'Agency'], live: 'https://reblatesols.com/' },
     ],
 
+    /* ---------- Publications (first author on all) ----------
+       status: upcoming | presented | published;  date: ISO (presentation date)   */
+    publications: [
+        {
+            status: 'upcoming',
+            date: '2026-11-26',
+            title: 'Spacing Over Speed: An Exploratory CARLA Study of Collision Risk During a Gradual Weather Transition',
+            titleJa: '速度より車間距離：天候の段階的変化における衝突リスクに関するCARLAを用いた探索的研究',
+            authors: ['Kamran, M.', 'Hayami, T.'],
+            year: 2026,
+            venue: { en: '8th International Conference on Smart Vehicular Technology, Transportation, Communication and Applications (VTCA 2026)', ja: '第8回 スマート車両技術・交通・通信・応用に関する国際会議（VTCA 2026）' },
+            place: { en: 'University of Miyazaki, Japan', ja: '宮崎大学（日本）' },
+            note: { en: 'Proceedings to be published by Springer (Smart Innovation, Systems and Technologies).', ja: '論文集はSpringer（Smart Innovation, Systems and Technologies）より刊行予定。' },
+            topic: { en: 'Driving simulation', ja: '運転シミュレーション' }
+        },
+        {
+            status: 'presented',
+            date: '2026-08-17',
+            title: 'Acoustic Variability of the /ai/ Diphthong: The Impact of Phonetic Context and Articulatory Behavior',
+            titleJa: '二重母音/ai/の音響的変動：音声環境と調音動作の影響',
+            authors: ['Kamran, M.', 'Kondo, E.', 'Hayami, T.'],
+            year: 2026,
+            venue: { en: 'SICE Festival with Annual Conference 2026 (SICE FES 2026)', ja: 'SICE Festival with Annual Conference 2026（SICE FES 2026）' },
+            place: { en: 'Yokohama, Japan', ja: '横浜（日本）' },
+            topic: { en: 'Speech & phonetics', ja: '音声・音響分析' }
+        },
+        {
+            status: 'published',
+            date: '2026-08-04',
+            title: 'Systematic Visualization of Articulatory Motion and Formant-to-Coordinate Mapping across Classes and Groups',
+            titleJa: 'クラス・グループ間における調音運動の体系的可視化とフォルマント‐座標マッピング',
+            authors: ['Kamran, M.', 'Kondo, E.', 'Hayami, T.'],
+            year: 2026,
+            venue: { en: '3rd International Conference on Connected Innovation and Technology (ICCITX 2026), IEEE', ja: '第3回 Connected Innovation and Technology国際会議（ICCITX 2026）、IEEE' },
+            place: { en: 'Published in IEEE Xplore', ja: 'IEEE Xploreに掲載' },
+            doi: '10.1109/ICCITX70146.2026.11679952',
+            link: 'https://ieeexplore.ieee.org/document/11679952',
+            topic: { en: 'Speech & data visualization', ja: '音声・データ可視化' }
+        }
+    ],
+
     /* ---------- Life in Japan gallery ----------
        w/h = full-size pixel dimensions (prevents layout shift)             */
     gallery: [

@@ -110,7 +110,7 @@
             'exp.ed.type': 'Graduated',
             'exp.ed.role': 'M.Sc. Applied Information Systems',
             'exp.ed.org': 'University of Kitakyushu, Japan · MEXT Scholarship',
-            'exp.ed.summary': 'Completed alongside freelance work. Research on traffic psychology and driver behavior using Python and the CARLA simulator (Unreal Engine) — data collection, analysis and simulation design.',
+            'exp.ed.summary': 'Completed alongside freelance work. Research on traffic psychology, driver behavior and speech articulation using Python and the CARLA simulator (Unreal Engine), resulting in three first-author conference papers, including one in IEEE Xplore.',
 
             'skills.eyebrow': 'Skills',
             'skills.title': 'A stack built <span class="grad-text">in production</span>',
@@ -216,7 +216,23 @@
             'certs.mscBy': 'University of Kitakyushu · 2026',
             'gallery.aria': 'Life in Japan photo slider',
             'contact.languages': 'Languages',
-            'contact.languagesVal': 'English & Japanese'
+            'contact.languagesVal': 'English & Japanese',
+            'nav.publications': 'Publications',
+            'pubs.eyebrow': 'Research',
+            'pubs.title': 'Publications &amp; <span class="grad-text">conference papers</span>',
+            'pubs.sub': 'First-author research from my M.Sc. at the University of Kitakyushu — driving simulation, speech acoustics and data visualization.',
+            'pubs.statPapers': 'first-author papers',
+            'pubs.statConf': 'international & national conferences',
+            'pubs.statIndexed': 'Xplore · Springer proceedings (forthcoming)',
+            'pubs.firstAuthor': 'First author',
+            'pubs.status.upcoming': 'Accepted · upcoming',
+            'pubs.status.presented': 'Presented',
+            'pubs.status.published': 'Published · IEEE Xplore',
+            'pubs.presentedOn': 'Presented',
+            'pubs.toPresent': 'To be presented',
+            'pubs.read': 'Read on IEEE Xplore',
+            'pubs.soon': 'Paper link coming soon',
+            'pubs.soonUpcoming': 'Link available after the conference'
         },
 
         ja: {
@@ -317,7 +333,7 @@
             'exp.ed.type': '修了',
             'exp.ed.role': '応用情報システム 修士課程',
             'exp.ed.org': '北九州市立大学大学院・文部科学省（MEXT）国費留学生',
-            'exp.ed.summary': 'フリーランスの仕事と並行して修了。PythonとCARLAシミュレーター（Unreal Engine）を用いて、交通心理学とドライバー行動を研究し、データ収集・分析からシミュレーション設計までを担当しました。',
+            'exp.ed.summary': 'フリーランスの仕事と並行して修了。PythonとCARLAシミュレーター（Unreal Engine）を用いて、交通心理学・ドライバー行動・音声の調音動作を研究し、IEEE Xplore掲載論文を含む3件の筆頭著者論文を発表しました。',
 
             'skills.eyebrow': 'スキル',
             'skills.title': '<span class="grad-text">実務で磨いた</span>技術スタック',
@@ -423,7 +439,23 @@
             'certs.mscBy': '北九州市立大学大学院・2026年修了',
             'gallery.aria': '日本での生活 フォトスライダー',
             'contact.languages': '対応言語',
-            'contact.languagesVal': '英語・日本語'
+            'contact.languagesVal': '英語・日本語',
+            'nav.publications': '研究業績',
+            'pubs.eyebrow': '研究',
+            'pubs.title': '研究業績・<span class="grad-text">学会発表</span>',
+            'pubs.sub': '北九州市立大学大学院での研究成果（すべて筆頭著者）。運転シミュレーション、音声音響分析、データ可視化に取り組みました。',
+            'pubs.statPapers': '件の筆頭著者論文',
+            'pubs.statConf': '件の国際・国内学会',
+            'pubs.statIndexed': 'Xplore掲載・Springer論文集（刊行予定）',
+            'pubs.firstAuthor': '筆頭著者',
+            'pubs.status.upcoming': '採択・発表予定',
+            'pubs.status.presented': '発表済み',
+            'pubs.status.published': '掲載済み・IEEE Xplore',
+            'pubs.presentedOn': '発表日',
+            'pubs.toPresent': '発表予定日',
+            'pubs.read': 'IEEE Xploreで読む',
+            'pubs.soon': '論文リンクは近日公開',
+            'pubs.soonUpcoming': '学会発表後に公開予定'
         }
     };
 
