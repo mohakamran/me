@@ -222,17 +222,17 @@
             'pubs.title': 'Publications &amp; <span class="grad-text">conference papers</span>',
             'pubs.sub': 'First-author research from my M.Sc. at the University of Kitakyushu — driving simulation, speech acoustics and data visualization.',
             'pubs.statPapers': 'first-author papers',
-            'pubs.statConf': 'international & national conferences',
-            'pubs.statIndexed': 'Xplore · Springer proceedings (forthcoming)',
+            'pubs.statConf': 'conferences: ICCITX (IEEE), SICE FES, VTCA',
             'pubs.firstAuthor': 'First author',
-            'pubs.status.upcoming': 'Accepted · upcoming',
-            'pubs.status.presented': 'Presented',
-            'pubs.status.published': 'Published · IEEE Xplore',
+            'pubs.status.published': 'Published',
             'pubs.presentedOn': 'Presented',
             'pubs.toPresent': 'To be presented',
             'pubs.read': 'Read on IEEE Xplore',
             'pubs.soon': 'Paper link coming soon',
-            'pubs.soonUpcoming': 'Link available after the conference'
+            'pubs.soonUpcoming': 'Link available after the conference',
+            'pubs.status.accepted': 'Accepted',
+            'pubs.originalTitle': 'Original title',
+            'pubs.statPublished': 'published · 1 accepted (Springer)'
         },
 
         ja: {
@@ -445,17 +445,17 @@
             'pubs.title': '研究業績・<span class="grad-text">学会発表</span>',
             'pubs.sub': '北九州市立大学大学院での研究成果（すべて筆頭著者）。運転シミュレーション、音声音響分析、データ可視化に取り組みました。',
             'pubs.statPapers': '件の筆頭著者論文',
-            'pubs.statConf': '件の国際・国内学会',
-            'pubs.statIndexed': 'Xplore掲載・Springer論文集（刊行予定）',
+            'pubs.statConf': '件の学会：ICCITX（IEEE）・SICE FES・VTCA',
             'pubs.firstAuthor': '筆頭著者',
-            'pubs.status.upcoming': '採択・発表予定',
-            'pubs.status.presented': '発表済み',
-            'pubs.status.published': '掲載済み・IEEE Xplore',
+            'pubs.status.published': '掲載済み',
             'pubs.presentedOn': '発表日',
-            'pubs.toPresent': '発表予定日',
+            'pubs.toPresent': '発表予定',
             'pubs.read': 'IEEE Xploreで読む',
             'pubs.soon': '論文リンクは近日公開',
-            'pubs.soonUpcoming': '学会発表後に公開予定'
+            'pubs.soonUpcoming': '学会発表後に公開予定',
+            'pubs.status.accepted': '採択済み',
+            'pubs.originalTitle': '原題',
+            'pubs.statPublished': '件 掲載済み・1件 採択（Springer）'
         }
     };
 

@@ -260,11 +260,12 @@ window.SITE_DATA = {
     ],
 
     /* ---------- Publications (first author on all) ----------
-       status: upcoming | presented | published;  date: ISO (presentation date)   */
+       status: accepted | published;  date / dateEnd: ISO presentation date (range)   */
     publications: [
         {
-            status: 'upcoming',
-            date: '2026-11-26',
+            status: 'accepted',
+            date: '2026-11-25',
+            dateEnd: '2026-11-26',
             title: 'Spacing Over Speed: An Exploratory CARLA Study of Collision Risk During a Gradual Weather Transition',
             titleJa: '速度より車間距離：天候の段階的変化における衝突リスクに関するCARLAを用いた探索的研究',
             authors: ['Kamran, M.', 'Hayami, T.'],
@@ -275,13 +276,13 @@ window.SITE_DATA = {
             topic: { en: 'Driving simulation', ja: '運転シミュレーション' }
         },
         {
-            status: 'presented',
+            status: 'published',
             date: '2026-08-17',
             title: 'Acoustic Variability of the /ai/ Diphthong: The Impact of Phonetic Context and Articulatory Behavior',
             titleJa: '二重母音/ai/の音響的変動：音声環境と調音動作の影響',
             authors: ['Kamran, M.', 'Kondo, E.', 'Hayami, T.'],
             year: 2026,
-            venue: { en: 'SICE Festival with Annual Conference 2026 (SICE FES 2026)', ja: 'SICE Festival with Annual Conference 2026（SICE FES 2026）' },
+            venue: { en: 'SICE Festival with Annual Conference 2026 (SICE FES 2026)', ja: '計測自動制御学会（SICE）年次大会 SICE FES 2026' },
             place: { en: 'Yokohama, Japan', ja: '横浜（日本）' },
             topic: { en: 'Speech & phonetics', ja: '音声・音響分析' }
         },
@@ -292,7 +293,7 @@ window.SITE_DATA = {
             titleJa: 'クラス・グループ間における調音運動の体系的可視化とフォルマント‐座標マッピング',
             authors: ['Kamran, M.', 'Kondo, E.', 'Hayami, T.'],
             year: 2026,
-            venue: { en: '3rd International Conference on Connected Innovation and Technology (ICCITX 2026), IEEE', ja: '第3回 Connected Innovation and Technology国際会議（ICCITX 2026）、IEEE' },
+            venue: { en: '3rd International Conference on Connected Innovation and Technology (ICCITX 2026), IEEE', ja: '第3回 コネクテッド・イノベーション技術国際会議（ICCITX 2026・IEEE）' },
             place: { en: 'Published in IEEE Xplore', ja: 'IEEE Xploreに掲載' },
             doi: '10.1109/ICCITX70146.2026.11679952',
             link: 'https://ieeexplore.ieee.org/document/11679952',
