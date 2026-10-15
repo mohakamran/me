@@ -1,9 +1,12 @@
 /* ==========================================================================
    Hero 3D scene (Three.js)
    - A glossy morphing "blob" (custom shader) sits behind the portrait,
-     with glossy geometric shapes orbiting it and a soft particle field.
+     orbited by 3D tiles of my tech stack (Python, Laravel, React, AI…)
+     on two tilted rings, plus a soft particle field. Hover a tile to flip
+     it and see its name; click or tap it to spin it.
    - Everything reacts to the mouse; the blob tracks the portrait's
-     position on screen (including while the hero parallax-scrolls).
+     position on screen. Scrolling away spins and swells the blob, sends
+     the tiles outward and dollies the camera in.
    - Lazy: loaded from the CDN only after the page has loaded and the
      browser is idle. Skipped for prefers-reduced-motion, Save-Data,
      no WebGL or very low-end devices — the CSS gradient orbs remain.
@@ -36,8 +39,8 @@
     }
 
     var PALETTES = {
-        light: { c1: '#6366f1', c2: '#a855f7', c3: '#ec4899', shapes: ['#6366f1', '#a855f7', '#ec4899', '#f59e0b', '#06b6d4', '#8b5cf6'], particles: ['#6366f1', '#a855f7', '#ec4899'] },
-        dark:  { c1: '#4f46e5', c2: '#9333ea', c3: '#db2777', shapes: ['#818cf8', '#c084fc', '#f472b6', '#fbbf24', '#22d3ee', '#a78bfa'], particles: ['#818cf8', '#c084fc', '#f472b6'] }
+        light: { c1: '#6366f1', c2: '#a855f7', c3: '#ec4899', particles: ['#6366f1', '#a855f7', '#ec4899'] },
+        dark:  { c1: '#4f46e5', c2: '#9333ea', c3: '#db2777', particles: ['#818cf8', '#c084fc', '#f472b6'] }
     };
 
     var BLOB_VERTEX = [
@@ -91,7 +94,7 @@
         var camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
         camera.position.z = 10;
 
-        /* Lights (for the glossy shapes) */
+        /* Lights (for the glossy tiles) */
         scene.add(new THREE.AmbientLight(0xffffff, 0.9));
         var key = new THREE.DirectionalLight(0xffffff, 1.6);
         key.position.set(4, 6, 8);
@@ -122,30 +125,112 @@
         );
         anchor.add(blob);
 
-        /* Floating glossy shapes orbiting the blob */
-        var geometries = [
-            new THREE.TorusGeometry(0.28, 0.1, 24, 48),
-            new THREE.OctahedronGeometry(0.3),
-            new THREE.IcosahedronGeometry(0.26),
-            new THREE.TorusKnotGeometry(0.2, 0.065, 96, 12),
-            new THREE.BoxGeometry(0.34, 0.34, 0.34),
-            new THREE.SphereGeometry(0.17, 32, 32)
+        /* Tech-stack orbit: glossy logo tiles circling the core on two tilted rings */
+        var TECH = [
+            { name: 'Python', glyph: '', fam: 'b', color: '#3776ab', ring: 0 },
+            { name: 'Laravel', glyph: '', fam: 'b', color: '#f05340', ring: 0 },
+            { name: 'React', glyph: '', fam: 'b', color: '#149eca', ring: 0 },
+            { name: 'Node.js', glyph: '', fam: 'b', color: '#3c873a', ring: 0 },
+            { name: 'PHP', glyph: '', fam: 'b', color: '#777bb4', ring: 0 },
+            { name: 'JavaScript', glyph: '', fam: 'b', color: '#e0a800', ring: 0 },
+            { name: 'AI & LLMs', glyph: '', fam: 's', color: '#a855f7', ring: 1 },
+            { name: 'Docker', glyph: '', fam: 'b', color: '#2496ed', ring: 1 },
+            { name: 'TypeScript', text: 'TS', color: '#3178c6', ring: 1 },
+            { name: 'MySQL', glyph: '', fam: 's', color: '#00758f', ring: 1 },
+            { name: 'Git', glyph: '', fam: 'b', color: '#f05032', ring: 1 },
+            { name: 'Tailwind CSS', glyph: '', fam: 's', color: '#06b6d4', ring: 1 }
         ];
-        var shapes = geometries.map(function (geo, i) {
-            var mat = new THREE.MeshPhysicalMaterial({ roughness: 0.18, metalness: 0.25, clearcoat: 1, clearcoatRoughness: 0.15 });
-            var mesh = new THREE.Mesh(geo, mat);
-            anchor.add(mesh);
-            return {
-                mesh: mesh,
-                angle: (i / geometries.length) * Math.PI * 2,
-                speed: 0.12 + (i % 3) * 0.05,
-                rx: 1.25 + (i % 2) * 0.2,        // orbit radius (in blob radii)
-                ry: 1.05 + ((i + 1) % 2) * 0.2,
-                zOff: (i % 2 ? 1 : -1) * 0.5,
-                bob: Math.random() * Math.PI * 2,
-                spin: new THREE.Vector3(Math.random(), Math.random(), Math.random()).multiplyScalar(0.8)
-            };
+        var RINGS = [
+            { r: 1.24, speed: 0.20, tilt: new THREE.Euler(1.12, 0, 0.34) },
+            { r: 1.5, speed: -0.14, tilt: new THREE.Euler(1.2, 0, -0.38) }
+        ];
+        var fontsReady = false;
+
+        // Rounded tile: extruded rounded rectangle; caps carry the logo texture, sides the brand colour
+        var tileGeo = (function () {
+            var sh = new THREE.Shape(), rr = 0.22;
+            sh.moveTo(rr, 0); sh.lineTo(1 - rr, 0); sh.quadraticCurveTo(1, 0, 1, rr);
+            sh.lineTo(1, 1 - rr); sh.quadraticCurveTo(1, 1, 1 - rr, 1);
+            sh.lineTo(rr, 1); sh.quadraticCurveTo(0, 1, 0, 1 - rr);
+            sh.lineTo(0, rr); sh.quadraticCurveTo(0, 0, rr, 0);
+            var g = new THREE.ExtrudeGeometry(sh, { depth: 0.12, bevelEnabled: true, bevelThickness: 0.04, bevelSize: 0.04, bevelSegments: 4, curveSegments: 10 });
+            g.translate(-0.5, -0.5, -0.06);
+            return g;
+        })();
+
+        function drawFace(t, dark) {
+            var c = t.canvas, g = c.getContext('2d'), n = c.width;
+            var grd = g.createLinearGradient(0, 0, n, n);
+            // Face: soft brand-tinted gradient
+            var tint = new THREE.Color(t.color);
+            var top = new THREE.Color(dark ? '#20244a' : '#ffffff').lerp(tint, dark ? 0.12 : 0.05);
+            var bottom = new THREE.Color(dark ? '#121530' : '#f4f2fb').lerp(tint, dark ? 0.2 : 0.12);
+            grd.addColorStop(0, '#' + top.getHexString());
+            grd.addColorStop(1, '#' + bottom.getHexString());
+            g.fillStyle = grd; g.fillRect(0, 0, n, n);
+            var col = new THREE.Color(t.color);
+            if (dark) col.lerp(new THREE.Color('#ffffff'), 0.22);
+            g.textAlign = 'center'; g.textBaseline = 'middle';
+            if (t.text) {
+                // TypeScript-style badge
+                var b = n * 0.56, x = (n - b) / 2;
+                g.fillStyle = t.color; g.beginPath();
+                if (g.roundRect) g.roundRect(x, x, b, b, n * 0.07); else g.rect(x, x, b, b);
+                g.fill();
+                g.fillStyle = '#ffffff'; g.font = '800 ' + Math.round(n * 0.27) + 'px "Outfit", Arial, sans-serif';
+                g.fillText(t.text, n / 2 + n * 0.04, n / 2 + n * 0.06);
+            } else if (fontsReady) {
+                g.fillStyle = '#' + col.getHexString();
+                g.font = (t.fam === 'b' ? '400 ' : '900 ') + Math.round(n * 0.56) + 'px "' + (t.fam === 'b' ? 'Font Awesome 6 Brands' : 'Font Awesome 6 Free') + '"';
+                g.shadowColor = 'rgba(0,0,0,' + (dark ? 0.35 : 0.12) + ')';
+                g.shadowBlur = n * 0.03; g.shadowOffsetY = n * 0.015;
+                g.fillText(t.glyph, n / 2, n / 2 + n * 0.02);
+                g.shadowColor = 'transparent';
+            } else {
+                g.fillStyle = '#' + col.getHexString();
+                g.font = '800 ' + Math.round(n * 0.2) + 'px Arial, sans-serif';
+                g.fillText(t.name.slice(0, 3), n / 2, n / 2);
+            }
+            t.texture.needsUpdate = true;
+        }
+
+        var tiles = TECH.map(function (t, i) {
+            t.canvas = document.createElement('canvas');
+            t.canvas.width = t.canvas.height = 256;
+            t.texture = new THREE.CanvasTexture(t.canvas);
+            t.texture.colorSpace = THREE.SRGBColorSpace;
+            t.texture.anisotropy = 4;
+            // Face is partly self-lit (emissive = its own texture) so logo colours stay true under the coloured lights
+            var face = new THREE.MeshPhysicalMaterial({ map: t.texture, emissive: 0xffffff, emissiveMap: t.texture, emissiveIntensity: 0.55, roughness: 0.4, clearcoat: 0.6, clearcoatRoughness: 0.25 });
+            var side = new THREE.MeshPhysicalMaterial({ color: t.color, roughness: 0.25, metalness: 0.25, clearcoat: 1 });
+            t.mesh = new THREE.Mesh(tileGeo, [face, side]);
+            t.mesh.userData.tile = t;
+            anchor.add(t.mesh);
+            var inRing = TECH.filter(function (x) { return x.ring === t.ring; });
+            t.angle = (inRing.indexOf(t) / inRing.length) * Math.PI * 2 + t.ring * 0.5;
+            t.phase = i * 1.7;
+            t.hover = 0; t.spin = 0; t.spinTarget = 0; t.jump = 0;
+            return t;
         });
+
+        // Dashed orbit paths
+        var orbitLines = RINGS.map(function (ring) {
+            var pts = new THREE.EllipseCurve(0, 0, 1, 1, 0, Math.PI * 2).getPoints(128);
+            var geo = new THREE.BufferGeometry().setFromPoints(pts.map(function (p) { return new THREE.Vector3(p.x, p.y, 0); }));
+            var line = new THREE.LineLoop(geo, new THREE.LineDashedMaterial({ dashSize: 0.04, gapSize: 0.03, transparent: true, opacity: 0.45 }));
+            line.computeLineDistances();
+            line.rotation.copy(ring.tilt);
+            anchor.add(line);
+            return line;
+        });
+
+        // Logos use the page's Font Awesome fonts; redraw once they are available
+        if (document.fonts && document.fonts.load) {
+            Promise.all([
+                document.fonts.load('400 64px "Font Awesome 6 Brands"'),
+                document.fonts.load('900 64px "Font Awesome 6 Free"')
+            ]).then(function () { fontsReady = true; applyTheme(); }).catch(function () {});
+        }
 
         /* Soft particle field */
         var sprite = (function () {
@@ -184,7 +269,8 @@
             blobUniforms.uC2.value.set(pal.c2);
             blobUniforms.uC3.value.set(pal.c3);
             blobUniforms.uRim.value = k === 'dark' ? 0.45 : 0.6;
-            shapes.forEach(function (s, i) { s.mesh.material.color.set(pal.shapes[i % pal.shapes.length]); });
+            tiles.forEach(function (t) { drawFace(t, k === 'dark'); });
+            orbitLines.forEach(function (l) { l.material.color.set(pal.c2); l.material.opacity = k === 'dark' ? 0.55 : 0.4; });
             var c = new THREE.Color();
             for (var i = 0; i < COUNT; i++) {
                 c.set(pal.particles[Math.floor(seed[i] * pal.particles.length)]);
@@ -222,12 +308,85 @@
         resize();
         window.addEventListener('resize', resize, { passive: true });
 
+        /* Tile interaction: hover grows + flips a tile and shows its name; click spins it */
+        var raycaster = new THREE.Raycaster(), ndc = new THREE.Vector2(), tmpV = new THREE.Vector3();
+        var hovered = null, px = -1, py = -1, pointerMoved = false, blocked = false, tipTimer = null;
+        var tileMeshes = tiles.map(function (t) { return t.mesh; });
+        var cursorEl = document.querySelector('.cursor');
+        var tip = document.createElement('div');
+        tip.className = 'tech-tip';
+        tip.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(tip);
+
+        function hitTest(x, y) {
+            var rect = canvas.getBoundingClientRect();
+            if (x < rect.left || x > rect.right || y < rect.top || y > rect.bottom) return null;
+            ndc.set(((x - rect.left) / rect.width) * 2 - 1, -((y - rect.top) / rect.height) * 2 + 1);
+            raycaster.setFromCamera(ndc, camera);
+            var hits = raycaster.intersectObjects(tileMeshes.concat([blob]), false);
+            // A tile hidden behind the glowing core doesn't count
+            return hits.length && hits[0].object.userData.tile ? hits[0].object.userData.tile : null;
+        }
+        function isBlocked(x, y) {
+            var el = document.elementFromPoint(x, y);
+            return !el || !!el.closest('.portrait, .float-card, .hero-copy a, .hero-copy button, .hero-title, .hero-lead, .hero-meta, .status-pill, .site-header, .scroll-cue');
+        }
+        function setHover(t) {
+            if (t === hovered) return;
+            if (t) t.spinTarget += Math.PI * 2;          // flip around once on hover
+            hovered = t;
+            hero.classList.toggle('tile-hover', !!t);
+            // The custom cursor shows its hover ring; the name floats above the tile
+            if (cursorEl && document.documentElement.classList.contains('has-custom-cursor')) {
+                cursorEl.setAttribute('data-state', t ? 'link' : '');
+            }
+            if (t) showTip(t); else hideTip();
+        }
+        function pickHover() {
+            if (!pointerMoved) return;
+            pointerMoved = false;
+            setHover(blocked ? null : hitTest(px, py));
+        }
+        function showTip(t) { tip.textContent = t.name; tip.style.setProperty('--c', t.color); tip.classList.add('show'); tip._t = t; }
+        function hideTip() { tip.classList.remove('show'); tip._t = null; }
+        function placeTip() {
+            var t = tip._t;
+            if (!t) return;
+            t.mesh.getWorldPosition(tmpV).project(camera);
+            var rect = canvas.getBoundingClientRect();
+            tip.style.transform = 'translate3d(' + (rect.left + (tmpV.x + 1) / 2 * rect.width).toFixed(1) + 'px,' + (rect.top + (1 - tmpV.y) / 2 * rect.height).toFixed(1) + 'px,0)';
+        }
+        window.addEventListener('pointermove', function (e) {
+            if (e.pointerType !== 'mouse') return;
+            px = e.clientX; py = e.clientY; pointerMoved = true;
+            blocked = isBlocked(px, py);
+        }, { passive: true });
+        hero.addEventListener('pointerleave', function () { px = py = -1; pointerMoved = true; });
+        hero.addEventListener('click', function (e) {
+            if (e.target.closest('a, button, input, .portrait')) return;
+            var t = hitTest(e.clientX, e.clientY);
+            if (!t) return;
+            t.spinTarget += Math.PI * 4;                 // double spin + hop toward the viewer
+            t.jump = 1;
+            if (e.pointerType !== 'mouse' || !hovered) {   // touch: show the name for a moment
+                showTip(t);
+                clearTimeout(tipTimer);
+                tipTimer = setTimeout(function () { if (hovered !== t) hideTip(); }, 1600);
+            }
+        });
+
         /* Mouse */
         var mouse = { x: 0, y: 0 }, cur = { x: 0, y: 0 };
         window.addEventListener('pointermove', function (e) {
             mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
             mouse.y = (e.clientY / window.innerHeight) * 2 - 1;
         }, { passive: true });
+
+        /* Scroll: 0 at the top of the page → 1 once the hero has scrolled away */
+        var scrollP = 0, scrollCur = 0;
+        function readScroll() { scrollP = Math.max(0, Math.min(1, window.scrollY / Math.max(1, hero.offsetHeight * 0.85))); }
+        window.addEventListener('scroll', readScroll, { passive: true });
+        readScroll();
 
         /* Loop — only while visible */
         var visible = true, running = false, last = 0, time = 0;
@@ -239,37 +398,50 @@
 
             cur.x += (mouse.x - cur.x) * 0.05;
             cur.y += (mouse.y - cur.y) * 0.05;
+            scrollCur += (scrollP - scrollCur) * 0.08;      // smoothed scroll progress
+            var sp = scrollCur;
 
             // Intro: grow in with a soft overshoot (ease-out-back)
             intro = Math.min(1, intro + dt * 0.9);
             var introEase = 1 + 1.4 * Math.pow(intro - 1, 3) + 0.4 * Math.pow(intro - 1, 2);
             placeAnchor();
-            blob.scale.setScalar(anchor.userData.radius * Math.max(0, introEase));
+            // Scrolling away: the blob swells, wobbles harder and spins
+            blob.scale.setScalar(anchor.userData.radius * Math.max(0, introEase) * (1 + sp * 0.55));
 
             blobUniforms.uTime.value = time;
-            blobUniforms.uAmp.value = 1 + Math.hypot(cur.x, cur.y) * 0.35;
-            blob.rotation.y = time * 0.15 + cur.x * 0.5;
-            blob.rotation.x = cur.y * 0.35;
+            blobUniforms.uAmp.value = 1 + Math.hypot(cur.x, cur.y) * 0.35 + sp * 0.9;
+            blob.rotation.y = time * 0.15 + cur.x * 0.5 + sp * 2.4;
+            blob.rotation.x = cur.y * 0.35 + sp * 0.8;
+            blob.rotation.z = sp * 1.2;
 
-            var R = anchor.userData.radius;
-            shapes.forEach(function (s, i) {
-                s.angle += dt * s.speed;
-                var a = s.angle;
-                s.mesh.position.set(
-                    Math.cos(a) * R * s.rx + cur.x * 0.25 * (i % 2 ? 1 : -1),
-                    Math.sin(a) * R * s.ry + Math.sin(time * 1.2 + s.bob) * 0.12 - cur.y * 0.2,
-                    Math.sin(a * 0.7) * R * 0.6 + s.zOff
+            // Tech tiles orbit the core; scrolling widens the rings and speeds them up
+            var R = anchor.userData.radius * (1 + sp * 1.2) * (heroW < 640 ? 0.8 : 1);   // tighter orbits on phones
+            pickHover();
+            orbitLines.forEach(function (l, i) { l.scale.setScalar(Math.max(0.001, R * RINGS[i].r * introEase)); });
+            tiles.forEach(function (t) {
+                var ring = RINGS[t.ring];
+                t.angle += dt * ring.speed * (1 + sp * 2.5) * (hovered ? 0.3 : 1);
+                var rr = R * ring.r;
+                tmpV.set(Math.cos(t.angle) * rr, Math.sin(t.angle) * rr, 0).applyEuler(ring.tilt);
+                t.hover += ((hovered === t ? 1 : 0) - t.hover) * 0.14;
+                t.jump *= 0.93;
+                t.spin += (t.spinTarget - t.spin) * 0.07;
+                t.mesh.position.set(tmpV.x, tmpV.y, tmpV.z + t.jump * R * 0.6 + t.hover * R * 0.25);
+                t.mesh.scale.setScalar(Math.max(0.001, R * 0.31 * (1 + t.hover * 0.45 + t.jump * 0.3) * Math.max(0, introEase)));
+                // Mostly face the viewer so logos stay readable, with a gentle wobble
+                t.mesh.rotation.set(
+                    Math.sin(time * 0.9 + t.phase) * 0.22 - cur.y * 0.25,
+                    Math.cos(time * 0.7 + t.phase) * 0.3 + cur.x * 0.35 + t.spin,
+                    Math.sin(time * 0.5 + t.phase) * 0.08
                 );
-                s.mesh.scale.setScalar(Math.max(0.001, R / 1.9) * Math.max(0, introEase));
-                s.mesh.rotation.x += dt * s.spin.x;
-                s.mesh.rotation.y += dt * s.spin.y;
-                s.mesh.rotation.z += dt * s.spin.z;
             });
+            placeTip();
 
-            points.rotation.y = time * 0.02 + cur.x * 0.08;
-            points.rotation.x = cur.y * 0.05;
+            points.rotation.y = time * 0.02 + cur.x * 0.08 + sp * 0.7;
+            points.rotation.x = cur.y * 0.05 + sp * 0.25;
             camera.position.x = cur.x * 0.35;
             camera.position.y = -cur.y * 0.25;
+            camera.position.z = 10 - sp * 2.6;                // dolly in
             camera.lookAt(0, 0, 0);
 
             renderer.render(scene, camera);

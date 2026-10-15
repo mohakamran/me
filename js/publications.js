@@ -44,6 +44,15 @@
         return joined + ' (' + year + ')';
     }
 
+    /* APA-style citation (always English — the papers are in English) */
+    function citation(p) {
+        var a = p.authors;
+        var names = a.length > 1 ? a.slice(0, -1).join(', ') + ', & ' + a[a.length - 1] : a[0];
+        var base = names + ' (' + p.year + '). ' + p.title + '. ';
+        if (p.status === 'accepted') return base + 'Accepted for presentation at ' + p.venue.en + ', ' + p.place.en + '.';
+        return base + 'In ' + p.venue.en + '.' + (p.doi ? ' https://doi.org/' + p.doi : '');
+    }
+
     function render() {
         var list = document.getElementById('pub-list');
         if (!list) return;
@@ -55,6 +64,8 @@
                       '<i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>' + esc(t('pubs.read')) + '</span></a>' +
                   (p.doi ? '<a class="pub-doi" href="https://doi.org/' + p.doi + '" target="_blank" rel="noopener">DOI: ' + esc(p.doi) + '</a>' : '')
                 : '<span class="pub-soon"><i class="fa-regular fa-clock" aria-hidden="true"></i>' + esc(t(p.status === 'accepted' ? 'pubs.soonUpcoming' : 'pubs.soon')) + '</span>';
+            action += '<button type="button" class="pub-cite" data-copy="' + esc(citation(p)) + '" data-copied="toast.citeCopied">' +
+                          '<i class="fa-regular fa-copy" aria-hidden="true"></i><span>' + esc(t('pubs.cite')) + '</span></button>';
             return '' +
                 '<li class="pub-card glass tilt" data-tilt-max="4" data-status="' + p.status + '">' +
                     '<span class="pub-num" aria-hidden="true">' + (i + 1) + '</span>' +

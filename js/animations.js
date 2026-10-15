@@ -4,7 +4,7 @@
    - Header state, active nav link, mobile drawer
    - Scroll progress, timeline progress line, hero parallax
    - Intersection Observer reveals (.reveal / .reveal-stagger → .is-visible)
-   - Count-up counters, 3D tilt + glare, magnetic buttons, cursor glow
+   - 3D tilt + glare, magnetic buttons, cursor glow (counters: js/counters.js)
    Everything motion-related is skipped for prefers-reduced-motion users.
    ========================================================================== */
 (function () {
@@ -143,7 +143,6 @@
     function initScroll(header) {
         var bar = document.querySelector('.scroll-progress span');
         var timeline = document.querySelector('.timeline');
-        var heroInner = document.querySelector('.hero-inner');
         var ticking = false;
 
         function update() {
@@ -160,18 +159,7 @@
                 var p = (vh * 0.6 - r.top) / r.height;
                 timeline.style.setProperty('--progress', Math.max(0, Math.min(1, p)).toFixed(3));
             }
-
-            // Hero content drifts up and fades as you scroll away — desktop only.
-            // On phones/tablets the portrait sits below the text, so fading would hide it.
-            if (heroInner && !reduceMotion) {
-                if (window.innerWidth >= 1024 && y < vh * 1.2) {
-                    heroInner.style.translate = '0 ' + (y * 0.28).toFixed(1) + 'px';
-                    heroInner.style.opacity = Math.max(0, 1 - y / (vh * 0.85)).toFixed(3);
-                } else if (window.innerWidth < 1024 && heroInner.style.opacity) {
-                    heroInner.style.translate = '';
-                    heroInner.style.opacity = '';
-                }
-            }
+            // (Hero scroll effect lives in js/scroll-fx.js)
         }
 
         function onScroll() {
@@ -197,7 +185,6 @@
 
         if (reduceMotion || !('IntersectionObserver' in window)) {
             targets.forEach(function (el) { el.classList.add('is-visible'); });
-            document.querySelectorAll('.counter').forEach(function (c) { c.textContent = c.getAttribute('data-count'); });
             return;
         }
 
@@ -206,30 +193,13 @@
             entries.forEach(function (entry) {
                 if (!entry.isIntersecting) return;
                 entry.target.classList.add('is-visible');
-                entry.target.querySelectorAll('.counter').forEach(countUp);
                 revealObserver.unobserve(entry.target);
             });
         }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
 
         targets.forEach(function (el) { revealObserver.observe(el); });
-        document.querySelectorAll('.counter').forEach(function (c) { c.textContent = '0'; });
     }
-
-    function countUp(el) {
-        if (el.dataset.done) return;
-        el.dataset.done = '1';
-        var target = parseInt(el.getAttribute('data-count'), 10) || 0;
-        var duration = 1600;
-        var start = null;
-        function frame(ts) {
-            if (start === null) start = ts;
-            var p = Math.min(1, (ts - start) / duration);
-            var eased = 1 - Math.pow(1 - p, 4);
-            el.textContent = Math.round(target * eased).toLocaleString(document.documentElement.lang);
-            if (p < 1) requestAnimationFrame(frame);
-        }
-        requestAnimationFrame(frame);
-    }
+    // Counters are handled by js/counters.js (rolling odometer digits)
 
     /* ---------- 3D tilt + glare (cards & portraits) ---------- */
     function bindTilt(scope) {
@@ -336,6 +306,9 @@
             if (t.closest('.cf-slide.is-active')) return setState('label', window.I18N.t('cursor.view'));
             if (t.closest('.cf-stage')) return setState('label', window.I18N.t('cursor.drag'));
             if (t.closest('.skill-globe')) return setState('label', window.I18N.t('cursor.spin'));
+            if (t.closest('.fp-media, .ac-media')) return setState('label', window.I18N.t('cursor.view'));
+            if (t.closest('.portrait-flip-btn, .portrait-flip a')) return setState('link');
+            if (t.closest('.portrait-flip')) return setState('label', window.I18N.t('cursor.flip'));
             if (t.closest('a, button, label, [role="button"], .filter-btn')) return setState('link');
             setState('');
         });
