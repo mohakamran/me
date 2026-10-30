@@ -229,7 +229,7 @@
             'pubs.read': 'Read on IEEE Xplore',
             'pubs.soon': 'Paper link coming soon',
             'pubs.soonUpcoming': 'Link available after the conference',
-            'pubs.status.accepted': 'Accepted',
+            'pubs.status.accepted': 'Accepted · upcoming presentation',
             'pubs.originalTitle': 'Original title',
             'pubs.statPublished': 'published · 1 accepted (Springer)',
             'story.kicker': 'In a nutshell',
@@ -277,7 +277,11 @@
             'footer.explore': 'Explore',
             'footer.work': 'Featured work',
             'footer.allProjects': 'All projects',
-            'footer.built': 'Designed & built with HTML, CSS, JavaScript & Three.js'
+            'footer.built': 'Designed & built with HTML, CSS, JavaScript & Three.js',
+            'pubs.linkSite': 'Conference website',
+            'pubs.linkProgram': 'Conference program',
+            'pubs.paperId': 'Paper ID',
+            'pubs.session': 'Session'
         },
 
         ja: {
@@ -497,7 +501,7 @@
             'pubs.read': 'IEEE Xploreで読む',
             'pubs.soon': '論文リンクは近日公開',
             'pubs.soonUpcoming': '学会発表後に公開予定',
-            'pubs.status.accepted': '採択済み',
+            'pubs.status.accepted': '採択済み・発表予定',
             'pubs.originalTitle': '原題',
             'pubs.statPublished': '件 掲載済み・1件 採択（Springer）',
             'story.kicker': 'ひとことで言うと',
@@ -545,7 +549,11 @@
             'footer.explore': 'メニュー',
             'footer.work': '主な実績',
             'footer.allProjects': 'すべてのプロジェクト',
-            'footer.built': 'HTML・CSS・JavaScript・Three.jsで設計・開発'
+            'footer.built': 'HTML・CSS・JavaScript・Three.jsで設計・開発',
+            'pubs.linkSite': '学会公式サイト',
+            'pubs.linkProgram': '学会プログラム',
+            'pubs.paperId': '論文ID',
+            'pubs.session': 'セッション'
         }
     };
 

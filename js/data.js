@@ -300,30 +300,47 @@ window.SITE_DATA = {
     ],
 
     /* ---------- Publications (first author on all) ----------
-       status: accepted | published;  date / dateEnd: ISO presentation date (range)   */
+       status: accepted | published;  date (dateEnd optional): ISO presentation date;
+       links: [{ href, label: i18n key, icon }] — the first one is the main button   */
     publications: [
         {
             status: 'accepted',
             date: '2026-11-25',
-            dateEnd: '2026-11-26',
             title: 'Spacing Over Speed: An Exploratory CARLA Study of Collision Risk During a Gradual Weather Transition',
             titleJa: '速度より車間距離：天候の段階的変化における衝突リスクに関するCARLAを用いた探索的研究',
             authors: ['Kamran, M.', 'Hayami, T.'],
             year: 2026,
             venue: { en: '8th International Conference on Smart Vehicular Technology, Transportation, Communication and Applications (VTCA 2026)', ja: '第8回 スマート車両技術・交通・通信・応用に関する国際会議（VTCA 2026）' },
-            place: { en: 'University of Miyazaki, Japan', ja: '宮崎大学（日本）' },
+            place: { en: 'University of Miyazaki, Miyazaki, Japan', ja: '宮崎大学（宮崎県宮崎市）' },
+            desc: {
+                en: 'An exploratory study using the CARLA driving simulator to investigate collision risk during gradual weather transitions, examining the relationship between vehicle spacing, driving speed and road safety under changing environmental conditions.',
+                ja: 'CARLA運転シミュレーターを用いて、天候が徐々に変化する状況での衝突リスクを調べた探索的研究。変化する環境条件の下で、車間距離・走行速度と道路の安全性の関係を検証しました。'
+            },
             note: { en: 'Proceedings to be published by Springer (Smart Innovation, Systems and Technologies).', ja: '論文集はSpringer（Smart Innovation, Systems and Technologies）より刊行予定。' },
+            links: [
+                { href: 'https://vtca2026.com/', label: 'pubs.linkSite', icon: 'fa-globe' },
+                { href: 'https://vtca2026.com/program', label: 'pubs.linkProgram', icon: 'fa-list-ul' }
+            ],
             topic: { en: 'Driving simulation', ja: '運転シミュレーション' }
         },
         {
             status: 'published',
-            date: '2026-08-17',
+            date: '2026-09-16',
             title: 'Acoustic Variability of the /ai/ Diphthong: The Impact of Phonetic Context and Articulatory Behavior',
             titleJa: '二重母音/ai/の音響的変動：音声環境と調音動作の影響',
             authors: ['Kamran, M.', 'Kondo, E.', 'Hayami, T.'],
             year: 2026,
-            venue: { en: 'SICE Festival with Annual Conference 2026 (SICE FES 2026)', ja: '計測自動制御学会（SICE）年次大会 SICE FES 2026' },
+            venue: { en: '2026 SICE Festival with Annual Conference (SICE 2026)', ja: '2026年 計測自動制御学会 SICE Festival with Annual Conference（SICE 2026）' },
             place: { en: 'Yokohama, Japan', ja: '横浜（日本）' },
+            desc: {
+                en: 'Research investigating acoustic variability in the /ai/ diphthong, focusing on the influence of phonetic context and articulatory behavior through acoustic and formant analysis.',
+                ja: '二重母音/ai/の音響的な変動について、音声環境（前後の音）と調音動作の影響に着目し、音響分析とフォルマント分析によって調べた研究です。'
+            },
+            paperId: '0285',
+            session: 'WeCT1-01.13',
+            links: [
+                { href: 'https://controls.papercept.net/conferences/conferences/SICE26/program/SICE26_ContentListWeb_3.html', label: 'pubs.linkProgram', icon: 'fa-list-ul' }
+            ],
             topic: { en: 'Speech & phonetics', ja: '音声・音響分析' }
         },
         {
@@ -336,7 +353,9 @@ window.SITE_DATA = {
             venue: { en: '3rd International Conference on Connected Innovation and Technology (ICCITX 2026), IEEE', ja: '第3回 コネクテッド・イノベーション技術国際会議（ICCITX 2026・IEEE）' },
             place: { en: 'Published in IEEE Xplore', ja: 'IEEE Xploreに掲載' },
             doi: '10.1109/ICCITX70146.2026.11679952',
-            link: 'https://ieeexplore.ieee.org/document/11679952',
+            links: [
+                { href: 'https://ieeexplore.ieee.org/document/11679952', label: 'pubs.read', icon: 'fa-file-lines' }
+            ],
             topic: { en: 'Speech & data visualization', ja: '音声・データ可視化' }
         }
     ],

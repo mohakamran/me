@@ -1187,6 +1187,10 @@ main { position: relative; z-index: 1; }
 .pub-where span { display: inline-flex; align-items: baseline; gap: 10px; }
 .pub-where time { font-weight: 700; color: var(--text); }
 .pub-note { font-size: 0.86rem; color: var(--text-subtle); font-style: italic; }
+.pub-desc { font-size: 0.93rem; color: var(--text-muted); line-height: 1.65; }
+.pub-ids { display: flex; flex-wrap: wrap; gap: 8px; }
+.pub-ids span { padding: 3px 10px; border-radius: 8px; font-family: var(--font-mono); font-size: 0.74rem; color: var(--text-muted); background: var(--grad-soft); border: 1px solid var(--border); }
+.pub-ids b { font-family: var(--font-body); font-weight: 700; color: var(--text); margin-right: 4px; }
 .pub-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding-top: 4px; position: relative; z-index: 5; }
 .pub-doi { font-family: var(--font-mono); font-size: 0.76rem; color: var(--text-subtle); overflow-wrap: anywhere; }
 .pub-doi:hover { color: var(--accent); }

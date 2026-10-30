@@ -50,7 +50,7 @@
         var names = a.length > 1 ? a.slice(0, -1).join(', ') + ', & ' + a[a.length - 1] : a[0];
         var base = names + ' (' + p.year + '). ' + p.title + '. ';
         if (p.status === 'accepted') return base + 'Accepted for presentation at ' + p.venue.en + ', ' + p.place.en + '.';
-        return base + 'In ' + p.venue.en + '.' + (p.doi ? ' https://doi.org/' + p.doi : '');
+        return base + 'In ' + p.venue.en + (p.paperId ? ' (Paper ' + p.paperId + ')' : '') + '.' + (p.doi ? ' https://doi.org/' + p.doi : '');
     }
 
     function render() {
@@ -59,9 +59,12 @@
         list.innerHTML = pubs.map(function (p, i) {
             var ja = window.I18N.lang === 'ja' && p.titleJa;
             var dateLabel = t(p.status === 'accepted' ? 'pubs.toPresent' : 'pubs.presentedOn');
-            var action = p.link
-                ? '<a class="btn btn-primary btn-sm" href="' + p.link + '" target="_blank" rel="noopener">' +
-                      '<i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>' + esc(t('pubs.read')) + '</span></a>' +
+            var links = p.links || [];
+            var action = links.length
+                ? links.map(function (l, li) {
+                      return '<a class="btn ' + (li === 0 ? 'btn-primary' : 'btn-ghost') + ' btn-sm" href="' + l.href + '" target="_blank" rel="noopener">' +
+                          '<i class="fa-solid ' + (l.icon || 'fa-arrow-up-right-from-square') + '" aria-hidden="true"></i><span>' + esc(t(l.label)) + '</span></a>';
+                  }).join('') +
                   (p.doi ? '<a class="pub-doi" href="https://doi.org/' + p.doi + '" target="_blank" rel="noopener">DOI: ' + esc(p.doi) + '</a>' : '')
                 : '<span class="pub-soon"><i class="fa-regular fa-clock" aria-hidden="true"></i>' + esc(t(p.status === 'accepted' ? 'pubs.soonUpcoming' : 'pubs.soon')) + '</span>';
             action += '<button type="button" class="pub-cite" data-copy="' + esc(citation(p)) + '" data-copied="toast.citeCopied">' +
@@ -80,11 +83,16 @@
                               '<p class="pub-title-orig" lang="en"><span>' + esc(t('pubs.originalTitle')) + '</span>' + esc(p.title) + '</p>'
                             : '<h3 lang="en">' + esc(p.title) + '</h3>') +
                         '<p class="pub-authors">' + authors(p.authors, p.year) + '</p>' +
+                        (p.desc ? '<p class="pub-desc">' + esc(pick(p.desc)) + '</p>' : '') +
                         '<p class="pub-venue"><i class="fa-solid fa-building-columns" aria-hidden="true"></i><span>' + esc(pick(p.venue)) + '</span></p>' +
                         '<p class="pub-where">' +
                             '<span><i class="fa-solid fa-location-dot" aria-hidden="true"></i>' + esc(pick(p.place)) + '</span>' +
                             '<span><i class="fa-regular fa-calendar" aria-hidden="true"></i>' + esc(dateLabel) + ' <time datetime="' + p.date + '">' + esc(formatDate(p.date, p.dateEnd)) + '</time></span>' +
                         '</p>' +
+                        (p.paperId || p.session ? '<p class="pub-ids">' +
+                            (p.paperId ? '<span><b>' + esc(t('pubs.paperId')) + '</b> ' + esc(p.paperId) + '</span>' : '') +
+                            (p.session ? '<span><b>' + esc(t('pubs.session')) + '</b> ' + esc(p.session) + '</span>' : '') +
+                        '</p>' : '') +
                         (p.note ? '<p class="pub-note">' + esc(pick(p.note)) + '</p>' : '') +
                         '<div class="pub-actions">' + action + '</div>' +
                     '</article>' +
