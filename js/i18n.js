@@ -281,7 +281,9 @@
             'pubs.linkSite': 'Conference website',
             'pubs.linkProgram': 'Conference program',
             'pubs.paperId': 'Paper ID',
-            'pubs.session': 'Session'
+            'pubs.session': 'Session',
+            'theme.customize': 'Change colour theme',
+            'theme.hint': 'New: pick your colour theme'
         },
 
         ja: {
@@ -553,7 +555,9 @@
             'pubs.linkSite': '学会公式サイト',
             'pubs.linkProgram': '学会プログラム',
             'pubs.paperId': '論文ID',
-            'pubs.session': 'セッション'
+            'pubs.session': 'セッション',
+            'theme.customize': 'カラーテーマを変更',
+            'theme.hint': 'カラーテーマを選べます'
         }
     };
 

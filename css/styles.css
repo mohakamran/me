@@ -2747,6 +2747,130 @@ a.fct-item:hover { color: var(--accent); }
 /* Small laptops: make room for the palette button — the hero and menu already link to Contact */
 @media (min-width: 1024px) and (max-width: 1279px) { .nav-cta { display: none; } }
 
+/* ---------- Floating colour picker (bottom-right) ---------- */
+.theme-dock {
+    position: fixed;
+    right: calc(16px + env(safe-area-inset-right, 0px));
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    z-index: 89;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+}
+.dock-btn {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: var(--surface-strong);
+    color: var(--accent);
+    font-size: 1.15rem;
+    box-shadow: var(--shadow-glow);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    transition: transform 0.4s var(--ease-spring), color 0.3s;
+}
+/* Rotating ring in the current palette colours */
+.dock-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    padding: 3px;
+    background: conic-gradient(var(--accent-1), var(--accent-2), var(--accent-3), var(--accent-1));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: spin 6s linear infinite;
+}
+.dock-btn i { position: relative; transition: transform 0.6s var(--ease-spring); }
+.dock-btn:hover { transform: scale(1.08); }
+.dock-btn:hover i, .theme-dock.open .dock-btn i { transform: rotate(-25deg) scale(1.1); }
+.theme-dock.open .dock-btn { background: var(--grad); color: #fff; }
+/* Gentle attention pulse while the first-visit hint is showing */
+.theme-dock.nudge .dock-btn { animation: dockNudge 1.6s var(--ease) infinite; }
+@keyframes dockNudge { 0%, 100% { box-shadow: var(--shadow-glow), 0 0 0 0 color-mix(in srgb, var(--accent-2) 45%, transparent); } 60% { box-shadow: var(--shadow-glow), 0 0 0 14px transparent; } }
+
+.dock-panel {
+    width: min(300px, calc(100vw - 32px));
+    padding: 16px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--surface-strong);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+    box-shadow: var(--shadow-lift);
+    opacity: 0;
+    transform: translateY(10px) scale(0.96);
+    transform-origin: bottom right;
+    transition: opacity 0.25s, transform 0.35s var(--ease-spring);
+}
+.dock-panel.show { opacity: 1; transform: none; }
+.dock-title { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; font-size: 0.82rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text); }
+.dock-title i { color: var(--accent); }
+.dock-swatches { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.swatch-named {
+    --s1: #047857; --s2: #10b981; --s3: #84cc16;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 8px 10px;
+    border-radius: 14px;
+    border: 1.5px solid var(--border);
+    background: var(--surface-solid);
+    color: var(--text);
+    font-size: 0.86rem;
+    font-weight: 700;
+    text-align: left;
+    transition: border-color 0.2s, transform 0.3s var(--ease-spring), box-shadow 0.3s;
+}
+.swatch-named:hover { transform: translateY(-2px); border-color: var(--border-strong); }
+.swatch-named[aria-pressed="true"] { border-color: var(--accent-2); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-2) 22%, transparent); }
+.sn-dot { width: 26px; height: 26px; flex: none; border-radius: 50%; background: linear-gradient(135deg, var(--s1), var(--s2) 55%, var(--s3)); box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.5); }
+.swatch-named[aria-pressed="true"] .sn-dot { box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.85), 0 0 0 2px var(--accent-2); }
+.swatch-named.swatch-violet { --s1: #4f46e5; --s2: #a855f7; --s3: #ec4899; }
+.swatch-named.swatch-ocean { --s1: #2563eb; --s2: #0891b2; --s3: #14b8a6; }
+.swatch-named.swatch-sunset { --s1: #e11d48; --s2: #f97316; --s3: #f59e0b; }
+.dock-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 0.84rem; font-weight: 700; color: var(--text-muted); }
+
+/* First-visit hint bubble */
+.dock-hint {
+    position: relative;
+    display: grid;
+    gap: 10px;
+    padding: 14px 40px 14px 16px;
+    border-radius: 18px;
+    background: var(--surface-strong);
+    border: 1px solid var(--border);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+    box-shadow: var(--shadow-lift);
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+    transform-origin: bottom right;
+    transition: opacity 0.3s, transform 0.4s var(--ease-spring);
+}
+.dock-hint.show { opacity: 1; transform: none; }
+.dock-hint::after { content: ""; position: absolute; right: 22px; bottom: -6px; width: 12px; height: 12px; background: var(--surface-strong); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); transform: rotate(45deg); }
+.dock-hint p { font-size: 0.88rem; font-weight: 800; color: var(--text); }
+.dock-hint .swatch { width: 34px; height: 34px; }
+.dock-hint-close { position: absolute; top: 8px; right: 8px; display: grid; place-items: center; width: 28px; height: 28px; border: 0; border-radius: 8px; background: transparent; color: var(--text-subtle); }
+.dock-hint-close:hover { background: var(--grad-soft); color: var(--text); }
+
+@media (max-width: 479px) {
+    .theme-dock { right: 12px; bottom: 12px; }
+    .dock-btn { width: 48px; height: 48px; font-size: 1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .dock-ring, .theme-dock.nudge .dock-btn { animation: none; }
+}
+@media print { .theme-dock { display: none !important; } }
+
 /* ---------- Print ---------- */
 @media print {
     .site-header, .cursor-glow, .scroll-progress, .hero-bg, .marquee, .scroll-cue, .contact-form-wrap, #gallery, .globe-wrap { display: none !important; }

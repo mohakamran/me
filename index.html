@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="light" data-accent="emerald">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -20,7 +20,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@being_m_kamran">
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><linearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22><stop offset=%220%22 stop-color=%22%234f46e5%22/><stop offset=%22.5%22 stop-color=%22%23a855f7%22/><stop offset=%221%22 stop-color=%22%23ec4899%22/></linearGradient></defs><rect width=%22100%22 height=%22100%22 rx=%2224%22 fill=%22url(%23g)%22/><path d=%22M20 72V30l15 20 15-20v42M62 30v42M62 52l18-22M62 52l18 20%22 stroke=%22white%22 stroke-width=%228%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22/></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><linearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22><stop offset=%220%22 stop-color=%22%23047857%22/><stop offset=%22.5%22 stop-color=%22%2310b981%22/><stop offset=%221%22 stop-color=%22%2384cc16%22/></linearGradient></defs><rect width=%22100%22 height=%22100%22 rx=%2224%22 fill=%22url(%23g)%22/><path d=%22M20 72V30l15 20 15-20v42M62 30v42M62 52l18-22M62 52l18 20%22 stroke=%22white%22 stroke-width=%228%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22/></svg>">
 
     <!-- The site always opens in light mode; language is restored before first paint -->
     <script>
@@ -30,7 +30,10 @@
             if (l === 'jp') l = 'ja';
             if (l !== 'en' && l !== 'ja') l = /^ja\b/i.test(navigator.language || '') ? 'ja' : 'en';
             d.setAttribute('data-theme', 'light');
-            try { var a = localStorage.getItem('accent'); if (/^(ocean|sunset|emerald)$/.test(a)) d.setAttribute('data-accent', a); } catch (e) {}
+            // Colour theme: Emerald by default; a visitor's saved choice wins
+            var a = 'emerald';
+            try { var saved = localStorage.getItem('accent'); if (/^(emerald|violet|ocean|sunset)$/.test(saved)) a = saved; } catch (e) {}
+            if (a === 'violet') d.removeAttribute('data-accent'); else d.setAttribute('data-accent', a);
             d.setAttribute('lang', l);
             d.classList.add('js');
         })();
@@ -115,7 +118,7 @@
                     </button>
                     <div class="theme-pop" id="theme-pop" hidden>
                         <p class="theme-pop-title" data-i18n="theme.palette">Colour theme</p>
-                        <div class="swatches" role="group" aria-label="Colour theme" data-i18n-attr="aria-label:theme.palette"><button type="button" class="swatch swatch-violet" data-accent-btn="violet" aria-pressed="false" aria-label="Violet" data-i18n-attr="aria-label:theme.violet"><span></span></button><button type="button" class="swatch swatch-ocean" data-accent-btn="ocean" aria-pressed="false" aria-label="Ocean" data-i18n-attr="aria-label:theme.ocean"><span></span></button><button type="button" class="swatch swatch-sunset" data-accent-btn="sunset" aria-pressed="false" aria-label="Sunset" data-i18n-attr="aria-label:theme.sunset"><span></span></button><button type="button" class="swatch swatch-emerald" data-accent-btn="emerald" aria-pressed="false" aria-label="Emerald" data-i18n-attr="aria-label:theme.emerald"><span></span></button></div>
+                        <div class="swatches" role="group" aria-label="Colour theme" data-i18n-attr="aria-label:theme.palette"><button type="button" class="swatch swatch-emerald" data-accent-btn="emerald" aria-pressed="false" aria-label="Emerald" data-i18n-attr="aria-label:theme.emerald"><span></span></button><button type="button" class="swatch swatch-violet" data-accent-btn="violet" aria-pressed="false" aria-label="Violet" data-i18n-attr="aria-label:theme.violet"><span></span></button><button type="button" class="swatch swatch-ocean" data-accent-btn="ocean" aria-pressed="false" aria-label="Ocean" data-i18n-attr="aria-label:theme.ocean"><span></span></button><button type="button" class="swatch swatch-sunset" data-accent-btn="sunset" aria-pressed="false" aria-label="Sunset" data-i18n-attr="aria-label:theme.sunset"><span></span></button></div>
                     </div>
                 </div>
                 <a href="#contact" class="btn btn-primary btn-sm nav-cta magnetic" data-i18n="nav.contact">Contact Me</a>
@@ -158,7 +161,7 @@
             </div>
             <div class="ds-row">
                 <span class="ds-label" data-i18n="theme.palette">Colour theme</span>
-                <div class="swatches swatches-lg" role="group" aria-label="Colour theme" data-i18n-attr="aria-label:theme.palette"><button type="button" class="swatch swatch-violet" data-accent-btn="violet" aria-pressed="false" aria-label="Violet" data-i18n-attr="aria-label:theme.violet"><span></span></button><button type="button" class="swatch swatch-ocean" data-accent-btn="ocean" aria-pressed="false" aria-label="Ocean" data-i18n-attr="aria-label:theme.ocean"><span></span></button><button type="button" class="swatch swatch-sunset" data-accent-btn="sunset" aria-pressed="false" aria-label="Sunset" data-i18n-attr="aria-label:theme.sunset"><span></span></button><button type="button" class="swatch swatch-emerald" data-accent-btn="emerald" aria-pressed="false" aria-label="Emerald" data-i18n-attr="aria-label:theme.emerald"><span></span></button></div>
+                <div class="swatches swatches-lg" role="group" aria-label="Colour theme" data-i18n-attr="aria-label:theme.palette"><button type="button" class="swatch swatch-emerald" data-accent-btn="emerald" aria-pressed="false" aria-label="Emerald" data-i18n-attr="aria-label:theme.emerald"><span></span></button><button type="button" class="swatch swatch-violet" data-accent-btn="violet" aria-pressed="false" aria-label="Violet" data-i18n-attr="aria-label:theme.violet"><span></span></button><button type="button" class="swatch swatch-ocean" data-accent-btn="ocean" aria-pressed="false" aria-label="Ocean" data-i18n-attr="aria-label:theme.ocean"><span></span></button><button type="button" class="swatch swatch-sunset" data-accent-btn="sunset" aria-pressed="false" aria-label="Sunset" data-i18n-attr="aria-label:theme.sunset"><span></span></button></div>
             </div>
         </div>
         <div class="drawer-foot">
@@ -826,6 +829,43 @@
         </div>
         <div class="footer-wordmark" aria-hidden="true">KAMRAN</div>
     </footer>
+
+    <!-- Floating colour picker (bottom-right): always visible, with a one-time hint for first-time visitors -->
+    <div class="theme-dock" id="theme-dock">
+        <div class="dock-panel" id="dock-panel" role="dialog" aria-labelledby="dock-title" hidden>
+            <p class="dock-title" id="dock-title"><i class="fa-solid fa-palette" aria-hidden="true"></i><span data-i18n="theme.palette">Colour theme</span></p>
+            <div class="dock-swatches" role="group" aria-labelledby="dock-title">
+                <button type="button" class="swatch-named swatch-emerald" data-accent-btn="emerald" aria-pressed="false">
+                    <span class="sn-dot" aria-hidden="true"></span><span class="sn-name" data-i18n="theme.emerald">Emerald</span>
+                </button>
+                <button type="button" class="swatch-named swatch-violet" data-accent-btn="violet" aria-pressed="false">
+                    <span class="sn-dot" aria-hidden="true"></span><span class="sn-name" data-i18n="theme.violet">Violet</span>
+                </button>
+                <button type="button" class="swatch-named swatch-ocean" data-accent-btn="ocean" aria-pressed="false">
+                    <span class="sn-dot" aria-hidden="true"></span><span class="sn-name" data-i18n="theme.ocean">Ocean</span>
+                </button>
+                <button type="button" class="swatch-named swatch-sunset" data-accent-btn="sunset" aria-pressed="false">
+                    <span class="sn-dot" aria-hidden="true"></span><span class="sn-name" data-i18n="theme.sunset">Sunset</span>
+                </button>
+            </div>
+            <div class="dock-row">
+                <span data-i18n="theme.mode">Light / dark</span>
+                <button type="button" class="icon-btn theme-toggle" aria-label="Toggle light and dark theme" data-i18n-attr="aria-label:a11y.theme">
+                    <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1Z" fill="currentColor"/></svg>
+                    <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4.4" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.2v2.3M12 19.5v2.3M2.2 12h2.3M19.5 12h2.3M5.1 5.1l1.6 1.6M17.3 17.3l1.6 1.6M5.1 18.9l1.6-1.6M17.3 6.7l1.6-1.6"/></g></svg>
+                </button>
+            </div>
+        </div>
+        <div class="dock-hint" id="dock-hint" role="status" hidden>
+            <p data-i18n="theme.hint">Pick your colour theme</p>
+            <div class="swatches" role="group" aria-label="Colour theme" data-i18n-attr="aria-label:theme.palette"><button type="button" class="swatch swatch-emerald" data-accent-btn="emerald" aria-pressed="false" aria-label="Emerald" data-i18n-attr="aria-label:theme.emerald"><span></span></button><button type="button" class="swatch swatch-violet" data-accent-btn="violet" aria-pressed="false" aria-label="Violet" data-i18n-attr="aria-label:theme.violet"><span></span></button><button type="button" class="swatch swatch-ocean" data-accent-btn="ocean" aria-pressed="false" aria-label="Ocean" data-i18n-attr="aria-label:theme.ocean"><span></span></button><button type="button" class="swatch swatch-sunset" data-accent-btn="sunset" aria-pressed="false" aria-label="Sunset" data-i18n-attr="aria-label:theme.sunset"><span></span></button></div>
+            <button type="button" class="dock-hint-close" aria-label="Close" data-i18n-attr="aria-label:a11y.close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+        </div>
+        <button type="button" class="dock-btn" aria-expanded="false" aria-controls="dock-panel" aria-label="Change colour theme" data-i18n-attr="aria-label:theme.customize">
+            <span class="dock-ring" aria-hidden="true"></span>
+            <i class="fa-solid fa-palette" aria-hidden="true"></i>
+        </button>
+    </div>
 
     <!-- Small notification for copy actions -->
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
