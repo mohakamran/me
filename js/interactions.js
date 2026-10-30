@@ -208,9 +208,9 @@
     /* ---------- Projects: clicking a screenshot opens the project ---------- */
     function initProjectMedia() {
         document.addEventListener('click', function (e) {
-            var media = e.target.closest('.fp-media, .ac-media');
+            var media = e.target.closest('.fp-media, .ac-media, .cs-media');
             if (!media) return;
-            var card = media.closest('.fp-card, .archive-card');
+            var card = media.closest('.fp-card, .archive-card, .cs-card');
             var target = card && (card.querySelector('[data-case]') || card.querySelector('a.ac-link[href^="http"]'));
             if (target) target.click();
         });
@@ -245,7 +245,21 @@
         document.addEventListener('langchange', update);
     }
 
+    /* ---------- Footer: gradient spotlight on the big wordmark follows the cursor ---------- */
+    function initWordmark() {
+        var footer = document.querySelector('.site-footer');
+        var mark = footer && footer.querySelector('.footer-wordmark');
+        if (!mark || reduceMotion || !finePointer) return;
+        footer.addEventListener('pointermove', function (e) {
+            var r = mark.getBoundingClientRect();
+            mark.style.setProperty('--wx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+            mark.classList.add('lit');
+        });
+        footer.addEventListener('pointerleave', function () { mark.classList.remove('lit'); });
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
+        initWordmark();
         initCopy();
         initNavIndicator();
         initTyped();

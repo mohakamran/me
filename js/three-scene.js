@@ -263,8 +263,16 @@
         scene.add(points);
 
         function themeKey() { return document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'; }
+        // Colours follow the CSS accent palette (Violet / Ocean / Sunset / Emerald)
+        function cssPalette(k) {
+            var cs = getComputedStyle(document.documentElement);
+            var v = function (n, fb) { return (cs.getPropertyValue(n) || '').trim() || fb; };
+            var base = PALETTES[k];
+            var c1 = v('--accent-1', base.c1), c2 = v('--accent-2', base.c2), c3 = v('--accent-3', base.c3);
+            return { c1: c1, c2: c2, c3: c3, particles: [c1, c2, c3] };
+        }
         function applyTheme() {
-            var k = themeKey(), pal = PALETTES[k];
+            var k = themeKey(), pal = cssPalette(k);
             blobUniforms.uC1.value.set(pal.c1);
             blobUniforms.uC2.value.set(pal.c2);
             blobUniforms.uC3.value.set(pal.c3);
@@ -280,6 +288,8 @@
             pMat.blending = k === 'dark' ? THREE.AdditiveBlending : THREE.NormalBlending;
             pMat.opacity = k === 'dark' ? 0.85 : 0.5;
             pMat.needsUpdate = true;
+            pinkLight.color.set(pal.c3);
+            blueLight.color.set(pal.c1);
         }
         applyTheme();
         document.addEventListener('themechange', applyTheme);

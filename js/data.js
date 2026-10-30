@@ -11,6 +11,11 @@ window.SITE_DATA = {
     featured: [
         {
             id: 'gymflow',
+            highlights: [
+                { en: 'Self-service signup with a fully isolated, branded workspace for every gym', ja: 'ジムごとに完全に分離された、ブランド付きワークスペースをセルフ登録で提供' },
+                { en: '2-second QR check-in, plus a self check-in kiosk for the front desk', ja: '2秒で完了するQRチェックインと、受付用のセルフチェックイン端末モード' },
+                { en: 'Invoices with partial payments, refunds, PDF export and email', ja: '分割払い・返金・PDF出力・メール送信に対応した請求書機能' }
+            ],
             category: 'web-app',
             image: 'img/projects/gymflow.webp',
             image2: 'img/projects/gymflow-2.webp',
@@ -40,6 +45,11 @@ window.SITE_DATA = {
         },
         {
             id: 'medicore',
+            highlights: [
+                { en: 'First-expiry-first-out selling, so expired stock can never be sold', ja: '使用期限の早い順に販売（FEFO）し、期限切れ在庫は販売不可' },
+                { en: 'Barcode POS with invoice numbers that stay correct with several cashiers', ja: '複数レジでも番号が重複しないバーコード対応POS' },
+                { en: '31 granular permissions and a full before/after audit log', ja: '31種類の細かな権限と、変更前後を記録する監査ログ' }
+            ],
             category: 'web-app',
             image: 'img/projects/medicore.webp',
             image2: 'img/projects/medicore-2.webp',
@@ -69,6 +79,11 @@ window.SITE_DATA = {
         },
         {
             id: 'pixelforge',
+            highlights: [
+                { en: '100% in-browser processing: images never leave the device', ja: '処理はすべてブラウザ内で完結し、画像が端末の外に出ない' },
+                { en: 'Batch queue with ZIP and multi-page PDF export', ja: '一括処理キューと、ZIP・複数ページPDFでの書き出し' },
+                { en: 'Optional Gemini auto-enhance through a secure server proxy', ja: 'サーバー経由で安全に呼び出す、Geminiによる自動補正（任意）' }
+            ],
             category: 'web-app',
             image: 'img/projects/pixelforge.webp',
             label: { en: 'Web app · AI', ja: 'Webアプリ・AI' },
@@ -95,6 +110,11 @@ window.SITE_DATA = {
         },
         {
             id: 'learnflow',
+            highlights: [
+                { en: 'GPT-4o turns a learning goal into a step-by-step roadmap', ja: 'GPT-4oが学習目標をステップ式のロードマップに変換' },
+                { en: 'Lessons unlock in order, with XP, levels and daily streaks', ja: 'レッスンは順番に解放され、XP・レベル・連続学習日数で継続を支援' },
+                { en: 'One-command Docker setup: MySQL, Laravel API, React + Nginx', ja: 'Dockerのコマンド1つでMySQL・Laravel API・React＋Nginxが起動' }
+            ],
             category: 'web-app',
             image: 'img/projects/learnflow.webp',
             label: { en: 'AI · Full stack', ja: 'AI・フルスタック' },
@@ -121,6 +141,11 @@ window.SITE_DATA = {
         },
         {
             id: 'stayease',
+            highlights: [
+                { en: 'JWT authentication with separate guest and host roles', ja: 'ゲストとホストの権限を分けたJWT認証' },
+                { en: 'Booking engine that rejects overlapping dates', ja: '日程の重複を防ぐ予約エンジン' },
+                { en: 'Dockerized PostgreSQL, Redis, Celery, Django and React', ja: 'PostgreSQL・Redis・Celery・Django・ReactをDockerで構成' }
+            ],
             category: 'web-app',
             image: 'img/projects/stayease.webp',
             label: { en: 'Full stack', ja: 'フルスタック' },
@@ -147,6 +172,11 @@ window.SITE_DATA = {
         },
         {
             id: 'task-manager',
+            highlights: [
+                { en: 'Drag-and-drop board across Pending, Working and Completed', ja: '「未着手・作業中・完了」をドラッグ＆ドロップで移動できるボード' },
+                { en: 'bcrypt hashing, JWT authentication and protected routes', ja: 'bcryptによるハッシュ化、JWT認証、保護されたルート' },
+                { en: 'Containerized with Docker Compose', ja: 'Docker Composeでコンテナ化' }
+            ],
             category: 'web-app',
             image: 'img/projects/task-manager.webp',
             label: { en: 'MERN', ja: 'MERN' },
@@ -173,6 +203,11 @@ window.SITE_DATA = {
         },
         {
             id: 'bulk-email',
+            highlights: [
+                { en: 'A personalized email for each recipient, with a CV attached', ja: '受信者ごとにパーソナライズし、CVを添付したメールを送信' },
+                { en: 'Spaced-out sending, with each email tracked as sent, pending or failed', ja: '送信間隔を空け、各メールを「送信済み・保留・失敗」で記録' },
+                { en: 'Searchable dashboard with one-click resend', ja: '検索できるダッシュボードと、ワンクリック再送信' }
+            ],
             category: 'web-app',
             image: 'img/projects/bulk-email.webp',
             label: { en: 'Automation', ja: '業務自動化' },
@@ -199,6 +234,11 @@ window.SITE_DATA = {
         },
         {
             id: 'travelx',
+            highlights: [
+                { en: 'Guided 4-step booking, pre-filled from destination pages', ja: '目的地ページから自動入力される4ステップの予約フロー' },
+                { en: 'Particle effects, Framer Motion transitions and glass UI', ja: 'パーティクル演出、Framer Motionの画面遷移、ガラス風UI' },
+                { en: 'Destination filters and an interactive Leaflet map', ja: '目的地の絞り込みと、インタラクティブなLeaflet地図' }
+            ],
             category: 'web-app',
             image: 'img/projects/travelx.webp',
             label: { en: 'Frontend', ja: 'フロントエンド' },

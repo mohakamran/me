@@ -141,7 +141,8 @@
 
     /* ---------- Scroll-linked updates (one rAF-throttled handler) ---------- */
     function initScroll(header) {
-        var bar = document.querySelector('.scroll-progress span');
+        var bar = document.querySelector('.nav-progress span');
+        var lastY = window.scrollY, travel = 0;
         var timeline = document.querySelector('.timeline');
         var ticking = false;
 
@@ -151,7 +152,17 @@
             var vh = window.innerHeight;
             var max = document.documentElement.scrollHeight - vh;
 
-            if (header) header.classList.toggle('scrolled', y > 16);
+            if (header) {
+                header.classList.toggle('scrolled', y > 16);
+                // Slide the header away while scrolling down; bring it back on any scroll up
+                var dy = y - lastY;
+                travel = (dy > 0) === (travel > 0) ? travel + dy : dy;
+                var menuOpen = document.body.classList.contains('no-scroll');
+                var focusInside = header.contains(document.activeElement) && document.activeElement !== document.body;
+                if (y < 240 || menuOpen || focusInside || travel < -24) header.classList.remove('hide');
+                else if (travel > 60) header.classList.add('hide');
+                lastY = y;
+            }
             if (bar) bar.style.transform = 'scaleX(' + (max > 0 ? y / max : 0) + ')';
 
             if (timeline) {
@@ -306,7 +317,7 @@
             if (t.closest('.cf-slide.is-active')) return setState('label', window.I18N.t('cursor.view'));
             if (t.closest('.cf-stage')) return setState('label', window.I18N.t('cursor.drag'));
             if (t.closest('.skill-globe')) return setState('label', window.I18N.t('cursor.spin'));
-            if (t.closest('.fp-media, .ac-media')) return setState('label', window.I18N.t('cursor.view'));
+            if (t.closest('.fp-media, .ac-media, .cs-media')) return setState('label', window.I18N.t('cursor.view'));
             if (t.closest('.portrait-flip-btn, .portrait-flip a')) return setState('link');
             if (t.closest('.portrait-flip')) return setState('label', window.I18N.t('cursor.flip'));
             if (t.closest('a, button, label, [role="button"], .filter-btn')) return setState('link');
