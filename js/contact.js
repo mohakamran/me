@@ -120,6 +120,10 @@
                 // Success state
                 setState(submitBtn, 'success');
                 showMsg(successMessage, true);
+                if (window.Confetti) {
+                    var r = submitBtn.getBoundingClientRect();
+                    window.Confetti({ x: r.left + r.width / 2, y: r.top });
+                }
 
                 // Reset form after delay
                 setTimeout(function () {
