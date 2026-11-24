@@ -13,8 +13,8 @@
 
     var dict = {
         en: {
-            'meta.title': 'Muhammad Kamran — Full Stack & AI Engineer',
-            'meta.description': 'Muhammad Kamran is a Full Stack & AI Engineer with 5+ years of professional experience building production systems with Laravel, React, Node.js and Python. M.Sc. graduate of the University of Kitakyushu, based in Japan. Speaks English and Japanese.',
+            'meta.title': 'Muhammad Kamran — Full Stack & AI Engineer in Japan | Laravel, React, Python, LLM Apps',
+            'meta.description': 'Muhammad Kamran is a Full Stack & AI Engineer in Kitakyushu, Japan with 5+ years of experience. He builds SaaS platforms, ERPs and private LLM apps (RAG, Ollama, OpenAI, Gemini) with Laravel, React, Next.js, Python and FastAPI. English & Japanese.',
 
             'a11y.skip': 'Skip to content',
             'a11y.language': 'Language',
@@ -46,7 +46,7 @@
 
             'hero.status': 'Open to full-time roles & freelance projects',
             'hero.kicker': "Hi, I'm Muhammad Kamran",
-            'hero.title': 'Full Stack &amp; <span class="grad-text">AI Engineer</span>',
+            'hero.title': '<span class="sr-only">Muhammad Kamran, </span>Full Stack &amp; <span class="grad-text">AI Engineer</span>',
             'hero.lead': '<strong>5+ years</strong> building production systems with Laravel, React, Node.js and Python — for teams and clients worldwide. Now based in Kitakyushu, Japan.',
             'hero.ctaWork': 'View Projects',
             'hero.ctaContact': 'Contact Me',
@@ -123,7 +123,7 @@
 
             'work.eyebrow': 'Featured work',
             'work.title': 'Selected <span class="grad-text">case studies</span>',
-            'work.sub': 'Pick a project to preview it — then open the full story: problem, solution, stack and result.',
+            'work.sub': 'From private local-LLM research tools to multi-tenant SaaS — pick a project to preview it, then open the full story: problem, solution, stack and result.',
             'work.caseStudy': 'Read case study',
             'work.problem': 'Problem',
             'work.solution': 'Solution',
@@ -257,6 +257,11 @@
             'footer.ctaBig': 'Let\'s talk',
             'footer.live': 'Kitakyushu, Japan',
             'work.tabsAria': 'Case studies',
+            'work.new': 'New',
+            'work.filterAll': 'All',
+            'work.filterAi': 'AI & LLM',
+            'work.filterWeb': 'Full-stack & SaaS',
+            'work.filterAria': 'Filter case studies',
             'work.prev': 'Previous project',
             'work.next': 'Next project',
             'archive.searchLabel': 'Search projects',
@@ -348,8 +353,8 @@
         },
 
         ja: {
-            'meta.title': 'ムハンマド・カムラン｜フルスタック＆AIエンジニア',
-            'meta.description': 'Laravel・React・Node.js・Pythonを中心に、5年以上にわたり本番システムの開発に携わってきたフルスタック＆AIエンジニア、ムハンマド・カムランのポートフォリオです。北九州市立大学大学院修了。英語・日本語に対応。',
+            'meta.title': 'ムハンマド・カムラン｜フルスタック＆AIエンジニア（北九州・福岡）',
+            'meta.description': 'Laravel・React・Next.js・Python・FastAPIで、SaaS・ERP・ローカルLLM/RAGを使ったAIアプリを開発するフルスタック＆AIエンジニア、ムハンマド・カムランのポートフォリオ。実務経験5年以上、北九州市立大学大学院修了。英語・日本語対応。',
 
             'a11y.skip': '本文へスキップ',
             'a11y.language': '言語',
@@ -381,7 +386,7 @@
 
             'hero.status': '正社員・業務委託のご相談を受け付けています',
             'hero.kicker': 'はじめまして、ムハンマド・カムランです',
-            'hero.title': 'フルスタック＆<span class="grad-text">AIエンジニア</span>',
+            'hero.title': '<span class="sr-only">ムハンマド・カムラン　</span>フルスタック＆<span class="grad-text">AIエンジニア</span>',
             'hero.lead': 'Laravel・React・Node.js・Pythonを軸に、<strong>5年以上</strong>にわたって世界各地のチームやクライアント向けに本番システムを開発してきました。現在は福岡県北九州市を拠点に活動しています。',
             'hero.ctaWork': 'プロジェクトを見る',
             'hero.ctaContact': 'お問い合わせ',
@@ -458,7 +463,7 @@
 
             'work.eyebrow': '主な実績',
             'work.title': '<span class="grad-text">ケーススタディ</span>',
-            'work.sub': 'プロジェクトを選んでプレビュー。詳細では課題・解決策・技術スタック・成果をご覧いただけます。',
+            'work.sub': 'ローカルLLMを使った研究ツールからマルチテナントSaaSまで。プロジェクトを選んでプレビューし、課題・解決策・技術スタック・成果をご覧ください。',
             'work.caseStudy': '詳細を見る',
             'work.problem': '課題',
             'work.solution': '解決策',
@@ -592,6 +597,11 @@
             'footer.ctaBig': 'お話ししましょう',
             'footer.live': '福岡県北九州市',
             'work.tabsAria': 'ケーススタディ',
+            'work.new': 'NEW',
+            'work.filterAll': 'すべて',
+            'work.filterAi': 'AI・LLM',
+            'work.filterWeb': 'フルスタック・SaaS',
+            'work.filterAria': 'ケーススタディを絞り込む',
             'work.prev': '前のプロジェクト',
             'work.next': '次のプロジェクト',
             'archive.searchLabel': 'プロジェクトを検索',

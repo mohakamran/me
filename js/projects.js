@@ -15,6 +15,17 @@
     var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var state = { cat: 'all', q: '', live: false };
     var activeCase = data.featured.length ? data.featured[0].id : null;
+    var csCat = 'all';   // case-study filter: all | ai | web
+
+    /* Case studies visible under the current filter */
+    function shownCases() {
+        return data.featured.filter(function (p) {
+            return csCat === 'all' || (csCat === 'ai' ? p.category === 'ai' : p.category !== 'ai');
+        });
+    }
+    function newBadge(p) {
+        return p.isNew ? '<span class="new-badge">' + esc(t('work.new')) + '</span>' : '';
+    }
 
     function esc(str) {
         return String(str).replace(/[&<>"']/g, function (c) {
@@ -38,7 +49,8 @@
                 tags: p.stack.slice(0, 2),
                 search: p.stack.join(' '),
                 github: p.links.github,
-                live: p.links.live
+                live: p.links.live,
+                isNew: p.isNew
             };
         });
         return featured.concat(data.archive);
@@ -55,11 +67,11 @@
     function renderTabs() {
         var tabs = document.getElementById('cs-tabs');
         if (!tabs) return;
-        tabs.innerHTML = data.featured.map(function (p, i) {
+        tabs.innerHTML = shownCases().map(function (p, i) {
             var on = p.id === activeCase;
             return '<button type="button" role="tab" class="cs-tab" id="cs-tab-' + p.id + '" data-cs="' + p.id + '" aria-controls="cs-stage" aria-selected="' + on + '" tabindex="' + (on ? 0 : -1) + '">' +
                 '<span class="cs-num">' + pad(i + 1) + '</span>' +
-                '<span class="cs-tab-text"><strong>' + esc(pick(p.title)) + '</strong><small>' + esc(pick(p.label)) + '</small></span>' +
+                '<span class="cs-tab-text"><strong>' + esc(pick(p.title)) + '</strong><small>' + newBadge(p) + esc(pick(p.label)) + '</small></span>' +
                 '<i class="fa-solid fa-arrow-right" aria-hidden="true"></i>' +
             '</button>';
         }).join('');
@@ -67,8 +79,9 @@
 
     function renderStage(animate) {
         var stage = document.getElementById('cs-stage');
-        var i = data.featured.findIndex(function (x) { return x.id === activeCase; });
-        var p = data.featured[i];
+        var cases = shownCases();
+        var i = cases.findIndex(function (x) { return x.id === activeCase; });
+        var p = cases[i];
         if (!stage || !p) return;
         stage.setAttribute('aria-labelledby', 'cs-tab-' + p.id);
         var metric = p.metric
@@ -81,7 +94,8 @@
                 '<div class="cs-media tilt" data-tilt-max="5">' +
                     '<img src="' + p.image + '" alt="' + esc(pick(p.title)) + '" width="1280" height="800" decoding="async">' +
                     '<span class="chip chip-solid">' + esc(pick(p.label)) + '</span>' +
-                    '<span class="cs-counter">' + pad(i + 1) + ' / ' + pad(data.featured.length) + '</span>' +
+                    '<span class="cs-counter">' + pad(i + 1) + ' / ' + pad(cases.length) + '</span>' +
+                    (p.isNew ? '<span class="new-badge new-badge-media">' + esc(t('work.new')) + '</span>' : '') +
                 '</div>' +
                 '<div class="cs-info">' +
                     '<p class="cs-role"><i class="fa-solid fa-user-gear" aria-hidden="true"></i>' + esc(pick(p.role)) + '</p>' +
@@ -97,7 +111,7 @@
                 '</div>' +
                 '<div class="cs-nav">' +
                     '<button type="button" class="icon-btn" data-cs-step="-1" aria-label="' + esc(t('work.prev')) + '"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>' +
-                    '<span class="cs-dots" aria-hidden="true">' + data.featured.map(function (x) { return '<span class="' + (x.id === p.id ? 'on' : '') + '"></span>'; }).join('') + '</span>' +
+                    '<span class="cs-dots" aria-hidden="true">' + cases.map(function (x) { return '<span class="' + (x.id === p.id ? 'on' : '') + '"></span>'; }).join('') + '</span>' +
                     '<button type="button" class="icon-btn" data-cs-step="1" aria-label="' + esc(t('work.next')) + '"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>' +
                 '</div>' +
             '</article>';
@@ -124,9 +138,10 @@
     }
 
     function step(dir) {
-        var i = data.featured.findIndex(function (x) { return x.id === activeCase; });
-        var n = data.featured.length;
-        select(data.featured[(i + dir + n) % n].id);
+        var cases = shownCases();
+        var i = cases.findIndex(function (x) { return x.id === activeCase; });
+        var n = cases.length;
+        select(cases[(i + dir + n) % n].id);
     }
 
     function initShowcase() {
@@ -142,11 +157,23 @@
         });
         tabs.addEventListener('keydown', function (e) {
             var keys = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 };
-            var ids = data.featured.map(function (x) { return x.id; });
+            var ids = shownCases().map(function (x) { return x.id; });
             var i = ids.indexOf(activeCase);
             if (keys[e.key]) { e.preventDefault(); select(ids[(i + keys[e.key] + ids.length) % ids.length], true); }
             else if (e.key === 'Home') { e.preventDefault(); select(ids[0], true); }
             else if (e.key === 'End') { e.preventDefault(); select(ids[ids.length - 1], true); }
+        });
+        // AI / full-stack filter chips above the showcase
+        var filter = document.getElementById('cs-filter');
+        if (filter) filter.addEventListener('click', function (e) {
+            var b = e.target.closest('[data-cs-filter]');
+            if (!b) return;
+            csCat = b.getAttribute('data-cs-filter');
+            renderCsFilter();
+            var cases = shownCases();
+            if (!cases.some(function (x) { return x.id === activeCase; })) activeCase = cases[0].id;
+            renderTabs();
+            renderStage(true);
         });
         stage.addEventListener('click', function (e) {
             var b = e.target.closest('[data-cs-step]');
@@ -161,6 +188,17 @@
             if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1);
             sx = null;
         });
+    }
+
+    function renderCsFilter() {
+        var el = document.getElementById('cs-filter');
+        if (!el) return;
+        var opts = [['all', 'work.filterAll', 'fa-layer-group'], ['ai', 'work.filterAi', 'fa-wand-magic-sparkles'], ['web', 'work.filterWeb', 'fa-code']];
+        el.innerHTML = opts.map(function (o) {
+            var n = data.featured.filter(function (p) { return o[0] === 'all' || (o[0] === 'ai' ? p.category === 'ai' : p.category !== 'ai'); }).length;
+            return '<button type="button" class="cs-filter-btn" data-cs-filter="' + o[0] + '" aria-pressed="' + (csCat === o[0]) + '">' +
+                '<i class="fa-solid ' + o[2] + '" aria-hidden="true"></i><span>' + esc(t(o[1])) + '</span><span class="count">' + n + '</span></button>';
+        }).join('');
     }
 
     /* ======================= Case-study modal ======================= */
@@ -248,7 +286,8 @@
             if (p.github) links += '<a href="' + p.github + '" target="_blank" rel="noopener" class="ac-link" aria-label="' + esc(t('archive.viewCode') + ' — ' + title) + '"><i class="fa-brands fa-github" aria-hidden="true"></i></a>';
             if (p.live) links += '<a href="' + p.live + '" target="_blank" rel="noopener" class="ac-link" aria-label="' + esc(t('archive.viewLive') + ' — ' + title) + '"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>';
             if (p.linkedin) links += '<a href="' + p.linkedin + '" target="_blank" rel="noopener" class="ac-link" aria-label="' + esc(t('archive.viewPost') + ' — ' + title) + '"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>';
-            var badges = (p.caseId ? '<span class="chip chip-solid ac-badge"><i class="fa-solid fa-star" aria-hidden="true"></i>' + esc(t('archive.featured')) + '</span>' : '') +
+            var isNew = p.isNew || (p.caseId && (data.featured.find(function (f) { return f.id === p.caseId; }) || {}).isNew);
+            var badges = (isNew ? '<span class="new-badge new-badge-card">' + esc(t('work.new')) + '</span>' : '') + (p.caseId ? '<span class="chip chip-solid ac-badge"><i class="fa-solid fa-star" aria-hidden="true"></i>' + esc(t('archive.featured')) + '</span>' : '') +
                          (p.live ? '<span class="chip ac-live"><span class="pulse-dot" aria-hidden="true"></span>' + esc(t('archive.liveBadge')) + '</span>' : '');
             return '' +
                 '<article class="archive-card glass" style="--i:' + Math.min(i, 8) + '" data-idx="' + i + '" data-category="' + p.category + '">' +
@@ -343,6 +382,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', function () {
+        renderCsFilter();
         renderTabs();
         renderStage(false);
         initShowcase();
@@ -352,6 +392,7 @@
     });
 
     document.addEventListener('langchange', function () {
+        renderCsFilter();
         renderTabs();
         renderStage(false);
         renderArchive();

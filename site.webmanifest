@@ -1,0 +1,14 @@
+{
+  "name": "Muhammad Kamran — Full Stack & AI Engineer",
+  "short_name": "Kamran",
+  "description": "Portfolio of Muhammad Kamran, Full Stack & AI Engineer in Japan.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f7fc",
+  "theme_color": "#10b981",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/img/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
