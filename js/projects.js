@@ -157,7 +157,11 @@
                 var small = window.innerWidth < 900;
                 data.featured.forEach(function (p) { var im = new Image(); im.src = small ? p.image.replace(/\.webp$/, '-sm.webp') : p.image; });
             };
-            if ('requestIdleCallback' in window) requestIdleCallback(go, { timeout: 3000 }); else setTimeout(go, 1500);
+            var idle = function () { if ('requestIdleCallback' in window) requestIdleCallback(go, { timeout: 3000 }); else setTimeout(go, 1500); };
+            // Only once the visitor is getting close to the case studies (saves data for people who never scroll there)
+            if (!('IntersectionObserver' in window)) return idle();
+            var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { io.disconnect(); idle(); } }, { rootMargin: '800px 0px' });
+            io.observe(stage);
         });
 
         tabs.addEventListener('click', function (e) {
@@ -298,35 +302,34 @@
     var list = [];
     var expanded = false;
 
-    function renderArchive() {
-        var grid = document.getElementById('archive-grid');
-        if (!grid) return;
-        list = allProjects();
-        grid.innerHTML = list.map(function (p, i) {
-            var title = pick(p.title);
-            var links = '';
-            if (p.caseId) links += '<button type="button" class="ac-link" data-case="' + p.caseId + '" aria-label="' + esc(t('work.caseStudy') + ' — ' + title) + '"><i class="fa-solid fa-book-open" aria-hidden="true"></i></button>';
-            if (p.github) links += '<a href="' + p.github + '" target="_blank" rel="noopener" class="ac-link" aria-label="' + esc(t('archive.viewCode') + ' — ' + title) + '"><i class="fa-brands fa-github" aria-hidden="true"></i></a>';
-            if (p.live) links += '<a href="' + p.live + '" target="_blank" rel="noopener" class="ac-link" aria-label="' + esc(t('archive.viewLive') + ' — ' + title) + '"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>';
-            if (p.linkedin) links += '<a href="' + p.linkedin + '" target="_blank" rel="noopener" class="ac-link" aria-label="' + esc(t('archive.viewPost') + ' — ' + title) + '"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>';
-            var isNew = p.isNew || (p.caseId && (data.featured.find(function (f) { return f.id === p.caseId; }) || {}).isNew);
-            var badges = (isNew ? '<span class="new-badge new-badge-card">' + esc(t('work.new')) + '</span>' : '') + (p.caseId ? '<span class="chip chip-solid ac-badge"><i class="fa-solid fa-star" aria-hidden="true"></i>' + esc(t('archive.featured')) + '</span>' : '') +
-                         (p.live ? '<span class="chip ac-live"><span class="pulse-dot" aria-hidden="true"></span>' + esc(t('archive.liveBadge')) + '</span>' : '');
-            return '' +
-                '<article class="archive-card glass" style="--i:' + Math.min(i, 8) + '" data-idx="' + i + '" data-category="' + p.category + '">' +
-                    '<div class="ac-media"><img ' + srcset(p.image) + ' sizes="(min-width: 700px) 360px, 92vw" alt="' + esc(title) + ' — project screenshot" width="960" height="600" loading="lazy" decoding="async">' + badges + '</div>' +
-                    '<div class="ac-body">' +
-                        '<h3>' + esc(title) + '</h3>' +
-                        '<p>' + esc(pick(p.desc)) + '</p>' +
-                        '<div class="ac-foot">' +
-                            '<ul class="tag-list tag-list-sm">' + p.tags.slice(0, 2).map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') + '</ul>' +
-                            '<div class="ac-links">' + links + '</div>' +
-                        '</div>' +
+    function cardHTML(p, i, n) {
+        var title = pick(p.title);
+        var links = '';
+        if (p.caseId) links += '<button type="button" class="ac-link" data-case="' + p.caseId + '" aria-label="' + esc(t('work.caseStudy') + ' — ' + title) + '"><i class="fa-solid fa-book-open" aria-hidden="true"></i></button>';
+        if (p.github) links += '<a href="' + p.github + '" target="_blank" rel="noopener" class="ac-link" aria-label="' + esc(t('archive.viewCode') + ' — ' + title) + '"><i class="fa-brands fa-github" aria-hidden="true"></i></a>';
+        if (p.live) links += '<a href="' + p.live + '" target="_blank" rel="noopener" class="ac-link" aria-label="' + esc(t('archive.viewLive') + ' — ' + title) + '"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>';
+        if (p.linkedin) links += '<a href="' + p.linkedin + '" target="_blank" rel="noopener" class="ac-link" aria-label="' + esc(t('archive.viewPost') + ' — ' + title) + '"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>';
+        var isNew = p.isNew || (p.caseId && (data.featured.find(function (f) { return f.id === p.caseId; }) || {}).isNew);
+        var badges = (isNew ? '<span class="new-badge new-badge-card">' + esc(t('work.new')) + '</span>' : '') + (p.caseId ? '<span class="chip chip-solid ac-badge"><i class="fa-solid fa-star" aria-hidden="true"></i>' + esc(t('archive.featured')) + '</span>' : '') +
+                     (p.live ? '<span class="chip ac-live"><span class="pulse-dot" aria-hidden="true"></span>' + esc(t('archive.liveBadge')) + '</span>' : '');
+        return '' +
+            '<article class="archive-card glass" style="--i:' + Math.min(n, 8) + '" data-idx="' + i + '" data-category="' + p.category + '">' +
+                '<div class="ac-media"><img ' + srcset(p.image) + ' sizes="(min-width: 700px) 360px, 92vw" alt="' + esc(title) + ' — project screenshot" width="960" height="600" loading="lazy" decoding="async">' + badges + '</div>' +
+                '<div class="ac-body">' +
+                    '<h3>' + esc(title) + '</h3>' +
+                    '<p>' + esc(pick(p.desc)) + '</p>' +
+                    '<div class="ac-foot">' +
+                        '<ul class="tag-list tag-list-sm">' + p.tags.slice(0, 2).map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') + '</ul>' +
+                        '<div class="ac-links">' + links + '</div>' +
                     '</div>' +
-                    '<span class="card-shine" aria-hidden="true"></span>' +
-                '</article>';
-        }).join('');
-        document.dispatchEvent(new CustomEvent('contentrendered', { detail: { scope: grid } }));
+                '</div>' +
+                '<span class="card-shine" aria-hidden="true"></span>' +
+            '</article>';
+    }
+
+    function renderArchive() {
+        if (!document.getElementById('archive-grid')) return;
+        list = allProjects();
         applyFilters(false);
     }
 
@@ -340,26 +343,26 @@
         return true;
     }
 
+    // Only the cards on screen are in the DOM (keeps the page light on phones); filters rebuild the grid
+    function archiveLimit() { return window.innerWidth >= 1200 ? 8 : window.innerWidth >= 900 ? 6 : 4; }
+
     function applyFilters(animate) {
         var grid = document.getElementById('archive-grid');
         if (!grid) return;
-        var shown = 0, matched = 0;
-        // Collapsed view: only the first rows of matching projects; "Show all" reveals the rest
-        var limit = expanded ? Infinity : (window.innerWidth >= 1200 ? 8 : window.innerWidth >= 900 ? 6 : 4);
-        grid.querySelectorAll('.archive-card').forEach(function (card) {
-            var p = list[parseInt(card.getAttribute('data-idx'), 10)];
-            var show = matches(p);
-            if (show) matched++;
-            if (show && shown >= limit) show = false;
-            card.hidden = !show;
-            if (show) {
-                if (animate && !reduceMotion) {
-                    card.style.animationDelay = Math.min(shown, 8) * 40 + 'ms';
-                    card.classList.remove('fade-in'); void card.offsetWidth; card.classList.add('fade-in');
-                }
-                shown++;
-            }
-        });
+        var matching = [];
+        list.forEach(function (p, i) { if (matches(p)) matching.push(i); });
+        var visible = expanded ? matching : matching.slice(0, archiveLimit());
+        var before = grid.children.length;
+        grid.innerHTML = visible.map(function (i, n) { return cardHTML(list[i], i, n); }).join('');
+        if (animate && !reduceMotion) {
+            // When expanding, only the newly added cards animate in
+            Array.prototype.forEach.call(grid.children, function (card, n) {
+                if (expanded && n < before && before < visible.length) return;
+                card.style.animationDelay = Math.min(n % 8, 8) * 40 + 'ms';
+                card.classList.add('fade-in');
+            });
+        }
+        document.dispatchEvent(new CustomEvent('contentrendered', { detail: { scope: grid } }));
         // Live counts per category (respect the search + live-demo switch)
         document.querySelectorAll('.filter-btn').forEach(function (btn) {
             var f = btn.getAttribute('data-filter');
@@ -368,16 +371,17 @@
             if (el) el.textContent = n;
             btn.classList.toggle('is-empty', n === 0);
         });
+        var matched = matching.length;
         var line = document.getElementById('result-line');
         if (line) line.textContent = t('archive.showing').replace('{n}', matched).replace('{total}', list.length);
         var moreWrap = document.getElementById('archive-more-wrap'), more = document.getElementById('archive-more');
         if (moreWrap && more) {
-            moreWrap.hidden = matched <= (window.innerWidth >= 1200 ? 8 : window.innerWidth >= 900 ? 6 : 4);
+            moreWrap.hidden = matched <= archiveLimit();
             more.setAttribute('aria-expanded', String(expanded));
             more.querySelector('span').textContent = expanded ? t('archive.less') : t('archive.more').replace('{n}', matched);
         }
         var empty = document.getElementById('empty-state');
-        if (empty) empty.hidden = shown !== 0;
+        if (empty) empty.hidden = matched !== 0;
         if (window.SmoothScroll) window.SmoothScroll.resize();
     }
 

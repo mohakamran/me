@@ -821,6 +821,9 @@
                 if (lang !== current) setLang(lang, true);
             });
         });
-        setLang(current, false);
+        // The HTML is authored in English: for English visitors skip the full re-translation and the
+        // 'langchange' re-render (each section already renders itself once on DOMContentLoaded)
+        if (current === 'en') updateButtons();
+        else setLang(current, false);
     });
 })();

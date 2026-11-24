@@ -139,14 +139,17 @@
         });
     }
 
+    // Letter splitting only powers pointer effects: touch devices keep plain headings (far fewer DOM nodes)
+    var doSplit = !reduceMotion && finePointer;
+
     document.addEventListener('DOMContentLoaded', function () {
         if (reduceMotion) return;
-        splitAll();
+        if (doSplit) splitAll();
         initHeroMagnet();
         initScramble();
     });
     // i18n replaces the heading markup on language change → split again
-    document.addEventListener('langchange', function () { if (!reduceMotion) splitAll(); });
+    document.addEventListener('langchange', function () { if (doSplit) splitAll(); });
     window.addEventListener('load', function () { document.querySelectorAll('.split').forEach(paintGradients); });
     window.addEventListener('resize', function () { document.querySelectorAll('.split').forEach(paintGradients); }, { passive: true });
 })();

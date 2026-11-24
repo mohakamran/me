@@ -3159,3 +3159,14 @@ a.fct-item:hover { color: var(--accent); }
 @keyframes tilt3dIn { from { transform: perspective(1400px) rotateX(16deg) translateY(60px) scale(0.94); } to { transform: none; } }
 @keyframes card3dIn { from { transform: perspective(900px) rotateX(24deg) translateY(50px); } to { transform: none; } }
 @keyframes head3dIn { from { transform: perspective(700px) rotateX(55deg) translateY(30px); } to { transform: none; } }
+
+/* ---------- Phones & tablets: cheaper painting (same look) ----------
+   Blurred orbs become soft radial gradients (no 90px blur filter to rasterise), and glass
+   panels use a solid surface instead of a live backdrop blur. */
+@media (max-width: 899px), (pointer: coarse) {
+    .orb { filter: none; background: radial-gradient(closest-side, var(--orb-c), transparent); }
+    .orb-1 { --orb-c: var(--accent-2); }
+    .orb-2 { --orb-c: var(--accent-1); }
+    .orb-3 { --orb-c: var(--accent-3); }
+    .glass { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--surface-solid); }
+}
