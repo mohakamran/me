@@ -132,7 +132,8 @@ These need your own accounts, so I can't do them for you. They matter more than 
 - **A short blog / notes section**: 3–5 posts such as "Building a private RAG app on an 8 GB M1",
   "Job hunting in Japan as a foreign engineer" or "Structured outputs with Pydantic". Each targets a
   long-tail keyword and gives AI assistants more to cite.
-- **Self-host or subset the icon font**: Font Awesome loads ~300 KB of fonts for ~60 icons. Swapping to
-  inline SVG icons would be the next big performance gain.
+- ~~Replace the icon font~~ **Done:** Font Awesome's ~300 KB icon font is replaced by `css/icons.css`, which
+  holds only the ~90 icons the site uses as inline SVG (~19 KB gzipped). Live mobile scores went from
+  82–92 to 92–93 on warm runs.
 - **Re-check scores after each deploy** with PageSpeed Insights:
   https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fkamranweb.vercel.app%2F
