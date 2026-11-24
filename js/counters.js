@@ -14,7 +14,7 @@
         if (el.dataset.odo) return;
         el.dataset.odo = '1';
         var value = String(el.getAttribute('data-count'));
-        el.setAttribute('aria-label', value);
+        el.setAttribute('data-value', value);
         el.classList.add('odo');
         el.innerHTML = value.split('').map(function (ch, i) {
             if (!/[0-9]/.test(ch)) return '<span class="odo-sep" aria-hidden="true">' + ch + '</span>';
@@ -22,7 +22,7 @@
             var strip = '';
             for (var n = 0; n < 20; n++) strip += '<span>' + (n % 10) + '</span>';
             return '<span class="odo-digit" aria-hidden="true" style="--d:' + ch + ';--k:' + i + '"><span class="odo-strip">' + strip + '</span></span>';
-        }).join('');
+        }).join('') + '<span class="sr-only">' + value + '</span>';
     }
 
     function roll(el) {

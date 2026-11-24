@@ -206,3 +206,18 @@
     document.addEventListener('DOMContentLoaded', init);
     document.addEventListener('langchange', function () { renderStory(); requestTick(); });
 })();
+
+/* Performance: pause decorative CSS animations in sections that are off-screen */
+(function () {
+    'use strict';
+    if (!('IntersectionObserver' in window)) return;
+    document.addEventListener('DOMContentLoaded', function () {
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) { e.target.classList.toggle('is-offscreen', !e.isIntersecting); });
+        }, { rootMargin: '200px 0px' });
+        document.querySelectorAll('main > section, .site-footer').forEach(function (s) {
+            s.classList.add('is-offscreen');
+            io.observe(s);
+        });
+    });
+})();

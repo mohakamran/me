@@ -1,0 +1,33 @@
+# Muhammad Kamran — Full Stack & AI Engineer (Japan)
+
+> Muhammad Kamran is a Full Stack & AI Engineer based in Kitakyushu, Fukuoka, Japan, with 5+ years of professional experience. He builds production web apps, SaaS platforms, ERPs and LLM-powered products with Laravel, React, Next.js, Node.js, Python and FastAPI. He works in English and Japanese and is open to full-time roles in Japan and remote freelance work.
+
+Website: https://kamranweb.vercel.app/
+GitHub: https://github.com/mohakamran
+LinkedIn: https://www.linkedin.com/in/mokamran/
+Email: mohammadkamran1515@gmail.com
+
+## Key facts
+- Role: Full Stack & AI Engineer (backend, front end, LLM applications)
+- Location: Kitakyushu, Fukuoka, Japan (JST, UTC+9)
+- Languages: English and Japanese
+- Education: M.Sc. Applied Information Systems, University of Kitakyushu (2026), MEXT scholar; B.Sc. IT, University of Gujrat
+- Experience: ~4 years as Full Stack Engineer at Reblate Solutions (15+ production apps, CRM that improved workflow efficiency by 70%); independent full stack & AI work since August 2024
+- Research: traffic behaviour with Python and the CARLA driving simulator; papers at SICE 2026 and VTCA 2026
+- Stack: Laravel/PHP 8, Node.js, Python, FastAPI, Django, React, Next.js, TypeScript, Tailwind CSS, MySQL, PostgreSQL, SQLite, Firebase, OpenAI, Google Gemini, Ollama, RAG, Shopify, WordPress
+
+## AI case studies
+- [Scholaria](https://github.com/mohakamran/scholaria): private, offline AI research assistant (Ollama, FastAPI, Streamlit, SQLite FTS5). Page-cited RAG answers, statistics computed in Python, 64 tests.
+- [Personal Doctor AI](https://github.com/mohakamran/personal-doctor-ai): local-first health companion (React 19, FastAPI, OpenAI Responses API) with an emergency-symptom safety layer, 69 tests.
+- [Japanese AI Tutor](https://github.com/mohakamran/japanese-ai-tutor): AI Japanese teacher with Pydantic-validated structured outputs and code-based quiz scoring, 208 tests.
+- [JobAI Japan](https://github.com/mohakamran/jobai-japan): generates Japanese résumés (履歴書, 職務経歴書) with Gemini, plus job matching and an application tracker.
+
+## Full-stack & SaaS case studies
+- [GymFlow](https://github.com/mohakamran/gymflow): multi-tenant gym management SaaS (Laravel 13), 85 tests.
+- [MediCore](https://github.com/mohakamran/medicore-pharmacy-erp): pharmacy ERP with FEFO batch inventory and barcode POS (Laravel 13), 88 tests.
+- [PixelForge](https://github.com/mohakamran/pixelforge): privacy-first image toolkit (Next.js).
+- [LearnFlow](https://github.com/mohakamran/LearnFlow), [StayEase](https://github.com/mohakamran/stayease), [Task Manager](https://github.com/mohakamran/task-manager), [Bulk Email Sender](https://github.com/mohakamran/bulk_email_sender), [TravelX](https://github.com/mohakamran/travelx)
+
+## Optional
+- [CV (PDF)](https://kamranweb.vercel.app/japan-kamran-cv.pdf)
+- [Sitemap](https://kamranweb.vercel.app/sitemap.xml)

@@ -22,6 +22,8 @@
         var conn = navigator.connection;
         if (conn && (conn.saveData || /2g/.test(conn.effectiveType || ''))) return false;
         if (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) return false;
+        // Phones and tablets get the lighter CSS hero (saves ~600 KB of 3D code)
+        if (window.innerWidth < 900 || window.matchMedia('(pointer: coarse)').matches) return false;
         try {
             var c = document.createElement('canvas');
             return !!(window.WebGLRenderingContext && (c.getContext('webgl2') || c.getContext('webgl')));

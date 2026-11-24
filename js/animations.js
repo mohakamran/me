@@ -16,7 +16,8 @@
 
     /* ---------- Smooth scroll ---------- */
     function initSmoothScroll() {
-        if (!reduceMotion && window.Lenis) {
+        // Phones and tablets keep native (faster) scrolling
+        if (!reduceMotion && finePointer && window.Lenis) {
             lenis = new window.Lenis({ lerp: 0.09, smoothWheel: true, wheelMultiplier: 1 });
             (function raf(time) {
                 lenis.raf(time);

@@ -11,6 +11,7 @@
     <meta name="theme-color" content="#f7f7fc">
     <link rel="canonical" href="https://kamranweb.vercel.app/">
     <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+    <link rel="alternate" type="text/plain" title="LLM-readable summary" href="/llms.txt">
     <link rel="me" href="https://github.com/mohakamran">
     <link rel="me" href="https://www.linkedin.com/in/mokamran/">
 
@@ -53,12 +54,23 @@
             if (a === 'violet') d.removeAttribute('data-accent'); else d.setAttribute('data-accent', a);
             d.setAttribute('lang', l);
             d.classList.add('js');
+            window.loadJaFonts = function () {
+                if (document.getElementById('ja-fonts')) return;
+                var f = document.createElement('link');
+                f.id = 'ja-fonts'; f.rel = 'stylesheet';
+                f.href = 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&display=swap';
+                document.head.appendChild(f);
+            };
+            if (l === 'ja') window.loadJaFonts();
         })();
     </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500..800&family=Plus+Jakarta+Sans:wght@400..700&family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&family=JetBrains+Mono:wght@500&display=swap">
+    <!-- Fonts load without blocking the first paint; Japanese fonts only load for the Japanese version -->
+    <!-- Self-hosted Latin fonts (declared at the top of css/styles.css) -->
+    <link rel="preload" as="font" type="font/woff2" href="fonts/outfit-var.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="fonts/plus-jakarta-sans-var.woff2" crossorigin>
     <!-- Icons: loaded without blocking render -->
     <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
@@ -137,8 +149,31 @@
             "https://github.com/mohakamran",
             "https://www.linkedin.com/in/mokamran/",
             "https://x.com/being_m_kamran",
-            "https://www.youtube.com/@muhkamran1034"
-          ]
+            "https://www.youtube.com/@muhkamran1034",
+            "https://www.instagram.com/being_m_kamran/"
+          ],
+          "hasCredential": [
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "degree",
+              "name": "M.Sc. Applied Information Systems",
+              "recognizedBy": {
+                "@type": "CollegeOrUniversity",
+                "name": "University of Kitakyushu"
+              }
+            }
+          ],
+          "award": [
+            "MEXT Scholarship (Japanese Government)"
+          ],
+          "workLocation": {
+            "@type": "Place",
+            "name": "Kitakyushu, Fukuoka, Japan"
+          },
+          "seeks": {
+            "@type": "Demand",
+            "description": "Full-time Full Stack, Backend or AI Engineer roles in Japan and remote freelance projects"
+          }
         },
         {
           "@type": "WebSite",
@@ -353,10 +388,63 @@
               }
             }
           ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://kamranweb.vercel.app/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Who is Muhammad Kamran?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Muhammad Kamran is a Full Stack & AI Engineer based in Kitakyushu, Fukuoka, Japan, with 5+ years of professional experience. He builds production web applications, SaaS platforms and LLM-powered products with Laravel, React, Next.js, Node.js, Python and FastAPI."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What kind of AI work does he do?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "He builds practical LLM applications: retrieval-augmented generation (RAG) with page-level citations, local models with Ollama, structured outputs with the OpenAI Responses API and Pydantic, and Google Gemini integrations. Examples include Scholaria (a private, offline AI research assistant), Personal Doctor AI and Japanese AI Tutor."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is he available for hire?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. He is open to full-time roles in Japan and to remote freelance work, for full stack, backend or AI engineering positions. He usually replies within 24 hours."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Which languages does he work in?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "He works in both English and Japanese, so he can join Japanese teams, write Japanese documentation and work with international clients."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is his tech stack?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Back end: Laravel (PHP 8), Node.js, Python, FastAPI and Django. Front end: React, Next.js, TypeScript and Tailwind CSS. Data: MySQL, PostgreSQL, SQLite and Firebase. AI: OpenAI, Gemini, Ollama, RAG, pandas and statsmodels. He also builds Shopify and WordPress sites."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is his education?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "He holds an M.Sc. in Applied Information Systems from the University of Kitakyushu (2026), earned as a MEXT scholar, with research on traffic behaviour using Python and the CARLA driving simulator. He also has a B.Sc. in IT from the University of Gujrat."
+              }
+            }
+          ]
         }
       ]
     }
-
     </script>
 </head>
 
@@ -469,6 +557,7 @@
                 <a href="https://github.com/mohakamran" target="_blank" rel="noopener" class="social" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
                 <a href="https://www.linkedin.com/in/mokamran/" target="_blank" rel="noopener" class="social" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
                 <a href="https://x.com/being_m_kamran" target="_blank" rel="noopener" class="social" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
+                <a href="https://www.instagram.com/being_m_kamran/" target="_blank" rel="noopener" class="social" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
                 <a href="mailto:mohammadkamran1515@gmail.com" class="social" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
             </div>
         </div>
@@ -852,6 +941,10 @@
                     <p class="section-sub" data-i18n="work.sub">From private local-LLM research tools to multi-tenant SaaS — pick a project to preview it, then open the full story: problem, solution, stack and result.</p>
                 </header>
                 <!-- Case study showcase: pick a project on the left, preview on the right (js/projects.js) -->
+                <div class="ship-log reveal" aria-label="Recently shipped" data-i18n-attr="aria-label:work.shipAria">
+                    <span class="ship-label"><span class="pulse-dot" aria-hidden="true"></span><span data-i18n="work.shipped">Recently shipped</span></span>
+                    <div class="ship-viewport"><ul class="ship-track" id="ship-track"></ul></div>
+                </div>
                 <div class="cs-filter reveal" id="cs-filter" role="group" aria-label="Filter case studies" data-i18n-attr="aria-label:work.filterAria"></div>
                 <div class="cs reveal" id="case-showcase">
                     <div class="cs-tabs" role="tablist" aria-label="Case studies" data-i18n-attr="aria-label:work.tabsAria" id="cs-tabs"></div>
@@ -965,7 +1058,7 @@
                 <header class="fx-3d section-head reveal">
                     <span class="eyebrow" data-i18n="gallery.eyebrow">Life in Japan</span>
                     <h2 id="gallery-title" data-i18n-html="gallery.title">Beyond the <span class="grad-text">keyboard</span></h2>
-                    <p class="section-sub" data-i18n="gallery.sub">Seasons, shrines, coastlines and good company — a few moments from life in Fukuoka and around Japan.</p>
+                    <p class="section-sub" data-i18n="gallery.sub">Graduation, conferences, cherry blossoms, a trip to Taiwan and good company — recent moments from life in Japan.</p>
                 </header>
             </div>
             <div class="coverflow reveal" id="coverflow" role="region" aria-roledescription="carousel" aria-label="Life in Japan photos" data-i18n-attr="aria-label:gallery.aria" tabindex="0">
@@ -981,8 +1074,59 @@
             </div>
         </section>
 
+        <!-- ============ FAQ / QUICK FACTS (answer-engine friendly) ============ -->
+        <section id="faq" class="section" data-watermark="FAQ" aria-labelledby="faq-title">
+            <div class="container faq-grid">
+                <div class="faq-intro reveal">
+                    <span class="eyebrow" data-i18n="faq.eyebrow">Quick answers</span>
+                    <h2 id="faq-title" data-i18n-html="faq.title">Hiring me in <span class="grad-text">30 seconds</span></h2>
+                    <p class="section-sub" data-i18n="faq.sub">The questions recruiters and clients ask most — answered up front.</p>
+                    <div class="tldr glass">
+                        <p class="tldr-label"><i class="fa-solid fa-bolt" aria-hidden="true"></i><span data-i18n="faq.tldr">TL;DR</span></p>
+                        <ul>
+                            <li><strong>5+</strong> <span data-i18n="faq.f1">years shipping production apps</span></li>
+                            <li><strong>12</strong> <span data-i18n="faq.f2">in-depth case studies, 4 of them LLM apps</span></li>
+                            <li><strong>EN · 日本語</strong> <span data-i18n="faq.f3">works in both languages</span></li>
+                            <li><strong>M.Sc.</strong> <span data-i18n="faq.f4">University of Kitakyushu, MEXT scholar</span></li>
+                            <li><strong>JST</strong> <span data-i18n="faq.f5">Kitakyushu, Japan · replies within 24h</span></li>
+                        </ul>
+                        <div class="tldr-actions">
+                            <a href="#contact" class="btn btn-primary btn-sm"><span data-i18n="faq.cta">Start a conversation</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                            <a href="japan-kamran-cv.pdf" class="btn btn-ghost btn-sm" download><i class="fa-solid fa-download" aria-hidden="true"></i><span data-i18n="hero.cv">Download CV</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-list reveal">
+                        <details class="faq-item glass" open>
+                            <summary><span data-i18n="faq.q1">Who is Muhammad Kamran?</span><i class="fa-solid fa-plus" aria-hidden="true"></i></summary>
+                            <div class="faq-a"><p data-i18n="faq.a1">Muhammad Kamran is a Full Stack &amp; AI Engineer based in Kitakyushu, Fukuoka, Japan, with 5+ years of professional experience. He builds production web applications, SaaS platforms and LLM-powered products with Laravel, React, Next.js, Node.js, Python and FastAPI.</p></div>
+                        </details>
+                        <details class="faq-item glass">
+                            <summary><span data-i18n="faq.q2">What kind of AI work does he do?</span><i class="fa-solid fa-plus" aria-hidden="true"></i></summary>
+                            <div class="faq-a"><p data-i18n="faq.a2">He builds practical LLM applications: retrieval-augmented generation (RAG) with page-level citations, local models with Ollama, structured outputs with the OpenAI Responses API and Pydantic, and Google Gemini integrations. Examples include Scholaria (a private, offline AI research assistant), Personal Doctor AI and Japanese AI Tutor.</p></div>
+                        </details>
+                        <details class="faq-item glass">
+                            <summary><span data-i18n="faq.q3">Is he available for hire?</span><i class="fa-solid fa-plus" aria-hidden="true"></i></summary>
+                            <div class="faq-a"><p data-i18n="faq.a3">Yes. He is open to full-time roles in Japan and to remote freelance work, for full stack, backend or AI engineering positions. He usually replies within 24 hours.</p></div>
+                        </details>
+                        <details class="faq-item glass">
+                            <summary><span data-i18n="faq.q4">Which languages does he work in?</span><i class="fa-solid fa-plus" aria-hidden="true"></i></summary>
+                            <div class="faq-a"><p data-i18n="faq.a4">He works in both English and Japanese, so he can join Japanese teams, write Japanese documentation and work with international clients.</p></div>
+                        </details>
+                        <details class="faq-item glass">
+                            <summary><span data-i18n="faq.q5">What is his tech stack?</span><i class="fa-solid fa-plus" aria-hidden="true"></i></summary>
+                            <div class="faq-a"><p data-i18n="faq.a5">Back end: Laravel (PHP 8), Node.js, Python, FastAPI and Django. Front end: React, Next.js, TypeScript and Tailwind CSS. Data: MySQL, PostgreSQL, SQLite and Firebase. AI: OpenAI, Gemini, Ollama, RAG, pandas and statsmodels. He also builds Shopify and WordPress sites.</p></div>
+                        </details>
+                        <details class="faq-item glass">
+                            <summary><span data-i18n="faq.q6">What is his education?</span><i class="fa-solid fa-plus" aria-hidden="true"></i></summary>
+                            <div class="faq-a"><p data-i18n="faq.a6">He holds an M.Sc. in Applied Information Systems from the University of Kitakyushu (2026), earned as a MEXT scholar, with research on traffic behaviour using Python and the CARLA driving simulator. He also has a B.Sc. in IT from the University of Gujrat.</p></div>
+                        </details>
+                </div>
+            </div>
+        </section>
+
         <!-- ============ 10. CONTACT ============ -->
-        <section id="contact" class="section" data-watermark="CONTACT" aria-labelledby="contact-title">
+        <section id="contact" class="section section-alt" data-watermark="CONTACT" aria-labelledby="contact-title">
             <div class="container contact-grid">
                 <div class="contact-info reveal">
                     <span class="eyebrow" data-i18n="contact.eyebrow">Contact</span>
@@ -1013,6 +1157,7 @@
                         <a href="https://github.com/mohakamran" target="_blank" rel="noopener" class="social" data-tip="GitHub" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
                         <a href="https://www.linkedin.com/in/mokamran/" target="_blank" rel="noopener" class="social" data-tip="LinkedIn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
                         <a href="https://x.com/being_m_kamran" target="_blank" rel="noopener" class="social" data-tip="X" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
+                        <a href="https://www.instagram.com/being_m_kamran/" target="_blank" rel="noopener me" class="social" data-tip="Instagram" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
                         <a href="https://www.youtube.com/@muhkamran1034" target="_blank" rel="noopener" class="social" data-tip="YouTube" aria-label="YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
                     </div>
                 </div>
@@ -1080,7 +1225,7 @@
                     <span class="fc-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
                 </a>
                 <div class="fcc-actions">
-                    <button type="button" class="copy-chip" data-copy="mohammadkamran1515@gmail.com" data-copied="toast.emailCopied" aria-label="Copy email address" data-i18n-attr="aria-label:contact.copyAria">
+                    <button type="button" class="copy-chip" data-copy="mohammadkamran1515@gmail.com" data-copied="toast.emailCopied" title="Copy email address" data-i18n-attr="title:contact.copyAria">
                         <i class="fa-solid fa-envelope" aria-hidden="true"></i><span>mohammadkamran1515@gmail.com</span><i class="fa-regular fa-copy" aria-hidden="true"></i>
                     </button>
                     <a href="japan-kamran-cv.pdf" class="btn btn-ghost btn-sm" download><i class="fa-solid fa-download" aria-hidden="true"></i><span data-i18n="hero.cv">Download CV</span></a>
@@ -1089,7 +1234,7 @@
 
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <a href="#home" class="brand" aria-label="Back to top" data-i18n-attr="aria-label:a11y.top">
+                    <a href="#home" class="brand" title="Back to top" data-i18n-attr="title:a11y.top">
                         <span class="brand-mark" aria-hidden="true">
                             <svg viewBox="0 0 40 40" width="40" height="40"><rect width="40" height="40" rx="11" fill="url(#brandGrad)"/><path d="M8 28V13l7.5 9L23 13v15M27 13v15M27 21l7-8M27 21l7 7" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
                         </span>
@@ -1100,6 +1245,7 @@
                         <a href="https://github.com/mohakamran" target="_blank" rel="noopener" class="social" data-tip="GitHub" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
                         <a href="https://www.linkedin.com/in/mokamran/" target="_blank" rel="noopener" class="social" data-tip="LinkedIn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
                         <a href="https://x.com/being_m_kamran" target="_blank" rel="noopener" class="social" data-tip="X" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
+                        <a href="https://www.instagram.com/being_m_kamran/" target="_blank" rel="noopener me" class="social" data-tip="Instagram" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
                         <a href="https://www.youtube.com/@muhkamran1034" target="_blank" rel="noopener" class="social" data-tip="YouTube" aria-label="YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
                     </div>
                 </div>

@@ -6,6 +6,19 @@
    ========================================================================== */
 window.SITE_DATA = {
 
+    /* ---------- Shipping log (ticker above the case studies; newest first) ---------- */
+    shipLog: [
+        { date: '2026-11', name: 'Pinspire', what: { en: 'Next.js + Laravel visual discovery app', ja: 'Next.js＋Laravelのビジュアル発見アプリ' } },
+        { date: '2026-11', name: 'Japan Salary Calculator', what: { en: 'take-home pay with 2026 rates', ja: '2026年版の手取り計算' } },
+        { date: '2026-11', name: 'Scholaria', what: { en: 'offline local-LLM research assistant', ja: 'オフラインのローカルLLM研究アシスタント' } },
+        { date: '2026-11', name: 'Personal Doctor AI', what: { en: 'private AI health companion', ja: 'プライベートなAIヘルスケア' } },
+        { date: '2026-10', name: 'AI Engineering Academy', what: { en: '294-lesson AI engineer roadmap', ja: '294レッスンのAIエンジニア学習ロードマップ' } },
+        { date: '2026-10', name: 'Japanese AI Tutor', what: { en: 'structured-output AI language tutor', ja: '構造化出力のAI日本語教師' } },
+        { date: '2026-10', name: 'Nexvora Digital', what: { en: 'Next.js 16 agency site, Lighthouse ~98', ja: 'Next.js 16のエージェンシーサイト' } },
+        { date: '2026-10', name: 'GymFlow', what: { en: 'multi-tenant gym SaaS, 85 tests', ja: 'マルチテナントのジム管理SaaS' } },
+        { date: '2026-10', name: 'MediCore', what: { en: 'pharmacy ERP with FEFO inventory', ja: 'FEFO在庫管理の薬局ERP' } }
+    ],
+
     /* ---------- Case studies (Problem → Solution → Stack → Result) ----------
        wide: true   → full-width card;  image2 → second screenshot in the popup  */
     featured: [
@@ -503,19 +516,22 @@ window.SITE_DATA = {
     /* ---------- Life in Japan gallery ----------
        w/h = full-size pixel dimensions (prevents layout shift)             */
     gallery: [
-        { id: 10, w: 803, h: 810, caption: { en: 'Seaside torii gate, Fukuoka', ja: '海辺の鳥居（福岡）' } },
-        { id: 11, w: 1108, h: 1477, caption: { en: 'Shrine visit with friends', ja: '友人たちと神社めぐり' } },
-        { id: 7, w: 1108, h: 1477, caption: { en: 'Autumn flower fields', ja: '秋の花畑' } },
-        { id: 21, w: 1600, h: 1200, caption: { en: 'City lights at night', ja: '夜の街並み' } },
-        { id: 18, w: 960, h: 1280, caption: { en: 'Blue skies on the coast', ja: '青空の海岸' } },
-        { id: 24, w: 1536, h: 2048, caption: { en: 'First snow of winter', ja: '冬の初雪' } },
-        { id: 8, w: 1477, h: 1108, caption: { en: 'Dinner with friends', ja: '友人たちとの食事会' } },
-        { id: 26, w: 1536, h: 2048, caption: { en: 'Cherry blossom season', ja: '桜の季節' } },
-        { id: 19, w: 1156, h: 867, caption: { en: 'Cycling along the coast', ja: '海沿いをサイクリング' } },
-        { id: 14, w: 1536, h: 2048, caption: { en: 'At a space museum', ja: '宇宙博物館にて' } },
-        { id: 23, w: 1440, h: 1440, caption: { en: 'Stadium night with international friends', ja: '各国の友人たちとスタジアム観戦' } },
-        { id: 22, w: 1600, h: 1200, caption: { en: 'Castle moat walk', ja: 'お城のお堀を散策' } },
-        { id: 6, w: 1108, h: 1477, caption: { en: 'Breakwater by the sea', ja: '海辺の防波堤' } },
-        { id: 4, w: 1600, h: 900, caption: { en: 'Presenting research at the university', ja: '大学での研究発表' } }
+        { id: 101, w: 1200, h: 1600, caption: { en: 'Receiving my M.Sc. award, University of Kitakyushu (2026)', ja: '北九州市立大学で修士の表彰（2026年）' } },
+        { id: 103, w: 1600, h: 1535, caption: { en: 'Presenting at SICE FES 2026, Pacifico Yokohama', ja: 'SICE FES 2026で発表（パシフィコ横浜）' } },
+        { id: 102, w: 1600, h: 900, caption: { en: 'Master\'s graduation ceremony', ja: '大学院の修了式' } },
+        { id: 116, w: 1600, h: 1535, caption: { en: 'Visiting TSMC in Taiwan', ja: '台湾のTSMCを訪問' } },
+        { id: 104, w: 1280, h: 1600, caption: { en: 'On the Hibikino campus', ja: 'ひびきのキャンパスにて' } },
+        { id: 112, w: 1201, h: 1600, caption: { en: 'Cherry blossom season', ja: '桜の季節' } },
+        { id: 114, w: 1600, h: 1200, caption: { en: 'University startup ecosystem event (PARKS)', ja: '大学発スタートアップのイベント（PARKS）' } },
+        { id: 108, w: 1600, h: 1200, caption: { en: 'Road trip to Kirara-Hama, Yamaguchi', ja: 'きらら浜（山口）へドライブ' } },
+        { id: 115, w: 1280, h: 1600, caption: { en: 'Trying a VR ride at a tech expo', ja: 'テック展示会でVR体験' } },
+        { id: 107, w: 1280, h: 1600, caption: { en: 'Celebrating with labmates', ja: '研究室の仲間とお祝い' } },
+        { id: 113, w: 1600, h: 1600, caption: { en: 'Temple trail with friends', ja: '友人たちとお寺の小道を散策' } },
+        { id: 117, w: 1600, h: 1536, caption: { en: 'City streets in Taiwan', ja: '台湾の街並み' } },
+        { id: 105, w: 1600, h: 1200, caption: { en: 'Community study session', ja: '地域の勉強会' } },
+        { id: 111, w: 1600, h: 1600, caption: { en: 'Hilltop selfie with a friend', ja: '友人と山頂で記念撮影' } },
+        { id: 110, w: 1280, h: 1600, caption: { en: 'Green hillside walk in spring', ja: '春の丘を散歩' } },
+        { id: 106, w: 1600, h: 1537, caption: { en: 'Evening at a busy crossing', ja: '夕方の交差点' } },
+        { id: 109, w: 1280, h: 1600, caption: { en: 'Coastline on a cloudy day', ja: '曇り空の海岸線' } }
     ]
 };

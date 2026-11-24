@@ -36,6 +36,8 @@
     function pick(o) { return window.I18N.pick(o); }
     function lock(on) { if (window.ScrollLock) window.ScrollLock(on); else document.body.classList.toggle('no-scroll', on); }
     function pad(n) { return (n < 10 ? '0' : '') + n; }
+    /* 640px copy for small screens and grid cards, full 1280px for large previews */
+    function srcset(src) { var sm = src.replace(/\.webp$/, '-sm.webp'); return 'src="' + sm + '" srcset="' + sm + ' 640w, ' + src + ' 1280w"'; }
 
     /* Case studies first, then the archive — one list for the "All projects" grid */
     function allProjects() {
@@ -92,7 +94,7 @@
         stage.innerHTML = '' +
             '<article class="cs-card' + (animate && !reduceMotion ? ' enter' : '') + '">' +
                 '<div class="cs-media tilt" data-tilt-max="5">' +
-                    '<img src="' + p.image + '" alt="' + esc(pick(p.title)) + '" width="1280" height="800" decoding="async">' +
+                    '<img ' + srcset(p.image) + ' sizes="(min-width: 1100px) 46vw, (min-width: 900px) 52vw, 92vw" alt="' + esc(pick(p.title)) + ' — screenshot" width="1280" height="800" decoding="async">' +
                     '<span class="chip chip-solid">' + esc(pick(p.label)) + '</span>' +
                     '<span class="cs-counter">' + pad(i + 1) + ' / ' + pad(cases.length) + '</span>' +
                     (p.isNew ? '<span class="new-badge new-badge-media">' + esc(t('work.new')) + '</span>' : '') +
@@ -149,7 +151,14 @@
         var stage = document.getElementById('cs-stage');
         if (!tabs || !stage) return;
         // Preload every case-study image so switching is instant (no blank flash)
-        data.featured.forEach(function (p) { var im = new Image(); im.src = p.image; });
+        // (after the page has loaded, at the size this screen will actually use)
+        window.addEventListener('load', function () {
+            var go = function () {
+                var small = window.innerWidth < 900;
+                data.featured.forEach(function (p) { var im = new Image(); im.src = small ? p.image.replace(/\.webp$/, '-sm.webp') : p.image; });
+            };
+            if ('requestIdleCallback' in window) requestIdleCallback(go, { timeout: 3000 }); else setTimeout(go, 1500);
+        });
 
         tabs.addEventListener('click', function (e) {
             var b = e.target.closest('.cs-tab');
@@ -199,6 +208,19 @@
             return '<button type="button" class="cs-filter-btn" data-cs-filter="' + o[0] + '" aria-pressed="' + (csCat === o[0]) + '">' +
                 '<i class="fa-solid ' + o[2] + '" aria-hidden="true"></i><span>' + esc(t(o[1])) + '</span><span class="count">' + n + '</span></button>';
         }).join('');
+    }
+
+    /* Shipping log ticker: list rendered twice so the CSS loop is seamless */
+    function renderShipLog() {
+        var track = document.getElementById('ship-track');
+        if (!track || !data.shipLog) return;
+        var lang = window.I18N.lang;
+        var items = data.shipLog.map(function (x) {
+            var d = new Date(x.date + '-01T00:00:00');
+            var when = lang === 'ja' ? d.getFullYear() + '年' + (d.getMonth() + 1) + '月' : d.toLocaleString('en', { month: 'short', year: 'numeric' });
+            return '<li><time datetime="' + x.date + '">' + esc(when) + '</time><strong>' + esc(x.name) + '</strong><span>' + esc(pick(x.what)) + '</span></li>';
+        }).join('');
+        track.innerHTML = items + items.replace(/<li>/g, '<li aria-hidden="true">');
     }
 
     /* ======================= Case-study modal ======================= */
@@ -291,7 +313,7 @@
                          (p.live ? '<span class="chip ac-live"><span class="pulse-dot" aria-hidden="true"></span>' + esc(t('archive.liveBadge')) + '</span>' : '');
             return '' +
                 '<article class="archive-card glass" style="--i:' + Math.min(i, 8) + '" data-idx="' + i + '" data-category="' + p.category + '">' +
-                    '<div class="ac-media"><img src="' + p.image + '" alt="' + esc(title) + '" width="960" height="600" loading="lazy" decoding="async">' + badges + '</div>' +
+                    '<div class="ac-media"><img ' + srcset(p.image) + ' sizes="(min-width: 700px) 360px, 92vw" alt="' + esc(title) + ' — project screenshot" width="960" height="600" loading="lazy" decoding="async">' + badges + '</div>' +
                     '<div class="ac-body">' +
                         '<h3>' + esc(title) + '</h3>' +
                         '<p>' + esc(pick(p.desc)) + '</p>' +
@@ -382,6 +404,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', function () {
+        renderShipLog();
         renderCsFilter();
         renderTabs();
         renderStage(false);
@@ -392,6 +415,7 @@
     });
 
     document.addEventListener('langchange', function () {
+        renderShipLog();
         renderCsFilter();
         renderTabs();
         renderStage(false);

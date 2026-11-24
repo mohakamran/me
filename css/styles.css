@@ -1,3 +1,10 @@
+/* Self-hosted fonts (SIL Open Font License). "optional" = never causes a layout shift */
+@font-face { font-family: 'Outfit'; font-style: normal; font-weight: 500 800; font-display: optional; src: url('../fonts/outfit-var.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 400 700; font-display: optional; src: url('../fonts/plus-jakarta-sans-var.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 500; font-display: swap; src: url('../fonts/jetbrains-mono-500.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+/* Icons load asynchronously: reserve their box so nothing moves when the icon font arrives */
+i.fa-solid, i.fa-regular, i.fa-brands { display: inline-block; width: 1.25em; height: 1em; line-height: 1; text-align: center; font-style: normal; }
+
 /* ==========================================================================
    Muhammad Kamran — Portfolio stylesheet
    Contents
@@ -934,14 +941,8 @@ main { position: relative; z-index: 1; }
 @keyframes wheel { 0% { opacity: 0; transform: translateY(-2px); } 40% { opacity: 1; } 100% { opacity: 0; transform: translateY(10px); } }
 
 /* Page-load intro (JS adds .loaded on <html>) */
-.js .intro { opacity: 0; transform: translateY(30px); filter: blur(6px); }
-.js.loaded .intro {
-    opacity: 1;
-    transform: none;
-    filter: none;
-    transition: opacity 0.9s var(--ease), transform 1s var(--ease), filter 0.9s var(--ease);
-    transition-delay: calc(var(--i, 0) * 100ms + 100ms);
-}
+.js .intro { animation: introIn 0.9s var(--ease) both; animation-delay: calc(var(--i, 0) * 90ms + 60ms); }
+@keyframes introIn { from { opacity: 0.01; transform: translateY(26px); } to { opacity: 1; transform: none; } }
 
 .marquee {
     position: relative;
@@ -1804,7 +1805,7 @@ a.cert-badge:hover, .cert-badge-main:hover { border-color: var(--accent); transf
 .story-text .sw {
     --w: 0;
     display: inline-block;
-    opacity: calc(0.14 + var(--w) * 0.86);
+    opacity: calc(0.32 + var(--w) * 0.68);
     transform: translateY(calc((1 - var(--w)) * 0.35em));
     filter: blur(calc((1 - var(--w)) * 3px));
     transition: opacity 0.25s linear, transform 0.4s var(--ease), filter 0.3s linear;
@@ -2647,7 +2648,7 @@ a.cert-badge:hover, .cert-badge-main:hover { border-color: var(--accent); transf
 .switch input:focus-visible + .switch-track { outline: 2px solid var(--accent); outline-offset: 3px; }
 .filters { margin-bottom: 14px; }
 .filter-btn.is-empty { opacity: 0.45; }
-.result-line { text-align: center; font-size: 0.86rem; font-weight: 600; color: var(--text-subtle); margin-bottom: 22px; }
+.result-line { text-align: center; font-size: 0.86rem; font-weight: 600; color: var(--text-muted); margin-bottom: 22px; }
 .empty-state { display: grid; justify-items: center; gap: 12px; padding: 48px 16px; text-align: center; color: var(--text-muted); }
 .empty-state > i { font-size: 2.2rem; color: var(--accent); }
 .archive-card.fade-in { animation: fadeUp 0.45s var(--ease) both; }
@@ -3023,3 +3024,51 @@ a.fct-item:hover { color: var(--accent); }
     .site-header, .cursor-glow, .scroll-progress, .hero-bg, .marquee, .scroll-cue, .contact-form-wrap, #gallery, .globe-wrap { display: none !important; }
     body { background: #fff; color: #000; }
 }
+
+/* Off-screen sections: pause decorative animations (set by js/scroll-fx.js) */
+.is-offscreen, .is-offscreen *, .is-offscreen *::before, .is-offscreen *::after { animation-play-state: paused !important; }
+
+/* ---------- FAQ + TL;DR (answer-engine friendly) ---------- */
+.faq-grid { display: grid; gap: clamp(28px, 4vw, 56px); align-items: start; }
+@media (min-width: 980px) { .faq-grid { grid-template-columns: 0.9fr 1.1fr; } .faq-intro { position: sticky; top: calc(var(--header-h) + 32px); } }
+.faq-intro h2 { margin: 10px 0 12px; }
+.tldr { margin-top: 24px; padding: 22px; border-radius: var(--radius-lg); position: relative; overflow: hidden; }
+.tldr::before { content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1.5px; background: conic-gradient(from var(--tldr-a, 0deg), var(--accent-1), var(--accent-3), var(--accent-2), var(--accent-1)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: tldrSpin 6s linear infinite; pointer-events: none; }
+@property --tldr-a { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+@keyframes tldrSpin { to { --tldr-a: 360deg; } }
+.tldr-label { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+.tldr ul { display: grid; gap: 10px; }
+.tldr li { display: flex; align-items: baseline; gap: 10px; font-size: 0.96rem; color: var(--text-muted); }
+.tldr li strong { min-width: 74px; font-family: var(--font-display); font-weight: 800; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.tldr-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.faq-list { display: grid; gap: 12px; }
+.faq-item { border-radius: 18px; border: 1px solid var(--border); background: var(--surface-solid); transition: border-color 0.25s, box-shadow 0.3s; }
+.faq-item[open] { border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); box-shadow: var(--shadow); }
+.faq-item summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px; padding: 16px 20px; cursor: pointer; list-style: none; font-family: var(--font-display); font-weight: 700; font-size: 1.02rem; color: var(--text); }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary i { flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 10px; font-size: 0.8rem; color: var(--accent); background: var(--grad-soft); transition: transform 0.35s var(--ease), background 0.3s, color 0.3s; }
+.faq-item[open] summary i { transform: rotate(135deg); background: var(--grad); color: #fff; }
+.faq-item summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 16px; }
+.faq-a { padding: 0 20px 18px; color: var(--text-muted); line-height: 1.7; }
+.faq-item[open] .faq-a { animation: faqIn 0.45s var(--ease) both; }
+@keyframes faqIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .tldr::before, .faq-item[open] .faq-a { animation: none; } }
+
+/* ---------- Shipping log ticker ---------- */
+.ship-log { display: flex; align-items: center; gap: 14px; margin: 0 auto 22px; padding: 8px 8px 8px 16px; max-width: 980px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface-solid); box-shadow: var(--shadow); overflow: hidden; }
+.ship-label { flex: none; display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.ship-viewport { flex: 1; min-width: 0; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.ship-track { display: flex; gap: 10px; width: max-content; animation: shipScroll 48s linear infinite; }
+.ship-log:hover .ship-track, .ship-log:focus-within .ship-track { animation-play-state: paused; }
+.ship-track li { display: inline-flex; align-items: baseline; gap: 8px; padding: 7px 14px; border-radius: 999px; background: var(--bg-alt); font-size: 0.84rem; white-space: nowrap; }
+.ship-track time { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-subtle); }
+.ship-track strong { font-weight: 800; color: var(--text); }
+.ship-track span { color: var(--text-muted); }
+@keyframes shipScroll { to { transform: translateX(-50%); } }
+@media (max-width: 600px) { .ship-label span:last-child { display: none; } .ship-log { padding-left: 12px; } }
+@media (prefers-reduced-motion: reduce) { .ship-track { animation: none; } .ship-viewport { overflow-x: auto; } }
+
+/* Active case study: slow animated gradient edge */
+.cs-card { position: relative; }
+.cs-card::after { content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1.5px; pointer-events: none; background: conic-gradient(from var(--tldr-a, 0deg), transparent 0 60%, var(--accent-2) 75%, var(--accent-3) 85%, transparent 100%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: tldrSpin 7s linear infinite; opacity: 0.9; }
+@media (prefers-reduced-motion: reduce) { .cs-card::after { animation: none; opacity: 0; } }

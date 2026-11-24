@@ -42,6 +42,29 @@
             'nav.work': 'Projects',
             'nav.services': 'Services',
             'nav.life': 'Life in Japan',
+            "faq.eyebrow": "Quick answers",
+            "faq.title": "Hiring me in <span class=\"grad-text\">30 seconds</span>",
+            "faq.sub": "The questions recruiters and clients ask most — answered up front.",
+            "faq.tldr": "TL;DR",
+            "faq.f1": "years shipping production apps",
+            "faq.f2": "in-depth case studies, 4 of them LLM apps",
+            "faq.f3": "works in both languages",
+            "faq.f4": "University of Kitakyushu, MEXT scholar",
+            "faq.f5": "Kitakyushu, Japan · replies within 24h",
+            "faq.cta": "Start a conversation",
+            "nav.faq": "FAQ",
+            "faq.q1": "Who is Muhammad Kamran?",
+            "faq.a1": "Muhammad Kamran is a Full Stack & AI Engineer based in Kitakyushu, Fukuoka, Japan, with 5+ years of professional experience. He builds production web applications, SaaS platforms and LLM-powered products with Laravel, React, Next.js, Node.js, Python and FastAPI.",
+            "faq.q2": "What kind of AI work does he do?",
+            "faq.a2": "He builds practical LLM applications: retrieval-augmented generation (RAG) with page-level citations, local models with Ollama, structured outputs with the OpenAI Responses API and Pydantic, and Google Gemini integrations. Examples include Scholaria (a private, offline AI research assistant), Personal Doctor AI and Japanese AI Tutor.",
+            "faq.q3": "Is he available for hire?",
+            "faq.a3": "Yes. He is open to full-time roles in Japan and to remote freelance work, for full stack, backend or AI engineering positions. He usually replies within 24 hours.",
+            "faq.q4": "Which languages does he work in?",
+            "faq.a4": "He works in both English and Japanese, so he can join Japanese teams, write Japanese documentation and work with international clients.",
+            "faq.q5": "What is his tech stack?",
+            "faq.a5": "Back end: Laravel (PHP 8), Node.js, Python, FastAPI and Django. Front end: React, Next.js, TypeScript and Tailwind CSS. Data: MySQL, PostgreSQL, SQLite and Firebase. AI: OpenAI, Gemini, Ollama, RAG, pandas and statsmodels. He also builds Shopify and WordPress sites.",
+            "faq.q6": "What is his education?",
+            "faq.a6": "He holds an M.Sc. in Applied Information Systems from the University of Kitakyushu (2026), earned as a MEXT scholar, with research on traffic behaviour using Python and the CARLA driving simulator. He also has a B.Sc. in IT from the University of Gujrat.",
             'nav.contact': 'Contact Me',
 
             'hero.status': 'Open to full-time roles & freelance projects',
@@ -165,7 +188,7 @@
 
             'gallery.eyebrow': 'Life in Japan',
             'gallery.title': 'Beyond the <span class="grad-text">keyboard</span>',
-            'gallery.sub': 'Seasons, shrines, coastlines and good company — a few moments from life in Fukuoka and around Japan.',
+            'gallery.sub': 'Graduation, conferences, cherry blossoms, a trip to Taiwan and good company — recent moments from life in Japan.',
 
             'contact.eyebrow': 'Contact',
             'contact.title': "Let's build <span class=\"grad-text\">something great</span>",
@@ -258,6 +281,8 @@
             'footer.live': 'Kitakyushu, Japan',
             'work.tabsAria': 'Case studies',
             'work.new': 'New',
+            'work.shipped': 'Recently shipped',
+            'work.shipAria': 'Recently shipped projects',
             'work.filterAll': 'All',
             'work.filterAi': 'AI & LLM',
             'work.filterWeb': 'Full-stack & SaaS',
@@ -382,6 +407,29 @@
             'nav.work': 'プロジェクト',
             'nav.services': 'サービス',
             'nav.life': '日本での生活',
+            "faq.eyebrow": "よくある質問",
+            "faq.title": "<span class=\"grad-text\">30秒</span>でわかる私のこと",
+            "faq.sub": "採用担当者やクライアントの方からよくいただく質問に、先にお答えします。",
+            "faq.tldr": "要点",
+            "faq.f1": "年以上、本番アプリを開発",
+            "faq.f2": "件の詳しいケーススタディ（うち4件はLLMアプリ）",
+            "faq.f3": "英語・日本語の両方で対応",
+            "faq.f4": "北九州市立大学大学院・国費留学生",
+            "faq.f5": "北九州（日本）· 24時間以内に返信",
+            "faq.cta": "相談する",
+            "nav.faq": "FAQ",
+            "faq.q1": "ムハンマド・カムランとは？",
+            "faq.a1": "福岡県北九州市を拠点とする、実務経験5年以上のフルスタック＆AIエンジニアです。Laravel・React・Next.js・Node.js・Python・FastAPIを使い、本番運用のWebアプリ、SaaS、LLMを活用したAIプロダクトを開発しています。",
+            "faq.q2": "どのようなAI開発をしていますか？",
+            "faq.a2": "実用的なLLMアプリを開発しています。ページ単位の引用付きRAG、Ollamaによるローカルモデル、OpenAI Responses APIとPydanticによる構造化出力、Google Geminiの統合などです。代表作に、完全オフラインで動くAI研究アシスタント「Scholaria」、「Personal Doctor AI」、「Japanese AI Tutor」があります。",
+            "faq.q3": "採用やお仕事の依頼は可能ですか？",
+            "faq.a3": "はい。フルスタック・バックエンド・AIエンジニアとして、日本国内での正社員採用およびリモートでの業務委託に対応しています。通常24時間以内に返信します。",
+            "faq.q4": "どの言語で仕事ができますか？",
+            "faq.a4": "英語と日本語の両方で業務が可能です。日本のチームでの開発、日本語でのドキュメント作成、海外クライアントとのやり取りにも対応できます。",
+            "faq.q5": "主な技術スタックは？",
+            "faq.a5": "バックエンドはLaravel（PHP 8）・Node.js・Python・FastAPI・Django、フロントエンドはReact・Next.js・TypeScript・Tailwind CSS、データベースはMySQL・PostgreSQL・SQLite・Firebase、AIはOpenAI・Gemini・Ollama・RAG・pandas・statsmodelsです。ShopifyやWordPressのサイト制作にも対応しています。",
+            "faq.q6": "学歴を教えてください。",
+            "faq.a6": "北九州市立大学大学院で応用情報システムの修士号（2026年）を国費留学生（MEXT）として取得しました。PythonとCARLAシミュレータを用いた交通行動の研究を行いました。グジュラート大学でITの学士号も取得しています。",
             'nav.contact': 'お問い合わせ',
 
             'hero.status': '正社員・業務委託のご相談を受け付けています',
@@ -505,7 +553,7 @@
 
             'gallery.eyebrow': '日本での生活',
             'gallery.title': '<span class="grad-text">仕事以外</span>の日々',
-            'gallery.sub': '四季の移ろい、神社めぐり、海辺の風景、そして大切な仲間たち。福岡をはじめ、日本各地での思い出を少しだけご紹介します。',
+            'gallery.sub': '大学院の修了、学会発表、桜、台湾への旅、そして大切な仲間たち。日本での最近の思い出をご紹介します。',
 
             'contact.eyebrow': 'お問い合わせ',
             'contact.title': '<span class="grad-text">一緒に</span>つくりましょう',
@@ -598,6 +646,8 @@
             'footer.live': '福岡県北九州市',
             'work.tabsAria': 'ケーススタディ',
             'work.new': 'NEW',
+            'work.shipped': '最近リリース',
+            'work.shipAria': '最近リリースしたプロジェクト',
             'work.filterAll': 'すべて',
             'work.filterAi': 'AI・LLM',
             'work.filterWeb': 'フルスタック・SaaS',
@@ -741,6 +791,7 @@
         if (lang !== 'en' && lang !== 'ja') lang = 'en';
         current = lang;
         root.setAttribute('lang', lang);
+        if (lang === 'ja' && window.loadJaFonts) window.loadJaFonts();
         apply();
         updateMeta();
         updateButtons();
