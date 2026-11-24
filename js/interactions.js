@@ -245,17 +245,16 @@
         document.addEventListener('langchange', update);
     }
 
-    /* ---------- Footer: gradient spotlight on the big wordmark follows the cursor ---------- */
+    /* ---------- Footer wordmark: letters fill in a wave when the footer comes into view (hover fills single letters, CSS) ---------- */
     function initWordmark() {
-        var footer = document.querySelector('.site-footer');
-        var mark = footer && footer.querySelector('.footer-wordmark');
-        if (!mark || reduceMotion || !finePointer) return;
-        footer.addEventListener('pointermove', function (e) {
-            var r = mark.getBoundingClientRect();
-            mark.style.setProperty('--wx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
-            mark.classList.add('lit');
-        });
-        footer.addEventListener('pointerleave', function () { mark.classList.remove('lit'); });
+        var mark = document.querySelector('.footer-wordmark');
+        if (!mark || reduceMotion || !('IntersectionObserver' in window)) return;
+        var io = new IntersectionObserver(function (entries) {
+            if (!entries[0].isIntersecting) return;
+            mark.classList.add('wave');
+            setTimeout(function () { mark.classList.remove('wave'); }, 1900);
+        }, { threshold: 0.3 });
+        io.observe(mark);
     }
 
     document.addEventListener('DOMContentLoaded', function () {

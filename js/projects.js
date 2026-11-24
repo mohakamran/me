@@ -296,6 +296,7 @@
 
     /* ======================= All projects grid ======================= */
     var list = [];
+    var expanded = false;
 
     function renderArchive() {
         var grid = document.getElementById('archive-grid');
@@ -342,10 +343,14 @@
     function applyFilters(animate) {
         var grid = document.getElementById('archive-grid');
         if (!grid) return;
-        var shown = 0;
+        var shown = 0, matched = 0;
+        // Collapsed view: only the first rows of matching projects; "Show all" reveals the rest
+        var limit = expanded ? Infinity : (window.innerWidth >= 1200 ? 8 : window.innerWidth >= 900 ? 6 : 4);
         grid.querySelectorAll('.archive-card').forEach(function (card) {
             var p = list[parseInt(card.getAttribute('data-idx'), 10)];
             var show = matches(p);
+            if (show) matched++;
+            if (show && shown >= limit) show = false;
             card.hidden = !show;
             if (show) {
                 if (animate && !reduceMotion) {
@@ -364,7 +369,13 @@
             btn.classList.toggle('is-empty', n === 0);
         });
         var line = document.getElementById('result-line');
-        if (line) line.textContent = t('archive.showing').replace('{n}', shown).replace('{total}', list.length);
+        if (line) line.textContent = t('archive.showing').replace('{n}', matched).replace('{total}', list.length);
+        var moreWrap = document.getElementById('archive-more-wrap'), more = document.getElementById('archive-more');
+        if (moreWrap && more) {
+            moreWrap.hidden = matched <= (window.innerWidth >= 1200 ? 8 : window.innerWidth >= 900 ? 6 : 4);
+            more.setAttribute('aria-expanded', String(expanded));
+            more.querySelector('span').textContent = expanded ? t('archive.less') : t('archive.more').replace('{n}', matched);
+        }
         var empty = document.getElementById('empty-state');
         if (empty) empty.hidden = shown !== 0;
         if (window.SmoothScroll) window.SmoothScroll.resize();
@@ -394,6 +405,13 @@
             clear.addEventListener('click', function () { search.value = ''; clear.hidden = true; state.q = ''; applyFilters(true); search.focus(); });
         }
         if (live) live.addEventListener('change', function () { state.live = live.checked; applyFilters(true); });
+        var more = document.getElementById('archive-more');
+        if (more) more.addEventListener('click', function () {
+            var grid = document.getElementById('archive-grid');
+            expanded = !expanded;
+            applyFilters(expanded);
+            if (!expanded && grid) grid.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+        });
         if (reset) reset.addEventListener('click', function () {
             state = { cat: 'all', q: '', live: false };
             if (search) { search.value = ''; clear.hidden = true; }

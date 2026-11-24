@@ -461,7 +461,7 @@
     <!-- ============ HEADER / NAV ============ -->
     <header class="site-header" id="site-header">
         <div class="nav-shell">
-            <a href="#home" class="brand" aria-label="Muhammad Kamran — Home">
+            <a href="#home" class="brand" title="Muhammad Kamran — Home">
                 <span class="brand-mark" aria-hidden="true">
                     <svg viewBox="0 0 40 40" width="36" height="36"><defs><linearGradient id="brandGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--accent-1)"/><stop offset=".5" style="stop-color:var(--accent-2)"/><stop offset="1" style="stop-color:var(--accent-3)"/></linearGradient></defs><rect width="40" height="40" rx="11" fill="url(#brandGrad)"/><path d="M8 28V13l7.5 9L23 13v15M27 13v15M27 21l7-8M27 21l7 7" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
                     <span class="brand-status"></span>
@@ -492,7 +492,7 @@
                     <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1Z" fill="currentColor"/></svg>
                     <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4.4" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.2v2.3M12 19.5v2.3M2.2 12h2.3M19.5 12h2.3M5.1 5.1l1.6 1.6M17.3 17.3l1.6 1.6M5.1 18.9l1.6-1.6M17.3 6.7l1.6-1.6"/></g></svg>
                 </button>
-                <button type="button" class="cmdk-btn" aria-label="Open command palette" data-i18n-attr="aria-label:cmdk.open" aria-haspopup="dialog">
+                <button type="button" class="cmdk-btn" title="Open command palette" data-i18n-attr="title:cmdk.open" aria-haspopup="dialog">
                     <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
                     <span class="cmdk-btn-text" data-i18n="cmdk.btn">Search</span>
                     <kbd class="kbd-mod">⌘K</kbd>
@@ -638,6 +638,7 @@
                         </div>
                         <button type="button" class="portrait-flip-btn" aria-pressed="false" aria-controls="portrait-back" aria-label="Flip the card" data-i18n-attr="aria-label:hero.flipAria"><i class="fa-solid fa-rotate" aria-hidden="true"></i></button>
                     </div>
+                    <div class="orbit3d" aria-hidden="true"><div class="orbit3d-ring"><span style="--k:0"><b><i class="fa-brands fa-python"></i></b></span><span style="--k:1"><b><i class="fa-brands fa-laravel"></i></b></span><span style="--k:2"><b><i class="fa-brands fa-react"></i></b></span><span style="--k:3"><b><i class="fa-brands fa-node-js"></i></b></span><span style="--k:4"><b><i class="fa-solid fa-brain"></i></b></span><span style="--k:5"><b><i class="fa-brands fa-docker"></i></b></span><span style="--k:6"><b><i class="fa-brands fa-php"></i></b></span><span style="--k:7"><b><i class="fa-brands fa-git-alt"></i></b></span></div></div>
                     <div class="float-card fc-1 glass" aria-hidden="true">
                         <strong data-i18n="hero.fcYearsNum">5+</strong><span data-i18n="hero.fcYears">years in production</span>
                     </div>
@@ -987,6 +988,9 @@
                 <div class="archive-grid reveal-stagger" id="archive-grid">
                     <!-- Rendered by js/projects.js -->
                 </div>
+                <div class="archive-more" id="archive-more-wrap" hidden>
+                    <button type="button" class="btn btn-ghost magnetic" id="archive-more" aria-controls="archive-grid" aria-expanded="false"><span></span><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+                </div>
                 <div class="empty-state" id="empty-state" hidden>
                     <i class="fa-regular fa-folder-open" aria-hidden="true"></i>
                     <p data-i18n="archive.empty">No projects match your filters.</p>
@@ -1280,7 +1284,7 @@
                 <a href="#home" class="back-top"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i><span data-i18n="footer.backTop">Back to top</span></a>
             </div>
         </div>
-        <div class="footer-wordmark" aria-hidden="true">KAMRAN</div>
+        <div class="footer-wordmark" aria-hidden="true"><span style="--n:0">K</span><span style="--n:1">A</span><span style="--n:2">M</span><span style="--n:3">R</span><span style="--n:4">A</span><span style="--n:5">N</span></div>
     </footer>
 
     <!-- Floating colour picker (bottom-right): always visible, with a one-time hint for first-time visitors -->

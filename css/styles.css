@@ -3074,3 +3074,88 @@ a.fct-item:hover { color: var(--accent); }
 .cs-card { position: relative; }
 .cs-card::after { content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1.5px; pointer-events: none; background: conic-gradient(from var(--tldr-a, 0deg), transparent 0 60%, var(--accent-2) 75%, var(--accent-3) 85%, transparent 100%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: tldrSpin 7s linear infinite; opacity: 0.9; }
 @media (prefers-reduced-motion: reduce) { .cs-card::after { animation: none; opacity: 0; } }
+
+/* =====================================================================
+   Compact project grid, footer wordmark, CSS 3D effects (no extra JS)
+   ===================================================================== */
+
+/* All projects: smaller cards, 4 per row on wide screens, collapsed list */
+.ac-media { aspect-ratio: 16 / 9; }
+.ac-body { gap: 6px; padding: 14px 16px 14px; }
+.ac-body h3 { font-size: 0.98rem; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.ac-body p { font-size: 0.84rem; line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.ac-badge { top: 10px; left: 10px; font-size: 0.7rem; padding: 4px 9px; }
+.ac-live { font-size: 0.7rem; }
+@media (min-width: 1200px) {
+    .archive-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+}
+.archive-more { display: flex; justify-content: center; margin-top: 26px; }
+.archive-more[hidden] { display: none; }
+#archive-more i { transition: transform 0.35s var(--ease); transform: rotate(90deg); }
+#archive-more[aria-expanded="true"] i { transform: rotate(-90deg); }
+
+/* Case studies: tighter tab list so the showcase is shorter */
+@media (min-width: 1100px) {
+    .cs { grid-template-columns: 260px 1fr; }
+    .cs-tabs { gap: 6px; max-height: min(640px, calc(100vh - var(--header-h) - 64px)); }
+    .cs-tab { min-height: 0; padding: 8px 12px; gap: 10px; border-radius: 13px; }
+    .cs-tab-text strong { font-size: 0.86rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .cs-tab-text small { font-size: 0.7rem; }
+    .cs-card { gap: 18px; }
+    .cs-info { gap: 11px; }
+    .cs-summary { font-size: 0.95rem; }
+}
+
+/* Footer wordmark: letters fill with the accent gradient and lift in 3D on hover */
+.footer-wordmark { background: none; opacity: 1; pointer-events: auto; perspective: 900px; }
+.footer-wordmark span {
+    display: inline-block;
+    color: transparent;
+    -webkit-text-stroke: 1.5px color-mix(in srgb, var(--text) 22%, transparent);
+    background-image: var(--grad);
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 100% 0%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    transform-origin: 50% 100%;
+    transition: background-size 0.6s var(--ease), transform 0.6s var(--ease-spring), -webkit-text-stroke-color 0.4s;
+}
+.footer-wordmark span:hover, .footer-wordmark.wave span {
+    background-size: 100% 100%;
+    -webkit-text-stroke-color: transparent;
+    transform: translateY(-6%) rotateX(18deg) scale(1.04);
+}
+.footer-wordmark span:hover + span, .footer-wordmark span:has(+ span:hover) { background-size: 100% 45%; transform: translateY(-2%) rotateX(8deg); }
+.footer-wordmark.wave span { transition-delay: calc(var(--n) * 70ms); }
+@media (hover: none) { .footer-wordmark span:hover { background-size: 100% 0%; transform: none; } }
+
+/* Hero: CSS 3D tech ring for phones/tablets (desktop uses the WebGL scene).
+   A tilted "planet ring" of logos circles the bottom of the portrait; tiles counter-rotate to face the viewer. */
+.orbit3d { display: none; }
+@media (max-width: 899px), (pointer: coarse) {
+    .orbit3d { --r: clamp(120px, 40vw, 190px); --tilt: 13deg; display: block; position: absolute; left: 50%; bottom: 10%; width: 0; height: 0; z-index: 3; transform-style: preserve-3d; transform: rotateX(calc(var(--tilt) * -1)) rotateZ(-6deg); pointer-events: none; }
+    .orbit3d-ring { transform-style: preserve-3d; animation: orbitSpin 20s linear infinite; }
+    .orbit3d span { position: absolute; left: -19px; top: -19px; width: 38px; height: 38px; transform-style: preserve-3d; transform: rotateY(calc(var(--k) * 45deg)) translateZ(var(--r)); }
+    .orbit3d b { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 11px; font-size: 1.1rem; color: var(--accent); background: var(--surface-solid); border: 1px solid var(--border); box-shadow: 0 10px 22px -10px rgba(0, 0, 0, 0.4); animation: orbitFace 20s linear infinite; }
+    .orbit3d .fa-python { color: #3776ab; } .orbit3d .fa-laravel { color: #f05340; } .orbit3d .fa-react { color: #149eca; }
+    .orbit3d .fa-node-js { color: #3c873a; } .orbit3d .fa-docker { color: #2496ed; } .orbit3d .fa-php { color: #777bb4; } .orbit3d .fa-git-alt { color: #f05032; }
+    .hero-visual .fc-3 { display: none; }
+    .hero-visual .float-card { z-index: 4; }
+}
+@keyframes orbitSpin { to { transform: rotateY(360deg); } }
+/* Undo the ring's spin and tilt so each tile keeps facing the viewer */
+@keyframes orbitFace { from { transform: rotateY(calc(var(--k) * -45deg)) rotateX(var(--tilt)); } to { transform: rotateY(calc(var(--k) * -45deg - 360deg)) rotateX(var(--tilt)); } }
+
+/* Scroll-driven 3D entrances (Chrome/Edge/Safari 26+; others simply show the content) */
+@supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+        .cs-card { animation: tilt3dIn linear both; animation-timeline: view(); animation-range: entry 0% cover 30%; transform-origin: 50% 100%; }
+        .archive-card:not(.fade-in) { animation: card3dIn linear both; animation-timeline: view(); animation-range: entry 0% entry 90%; }
+        .section-head h2 { animation: head3dIn linear both; animation-timeline: view(); animation-range: entry 10% cover 35%; }
+        .faq-list, .tldr { animation: tilt3dIn linear both; animation-timeline: view(); animation-range: entry 0% cover 25%; }
+    }
+}
+@keyframes tilt3dIn { from { transform: perspective(1400px) rotateX(16deg) translateY(60px) scale(0.94); } to { transform: none; } }
+@keyframes card3dIn { from { transform: perspective(900px) rotateX(24deg) translateY(50px); } to { transform: none; } }
+@keyframes head3dIn { from { transform: perspective(700px) rotateX(55deg) translateY(30px); } to { transform: none; } }
