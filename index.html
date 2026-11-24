@@ -71,9 +71,9 @@
     <!-- Self-hosted Latin fonts (declared at the top of css/styles.css) -->
     <link rel="preload" as="font" type="font/woff2" href="fonts/outfit-var.woff2" crossorigin>
     <link rel="preload" as="font" type="font/woff2" href="fonts/plus-jakarta-sans-var.woff2" crossorigin>
-    <!-- Icons: loaded without blocking render -->
-    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+    <!-- Icons: inline SVG shapes (only the ~90 used), loaded without blocking render; icon boxes are reserved in styles.css -->
+    <link rel="preload" as="style" href="css/icons.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/icons.css"></noscript>
 
     <link rel="preload" as="image" href="img/profile-hero.webp" fetchpriority="high">
     <link rel="stylesheet" href="css/styles.css">
